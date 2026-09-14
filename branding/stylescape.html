@@ -7,7 +7,7 @@
 <meta name="description" content="Final visual direction for the calorie and nutrition app.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{
@@ -29,20 +29,21 @@
   --r-lg:28px;
   --r-md:20px;
   --r-sm:14px;
-  --display:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --ui:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  /* typography tokens — components read these, never a raw family */
+  --font-display:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-ui:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--bg);color:var(--ink);
-  font-family:var(--ui);font-size:16px;line-height:1.55;
+  font-family:var(--font-ui);font-size:16px;line-height:1.55;
   -webkit-font-smoothing:antialiased;
 }
 h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 :focus-visible{outline:2px solid var(--berry);outline-offset:3px}
 .wrap{max-width:1160px;margin:0 auto;padding-inline:clamp(20px,5vw,72px)}
 .num{font-variant-numeric:tabular-nums}
-.d{font-family:var(--display)}
+.d{font-family:var(--font-display)}
 
 /* section rhythm — generous */
 .sec{padding-block:clamp(56px,9vw,132px)}
@@ -52,7 +53,7 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
   color:var(--ink-3);display:flex;gap:12px;align-items:baseline;
 }
 .lab b{color:var(--berry);font-weight:500}
-.h2{font-family:var(--display);font-weight:500;font-size:clamp(28px,4.2vw,46px);letter-spacing:-.035em;line-height:1.08;margin-top:22px;text-wrap:balance;max-width:17ch}
+.h2{font-family:var(--font-display);font-weight:500;font-size:clamp(28px,4.2vw,46px);letter-spacing:-.035em;line-height:1.08;margin-top:22px;text-wrap:balance;max-width:17ch}
 .sub{margin-top:16px;color:var(--ink-2);font-size:16px;line-height:1.6;max-width:48ch}
 .gap-l{margin-top:clamp(36px,5.4vw,64px)}
 .gap-m{margin-top:clamp(24px,3.4vw,40px)}
@@ -72,9 +73,9 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 .mast{position:relative;overflow:hidden;padding-block:clamp(44px,7vw,92px) clamp(56px,9vw,124px)}
 .mast__grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(34px,5vw,60px)}
 @media(min-width:900px){.mast__grid{grid-template-columns:minmax(0,1fr) minmax(0,.82fr);align-items:center}}
-.mast h1{font-family:var(--display);font-weight:500;font-size:clamp(38px,6.6vw,74px);line-height:1.02;letter-spacing:-.042em;max-width:13ch;text-wrap:balance}
+.mast h1{font-family:var(--font-display);font-weight:500;font-size:clamp(38px,6.6vw,74px);line-height:1.02;letter-spacing:-.042em;max-width:13ch;text-wrap:balance}
 .mast__k{margin-top:clamp(30px,4.4vw,48px);display:flex;align-items:baseline;gap:12px}
-.mast__k b{font-family:var(--display);font-weight:400;font-size:clamp(72px,12vw,136px);letter-spacing:-.05em;line-height:.85}
+.mast__k b{font-family:var(--font-display);font-weight:300;font-size:clamp(72px,12vw,136px);letter-spacing:-.05em;line-height:.85}
 .mast__k span{font-size:clamp(15px,1.5vw,18px);color:var(--ink-2)}
 .mast__disc{position:relative;justify-self:end;width:min(100%,460px);aspect-ratio:1}
 @media(min-width:900px){.mast__disc{margin-right:clamp(-120px,-8vw,-40px)}}
@@ -115,16 +116,16 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 
 /* ---------- nutrition components ---------- */
 .kcal{display:flex;align-items:baseline;gap:11px}
-.kcal__n{font-family:var(--display);font-weight:400;letter-spacing:-.048em;line-height:.86;font-size:clamp(64px,9vw,96px)}
+.kcal__n{font-family:var(--font-display);font-weight:300;letter-spacing:-.048em;line-height:.86;font-size:clamp(64px,9vw,96px)}
 .kcal__u{font-size:17px;color:var(--ink-2)}
 .pair{display:flex}
 .pair>div{flex:1;min-width:0}
 .pair>div+div{padding-left:clamp(18px,3vw,28px);border-left:1px solid var(--line)}
 .pair>div:first-child{padding-right:clamp(18px,3vw,28px)}
-.pair b{display:block;font-family:var(--display);font-weight:500;font-size:20px;letter-spacing:-.02em}
+.pair b{display:block;font-family:var(--font-display);font-weight:500;font-size:20px;letter-spacing:-.02em}
 .pair span{display:block;margin-top:5px;font-size:14.5px;color:var(--ink-2)}
 .macros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.macro b{display:block;font-family:var(--display);font-weight:500;font-size:24px;letter-spacing:-.022em;line-height:1}
+.macro b{display:block;font-family:var(--font-display);font-weight:500;font-size:24px;letter-spacing:-.022em;line-height:1}
 .macro span{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:15px;color:var(--ink-2)}
 .macro i{width:7px;height:7px;border-radius:50%;flex:0 0 7px}
 .ing{display:flex;align-items:center;gap:14px;padding:15px 0;border-top:1px solid var(--line)}
@@ -132,7 +133,7 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 .ing__n{flex:1;min-width:0;font-size:16px;letter-spacing:-.005em}
 .ing__a{font-size:15px;color:var(--ink-2);text-align:right;flex:0 0 66px}
 .ing__k{font-size:16px;font-weight:500;text-align:right;flex:0 0 78px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding-inline:30px;border-radius:28px;border:0;font-family:var(--ui);font-size:17px;font-weight:500;letter-spacing:-.005em;cursor:pointer;transition:background .16s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding-inline:30px;border-radius:28px;border:0;font-family:var(--font-ui);font-size:17px;font-weight:500;letter-spacing:-.005em;cursor:pointer;transition:background .16s}
 .btn--p{background:var(--berry);color:#fff}
 .btn--p:hover{background:var(--berry-deep)}
 .btn--s{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2)}
@@ -158,13 +159,21 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 .screen__fade{height:56px;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff)}
 .dev__cap{margin-top:16px;font-size:13.5px;color:var(--ink-3)}
 .dev__cap b{display:block;color:var(--ink);font-weight:500;font-size:15px;margin-bottom:3px}
-.sh{font-family:var(--display);font-weight:500;letter-spacing:-.028em;line-height:1.14}
+.sh{font-family:var(--font-display);font-weight:600;letter-spacing:-.028em;line-height:1.14}
 .meta{display:flex;gap:18px;font-size:15px;color:var(--ink-2)}
 .meta span{display:flex;align-items:center;gap:7px}
 .dot{width:5px;height:5px;border-radius:50%;background:var(--line-2);flex:0 0 5px}
 .seg{display:inline-flex;background:var(--soft);border-radius:var(--r-sm);padding:3px}
 .seg span{padding:8px 14px;border-radius:11px;font-size:14.5px;color:var(--ink-2);white-space:nowrap}
 .seg span.on{background:var(--surface);color:var(--ink);font-weight:500;box-shadow:0 1px 2px rgba(28,27,25,.09)}
+/* ---------- type at mobile size ---------- */
+.tm{padding:24px 0;border-top:1px solid var(--line);display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:780px){.tm{grid-template-columns:216px minmax(0,1fr);gap:40px;align-items:start}}
+.tm:first-of-type{border-top:0;padding-top:0}
+.tm:last-of-type{padding-bottom:0}
+.tm__l{font-size:13.5px;color:var(--ink-3);line-height:1.5}
+.tm__l b{display:block;color:var(--ink);font-weight:500;font-size:14.5px;margin-bottom:3px}
+.tm__s{min-width:0;max-width:342px}
 .closing{border-top:1px solid var(--line);padding-block:clamp(32px,4.4vw,52px) clamp(48px,7vw,96px);color:var(--ink-2);font-size:15px;line-height:1.65;max-width:62ch}
 .closing b{color:var(--ink);font-weight:500}
 </style>
@@ -226,23 +235,23 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 <section class="sec sec--line">
   <div class="wrap">
     <p class="lab"><b>02</b> Typography</p>
-    <h2 class="h2">Instrument Sans for presence. Inter Tight for everything you read.</h2>
+    <h2 class="h2">Plus Jakarta Sans for presence. Inter Tight for everything you read.</h2>
 
     <div class="gap-l">
       <div class="ty">
-        <div class="ty__m"><b>Hero figure</b>Instrument Sans 400 · 96 / −4.8% · tabular</div>
-        <div class="ty__s d num" style="font-weight:400;font-size:clamp(58px,8.4vw,96px);letter-spacing:-.048em;line-height:.92">512</div>
+        <div class="ty__m"><b>Hero figure</b>Plus Jakarta Sans 300 · 96 / −4% · tabular</div>
+        <div class="ty__s d num" style="font-weight:300;font-size:clamp(58px,8.4vw,96px);letter-spacing:-.04em;line-height:.92">512</div>
       </div>
       <div class="ty">
-        <div class="ty__m"><b>Display</b>Instrument Sans 500 · 34 / −3.5%</div>
-        <div class="ty__s d" style="font-weight:500;font-size:clamp(25px,3.4vw,34px);letter-spacing:-.035em;line-height:1.1">Roast squash &amp; red lentils</div>
+        <div class="ty__m"><b>Display</b>Plus Jakarta Sans 600 · 34 / −3%</div>
+        <div class="ty__s d" style="font-weight:600;font-size:clamp(25px,3.4vw,34px);letter-spacing:-.03em;line-height:1.1">Roast squash &amp; red lentils</div>
       </div>
       <div class="ty">
-        <div class="ty__m"><b>Title</b>Instrument Sans 500 · 22 / −2.8%</div>
-        <div class="ty__s d" style="font-weight:500;font-size:22px;letter-spacing:-.028em">Today’s portion</div>
+        <div class="ty__m"><b>Title</b>Plus Jakarta Sans 600 · 22 / −2.5%</div>
+        <div class="ty__s d" style="font-weight:600;font-size:22px;letter-spacing:-.025em">Today’s portion</div>
       </div>
       <div class="ty">
-        <div class="ty__m"><b>Value</b>Instrument Sans 500 · 20 · tabular</div>
+        <div class="ty__m"><b>Value</b>Plus Jakarta Sans 500 · 20 · tabular</div>
         <div class="ty__s d num" style="font-weight:500;font-size:20px;letter-spacing:-.02em">340 g · 151 kcal</div>
       </div>
       <div class="ty">
@@ -478,6 +487,87 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
       </div>
 
     </div>
+  </div>
+</section>
+
+<!-- ============ 08 TYPE AT MOBILE SIZE ============ -->
+<section class="sec sec--line" id="type-mobile">
+  <div class="wrap">
+    <p class="lab"><b>08</b> Type at mobile size</p>
+    <h2 class="h2">The eight settings that carry the product.</h2>
+    <p class="sub">Rendered at true 390&nbsp;px values — nothing in this section is scaled up for the page.</p>
+
+    <div class="gap-l specimen">
+
+      <div class="tm">
+        <div class="tm__l"><b>1 · Major title</b>Plus Jakarta Sans 600<br>34 px / 1.12 / −3%</div>
+        <div class="tm__s">
+          <p style="font-family:var(--font-display);font-weight:600;font-size:34px;line-height:1.12;letter-spacing:-.03em">Roast squash &amp; red lentils</p>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>2 · Body paragraph</b>Inter Tight 400<br>16 px / 1.6</div>
+        <div class="tm__s">
+          <p style="font-size:16px;line-height:1.6">Roasted until the edges catch, then folded through lentils with lemon and tahini. Best warm, and it keeps for two days.</p>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>3 · Hero calorie + unit</b>Plus Jakarta Sans 300 · 76 px<br>unit Inter Tight 400 · 17 px</div>
+        <div class="tm__s">
+          <div style="display:flex;align-items:baseline;gap:11px">
+            <span class="num" style="font-family:var(--font-display);font-weight:300;font-size:76px;line-height:.92;letter-spacing:-.04em">512</span>
+            <span style="font-size:17px;color:var(--ink-2)">kcal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>4 · Portion / per-100 g</b>Values Plus Jakarta Sans 500 · 20 px<br>labels Inter Tight 400 · 15 px</div>
+        <div class="tm__s">
+          <div class="pair">
+            <div><b class="num">340 g</b><span>Portion</span></div>
+            <div><b class="num">151 kcal</b><span>Per 100 g</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>5 · Macro value + label</b>Values Plus Jakarta Sans 500 · 24 px<br>labels Inter Tight 400 · 15 px</div>
+        <div class="tm__s">
+          <div class="macros">
+            <div class="macro"><b class="num">19 g</b><span><i style="background:var(--m-p)"></i>Protein</span></div>
+            <div class="macro"><b class="num">58 g</b><span><i style="background:var(--m-c)"></i>Carbs</span></div>
+            <div class="macro"><b class="num">22 g</b><span><i style="background:var(--m-f)"></i>Fat</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>6 · Ingredient row</b>Inter Tight 400 · 16 px<br>amount 15 px · value 16 px / 500</div>
+        <div class="tm__s">
+          <div class="ing"><span class="ing__n">Butternut squash</span><span class="ing__a num">180 g</span><span class="ing__k num">115</span></div>
+          <div class="ing" style="border-bottom:0"><span class="ing__n">Red lentils, dry</span><span class="ing__a num">60 g</span><span class="ing__k num">209</span></div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>7 · Primary button</b>Inter Tight 500<br>17 px · 56 px tall</div>
+        <div class="tm__s">
+          <button class="btn btn--p btn--full" type="button">Add to my day</button>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>8 · Small secondary label</b>Inter Tight 500<br>14 px / +0.1em</div>
+        <div class="tm__s">
+          <p style="font-size:14px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)">Verified source</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="cap">Tabular figures throughout. The annotation column is stylescape chrome, not interface type.</p>
   </div>
 </section>
 
