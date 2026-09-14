@@ -16,7 +16,7 @@ The selected direction keeps that precision in the product's **structure and beh
 
 This is a usability decision before it is an aesthetic one.
 
-Both core jobs — work out what is in a dish, and find a recipe that suits you right now — are everyday, low-stakes, and often done while cooking or standing in a shop. The Data-Native language read as a measuring instrument, and that created three concrete problems:
+Both core jobs — work out what is in a dish, and find a recipe that suits you right now — are everyday, frequent, and often done while cooking or standing in a shop. The Data-Native language read as a measuring instrument, and that created three concrete problems:
 
 1. **It over-claimed precision.** Calibration marks and tick rings signal instrument-grade measurement. The underlying figures are database estimates against a user-entered portion. The visual language wrote a cheque the data cannot cash, which is a trust problem the moment a user notices.
 
