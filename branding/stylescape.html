@@ -3,1234 +3,838 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nutrition Stylescape — Round 02</title>
-<meta name="description" content="Two refined brand directions for a mobile calorie and nutrition app.">
+<title>Table — Locked Direction</title>
+<meta name="description" content="The selected visual direction for the calorie and nutrition app, with three candidate brand devices.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   PRESENTATION BOARD
-   A warm neutral table. Both directions are light, so the board
-   sits a step darker and lets the paper plates lift off it.
+   TABLE — locked direction
+   The page is set in the direction it describes: warm paper
+   ground, white cards, hairlines inside them, one berry accent.
    ============================================================ */
 *,*::before,*::after{box-sizing:border-box}
 :root{
   color-scheme:light;
-  --board:#DCD8D0;
-  --board-2:#D2CDC4;
-  --board-ink:#26231F;
-  --board-muted:#6C665C;
-  --board-faint:#928B80;
-  --board-line:#C3BCB0;
-  --gutter:clamp(16px,4.2vw,64px);
+  --paper:#F8F6F2;
+  --paper-2:#F1EDE6;
+  --card:#FFFFFF;
+  --ink:#1F1C1A;
+  --muted:#6E6862;
+  --faint:#A69E94;
+  --line:#ECE7DF;
+  --line-2:#DCD5C9;
+  --accent:#8A3355;
+  --accent-mid:#C68CA3;
+  --accent-soft:#E3C6D1;
+  --accent-tint:#F5E9EE;
+  --r:16px;
+  --r-sm:10px;
+  --gutter:clamp(18px,4.4vw,72px);
+  --sans:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --board-sans:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
 }
 html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;background:var(--board);color:var(--board-ink);
-  font-family:var(--board-sans);font-size:15px;line-height:1.6;
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.6;letter-spacing:-.005em;
   -webkit-font-smoothing:antialiased;
 }
 h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--board-ink);outline-offset:3px}
-.wrap{max-width:1320px;margin:0 auto;padding-inline:var(--gutter)}
-.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--board-faint)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:var(--gutter)}
+.num{font-variant-numeric:tabular-nums}
+
+/* micro label — the one place monospace survives */
+.micro{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);line-height:1.6}
+.micro--ink{color:var(--muted)}
 
 /* ---------- masthead ---------- */
-.masthead{padding-block:clamp(38px,6vw,84px) clamp(26px,4vw,44px)}
-.masthead__top{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;align-items:baseline;margin-bottom:clamp(26px,4.6vw,52px)}
-.masthead__grid{display:grid;gap:clamp(26px,4vw,58px);grid-template-columns:minmax(0,1fr)}
-@media(min-width:1000px){.masthead__grid{grid-template-columns:minmax(0,1.3fr) minmax(300px,.7fr);align-items:start}}
-.masthead h1{
-  font-family:"Instrument Sans",sans-serif;font-weight:600;
-  font-size:clamp(34px,6.4vw,68px);line-height:1.02;letter-spacing:-.035em;
-  text-wrap:balance;max-width:15ch;
+.mast{padding-block:clamp(40px,7vw,96px) clamp(30px,4.6vw,56px)}
+.mast__top{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;align-items:baseline;margin-bottom:clamp(28px,5vw,60px)}
+.mast__grid{display:grid;gap:clamp(26px,4vw,64px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:980px){.mast__grid{grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);align-items:start}}
+.mast h1{font-weight:600;font-size:clamp(36px,6.6vw,72px);line-height:1;letter-spacing:-.04em;text-wrap:balance;max-width:14ch}
+.mast h1 em{font-style:normal;color:var(--accent)}
+.mast__lede{margin-top:clamp(18px,2.6vw,30px);max-width:58ch;color:var(--muted);font-size:clamp(15px,1.4vw,17px);line-height:1.7}
+.changed{background:var(--card);border-radius:var(--r);padding:clamp(18px,2.4vw,26px)}
+.changed h2{font-size:15px;font-weight:600;letter-spacing:-.015em}
+.changed div{padding:11px 0;border-top:1px solid var(--line);font-size:13.2px;line-height:1.55;color:var(--muted)}
+.changed div:first-of-type{margin-top:14px}
+.changed b{color:var(--ink);font-weight:600}
+
+/* ---------- section scaffolding ---------- */
+.sec{padding-block:clamp(34px,5.2vw,78px);border-top:1px solid var(--line-2)}
+.sec__h{display:grid;gap:clamp(14px,2.4vw,40px);grid-template-columns:minmax(0,1fr);margin-bottom:clamp(24px,3.4vw,44px)}
+@media(min-width:900px){.sec__h{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:end}}
+.sec__t{font-size:clamp(24px,3.2vw,38px);font-weight:600;letter-spacing:-.035em;line-height:1.05;margin-top:12px;text-wrap:balance}
+.sec__n{font-size:14.4px;line-height:1.7;color:var(--muted);max-width:56ch}
+.sec__n+.sec__n{margin-top:12px}
+.sec__n b{color:var(--ink);font-weight:600}
+
+.card{background:var(--card);border-radius:var(--r);padding:clamp(18px,2.6vw,30px)}
+.card--flush{padding:0;overflow:hidden}
+.grid{display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:820px){
+  .grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid--21{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+  .grid--12{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}
 }
-.masthead__lede{margin-top:clamp(18px,2.6vw,28px);max-width:60ch;color:var(--board-muted);font-size:clamp(14.5px,1.35vw,16.5px);line-height:1.7}
-.keys{display:grid;gap:12px}
-.key{display:block;text-decoration:none;padding:20px 22px 22px;box-shadow:0 18px 34px -26px rgba(40,32,24,.75)}
-.key__row{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.key__no{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.55}
-.key__n{margin-top:10px;font-size:26px;line-height:1;letter-spacing:-.03em}
-.key__d{margin-top:9px;font-size:13px;line-height:1.5;opacity:.7;max-width:32ch}
-.key__sw{display:flex;gap:5px}
-.key__sw i{width:15px;height:15px;border-radius:50%}
-
-/* ---------- shared territory band ---------- */
-.territory{padding-block:clamp(30px,4.6vw,56px);border-top:1px solid var(--board-line)}
-.terr__grid{display:grid;gap:clamp(22px,3.4vw,52px);grid-template-columns:minmax(0,1fr)}
-@media(min-width:940px){.terr__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
-.terr__h{font-family:"Instrument Sans",sans-serif;font-weight:600;font-size:clamp(19px,2.1vw,24px);letter-spacing:-.02em;line-height:1.2}
-.terr__list{margin-top:18px;display:grid;gap:0}
-.terr__list div{padding:11px 0;border-top:1px solid var(--board-line);font-size:13.8px;line-height:1.6;color:var(--board-muted)}
-.terr__list div:last-child{border-bottom:1px solid var(--board-line)}
-.terr__list b{color:var(--board-ink);font-weight:600}
-.terr__list b{color:var(--board-ink);font-weight:600;letter-spacing:-.005em}
-.terr__list--cut div{color:var(--board-faint)}
-.terr__list--cut s{text-decoration-color:var(--board-faint);color:var(--board-faint)}
-
-/* ---------- plate scaffolding ---------- */
-.block{padding-block:clamp(30px,4.6vw,68px) 0}
-.block__tag{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between;padding-bottom:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--board-faint)}
-.plate{padding:clamp(22px,4vw,64px);box-shadow:0 30px 60px -38px rgba(40,32,24,.8)}
-.note{padding:13px 2px 0;color:var(--board-faint);font-size:12.5px;line-height:1.6;max-width:78ch}
-</style>
-<style>
-/* ============================================================
-   SHARED SPECIMEN LANGUAGE
-   Both directions use these structures; each themes them through
-   its own tokens and type. Same territory, two temperaments.
-   ============================================================ */
-.dir{--pad:clamp(22px,4vw,64px)}
-.dir__head{display:grid;gap:clamp(18px,3vw,48px);grid-template-columns:minmax(0,1fr)}
-@media(min-width:900px){.dir__head{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:end}}
-.dir__no{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-.dir__name{margin-top:12px;line-height:.95;letter-spacing:-.035em}
-.dir__tag{margin-top:14px;font-size:clamp(16px,1.8vw,21px);line-height:1.35;color:var(--muted);max-width:26ch}
-.dir__idea{font-size:14.8px;line-height:1.72;color:var(--muted);max-width:56ch}
-.dir__idea+.dir__idea{margin-top:13px}
-.dir__idea b{color:var(--ink);font-weight:600}
-
-.sec{margin-top:clamp(34px,5vw,76px)}
-.sec--tight{margin-top:clamp(24px,3.4vw,44px)}
-.rowlabel{
-  font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--faint);
-  padding-bottom:11px;border-bottom:1px solid var(--rule);margin-bottom:clamp(18px,2.6vw,32px);
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-}
-.g2{display:grid;gap:clamp(20px,3vw,44px);grid-template-columns:minmax(0,1fr)}
-@media(min-width:860px){.g2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
-.g2--wide{grid-template-columns:minmax(0,1fr)}
-@media(min-width:860px){.g2--wide{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
 .cap{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:10px;line-height:1.6}
-.body-note{font-size:13.8px;line-height:1.68;color:var(--muted);max-width:52ch}
-
-/* palette */
-.pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:0}
-.pal .sw{min-height:118px;padding:13px 13px 15px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
-.pal .sw i{font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:auto}
-.pal .sw b{font-size:12.5px;font-weight:600}
-.pal .sw span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;opacity:.62}
-
-/* type ladder */
-.ladder{display:grid;gap:0}
-.lad{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding:15px 0;border-top:1px solid var(--rule)}
-@media(min-width:720px){.lad{grid-template-columns:150px minmax(0,1fr);gap:24px;align-items:baseline}}
-.lad:last-child{border-bottom:1px solid var(--rule)}
-.lad__spec{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);line-height:1.6}
-.lad__spec b{display:block;color:var(--muted);font-weight:500;letter-spacing:.16em}
-.lad__s{min-width:0;overflow-wrap:anywhere}
-
-/* photography tone plates */
-.photo{position:relative;overflow:hidden;background:var(--chalk)}
-.photo::after{content:"";position:absolute;inset:0;background-image:var(--grain);mix-blend-mode:overlay;opacity:.5;pointer-events:none}
-.photo--warm{background-image:
-  radial-gradient(27% 23% at 35% 39%,rgba(230,168,90,.95),rgba(230,168,90,0) 70%),
-  radial-gradient(21% 19% at 57% 30%,rgba(158,68,46,.88),rgba(158,68,46,0) 72%),
-  radial-gradient(25% 22% at 49% 63%,rgba(203,122,60,.82),rgba(203,122,60,0) 74%),
-  radial-gradient(17% 15% at 67% 59%,rgba(104,116,62,.72),rgba(104,116,62,0) 76%),
-  radial-gradient(13% 12% at 30% 60%,rgba(243,226,192,.8),rgba(243,226,192,0) 74%),
-  radial-gradient(72% 62% at 20% 10%,rgba(255,234,204,.5),rgba(255,234,204,0) 72%),
-  linear-gradient(150deg,#6F4B34 0%,#482D1F 58%,#281911 100%);}
-.photo--warm2{background-image:
-  radial-gradient(24% 22% at 62% 42%,rgba(222,158,84,.94),rgba(222,158,84,0) 70%),
-  radial-gradient(19% 18% at 40% 34%,rgba(148,62,42,.86),rgba(148,62,42,0) 72%),
-  radial-gradient(23% 20% at 52% 68%,rgba(196,116,56,.8),rgba(196,116,56,0) 74%),
-  radial-gradient(15% 14% at 31% 58%,rgba(112,120,64,.7),rgba(112,120,64,0) 76%),
-  radial-gradient(68% 60% at 82% 8%,rgba(255,236,208,.48),rgba(255,236,208,0) 72%),
-  linear-gradient(202deg,#664430 0%,#422A1D 56%,#241610 100%);}
-.photo--warm3{background-image:
-  radial-gradient(26% 24% at 46% 34%,rgba(234,174,96,.92),rgba(234,174,96,0) 70%),
-  radial-gradient(18% 17% at 33% 56%,rgba(154,66,44,.84),rgba(154,66,44,0) 72%),
-  radial-gradient(22% 20% at 63% 61%,rgba(200,120,58,.8),rgba(200,120,58,0) 74%),
-  radial-gradient(14% 13% at 56% 44%,rgba(240,222,186,.78),rgba(240,222,186,0) 74%),
-  radial-gradient(70% 58% at 40% 6%,rgba(255,238,212,.46),rgba(255,238,212,0) 72%),
-  linear-gradient(168deg,#6B4831 0%,#452C1E 58%,#261811 100%);}
-.photo--bright{background-image:
-  radial-gradient(26% 24% at 40% 37%,rgba(255,198,74,.96),rgba(255,198,74,0) 70%),
-  radial-gradient(20% 18% at 62% 47%,rgba(226,85,44,.9),rgba(226,85,44,0) 72%),
-  radial-gradient(22% 20% at 34% 62%,rgba(142,152,76,.82),rgba(142,152,76,0) 74%),
-  radial-gradient(15% 14% at 57% 25%,rgba(250,238,214,.92),rgba(250,238,214,0) 74%),
-  radial-gradient(13% 12% at 68% 68%,rgba(198,74,48,.78),rgba(198,74,48,0) 76%),
-  linear-gradient(158deg,#EBAB5E 0%,#CB7431 56%,#9E4C26 100%);}
-.photo--bright2{background-image:
-  radial-gradient(25% 23% at 60% 36%,rgba(255,206,92,.95),rgba(255,206,92,0) 70%),
-  radial-gradient(19% 18% at 38% 46%,rgba(222,96,48,.88),rgba(222,96,48,0) 72%),
-  radial-gradient(21% 19% at 56% 66%,rgba(150,158,82,.8),rgba(150,158,82,0) 74%),
-  radial-gradient(14% 13% at 34% 26%,rgba(252,240,218,.9),rgba(252,240,218,0) 74%),
-  linear-gradient(196deg,#F0B562 0%,#D27C34 54%,#A45028 100%);}
-.photo--bright3{background-image:
-  radial-gradient(27% 25% at 46% 42%,rgba(255,192,70,.94),rgba(255,192,70,0) 70%),
-  radial-gradient(18% 17% at 63% 34%,rgba(216,80,42,.88),rgba(216,80,42,0) 72%),
-  radial-gradient(20% 18% at 36% 60%,rgba(146,154,78,.8),rgba(146,154,78,0) 74%),
-  radial-gradient(13% 12% at 58% 62%,rgba(250,236,210,.86),rgba(250,236,210,0) 74%),
-  linear-gradient(174deg,#E8A254 0%,#C66B2F 54%,#973F24 100%);}
-.ratio{display:flex;align-items:flex-end;justify-content:flex-start}
-.ratio__t{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:9px}
-.crops{display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(120px,1fr));align-items:end}
-
-/* iconography */
-.icons{display:flex;flex-wrap:wrap;gap:clamp(14px,2.2vw,30px)}
-.ico{display:flex;flex-direction:column;align-items:center;gap:9px;width:70px}
-.ico svg{width:30px;height:30px;display:block}
-.ico span{font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);text-align:center}
-
-/* UI fragments */
-.frags{display:grid;gap:clamp(14px,2vw,22px)}
-.frag{background:var(--chalk);padding:clamp(14px,1.8vw,20px)}
-.frag__l{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:11px}
-.num{font-variant-numeric:tabular-nums}
+.rowline{border-top:1px solid var(--line)}
+.note{font-size:13.4px;line-height:1.68;color:var(--muted);max-width:54ch}
+.note b{color:var(--ink);font-weight:600}
 </style>
 <style>
-/* ============================================================
-   DIRECTION 01 — TABLE
-   Warm paper, one deep accent, hairline rules, wide margins.
-   Motif: the marked rule — one line, one tick.
-   ============================================================ */
-.dA{
-  --paper:#F7F5F1; --chalk:#FFFFFF; --ink:#23201D; --muted:#726B63; --faint:#A0988D;
-  --rule:#E4DFD7;
-  --accent:#7B3352; --accent-2:#B47F94; --accent-3:#E3D4DA;
-  background:var(--paper);color:var(--ink);
-  font-family:"DM Sans",var(--board-sans);
-}
-.dA .dir__name{font-family:"Instrument Sans",sans-serif;font-weight:600;font-size:clamp(40px,6.8vw,84px)}
-.dA .dir__tag{font-family:"Instrument Sans",sans-serif;font-weight:400}
-.subh{font-size:clamp(17px,1.9vw,21px);line-height:1.25;letter-spacing:-.02em;margin-bottom:12px}
-.dA .subh{font-family:"Instrument Sans",sans-serif;font-weight:600}
+/* ---------- palette ---------- */
+.pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px}
+.sw{border-radius:var(--r-sm);min-height:116px;padding:12px 13px 14px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
+.sw i{font-style:normal;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:auto}
+.sw b{font-size:12.5px;font-weight:600}
+.sw span{font-family:var(--mono);font-size:10px;letter-spacing:.04em;opacity:.62}
+.rules{display:grid;gap:0;margin-top:20px}
+.rules div{padding:10px 0;border-top:1px solid var(--line);font-size:13.2px;line-height:1.6;color:var(--muted)}
+.rules div:last-child{border-bottom:1px solid var(--line)}
+.rules b{color:var(--ink);font-weight:600}
 
-/* motif: the marked rule */
-.tickline{position:relative;height:1px;background:var(--rule)}
-.tickline i{position:absolute;top:-5px;width:1px;height:11px;background:var(--accent)}
-.tickline--thick{height:2px;background:var(--rule)}
+/* ---------- type ladder ---------- */
+.lad{display:grid;grid-template-columns:minmax(0,1fr);gap:7px;padding:16px 0;border-top:1px solid var(--line)}
+@media(min-width:760px){.lad{grid-template-columns:168px minmax(0,1fr);gap:26px;align-items:baseline}}
+.lad:last-child{border-bottom:1px solid var(--line)}
+.lad__s{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);line-height:1.65}
+.lad__s b{display:block;color:var(--muted);font-weight:500;letter-spacing:.15em}
+.lad__x{min-width:0;overflow-wrap:anywhere}
 
-/* wordmark */
-.wmA{display:inline-block}
-.wmA__w{font-family:"Instrument Sans",sans-serif;font-weight:500;font-size:clamp(38px,5.2vw,58px);letter-spacing:-.045em;line-height:1}
-.wmA__r{position:relative;height:1px;background:var(--ink);margin-top:11px}
-.wmA__r i{position:absolute;top:-4px;left:31%;width:1px;height:9px;background:var(--accent)}
-.wmA__s{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-top:9px}
-
-/* hero number */
-.heroA__k{font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--faint)}
-.heroA__n{
-  font-family:"Instrument Sans",sans-serif;font-weight:600;
-  font-size:clamp(76px,13vw,148px);line-height:.84;letter-spacing:-.055em;
-  font-variant-numeric:tabular-nums;margin-top:14px;
-}
-.heroA__n sub{font-size:.17em;vertical-align:baseline;letter-spacing:.16em;color:var(--muted);font-weight:500;margin-left:.22em}
-.heroA__m{display:flex;flex-wrap:wrap;gap:6px 30px;margin-top:20px;font-size:13px;color:var(--muted)}
-.heroA__m b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
-
-/* macro band */
-.bandrow{display:flex;gap:3px}
-.bandrow>div{min-width:0}
-.band{height:13px}
-.band--p{background:var(--accent)}
-.band--c{background:var(--accent-2)}
-.band--f{background:var(--accent-3)}
-.bandlab{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding-bottom:7px}
-.bandval{font-size:clamp(19px,2.3vw,26px);font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums;padding-bottom:9px;line-height:1}
-.bandval small{font-size:.5em;font-weight:400;color:var(--muted);margin-left:2px}
-.bandpct{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--muted);padding-top:8px}
-
-/* day rule */
-.dayrule{position:relative;height:2px;background:var(--rule)}
-.dayrule i{position:absolute;inset:0 auto 0 0;background:var(--accent)}
-.dayrule u{position:absolute;top:-8px;height:18px;width:1px;background:var(--ink);text-decoration:none}
-.dayrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.dayrow b{font-size:clamp(20px,2.4vw,27px);font-weight:500;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
-.dayrow span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-
-/* fragments */
-.fA-search{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:11px}
-.fA-search input{flex:1;border:0;background:none;font:inherit;font-size:16px;color:var(--ink);padding:0;min-width:0}
-.fA-search input::placeholder{color:var(--faint)}
-.fA-row{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:12px 0;border-bottom:1px solid var(--rule)}
-.fA-row:first-of-type{border-top:1px solid var(--rule)}
-.fA-row em{font-style:normal;display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px}
-.fA-row b{font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:16px}
-.fA-step{display:inline-flex;align-items:stretch;border:1px solid var(--rule);background:var(--chalk)}
-.fA-step button{border:0;background:none;font:inherit;font-size:17px;color:var(--ink);padding:9px 16px;cursor:pointer;line-height:1}
-.fA-step span{padding:9px 18px;border-inline:1px solid var(--rule);font-variant-numeric:tabular-nums;font-size:15px}
-.fA-tog{display:inline-flex;gap:26px}
-.fA-tog span{font-size:14px;color:var(--muted);padding-bottom:9px;position:relative}
-.fA-tog span.on{color:var(--ink)}
-.fA-tog span.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent)}
-.fA-tog span.on::before{content:"";position:absolute;left:50%;bottom:-4px;width:1px;height:8px;background:var(--accent)}
-
-/* ============================================================
-   DIRECTION 02 — ZEST
-   Same light ground, brand stepped forward. Marigold fields,
-   humanist weight, soft corners. Motif: the plate — a circle.
-   ============================================================ */
-.dB{
-  --paper:#F6F6F3; --chalk:#FFFFFF; --ink:#17181A; --muted:#64686C; --faint:#979CA0;
-  --rule:#E3E4DF;
-  --accent:#FFC53D; --accent-2:#E2552C; --accent-3:#17181A;
-  background:var(--paper);color:var(--ink);
-  font-family:"Plus Jakarta Sans",var(--board-sans);
-}
-.dB .dir__name{font-family:"Manrope",sans-serif;font-weight:800;font-size:clamp(40px,6.8vw,84px)}
-.dB .dir__tag{font-family:"Manrope",sans-serif;font-weight:500}
-.dB .subh{font-family:"Manrope",sans-serif;font-weight:700}
-.dB .dir__no{color:var(--accent-2)}
-
-/* wordmark */
-.wmB{display:inline-block}
-.wmB__w{display:flex;align-items:center;gap:1px;font-family:"Manrope",sans-serif;font-weight:800;font-size:clamp(38px,5.2vw,58px);letter-spacing:-.05em;line-height:1}
-.wmB__w svg{width:.78em;height:.78em;display:block;margin-inline:.02em}
-.wmB__s{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-top:13px}
-
-/* hero number */
-.heroB{display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(14px,2.4vw,28px)}
-.heroB__n{
-  font-family:"Manrope",sans-serif;font-weight:800;
-  font-size:clamp(80px,14vw,160px);line-height:.8;letter-spacing:-.06em;
-  font-variant-numeric:tabular-nums;
-}
-.heroB__u{font-size:clamp(14px,1.6vw,18px);font-weight:600;letter-spacing:.04em;color:var(--muted);padding-bottom:clamp(8px,1.2vw,16px)}
-.heroB__m{font-size:13px;color:var(--muted);line-height:1.8;padding-bottom:clamp(6px,1vw,12px)}
-.heroB__m b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
-
-/* plate ring */
-.ringwrap{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(18px,3vw,36px)}
-.ring{width:clamp(148px,21vw,188px);aspect-ratio:1;flex:0 0 auto}
-.ring svg{width:100%;height:100%;display:block}
-.ringkey{display:grid;gap:0;min-width:180px;flex:1 1 200px}
-.ringkey div{display:flex;align-items:baseline;gap:11px;padding:10px 0;border-bottom:1px solid var(--rule)}
-.ringkey div:first-child{border-top:1px solid var(--rule)}
-.ringkey i{width:11px;height:11px;border-radius:50%;flex:0 0 11px;transform:translateY(1px)}
-.ringkey span{flex:1;font-size:13.5px;color:var(--muted)}
-.ringkey b{font-weight:600;font-variant-numeric:tabular-nums;font-size:15px}
-
-/* marigold field bar */
-.fieldbar{display:flex;align-items:stretch;min-height:clamp(66px,8.4vw,88px);background:var(--chalk);border-radius:6px;overflow:hidden}
-.fieldbar__f{background:var(--accent);display:flex;align-items:center;padding-inline:clamp(15px,2.2vw,24px);min-width:0}
-.fieldbar__f b{font-family:"Manrope",sans-serif;font-weight:800;font-size:clamp(24px,3.4vw,40px);letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1;color:var(--ink)}
-.fieldbar__r{display:flex;align-items:center;padding-inline:clamp(15px,2.2vw,24px);color:var(--muted);font-size:13.5px;font-variant-numeric:tabular-nums;min-width:0}
-.fieldnote{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:11px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
-
-/* fragments */
-.fB-search{display:flex;align-items:center;gap:12px;background:var(--chalk);border:1px solid var(--rule);border-radius:999px;padding:6px 6px 6px 18px}
-.fB-search input{flex:1;border:0;background:none;font:inherit;font-size:15.5px;color:var(--ink);padding:0;min-width:0}
-.fB-search input::placeholder{color:var(--faint)}
-.fB-search button{border:0;width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;cursor:pointer;flex:0 0 42px}
-.fB-chips{display:flex;flex-wrap:wrap;gap:8px}
-.fB-chip{border:1px solid var(--rule);background:var(--chalk);border-radius:999px;padding:8px 15px;font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:8px}
-.fB-chip.on{background:var(--accent);border-color:var(--accent);color:var(--ink);font-weight:600}
-.fB-chip i{width:7px;height:7px;border-radius:50%;background:var(--accent-2)}
-.fB-serv{display:flex;align-items:center;gap:14px}
-.fB-serv .dots{display:flex;gap:5px}
-.fB-serv .dots i{width:15px;height:15px;border-radius:50%;background:var(--rule)}
-.fB-serv .dots i.on{background:var(--accent)}
-.fB-card{display:flex;align-items:center;gap:15px;background:var(--chalk);border-radius:10px;padding:13px}
-.fB-card .crop{width:74px;height:74px;border-radius:50%;flex:0 0 74px}
-.fB-card h4{margin:0;font-family:"Manrope",sans-serif;font-weight:700;font-size:15.5px;letter-spacing:-.015em;line-height:1.25}
-.fB-card p{margin:6px 0 0;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.fB-card .kcal{margin-left:auto;text-align:right;flex:0 0 auto}
-.fB-card .kcal b{font-family:"Manrope",sans-serif;font-weight:800;font-size:19px;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
-.fB-card .kcal em{font-style:normal;display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:2px}
+/* ---------- photography ---------- */
+.photo{position:relative;overflow:hidden;background:var(--paper-2);border-radius:var(--r-sm)}
+.photo::after{content:"";position:absolute;inset:0;background-image:var(--grain);mix-blend-mode:overlay;opacity:.45;pointer-events:none}
+.photo--a{background-image:
+  radial-gradient(27% 23% at 36% 40%,rgba(232,172,94,.95),rgba(232,172,94,0) 70%),
+  radial-gradient(21% 19% at 58% 30%,rgba(160,70,46,.88),rgba(160,70,46,0) 72%),
+  radial-gradient(25% 22% at 48% 64%,rgba(206,126,62,.82),rgba(206,126,62,0) 74%),
+  radial-gradient(17% 15% at 68% 60%,rgba(112,126,66,.74),rgba(112,126,66,0) 76%),
+  radial-gradient(13% 12% at 30% 60%,rgba(245,230,198,.82),rgba(245,230,198,0) 74%),
+  radial-gradient(74% 62% at 20% 8%,rgba(255,240,216,.55),rgba(255,240,216,0) 72%),
+  linear-gradient(152deg,#7A5439 0%,#513322 58%,#2C1D14 100%);}
+.photo--b{background-image:
+  radial-gradient(24% 22% at 62% 42%,rgba(226,164,88,.94),rgba(226,164,88,0) 70%),
+  radial-gradient(19% 18% at 40% 33%,rgba(150,64,42,.86),rgba(150,64,42,0) 72%),
+  radial-gradient(23% 20% at 52% 68%,rgba(200,120,58,.8),rgba(200,120,58,0) 74%),
+  radial-gradient(15% 14% at 32% 58%,rgba(120,132,70,.72),rgba(120,132,70,0) 76%),
+  radial-gradient(70% 60% at 82% 6%,rgba(255,242,220,.52),rgba(255,242,220,0) 72%),
+  linear-gradient(202deg,#6F4C34 0%,#4A2F20 56%,#281A12 100%);}
+.photo--c{background-image:
+  radial-gradient(26% 24% at 46% 34%,rgba(236,178,100,.92),rgba(236,178,100,0) 70%),
+  radial-gradient(18% 17% at 33% 57%,rgba(156,68,44,.84),rgba(156,68,44,0) 72%),
+  radial-gradient(22% 20% at 64% 62%,rgba(204,124,60,.8),rgba(204,124,60,0) 74%),
+  radial-gradient(14% 13% at 56% 45%,rgba(242,226,192,.8),rgba(242,226,192,0) 74%),
+  radial-gradient(72% 58% at 40% 4%,rgba(255,244,222,.5),rgba(255,244,222,0) 72%),
+  linear-gradient(168deg,#755037 0%,#4C3021 58%,#2A1B13 100%);}
 .circ{border-radius:50%}
+.crops{display:grid;gap:clamp(12px,1.6vw,18px);grid-template-columns:repeat(auto-fit,minmax(130px,1fr));align-items:end}
 
+/* ---------- nutrition data — house treatment ---------- */
+.hero__k{font-size:13px;color:var(--muted)}
+.hero__n{font-weight:400;font-size:clamp(70px,11.5vw,128px);line-height:.85;letter-spacing:-.05em;margin-top:12px}
+.hero__u{font-size:clamp(13px,1.4vw,16px);font-weight:500;color:var(--muted);letter-spacing:.01em;margin-top:10px}
+.macros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.macro{padding:14px 0 0;border-top:1px solid var(--line)}
+.macro dt{font-size:12.5px;color:var(--muted)}
+.macro dd{margin:7px 0 0;font-size:clamp(20px,2.4vw,26px);font-weight:500;letter-spacing:-.025em;line-height:1}
+.macro dd small{font-size:.52em;font-weight:400;color:var(--muted);margin-left:2px}
+.track{height:6px;border-radius:99px;background:var(--line);overflow:hidden}
+.track i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.daytop{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:13px}
+.daytop b{font-size:clamp(19px,2.2vw,24px);font-weight:500;letter-spacing:-.025em}
 
-/* Zest — half-plate crop and the food/data pairing */
-.halfplate{position:relative;overflow:hidden;background:var(--accent);display:grid;place-items:center}
-.halfplate .disc{width:78%;aspect-ratio:1;border-radius:50%;transform:translateY(-14%)}
-.pairB{display:grid;gap:clamp(18px,2.6vw,30px);grid-template-columns:minmax(0,1fr);align-items:center}
-@media(min-width:860px){
-  .pairB{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
-  .pairB__field{margin-left:-46px;padding-left:72px}
-}
-.pairB__disc{aspect-ratio:1;border-radius:50%;position:relative;z-index:2}
-.pairB__field{background:var(--accent);border-radius:10px;padding:clamp(20px,3vw,34px)}
+/* ---------- icons ---------- */
+.icons{display:flex;flex-wrap:wrap;gap:clamp(14px,2.2vw,28px)}
+.ico{display:flex;flex-direction:column;align-items:center;gap:9px;width:66px}
+.ico svg{width:28px;height:28px;display:block;color:var(--ink)}
+.ico span{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);text-align:center}
+
+/* ---------- UI fragments ---------- */
+.frag{background:var(--card);border-radius:var(--r);padding:clamp(15px,2vw,20px)}
+.frag__l{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:13px}
+.f-search{display:flex;align-items:center;gap:11px;background:var(--paper);border-radius:12px;padding:12px 14px}
+.f-search input{flex:1;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);padding:0;min-width:0}
+.f-search input::placeholder{color:var(--faint)}
+.f-row{display:flex;align-items:center;gap:13px;padding:11px 0;border-top:1px solid var(--line)}
+.f-row:first-of-type{border-top:0}
+.f-row__t{min-width:0;flex:1}
+.f-row__t strong{display:block;font-weight:500;font-size:14.5px;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f-row__t span{display:block;font-size:12px;color:var(--faint);margin-top:2px}
+.f-row__v{text-align:right;flex:0 0 auto}
+.f-row__v b{font-weight:500;font-size:16px}
+.f-thumb{width:44px;height:44px;flex:0 0 44px;border-radius:var(--r-sm)}
+.f-step{display:inline-flex;align-items:center;background:var(--paper);border-radius:12px;overflow:hidden}
+.f-step button{border:0;background:none;font:inherit;font-size:17px;color:var(--ink);padding:10px 16px;cursor:pointer;line-height:1}
+.f-step span{padding:10px 16px;font-size:15px;min-width:86px;text-align:center}
+.f-tabs{display:flex;justify-content:space-around;align-items:center;background:var(--card);border-radius:var(--r);padding:12px 6px 10px}
+.f-tab{display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--faint);flex:1}
+.f-tab.on{color:var(--accent)}
+.f-tab span{font-size:10.5px;letter-spacing:.01em}
+.f-tab svg{width:23px;height:23px}
+.f-seg{display:inline-flex;background:var(--paper);border-radius:12px;padding:3px}
+.f-seg span{padding:8px 15px;border-radius:9px;font-size:13.5px;color:var(--muted)}
+.f-seg span.on{background:var(--card);color:var(--ink);font-weight:500;box-shadow:0 1px 3px rgba(31,28,26,.07)}
 
 /* ============================================================
-   COMPARISON
+   BRAND DEVICE CANDIDATES
    ============================================================ */
-.compare{padding-block:clamp(40px,6vw,92px) clamp(46px,7vw,104px);border-top:1px solid var(--board-line);margin-top:clamp(36px,5vw,72px)}
-.cscroll{overflow-x:auto;margin-top:clamp(20px,3vw,34px);border:1px solid var(--board-line);background:#E4E0D9}
-.ctable{width:100%;min-width:760px;border-collapse:collapse;font-size:13.2px}
-.ctable th,.ctable td{padding:13px 16px;border-bottom:1px solid var(--board-line);vertical-align:top;text-align:left}
-.ctable tbody th{width:142px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--board-faint);font-weight:400}
-.ctable td{color:var(--board-muted);line-height:1.55}
-.ctable td b{color:var(--board-ink);font-weight:600}
-.chead{display:flex;align-items:center;gap:10px}
-.chead i{width:13px;height:13px;border-radius:50%;flex:0 0 13px}
-.chead span{font-family:"Instrument Sans",sans-serif;font-size:15px;font-weight:600;color:var(--board-ink)}
-.closing{border-top:1px solid var(--board-line);padding-block:clamp(26px,4vw,44px) clamp(44px,7vw,88px);color:var(--board-muted);font-size:13.6px;line-height:1.7;max-width:74ch}
-.closing strong{color:var(--board-ink)}
-@media print{.plate{box-shadow:none}}
+.devs{display:grid;gap:clamp(16px,2.2vw,24px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:1000px){.devs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dev{background:var(--card);border-radius:var(--r);padding:clamp(18px,2.2vw,26px);display:flex;flex-direction:column}
+.dev__k{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.dev__n{font-size:clamp(20px,2.3vw,26px);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-top:11px}
+.dev__r{font-size:13.6px;line-height:1.62;color:var(--muted);margin-top:11px}
+.dev__r b{color:var(--ink);font-weight:600}
+.dev__demo{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.dev__sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.dev__demo+.dev__demo{margin-top:20px}
+.dev__foot{margin-top:auto;padding-top:20px}
+.dev__foot p{font-size:12.6px;line-height:1.55;color:var(--muted);padding:9px 0;border-top:1px solid var(--line)}
+.dev__foot b{color:var(--ink);font-weight:600}
+
+/* device 01 — measure line */
+.measure{position:relative;height:3px;border-radius:2px;background:var(--line)}
+.measure i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:2px}
+/* device 02 — hanging plate */
+.hang{display:flex;align-items:center;gap:15px;background:var(--paper);border-radius:var(--r);padding:16px 16px 16px 0;margin-left:22px}
+.hang__c{flex:0 0 auto;margin-left:-22px}
+/* device 03 — the spine */
+.spine{width:6px;border-radius:99px;overflow:hidden;display:flex;flex-direction:column;flex:0 0 6px}
+.spine i{display:block;width:100%}
+.spine .p{background:var(--accent)}
+.spine .c{background:var(--accent-mid)}
+.spine .f{background:var(--accent-soft)}
+.spinerow{display:flex;align-items:stretch;gap:13px}
+
+/* ---------- closing ---------- */
+.closing{border-top:1px solid var(--line-2);padding-block:clamp(28px,4vw,48px) clamp(46px,7vw,92px);color:var(--muted);font-size:13.6px;line-height:1.7;max-width:74ch}
+.closing strong{color:var(--ink)}
 </style>
 </head>
 <body>
 
-<header class="masthead">
+<header class="mast">
   <div class="wrap">
-    <div class="masthead__top">
-      <p class="eyebrow">Calorie &amp; Nutrition App — Mobile</p>
-      <p class="eyebrow">Stage 02 / Branding · Stylescape · Round 02</p>
+    <div class="mast__top">
+      <p class="micro">Calorie &amp; Nutrition App — Mobile</p>
+      <p class="micro">Stage 02 / Branding · Locked direction · Round 03</p>
     </div>
-    <div class="masthead__grid">
+    <div class="mast__grid">
       <div>
-        <h1>The same brand, held at two temperatures.</h1>
-        <p class="masthead__lede">
-          Round 01 read like an instrument panel: dark, monospaced, gridded. This round keeps what was
-          working — the calm editorial structure, the light foundation, the belief that the number is the
-          answer — and trades the engineering tone for something warmer and more contemporary.
-          Both directions below are the same product: light, spacious, precise, with food visibly present.
-          One is quiet. One speaks up. Neither is a dashboard.
+        <h1>One direction, locked. Three ways to make it <em>recognisable</em>.</h1>
+        <p class="mast__lede">
+          Table is the foundation: warm paper, one berry accent, editorial hierarchy. What it gains here is
+          the calm card structure of a good modern health app, lighter typography, and food photography
+          promoted from supporting evidence to a first-class part of the brand.
+          Everything below is one direction — no alternatives. The last section holds the only open
+          question: three candidate brand devices, all built inside this same direction.
         </p>
       </div>
-      <div class="keys">
-        <a class="key" href="#table" style="background:#F7F5F1;color:#23201D">
-          <div class="key__row">
-            <span class="key__no">Direction 01</span>
-            <span class="key__sw"><i style="background:#7B3352"></i><i style="background:#B47F94"></i><i style="background:#E3D4DA"></i></span>
-          </div>
-          <div class="key__n" style="font-family:'Instrument Sans',sans-serif;font-weight:600">Table</div>
-          <p class="key__d">Warm paper, one deep accent, hairline rules. The dining table, not the data table.</p>
-        </a>
-        <a class="key" href="#zest" style="background:#F6F6F3;color:#17181A">
-          <div class="key__row">
-            <span class="key__no">Direction 02</span>
-            <span class="key__sw"><i style="background:#FFC53D"></i><i style="background:#E2552C"></i><i style="background:#17181A"></i></span>
-          </div>
-          <div class="key__n" style="font-family:'Manrope',sans-serif;font-weight:800">Zest</div>
-          <p class="key__d">Same light room, brand stepped forward. Marigold fields and a plate that counts.</p>
-        </a>
+      <div class="changed">
+        <h2>What changed from Round 02</h2>
+        <div><b>Cards adopted.</b> “Nothing sits in a box” gave calm but no grouping. Content now groups into white cards on paper, with hairlines separating rows inside them.</div>
+        <div><b>One type family.</b> DM Sans dropped. Instrument Sans carries display, body and data; monospace is a 10 px detail.</div>
+        <div><b>Lighter figures.</b> Hero numbers set at 400, not 600 — presence comes from scale and the space around them.</div>
+        <div><b>Softer icons.</b> Squared terminals replaced with rounded, at a lighter 1.5 px.</div>
+        <div><b>Accent retuned.</b> Bramble warmed and saturated a step so it holds its own beside real food.</div>
+        <div><b>Photography promoted.</b> From “once per surface” to a first-class element with its own crop rules.</div>
       </div>
     </div>
   </div>
 </header>
 
-<section class="territory">
-  <div class="wrap terr__grid">
-    <div>
-      <h2 class="terr__h">The ground both directions stand on</h2>
-      <div class="terr__list">
-        <div><b>Light foundation.</b> A warm neutral paper, always. Dark is a mode the product can offer; it is never the brand.</div>
-        <div><b>Numbers in the brand’s own voice.</b> Calories and macros are set in the display face with tabular figures — not handed to a monospace.</div>
-        <div><b>Monospace demoted.</b> It survives at 10 px only, for units, sources and measurement labels. It is a detail, not an identity.</div>
-        <div><b>Food is present.</b> Photographed, never illustrated, and never used as wallpaper behind text. It appears at full tonal quality or not at all.</div>
-        <div><b>One accent.</b> Neutrals carry the structure; the accent only ever carries meaning.</div>
-        <div><b>Space before decoration.</b> Margins are decided first. Nothing is added that a rule or a gap could do.</div>
-        <div><b>Shared placeholder name.</b> Both use the wordmark <b>Nota</b> so personality is comparable. The name is a stand-in for expression, not a naming recommendation.</div>
+<!-- ================= COLOUR ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__h">
+      <div>
+        <p class="micro">01 — Colour</p>
+        <h2 class="sec__t">Warm paper, one berry, and food doing the rest</h2>
+      </div>
+      <div>
+        <p class="sec__n">
+          <b>Bramble is a food colour</b> — fig, plum, radicchio, beetroot — which is why it sits comfortably
+          beside a photograph without looking like an interface swatch dropped on top of one.
+        </p>
+        <p class="sec__n">
+          It is deliberately not green. Every app in this category reaches for green, and green also competes
+          directly with the herbs and vegetables in the imagery. Most food photography lives in oranges,
+          browns and greens; a berry accent stays clear of that range, so the accent reads as the product’s
+          voice and the food reads as food.
+        </p>
       </div>
     </div>
-    <div>
-      <h2 class="terr__h">Deliberately left behind from Round 01</h2>
-      <div class="terr__list terr__list--cut">
-        <div><b>The dark instrument panel.</b> It read clinical — a monitoring system rather than something you consult before lunch.</div>
-        <div><b>Monospace as the brand voice.</b> Every figure in a developer typeface is what made the product feel like tooling.</div>
-        <div><b>Calibration ticks, rulers and dial gauges.</b> Measurement theatre. The number is already precise; it does not need to be dressed as an instrument.</div>
-        <div><b>900-weight square grotesks.</b> Confidence was coming from heaviness. It now comes from scale, colour and space.</div>
-        <div><b>The unit-count matrix.</b> Memorable, but it reads as an analytics grid — the exact association to avoid.</div>
-        <div><b>Hairline data tables as primary layout.</b> Kept only where a table is genuinely the right object; no longer the house style.</div>
-        <div><b>The hi-vis industrial accent.</b> Replaced by colours that belong to food and to considered editorial work.</div>
+
+    <div class="card">
+      <div class="pal">
+        <div class="sw" style="background:#F8F6F2;color:#1F1C1A;box-shadow:inset 0 0 0 1px #ECE7DF"><i>Ground</i><b>Paper</b><span>#F8F6F2</span></div>
+        <div class="sw" style="background:#FFFFFF;color:#1F1C1A;box-shadow:inset 0 0 0 1px #ECE7DF"><i>Surface</i><b>Card</b><span>#FFFFFF</span></div>
+        <div class="sw" style="background:#1F1C1A;color:#F8F6F2"><i>Text</i><b>Ink</b><span>#1F1C1A</span></div>
+        <div class="sw" style="background:#6E6862;color:#FFFFFF"><i>Secondary</i><b>Muted</b><span>#6E6862</span></div>
+        <div class="sw" style="background:#ECE7DF;color:#1F1C1A"><i>Divider</i><b>Hairline</b><span>#ECE7DF</span></div>
+        <div class="sw" style="background:#8A3355;color:#FFFFFF"><i>Accent</i><b>Bramble</b><span>#8A3355</span></div>
+        <div class="sw" style="background:#C68CA3;color:#1F1C1A"><i>Accent 60</i><b>Bramble Mid</b><span>#C68CA3</span></div>
+        <div class="sw" style="background:#F5E9EE;color:#1F1C1A"><i>Accent 12</i><b>Bramble Tint</b><span>#F5E9EE</span></div>
+      </div>
+      <div class="rules">
+        <div><b>The accent never covers more than about a tenth of a screen.</b> It is a mark, not a surface.</div>
+        <div><b>It has exactly three jobs:</b> the current value, the active state, and the single primary action. Nothing else earns it.</div>
+        <div><b>Macros are three steps of one hue,</b> never three different colours. Ranking is read as density, not as a colour key.</div>
+        <div><b>No red / amber / green semantics.</b> A value over target is stated in words; nothing turns red and scolds the user.</div>
+        <div><b>Photography is the second colour.</b> It is allowed to be the loudest thing on the screen — the palette is built quiet so it can be.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ==========================================================
-     DIRECTION 01 — TABLE
-     ========================================================== -->
-<section class="block" id="table">
+<!-- ================= TYPOGRAPHY ================= -->
+<section class="sec">
   <div class="wrap">
-    <div class="block__tag">
-      <span>Direction 01 — Table</span>
-      <span>Warm paper · Bramble · The marked rule</span>
-    </div>
-
-    <div class="plate dir dA">
-
-      <div class="dir__head">
-        <div>
-          <p class="dir__no">01</p>
-          <h2 class="dir__name">Table</h2>
-          <p class="dir__tag">The dining table, not the data table.</p>
-        </div>
-        <div>
-          <p class="dir__idea">
-            A calm, literate product that behaves like a well-edited reference you already trust.
-            Warm paper, wide margins, one hairline rule system, and a deep berry accent spent only where a
-            number matters. Nothing sits in a box: no cards, no containers, no chrome — everything rests
-            directly on the paper.
-          </p>
-          <p class="dir__idea">
-            <b>Confidence here comes from restraint and scale.</b> The calorie figure is the largest thing on
-            the page because it is the answer, and the rest of the page is quiet enough to let it be.
-            Food photography is generous and warm, cropped like a good cookbook rather than a menu.
-          </p>
-        </div>
+    <div class="sec__h">
+      <div>
+        <p class="micro">02 — Typography</p>
+        <h2 class="sec__t">One voice, working from 10 px to 128 px</h2>
       </div>
-
-      <!-- wordmark + colour -->
-      <div class="sec g2">
-        <div>
-          <h3 class="rowlabel"><span>Wordmark</span><span>Placeholder name</span></h3>
-          <div class="wmA">
-            <div class="wmA__w">Nota</div>
-            <div class="wmA__r"><i></i></div>
-          </div>
-          <p class="wmA__s">Know exactly what you’re eating</p>
-          <p class="body-note" style="margin-top:22px">
-            Instrument Sans at 500, tracked in tight. The motif rule runs the full width of the word with a
-            single accent tick beneath the <em>o</em> — the same mark that measures a value everywhere else in
-            the system. Lowercase, no capitals, no symbol: the name behaves like a byline.
-          </p>
-        </div>
-        <div>
-          <h3 class="rowlabel"><span>Colour relationships</span><span>One hue, three steps</span></h3>
-          <div class="pal">
-            <div class="sw" style="background:#F7F5F1;color:#23201D;outline:1px solid #E4DFD7"><i>Ground</i><b>Paper</b><span>#F7F5F1</span></div>
-            <div class="sw" style="background:#FFFFFF;color:#23201D;outline:1px solid #E4DFD7"><i>Surface</i><b>Chalk</b><span>#FFFFFF</span></div>
-            <div class="sw" style="background:#23201D;color:#F7F5F1"><i>Ink</i><b>Espresso</b><span>#23201D</span></div>
-            <div class="sw" style="background:#7B3352;color:#FFFFFF"><i>Accent</i><b>Bramble</b><span>#7B3352</span></div>
-            <div class="sw" style="background:#B47F94;color:#23201D"><i>Step 2</i><b>Bramble 55</b><span>#B47F94</span></div>
-            <div class="sw" style="background:#E3D4DA;color:#23201D"><i>Step 3</i><b>Bramble 20</b><span>#E3D4DA</span></div>
-          </div>
-          <p class="body-note" style="margin-top:20px">
-            One hue, three lightness steps, and warm neutrals underneath. Because every coloured element is
-            the same hue, a chart never needs a legend to feel coherent — density of colour <em>is</em> the
-            ranking. Bramble is a food colour (fig, plum, radicchio) rather than an interface colour, and it
-            is dark enough to set type on white. The neutrals are warm, so empty space reads as paper rather
-            than as an unfilled panel.
-          </p>
-        </div>
-      </div>
-
-      <!-- typography -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Typographic hierarchy</span><span>Instrument Sans · DM Sans · DM Mono</span></h3>
-        <div class="ladder">
-          <div class="lad">
-            <div class="lad__spec"><b>Display</b>Instrument Sans 600 · 64 / -3.5%</div>
-            <div class="lad__s" style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:clamp(30px,4.4vw,52px);letter-spacing:-.035em;line-height:1.02">Know exactly what you’re eating</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Heading</b>Instrument Sans 600 · 26 / -2%</div>
-            <div class="lad__s" style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:clamp(20px,2.3vw,26px);letter-spacing:-.02em">Roast squash, lentils &amp; tahini</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Hero figure</b>Instrument Sans 600 · tabular · -5.5%</div>
-            <div class="lad__s num" style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:clamp(38px,5.4vw,64px);letter-spacing:-.055em;line-height:1">512</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Data</b>DM Sans 500 · tabular · 20</div>
-            <div class="lad__s num" style="font-weight:500;font-size:20px">19 g · 58 g · 22 g</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Body</b>DM Sans 400 · 16 / 1.65</div>
-            <div class="lad__s" style="font-size:16px;line-height:1.65;max-width:52ch">Roasted until the edges catch, then folded through lentils with lemon and tahini. Best warm, and it keeps for two days.</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Micro label</b>DM Mono 400 · 10 / +0.17em</div>
-            <div class="lad__s" style="font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)">Per portion · 340 g · verified source</div>
-          </div>
-        </div>
-        <p class="body-note" style="margin-top:20px">
-          Two voices and a whisper. Instrument Sans carries anything that has to be remembered — the name,
-          headings and every hero figure. DM Sans handles reading and secondary data. Monospace appears only
-          at 10 px, and only on things that are literally measurements or sources.
+      <div>
+        <p class="sec__n">
+          <b>Instrument Sans alone.</b> A refined contemporary grotesk with slightly narrow proportions and a
+          faint editorial warmth — enough character to not read as a system default, restrained enough to
+          disappear behind the numbers.
+        </p>
+        <p class="sec__n">
+          Large figures are set at <b>400, never heavier</b>. Presence comes from scale, tight tracking and the
+          space kept clear around them. Every figure in the product is tabular, so values stay in column while
+          they recalculate.
         </p>
       </div>
+    </div>
 
-      <!-- motif -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Graphic motif — the marked rule</span><span>One line, one tick</span></h3>
-        <div class="g2">
-          <div>
-            <p class="subh">A hairline with a single mark on it</p>
-            <p class="body-note">
-              The whole system needs exactly one device, and this is it: a 1 px rule with a short accent tick
-              at a meaningful position. It sets a heading, it measures a day, it marks the selected unit, it
-              underlines the wordmark. Because the mark always means “this value, here”, it never becomes
-              decoration — and it costs one pixel of ink.
-            </p>
-          </div>
-          <div style="display:grid;gap:26px;align-content:start;padding-top:6px">
-            <div>
-              <p class="cap" style="margin:0 0 9px">Under a heading — marks the section</p>
-              <div class="tickline"><i style="left:0"></i></div>
-            </div>
-            <div>
-              <p class="cap" style="margin:0 0 9px">On a scale — marks a value</p>
-              <div class="tickline"><i style="left:62%"></i></div>
-            </div>
-            <div>
-              <p class="cap" style="margin:0 0 9px">Under a word — marks the name</p>
-              <div class="tickline"><i style="left:31%"></i></div>
-            </div>
-          </div>
+    <div class="card">
+      <div class="lad">
+        <div class="lad__s"><b>Hero figure</b>Instrument Sans 400 · 128 / -5% · tabular</div>
+        <div class="lad__x num" style="font-weight:400;font-size:clamp(54px,8.4vw,104px);letter-spacing:-.05em;line-height:.9">512</div>
+      </div>
+      <div class="lad">
+        <div class="lad__s"><b>Display</b>Instrument Sans 600 · 40 / -4%</div>
+        <div class="lad__x" style="font-weight:600;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.04em;line-height:1.05">Know exactly what you’re eating</div>
+      </div>
+      <div class="lad">
+        <div class="lad__s"><b>Screen title</b>Instrument Sans 600 · 22 / -2.5%</div>
+        <div class="lad__x" style="font-weight:600;font-size:22px;letter-spacing:-.025em">Today</div>
+      </div>
+      <div class="lad">
+        <div class="lad__s"><b>Card title</b>Instrument Sans 600 · 16 / -1.5%</div>
+        <div class="lad__x" style="font-weight:600;font-size:16px;letter-spacing:-.015em">Roast squash, lentils &amp; tahini</div>
+      </div>
+      <div class="lad">
+        <div class="lad__s"><b>Data value</b>Instrument Sans 500 · 20 · tabular</div>
+        <div class="lad__x num" style="font-weight:500;font-size:20px">19 g · 58 g · 22 g</div>
+      </div>
+      <div class="lad">
+        <div class="lad__s"><b>Body</b>Instrument Sans 400 · 15 / 1.6</div>
+        <div class="lad__x" style="font-size:15px;line-height:1.6;max-width:52ch">Roasted until the edges catch, then folded through lentils with lemon and tahini. Best warm, and it keeps for two days.</div>
+      </div>
+      <div class="lad">
+        <div class="lad__s"><b>Label</b>Instrument Sans 400 · 12.5 · muted</div>
+        <div class="lad__x" style="font-size:12.5px;color:var(--muted)">Per portion · 340 g</div>
+      </div>
+      <div class="lad">
+        <div class="lad__s"><b>Micro</b>DM Mono 400 · 10 / +0.16em</div>
+        <div class="lad__x micro">Verified source · updated today</div>
+      </div>
+      <p class="note" style="margin-top:20px">
+        Monospace appears on units, sources and timestamps only — roughly three places in the whole product.
+        If it starts showing up on labels, it has gone too far.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LAYOUT ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__h">
+      <div>
+        <p class="micro">03 — Layout principles</p>
+        <h2 class="sec__t">Paper holds cards. Cards hold rows.</h2>
+      </div>
+      <div>
+        <p class="sec__n">
+          Grouping happens once, at the card. Inside it, hairlines separate rows; outside it, only space does.
+          That single rule is what keeps a data-heavy screen from turning into a dashboard.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid--12">
+      <div class="card">
+        <div class="rules" style="margin-top:0">
+          <div style="border-top:0;padding-top:0"><b>One hero number per screen.</b> Everything else is a value.</div>
+          <div><b>Hairlines only inside cards.</b> Between cards, space does the separating.</div>
+          <div><b>8 px base.</b> 24 px card padding, 16 px between cards, 40 px between groups.</div>
+          <div><b>Images bleed to the card edge.</b> Never inset on all four sides — that reads as a banner.</div>
+          <div><b>One left rail.</b> Titles, body and labels share an edge; values align right against it.</div>
+          <div><b>Radius 16 on cards, 10 on media and inputs,</b> 99 only on the progress track.</div>
+          <div><b>The accent appears at most three times</b> on any one screen.</div>
         </div>
       </div>
-
-      <!-- hero number + macro band -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Key nutrition numbers</span><span>The answer, at full size</span></h3>
-        <div class="g2 g2--wide" style="align-items:start">
-          <div>
-            <p class="heroA__k">Roast squash, lentils &amp; tahini — 340 g</p>
-            <p class="heroA__n num">512<sub>KCAL</sub></p>
-            <div class="tickline" style="margin-top:22px"><i style="left:0"></i></div>
-            <div class="heroA__m">
-              <span>Per 100 g <b>151 kcal</b></span>
-              <span>Items <b>1</b></span>
-              <span>Source <b>Verified</b></span>
+      <div>
+        <div class="card card--flush">
+          <div class="photo photo--a" style="aspect-ratio:16/9;border-radius:0"></div>
+          <div style="padding:clamp(18px,2.6vw,26px)">
+            <p class="micro">Recipe · 35 min</p>
+            <h3 style="font-weight:600;font-size:clamp(17px,2vw,20px);letter-spacing:-.02em;margin-top:9px">Roast squash, lentils &amp; tahini</h3>
+            <div class="f-row" style="margin-top:14px;border-top:1px solid var(--line);padding-top:13px">
+              <div class="f-row__t"><strong style="font-weight:400;color:var(--muted);font-size:14px">Per serving</strong></div>
+              <div class="f-row__v"><b class="num">512 kcal</b></div>
             </div>
-          </div>
-          <div>
-            <p class="subh">Macro band</p>
-            <div class="bandrow">
-              <div style="flex:15 1 0"><p class="bandlab">Protein</p></div>
-              <div style="flex:46 1 0"><p class="bandlab">Carbs</p></div>
-              <div style="flex:39 1 0"><p class="bandlab">Fat</p></div>
+            <div class="f-row">
+              <div class="f-row__t"><strong style="font-weight:400;color:var(--muted);font-size:14px">Protein · Carbs · Fat</strong></div>
+              <div class="f-row__v"><b class="num" style="font-weight:400">19 · 58 · 22 g</b></div>
             </div>
-            <div class="bandrow">
-              <div style="flex:15 1 0"><p class="bandval num">19<small>g</small></p></div>
-              <div style="flex:46 1 0"><p class="bandval num">58<small>g</small></p></div>
-              <div style="flex:39 1 0"><p class="bandval num">22<small>g</small></p></div>
-            </div>
-            <div class="bandrow">
-              <div style="flex:15 1 0"><div class="band band--p"></div></div>
-              <div style="flex:46 1 0"><div class="band band--c"></div></div>
-              <div style="flex:39 1 0"><div class="band band--f"></div></div>
-            </div>
-            <div class="bandrow">
-              <div style="flex:15 1 0"><p class="bandpct">15%</p></div>
-              <div style="flex:46 1 0"><p class="bandpct">46%</p></div>
-              <div style="flex:39 1 0"><p class="bandpct">39%</p></div>
-            </div>
-            <p class="body-note" style="margin-top:20px">
-              One band, three segments, sized by share of energy and coloured by the single accent ramp.
-              The grams sit above their own segment, so the split is read in the layout rather than decoded
-              from a legend.
-            </p>
           </div>
         </div>
+        <p class="cap">Card anatomy — image bleeds, content indents, hairlines live inside</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="sec--tight" style="margin-top:clamp(30px,4vw,52px)">
-          <p class="subh">The day, as one rule</p>
-          <div class="dayrow" style="margin-bottom:14px">
-            <b class="num">1,240 <span style="font-family:var(--mono);font-size:.42em;letter-spacing:.14em;color:var(--muted)">OF 2,000 KCAL</span></b>
-            <span>760 remaining</span>
+<!-- ================= NUTRITION DATA ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__h">
+      <div>
+        <p class="micro">04 — Nutrition data</p>
+        <h2 class="sec__t">The number is the answer, so it gets the room</h2>
+      </div>
+      <div>
+        <p class="sec__n">
+          A calorie figure at 128 px in a 400 weight, with nothing within 40 px of it, reads as
+          <b>considered</b>. The same figure at 700 reads as <b>loud</b>. The whole hierarchy rests on that
+          distinction.
+        </p>
+        <p class="sec__n">
+          This is the house treatment — deliberately device-neutral. The recurring mark that makes it
+          <em>this product’s</em> nutrition block is the open question in section 08.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid--21">
+      <div class="card">
+        <p class="hero__k">Roast squash, lentils &amp; tahini · 340 g</p>
+        <p class="hero__n num">512</p>
+        <p class="hero__u">kcal per portion · 151 per 100 g</p>
+        <div class="macros" style="margin-top:clamp(24px,3.4vw,38px);gap:0">
+          <dl class="macro" style="padding-right:14px"><dt>Protein</dt><dd class="num">19<small>g</small></dd></dl>
+          <dl class="macro" style="padding-inline:14px"><dt>Carbs</dt><dd class="num">58<small>g</small></dd></dl>
+          <dl class="macro" style="padding-left:14px"><dt>Fat</dt><dd class="num">22<small>g</small></dd></dl>
+        </div>
+      </div>
+      <div style="display:grid;gap:clamp(14px,2vw,22px);align-content:start">
+        <div class="card">
+          <div class="daytop">
+            <b class="num">1,240 <span style="font-weight:400;color:var(--muted);font-size:.66em">of 2,000 kcal</span></b>
+            <span class="micro">62%</span>
           </div>
-          <div class="dayrule"><i style="width:62%"></i><u style="left:62%"></u></div>
-          <p class="body-note" style="margin-top:16px">
-            Progress is the motif at full width: accent up to the value, hairline beyond it, one ink tick at
-            the position. No track, no container, no percentage ring — and it still works at 40 px wide in a
-            list row.
+          <div class="track"><i style="width:62%"></i></div>
+          <p class="note" style="margin-top:14px;font-size:12.8px">
+            One track, one fill, rounded ends. Going over target extends the fill past the end of the track
+            rather than turning it red.
           </p>
         </div>
-      </div>
-
-      <!-- photography -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Photography direction</span><span>Warm, side-lit, generous</span></h3>
-        <div class="g2 g2--wide">
-          <div>
-            <div class="photo photo--warm" style="aspect-ratio:3/2"></div>
-            <p class="cap">Tone &amp; light study — stands in for photography, carries the grade not the subject</p>
+        <div class="card">
+          <p class="frag__l" style="margin-bottom:12px">Missing data</p>
+          <div class="f-row" style="border-top:0">
+            <div class="f-row__t"><strong style="font-weight:400;font-size:14.5px">Fibre</strong></div>
+            <div class="f-row__v"><b class="num" style="font-weight:400">9 g</b></div>
           </div>
-          <div>
-            <p class="body-note">
-              One soft source from the side, shadows allowed to fall deep and warm. Shot at eye level or
-              three-quarters — never the flat-lay grid that reads as a menu. Ingredients stay in frame; hands
-              are welcome; props and styling are not. Colour is warm and slightly desaturated, so the paper
-              and the photograph belong to the same room.
-            </p>
-            <p class="body-note" style="margin-top:14px">
-              Photography is used once per surface and never behind text. Where an image cannot be trusted to
-              be good, the layout runs without one rather than filling the space.
-            </p>
+          <div class="f-row">
+            <div class="f-row__t"><strong style="font-weight:400;font-size:14.5px">Sodium</strong></div>
+            <div class="f-row__v"><b style="font-weight:400;color:var(--faint)">Not available</b></div>
           </div>
+          <p class="note" style="margin-top:12px;font-size:12.8px">Never a zero. A missing value says so in words.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="sec--tight">
-          <p class="subh">Crop language</p>
+<!-- ================= PHOTOGRAPHY ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__h">
+      <div>
+        <p class="micro">05 — Photography</p>
+        <h2 class="sec__t">Real food, honestly lit</h2>
+      </div>
+      <div>
+        <p class="sec__n">
+          One broad soft daylight source with gentle directional falloff. Shot three-quarter or straight on;
+          overhead only when the dish is round. The food fills the frame and the surface behind it stays
+          quiet — no linen, no scattered crumbs, no props narrating a lifestyle.
+        </p>
+        <p class="sec__n">
+          <b>Not</b> the overhead flat-lay grid (reads as stock), <b>not</b> moody restaurant photography with
+          a black background (reads as a menu), <b>not</b> a glossy hero on a coloured banner (reads as
+          delivery). Warm but true colour, no heavy grading. Food should look like something you could
+          actually make.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid--12">
+      <div>
+        <div class="photo photo--a" style="aspect-ratio:4/5"></div>
+        <p class="cap">Tone &amp; light study — carries the intended grade, not the subject</p>
+      </div>
+      <div style="display:grid;gap:clamp(16px,2.4vw,26px);align-content:start">
+        <div>
+          <p class="frag__l">Crop rules</p>
           <div class="crops">
             <div>
-              <div class="photo photo--warm" style="aspect-ratio:4/5"></div>
-              <p class="ratio__t">4:5 — the dish</p>
+              <div class="photo photo--a" style="aspect-ratio:4/5"></div>
+              <p class="cap">4:5 — recipe and product headers</p>
             </div>
             <div>
-              <div class="photo photo--warm2" style="aspect-ratio:3/2"></div>
-              <p class="ratio__t">3:2 — context &amp; method</p>
+              <div class="photo photo--b" style="aspect-ratio:1/1"></div>
+              <p class="cap">1:1 — compact cards and rows</p>
             </div>
             <div>
-              <div class="photo photo--warm3" style="aspect-ratio:1/1"></div>
-              <p class="ratio__t">1:1 — list rows only</p>
-            </div>
-          </div>
-          <p class="body-note" style="margin-top:18px">
-            Three ratios, no others. Square is reserved for small list thumbnails so it never competes with a
-            hero; 4:5 is the dish portrait; 3:2 is the only wide crop, used for method and context.
-            Images are always flush to the text column, never inset in a card.
-          </p>
-        </div>
-      </div>
-
-      <!-- food + data together -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Where food and data meet</span><span>Side by side, never stacked</span></h3>
-        <div class="g2" style="align-items:stretch">
-          <div class="photo photo--warm" style="aspect-ratio:4/5;min-height:100%"></div>
-          <div style="display:flex;flex-direction:column;justify-content:center;padding-block:clamp(8px,1.6vw,18px)">
-            <p class="heroA__k">Recipe · 35 min · 4 servings</p>
-            <h4 class="subh" style="margin-top:12px;font-size:clamp(21px,2.6vw,29px)">Roast squash, lentils &amp; tahini</h4>
-            <p class="heroA__n num" style="font-size:clamp(52px,8vw,92px);margin-top:16px">512<sub>KCAL</sub></p>
-            <p class="cap" style="margin-top:6px">Per serving</p>
-            <div class="bandrow" style="margin-top:22px">
-              <div style="flex:15 1 0"><div class="band band--p"></div></div>
-              <div style="flex:46 1 0"><div class="band band--c"></div></div>
-              <div style="flex:39 1 0"><div class="band band--f"></div></div>
-            </div>
-            <div class="bandrow" style="margin-top:8px">
-              <div style="flex:15 1 0"><p class="bandpct">P 19 g</p></div>
-              <div style="flex:46 1 0"><p class="bandpct">C 58 g</p></div>
-              <div style="flex:39 1 0"><p class="bandpct">F 22 g</p></div>
+              <div class="photo photo--c circ" style="aspect-ratio:1/1"></div>
+              <p class="cap">Circle — only if device 02 is chosen</p>
             </div>
           </div>
         </div>
-        <p class="body-note" style="margin-top:18px;max-width:64ch">
-          The rule is simple and absolute: <b style="color:var(--ink)">data never sits on food</b>. The photograph holds its own
-          column and the numbers hold theirs, meeting at the paper between them. It keeps the image readable
-          as a photograph and the figure readable as a figure — and it removes any temptation to darken an
-          image so text can survive on top of it.
+        <p class="note">
+          Two ratios carry the whole product. The circular crop is not a free option — it only exists if the
+          hanging plate is selected as the brand device, because a round crop with nothing depending on it is
+          decoration.
         </p>
       </div>
+    </div>
 
-      <!-- icons + fragments -->
-      <div class="sec">
-        <div class="g2">
+    <div class="card card--flush" style="margin-top:clamp(18px,2.6vw,30px)">
+      <div class="grid" style="gap:0;grid-template-columns:minmax(0,1fr)">
+        <div class="photo photo--b" style="aspect-ratio:2/1;border-radius:0"></div>
+      </div>
+      <div style="padding:clamp(20px,3vw,34px);display:grid;gap:clamp(16px,2.4vw,28px);grid-template-columns:minmax(0,1fr)">
+        <div style="display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,44px);align-items:flex-end">
           <div>
-            <h3 class="rowlabel"><span>Iconography</span><span>1.5 px · squared · geometric</span></h3>
-            <div class="icons" style="color:#23201D">
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="6"/><path d="M14.4 14.4 20.5 20.5"/></svg>
-                <span>Search</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.5 8.5v-5h5M15.5 3.5h5v5M20.5 15.5v5h-5M8.5 20.5h-5v-5"/><path d="M8.5 8v8M12 8v8M15.5 8v8"/></svg>
-                <span>Scan</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 4.5v15M5.5 19.5h13M4 8.5h16"/><path d="M4 8.5 1.6 14.6h4.8zM20 8.5l-2.4 6.1h4.8z"/></svg>
-                <span>Portion</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><path d="M12 6.8v5.4l3.6 2.1"/></svg>
-                <span>Time</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/></svg>
-                <span>Servings</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7.5h18M3 12h18M3 16.5h18"/><circle cx="8.5" cy="7.5" r="2.1" fill="#F7F5F1"/><circle cx="15" cy="12" r="2.1" fill="#F7F5F1"/><circle cx="10" cy="16.5" r="2.1" fill="#F7F5F1"/></svg>
-                <span>Filter</span>
-              </span>
-            </div>
-            <p class="body-note" style="margin-top:22px">
-              Drawn on a 24 px grid at a constant 1.5 px stroke with squared terminals — the same weight as the
-              hairline rules, so icons and rules read as one system. Outline only, never filled, and no icon
-              carries the accent: colour is reserved for data.
-            </p>
+            <p class="micro">Per serving</p>
+            <p class="hero__n num" style="font-size:clamp(52px,8vw,88px);margin-top:8px">512</p>
           </div>
-          <div>
-            <h3 class="rowlabel"><span>UI fragments</span><span>Components, not screens</span></h3>
-            <div class="frags">
-              <div class="frag">
-                <p class="frag__l">Search — a rule, not a box</p>
-                <div class="fA-search">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" style="flex:0 0 18px"><circle cx="10" cy="10" r="6"/><path d="M14.4 14.4 20.5 20.5"/></svg>
-                  <input id="a-search" type="text" placeholder="Search a dish or product" aria-label="Search a dish or product">
-                  <span class="cap" style="margin:0">or scan</span>
-                </div>
-              </div>
-              <div class="frag">
-                <p class="frag__l">Result rows</p>
-                <div class="fA-row"><span>Roast squash, lentils &amp; tahini<em>Homemade · 340 g</em></span><b class="num">512</b></div>
-                <div class="fA-row"><span>Squash, butternut, roasted<em>Per 100 g</em></span><b class="num">64</b></div>
-                <div class="fA-row"><span>Tahini, light<em>Per 15 g</em></span><b class="num">89</b></div>
-              </div>
-              <div class="frag">
-                <p class="frag__l">Portion &amp; basis</p>
-                <div style="display:flex;flex-wrap:wrap;gap:20px 28px;align-items:center">
-                  <span class="fA-step"><button type="button" aria-label="Decrease portion">−</button><span class="num">340 g</span><button type="button" aria-label="Increase portion">+</button></span>
-                  <span class="fA-tog"><span class="on">Per portion</span><span>Per 100 g</span></span>
-                </div>
-              </div>
-            </div>
+          <div style="display:flex;gap:clamp(18px,3vw,36px);padding-bottom:10px">
+            <div><p style="font-size:12.5px;color:var(--muted)">Protein</p><p class="num" style="font-size:19px;font-weight:500;margin-top:4px">19 g</p></div>
+            <div><p style="font-size:12.5px;color:var(--muted)">Carbs</p><p class="num" style="font-size:19px;font-weight:500;margin-top:4px">58 g</p></div>
+            <div><p style="font-size:12.5px;color:var(--muted)">Fat</p><p class="num" style="font-size:19px;font-weight:500;margin-top:4px">22 g</p></div>
           </div>
         </div>
       </div>
-
     </div>
-    <p class="note">01 — Quietest of the two. Strongest where reading matters: recipe method, ingredient lists, multi-item dishes. The risk is that restraint reads as reserve — it needs excellent photography to feel warm rather than austere.</p>
+    <p class="cap">Food and data coexist by adjacency — the photograph keeps its own space and nothing is ever set on top of it</p>
   </div>
 </section>
 
-<!-- ==========================================================
-     DIRECTION 02 — ZEST
-     ========================================================== -->
-<section class="block" id="zest">
+<!-- ================= ICONS ================= -->
+<section class="sec">
   <div class="wrap">
-    <div class="block__tag">
-      <span>Direction 02 — Zest</span>
-      <span>Light ground · Marigold · The plate</span>
-    </div>
-
-    <div class="plate dir dB">
-
-      <div class="dir__head">
-        <div>
-          <p class="dir__no">02</p>
-          <h2 class="dir__name">Zest</h2>
-          <p class="dir__tag">Same room. The brand walks in.</p>
-        </div>
-        <div>
-          <p class="dir__idea">
-            The identical light, spacious product — same margins, same belief that the number is the answer —
-            but the brand stops whispering. A marigold field you can recognise across a room, a circular plate
-            motif that crops the food, splits the macros and sits inside the wordmark, and figures set with
-            real weight behind them.
-          </p>
-          <p class="dir__idea">
-            <b>The energy comes from scale and colour blocking, not from density.</b> Corners stay soft, the
-            type stays humanist, and the page still breathes — this is warmth turned up, not structure turned
-            harder. It is the version people describe to someone else after using it once.
-          </p>
-        </div>
+    <div class="sec__h">
+      <div>
+        <p class="micro">06 — Icons</p>
+        <h2 class="sec__t">1.5 px, rounded, no fills</h2>
       </div>
-
-      <!-- wordmark + colour -->
-      <div class="sec g2">
-        <div>
-          <h3 class="rowlabel"><span>Wordmark</span><span>Placeholder name</span></h3>
-          <div class="wmB">
-            <div class="wmB__w">
-              <span>N</span>
-              <svg viewBox="0 0 40 40" aria-hidden="true">
-                <circle cx="20" cy="20" r="14" fill="none" stroke="#17181A" stroke-width="8"
-                        stroke-dasharray="11.2 76.8" stroke-dashoffset="0" transform="rotate(-90 20 20)"></circle>
-                <circle cx="20" cy="20" r="14" fill="none" stroke="#FFC53D" stroke-width="8"
-                        stroke-dasharray="38.5 49.5" stroke-dashoffset="-13.2" transform="rotate(-90 20 20)"></circle>
-                <circle cx="20" cy="20" r="14" fill="none" stroke="#E2552C" stroke-width="8"
-                        stroke-dasharray="32.3 55.7" stroke-dashoffset="-53.7" transform="rotate(-90 20 20)"></circle>
-              </svg>
-              <span>ta</span>
-            </div>
-          </div>
-          <p class="wmB__s">Know exactly what you’re eating</p>
-          <p class="body-note" style="margin-top:22px">
-            Manrope at 800, tracked tight, with the <em>o</em> replaced by the plate — split into the three
-            macro arcs. The mark is the data visualisation at logo size, which means the identity and the
-            information are literally the same object. Set solid in ink, it also works as a single-colour mark.
-          </p>
-        </div>
-        <div>
-          <h3 class="rowlabel"><span>Colour relationships</span><span>One accent, one supporting tone</span></h3>
-          <div class="pal">
-            <div class="sw" style="background:#F6F6F3;color:#17181A;outline:1px solid #E3E4DF"><i>Ground</i><b>Paper</b><span>#F6F6F3</span></div>
-            <div class="sw" style="background:#FFFFFF;color:#17181A;outline:1px solid #E3E4DF"><i>Surface</i><b>Chalk</b><span>#FFFFFF</span></div>
-            <div class="sw" style="background:#17181A;color:#F6F6F3"><i>Ink</i><b>Carbon</b><span>#17181A</span></div>
-            <div class="sw" style="background:#FFC53D;color:#17181A"><i>Accent</i><b>Marigold</b><span>#FFC53D</span></div>
-            <div class="sw" style="background:#E2552C;color:#FFFFFF"><i>Support</i><b>Ember</b><span>#E2552C</span></div>
-            <div class="sw" style="background:#64686C;color:#FFFFFF"><i>Secondary</i><b>Slate</b><span>#64686C</span></div>
-          </div>
-          <p class="body-note" style="margin-top:20px">
-            Three rules hold this together. <b style="color:var(--ink)">Marigold carries area</b> — it fills fields and buttons and
-            never sets type. <b style="color:var(--ink)">Ember carries emphasis</b> — data marks, active states, one arc.
-            <b style="color:var(--ink)">Ink carries everything structural.</b> The two warm hues are analogous, so the page reads as
-            one temperature rather than as a palette, and the brightest thing on any screen after the marigold
-            is the food itself.
-          </p>
-        </div>
-      </div>
-
-      <!-- typography -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Typographic hierarchy</span><span>Manrope · Plus Jakarta Sans · DM Mono</span></h3>
-        <div class="ladder">
-          <div class="lad">
-            <div class="lad__spec"><b>Display</b>Manrope 800 · 66 / -4.5%</div>
-            <div class="lad__s" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(30px,4.4vw,52px);letter-spacing:-.045em;line-height:1.02">Know exactly what you’re eating</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Heading</b>Manrope 700 · 27 / -2%</div>
-            <div class="lad__s" style="font-family:'Manrope',sans-serif;font-weight:700;font-size:clamp(20px,2.3vw,27px);letter-spacing:-.02em">Roast squash, lentils &amp; tahini</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Hero figure</b>Manrope 800 · tabular · -6%</div>
-            <div class="lad__s num" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:clamp(40px,5.8vw,70px);letter-spacing:-.06em;line-height:1">512</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Data</b>Plus Jakarta Sans 600 · tabular · 20</div>
-            <div class="lad__s num" style="font-weight:600;font-size:20px">19 g · 58 g · 22 g</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Body</b>Plus Jakarta Sans 400 · 16 / 1.65</div>
-            <div class="lad__s" style="font-size:16px;line-height:1.65;max-width:52ch">Roasted until the edges catch, then folded through lentils with lemon and tahini. Best warm, and it keeps for two days.</div>
-          </div>
-          <div class="lad">
-            <div class="lad__spec"><b>Micro label</b>DM Mono 400 · 10 / +0.17em</div>
-            <div class="lad__s" style="font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)">Per portion · 340 g · verified source</div>
-          </div>
-        </div>
-        <p class="body-note" style="margin-top:20px">
-          Manrope’s geometry is round rather than square, so weight reads as confidence instead of as
-          engineering — it is the one place this direction is allowed to be heavy. Plus Jakarta Sans keeps
-          running text humane and slightly informal. The same 10 px monospace detail as Table, unchanged,
-          because it is shared territory.
+      <div>
+        <p class="sec__n">
+          Drawn on a 24 px grid at a constant 1.5 px stroke with rounded caps and joins — light enough to sit
+          beside 400-weight type without out-weighing it. Outline only; the active state changes colour to the
+          accent rather than filling the shape.
         </p>
       </div>
-
-      <!-- motif -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Graphic motif — the plate</span><span>One circle, four jobs</span></h3>
-        <div class="g2">
-          <div>
-            <p class="subh">A circle that is always the same circle</p>
-            <p class="body-note">
-              It crops the food, it splits into macros, it counts servings, and it stands in for the
-              <em>o</em> in the wordmark. Four jobs, one shape — which is what makes it a brand device rather
-              than a chart style. Round food imagery reads as a plate or a bowl without anyone having to say
-              so, and it is the reason this direction can be bold without becoming hard-edged.
-            </p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:clamp(14px,2.4vw,26px);align-items:center;padding-top:6px">
-            <div style="text-align:center">
-              <div class="photo photo--bright circ" style="width:88px;height:88px"></div>
-              <p class="cap" style="margin-top:9px">Crops food</p>
-            </div>
-            <div style="text-align:center">
-              <svg viewBox="0 0 140 140" width="88" height="88" aria-hidden="true">
-                <circle cx="70" cy="70" r="52" fill="none" stroke="#17181A" stroke-width="20" stroke-dasharray="45.5 281.2" stroke-dashoffset="0" transform="rotate(-90 70 70)"></circle>
-                <circle cx="70" cy="70" r="52" fill="none" stroke="#FFC53D" stroke-width="20" stroke-dasharray="146.8 179.9" stroke-dashoffset="-49" transform="rotate(-90 70 70)"></circle>
-                <circle cx="70" cy="70" r="52" fill="none" stroke="#E2552C" stroke-width="20" stroke-dasharray="123.9 202.8" stroke-dashoffset="-199.3" transform="rotate(-90 70 70)"></circle>
-              </svg>
-              <p class="cap" style="margin-top:9px">Splits macros</p>
-            </div>
-            <div style="text-align:center">
-              <div style="display:flex;gap:6px;height:88px;align-items:center">
-                <i style="width:20px;height:20px;border-radius:50%;background:#FFC53D;display:block"></i>
-                <i style="width:20px;height:20px;border-radius:50%;background:#FFC53D;display:block"></i>
-                <i style="width:20px;height:20px;border-radius:50%;background:#FFC53D;display:block"></i>
-                <i style="width:20px;height:20px;border-radius:50%;background:#E3E4DF;display:block"></i>
-              </div>
-              <p class="cap" style="margin-top:9px">Counts servings</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- hero number + ring -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Key nutrition numbers</span><span>Weight, not ornament</span></h3>
-        <div class="g2 g2--wide" style="align-items:start">
-          <div>
-            <p class="cap" style="margin:0 0 14px">Roast squash, lentils &amp; tahini — 340 g</p>
-            <div class="heroB">
-              <span class="heroB__n num">512</span>
-              <span class="heroB__u">kcal</span>
-              <span class="heroB__m">
-                <b>151</b> kcal per 100 g<br>
-                <b>1</b> item · verified source
-              </span>
-            </div>
-          </div>
-          <div>
-            <p class="subh">Plate ring</p>
-            <div class="ringwrap">
-              <div class="ring">
-                <svg viewBox="0 0 140 140" role="img" aria-label="Energy split: protein 15 percent, carbohydrate 46 percent, fat 39 percent">
-                  <circle cx="70" cy="70" r="52" fill="none" stroke="#E3E4DF" stroke-width="20"></circle>
-                  <circle cx="70" cy="70" r="52" fill="none" stroke="#17181A" stroke-width="20" stroke-dasharray="45.5 281.2" stroke-dashoffset="0" transform="rotate(-90 70 70)"></circle>
-                  <circle cx="70" cy="70" r="52" fill="none" stroke="#FFC53D" stroke-width="20" stroke-dasharray="146.8 179.9" stroke-dashoffset="-49" transform="rotate(-90 70 70)"></circle>
-                  <circle cx="70" cy="70" r="52" fill="none" stroke="#E2552C" stroke-width="20" stroke-dasharray="123.9 202.8" stroke-dashoffset="-199.3" transform="rotate(-90 70 70)"></circle>
-                </svg>
-              </div>
-              <div class="ringkey">
-                <div><i style="background:#17181A"></i><span>Protein</span><b class="num">19 g · 15%</b></div>
-                <div><i style="background:#FFC53D"></i><span>Carbohydrate</span><b class="num">58 g · 46%</b></div>
-                <div><i style="background:#E2552C"></i><span>Fat</span><b class="num">22 g · 39%</b></div>
-              </div>
-            </div>
-            <p class="body-note" style="margin-top:20px">
-              The wordmark at working size. Thick arcs, wide gaps, no centre label and no tick marks — it is a
-              plate divided, not a gauge read. At 20 px it still identifies the dish’s balance in a list row.
-            </p>
-          </div>
-        </div>
-
-        <div class="sec--tight" style="margin-top:clamp(30px,4vw,52px)">
-          <p class="subh">The day, as a field</p>
-          <div class="fieldbar">
-            <div class="fieldbar__f" style="flex:0 0 62%"><b class="num">1,240 kcal</b></div>
-            <div class="fieldbar__r"><span>760 left of 2,000</span></div>
-          </div>
-          <div class="fieldnote"><span>Consumed today</span><span>62% of target</span></div>
-          <p class="body-note" style="margin-top:16px">
-            Progress is a block of colour with the figure living inside it — the bar <em>is</em> the number’s
-            background, so there is nothing to read twice. Going over target extends the field into ember
-            rather than turning anything red: still a fact, not a verdict.
-          </p>
-        </div>
-      </div>
-
-      <!-- photography -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Photography direction</span><span>Bright, clean, saturated</span></h3>
-        <div class="g2 g2--wide">
-          <div>
-            <div class="photo photo--bright" style="aspect-ratio:3/2"></div>
-            <p class="cap">Tone &amp; light study — stands in for photography, carries the grade not the subject</p>
-          </div>
-          <div>
-            <p class="body-note">
-              Brighter and cleaner than Table: broad soft light, shallow shadows, colour left saturated.
-              Shot from directly above when the dish is round, because the frame is going to become a plate.
-              The food is the strongest colour on the page after the marigold — it is doing real work in the
-              palette, not illustrating a paragraph.
-            </p>
-            <p class="body-note" style="margin-top:14px">
-              Same discipline as Table on one point: an image is never a background. Where it meets the
-              marigold field, it meets it edge to edge.
-            </p>
-          </div>
-        </div>
-
-        <div class="sec--tight">
-          <p class="subh">Crop language</p>
-          <div class="crops">
-            <div>
-              <div class="photo photo--bright circ" style="aspect-ratio:1/1"></div>
-              <p class="ratio__t">Plate — the primary crop</p>
-            </div>
-            <div>
-              <div class="photo photo--bright2" style="aspect-ratio:4/5;border-radius:10px"></div>
-              <p class="ratio__t">4:5 — when it isn’t round</p>
-            </div>
-            <div>
-              <div class="halfplate" style="aspect-ratio:4/5;border-radius:10px">
-                <div class="photo photo--bright3 disc"></div>
-              </div>
-              <p class="ratio__t">Half-plate — image on field</p>
-            </div>
-          </div>
-          <p class="body-note" style="margin-top:18px">
-            The circle leads. Rectangles keep a 10 px radius so nothing in the system has a hard corner, and
-            the half-plate — a disc sitting on a marigold field — is the composition that carries recipe
-            headers and share images.
-          </p>
-        </div>
-      </div>
-
-      <!-- food + data -->
-      <div class="sec">
-        <h3 class="rowlabel"><span>Where food and data meet</span><span>Touching, never overlapping</span></h3>
-        <div class="pairB">
-          <div class="photo photo--bright pairB__disc"></div>
-          <div class="pairB__field">
-            <p class="cap" style="margin:0;color:#8A6C1E">Recipe · 35 min · 4 servings</p>
-            <h4 class="subh" style="margin-top:10px;font-size:clamp(20px,2.4vw,27px)">Roast squash, lentils &amp; tahini</h4>
-            <div style="display:flex;align-items:flex-end;gap:12px;margin-top:14px">
-              <span class="heroB__n num" style="font-size:clamp(50px,7.6vw,86px)">512</span>
-              <span class="heroB__u" style="color:#6B5310">kcal per serving</span>
-            </div>
-            <div style="display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:18px;font-size:13.5px;font-weight:600">
-              <span class="num"><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#17181A;margin-right:7px"></i>P 19 g</span>
-              <span class="num"><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#FFFFFF;margin-right:7px"></i>C 58 g</span>
-              <span class="num"><i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#E2552C;margin-right:7px"></i>F 22 g</span>
-            </div>
-          </div>
-        </div>
-        <p class="body-note" style="margin-top:18px;max-width:64ch">
-          The disc overlaps the field, the data sits in the field, and nothing sits on the photograph.
-          Inside a marigold field the macro key swaps carbs to white so the three marks stay separable —
-          the only place the palette flexes, and it flexes by rule.
-        </p>
-      </div>
-
-      <!-- icons + fragments -->
-      <div class="sec">
-        <div class="g2">
-          <div>
-            <h3 class="rowlabel"><span>Iconography</span><span>2.2 px · rounded · one ember dot</span></h3>
-            <div class="icons" style="color:#17181A">
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5.3 5.3"/><circle cx="10.5" cy="10.5" r="2.2" fill="#E2552C" stroke="none"/></svg>
-                <span>Search</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V6a2 2 0 0 1 2-2h2.5M15.5 4H18a2 2 0 0 1 2 2v2.5M20 15.5V18a2 2 0 0 1-2 2h-2.5M8.5 20H6a2 2 0 0 1-2-2v-2.5"/><path d="M8.5 12h7"/><circle cx="12" cy="12" r="2.4" fill="#E2552C" stroke="none"/></svg>
-                <span>Scan</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v13M6 19h12M4.5 9.5h15"/><path d="M4.5 9.5 2.4 15h4.2zM19.5 9.5 17.4 15h4.2z"/><circle cx="12" cy="5" r="2.2" fill="#E2552C" stroke="none"/></svg>
-                <span>Portion</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7.6v4.6l3.2 1.9"/><circle cx="12" cy="12" r="1.9" fill="#E2552C" stroke="none"/></svg>
-                <span>Time</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4" fill="#E2552C" stroke="none"/></svg>
-                <span>Servings</span>
-              </span>
-              <span class="ico">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5h17M3.5 12h17M3.5 16.5h17"/><circle cx="9" cy="7.5" r="2.4" fill="#F6F6F3"/><circle cx="15" cy="16.5" r="2.4" fill="#F6F6F3"/><circle cx="14.5" cy="12" r="2.2" fill="#E2552C" stroke="none"/></svg>
-                <span>Filter</span>
-              </span>
-            </div>
-            <p class="body-note" style="margin-top:22px">
-              A heavier 2.2 px stroke with rounded joins, matching the type’s roundness rather than the rule
-              system. Every icon carries exactly one filled ember circle — the plate again, at 4 px — which is
-              what keeps a set of ordinary glyphs recognisably this brand’s.
-            </p>
-          </div>
-          <div>
-            <h3 class="rowlabel"><span>UI fragments</span><span>Components, not screens</span></h3>
-            <div class="frags">
-              <div class="frag" style="border-radius:10px">
-                <p class="frag__l">Search — a pill with a plate button</p>
-                <div class="fB-search">
-                  <input id="b-search" type="text" placeholder="Search a dish or product" aria-label="Search a dish or product">
-                  <button type="button" aria-label="Scan a barcode">
-                    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V6a2 2 0 0 1 2-2h2.5M15.5 4H18a2 2 0 0 1 2 2v2.5M20 15.5V18a2 2 0 0 1-2 2h-2.5M8.5 20H6a2 2 0 0 1-2-2v-2.5"/><path d="M8.5 12h7"/></svg>
-                  </button>
-                </div>
-              </div>
-              <div class="frag" style="border-radius:10px">
-                <p class="frag__l">Active filters</p>
-                <div class="fB-chips">
-                  <span class="fB-chip on">Vegetarian</span>
-                  <span class="fB-chip on">Under 600 kcal</span>
-                  <span class="fB-chip"><i></i>No nuts</span>
-                  <span class="fB-chip">Under 40 min</span>
-                </div>
-              </div>
-              <div class="frag" style="border-radius:10px">
-                <p class="frag__l">Servings</p>
-                <div class="fB-serv">
-                  <span style="font-size:13.5px;color:var(--muted)">Serves</span>
-                  <span class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>
-                  <b class="num" style="font-family:'Manrope',sans-serif;font-weight:800;font-size:17px">3</b>
-                </div>
-              </div>
-              <div class="frag" style="border-radius:10px;padding:0;background:none">
-                <p class="frag__l">Recipe row</p>
-                <div class="fB-card">
-                  <div class="photo photo--bright2 crop"></div>
-                  <div style="min-width:0">
-                    <h4>Roast squash, lentils &amp; tahini</h4>
-                    <p class="num">35 min · 4 servings · vegetarian</p>
-                  </div>
-                  <div class="kcal"><b class="num">512</b><em>kcal</em></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
-    <p class="note">02 — Louder of the two, and more memorable at a glance. Strongest on recipe discovery and anywhere food imagery leads. The risk is the opposite of Table’s: marigold needs holding back, or the calm the two directions share is the first thing lost.</p>
+    <div class="card">
+      <div class="icons">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.1 15.1 20.6 20.6"/></svg><span>Search</span></span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.6V6.4A2.4 2.4 0 0 1 6.4 4h2.2M15.4 4h2.2A2.4 2.4 0 0 1 20 6.4v2.2M20 15.4v2.2a2.4 2.4 0 0 1-2.4 2.4h-2.2M8.6 20H6.4A2.4 2.4 0 0 1 4 17.6v-2.2"/><path d="M8 12h8"/></svg><span>Scan</span></span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5v13.5M6.5 19h11M4.6 9.4h14.8"/><path d="M4.6 9.4 2.4 15h4.4zM19.4 9.4 17.2 15h4.4z"/></svg><span>Portion</span></span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 7.4v4.9l3.3 2"/></svg><span>Time</span></span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.3"/></svg><span>Servings</span></span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h16M4 12h16M4 16.5h16"/><circle cx="9" cy="7.5" r="2.2" fill="#FFFFFF"/><circle cx="15" cy="12" r="2.2" fill="#FFFFFF"/><circle cx="10" cy="16.5" r="2.2" fill="#FFFFFF"/></svg><span>Filter</span></span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></svg><span>Add</span></span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4.5h11a1.5 1.5 0 0 1 1.5 1.5v13.4l-7-4.2-7 4.2V6a1.5 1.5 0 0 1 1.5-1.5Z"/></svg><span>Saved</span></span>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ==========================================================
-     COMPARISON
-     ========================================================== -->
-<section class="compare" id="compare">
+<!-- ================= UI FRAGMENTS ================= -->
+<section class="sec">
   <div class="wrap">
-    <p class="eyebrow">Comparison</p>
-    <h2 style="font-family:'Instrument Sans',sans-serif;font-weight:600;font-size:clamp(25px,3.6vw,42px);letter-spacing:-.03em;line-height:1.06;margin-top:12px;max-width:22ch;text-wrap:balance">
-      Two temperaments, attribute by attribute
-    </h2>
-    <p style="color:var(--board-muted);max-width:62ch;margin-top:14px;font-size:14.5px;line-height:1.7">
-      Same specimen throughout — a 340 g portion of roast squash, lentils and tahini at 512 kcal, and a day at
-      1,240 of 2,000 kcal. Same light ground, same margins, same placeholder name. What differs is how loudly
-      the brand speaks.
-    </p>
+    <div class="sec__h">
+      <div>
+        <p class="micro">07 — UI fragments</p>
+        <h2 class="sec__t">Components, not screens</h2>
+      </div>
+      <div>
+        <p class="sec__n">
+          Enough of the interface to prove the direction survives contact with real controls. Assembly into
+          screens comes after a device is chosen — these are deliberately unassembled.
+        </p>
+      </div>
+    </div>
 
-    <div class="cscroll">
-      <table class="ctable">
-        <thead>
-          <tr>
-            <th style="background:#DCD8D0"></th>
-            <th style="background:#DCD8D0"><div class="chead"><i style="background:#7B3352"></i><span>01 · Table</span></div></th>
-            <th style="background:#DCD8D0"><div class="chead"><i style="background:#FFC53D"></i><span>02 · Zest</span></div></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th>In one line</th>
-            <td><b>The dining table.</b> A quiet, literate reference.</td>
-            <td><b>The plate.</b> The same product, recognisable across a room.</td></tr>
-          <tr><th>Ground</th>
-            <td>Warm paper <b>#F7F5F1</b> — space reads as paper.</td>
-            <td>Cooler paper <b>#F6F6F3</b> — space reads as studio white.</td></tr>
-          <tr><th>Colour logic</th>
-            <td>One hue in three steps. Density of colour is the ranking, so charts never need a legend.</td>
-            <td>Marigold carries area, ember carries emphasis, ink carries structure. Food is part of the palette.</td></tr>
-          <tr><th>Display / body</th>
-            <td>Instrument Sans 600 / DM Sans</td>
-            <td>Manrope 800 / Plus Jakarta Sans</td></tr>
-          <tr><th>Numbers</th>
-            <td>Large and light-footed — size does the work, weight stays at 600.</td>
-            <td>Large and weighted — 800, tighter tracking, more physical presence.</td></tr>
-          <tr><th>Motif</th>
-            <td><b>The marked rule.</b> One hairline, one accent tick at the value.</td>
-            <td><b>The plate.</b> One circle that crops food, splits macros, counts servings, sits in the wordmark.</td></tr>
-          <tr><th>Data visualisation</th>
-            <td>A three-segment macro band and a day drawn as a single rule.</td>
-            <td>A thick three-arc ring and a day drawn as a marigold field with the figure inside it.</td></tr>
-          <tr><th>Photography</th>
-            <td>One warm side light, deep shadow, slightly desaturated — cookbook.</td>
-            <td>Broad bright light, shallow shadow, full saturation — the food is a colour source.</td></tr>
-          <tr><th>Crops</th>
-            <td>4:5, 3:2, 1:1. Square reserved for list rows. Flush to the text column.</td>
-            <td>Circle leads; 4:5 and the half-plate support it. 10 px radius on anything rectangular.</td></tr>
-          <tr><th>Icons</th>
-            <td>1.5 px, squared terminals, outline only, no accent — same weight as the rules.</td>
-            <td>2.2 px, rounded joins, one filled ember circle in every glyph.</td></tr>
-          <tr><th>Corners</th>
-            <td>Square throughout. No cards, no containers.</td>
-            <td>Soft: pills for controls, 10 px on surfaces, circles for imagery.</td></tr>
-          <tr><th>Energy</th>
-            <td>Low and steady. Reveals itself on the second look.</td>
-            <td>High but held. Lands on the first look.</td></tr>
-          <tr><th>Strongest on</th>
-            <td>Recipe method, ingredient lists, multi-item dishes — anywhere reading matters.</td>
-            <td>Recipe discovery, result cards, anything where food imagery leads.</td></tr>
-          <tr><th>Watch out for</th>
-            <td>Restraint reading as reserve. It depends on genuinely good photography to feel warm.</td>
-            <td>Marigold creeping past its rule. Overused, it costs the calm both directions share.</td></tr>
-        </tbody>
-      </table>
+    <div class="grid grid--2">
+      <div class="frag">
+        <p class="frag__l">Search</p>
+        <div class="f-search">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#A69E94" stroke-width="1.5" stroke-linecap="round" style="flex:0 0 19px"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.1 15.1 20.6 20.6"/></svg>
+          <input id="q" type="text" placeholder="Search a dish or product" aria-label="Search a dish or product">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#1F1C1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 19px"><path d="M4 8.6V6.4A2.4 2.4 0 0 1 6.4 4h2.2M15.4 4h2.2A2.4 2.4 0 0 1 20 6.4v2.2M20 15.4v2.2a2.4 2.4 0 0 1-2.4 2.4h-2.2M8.6 20H6.4A2.4 2.4 0 0 1 4 17.6v-2.2"/><path d="M8 12h8"/></svg>
+        </div>
+      </div>
+      <div class="frag">
+        <p class="frag__l">Portion &amp; basis</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center">
+          <span class="f-step"><button type="button" aria-label="Decrease portion">−</button><span class="num">340 g</span><button type="button" aria-label="Increase portion">+</button></span>
+          <span class="f-seg"><span class="on">Portion</span><span>100 g</span></span>
+        </div>
+      </div>
+      <div class="frag">
+        <p class="frag__l">Result rows</p>
+        <div class="f-row">
+          <div class="photo photo--a f-thumb"></div>
+          <div class="f-row__t"><strong>Roast squash, lentils &amp; tahini</strong><span>Homemade · 340 g</span></div>
+          <div class="f-row__v"><b class="num">512</b></div>
+        </div>
+        <div class="f-row">
+          <div class="photo photo--b f-thumb"></div>
+          <div class="f-row__t"><strong>Butternut squash, roasted</strong><span>Per 100 g</span></div>
+          <div class="f-row__v"><b class="num">64</b></div>
+        </div>
+        <div class="f-row">
+          <div class="photo photo--c f-thumb"></div>
+          <div class="f-row__t"><strong>Tahini, light</strong><span>Per 15 g</span></div>
+          <div class="f-row__v"><b class="num">89</b></div>
+        </div>
+      </div>
+      <div class="frag">
+        <p class="frag__l">Tab bar</p>
+        <div class="f-tabs" style="padding-inline:0">
+          <span class="f-tab on">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.2"/><path d="M15.1 15.1 20.6 20.6"/></svg>
+            <span>Calculate</span>
+          </span>
+          <span class="f-tab">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.3"/></svg>
+            <span>Recipes</span>
+          </span>
+        </div>
+        <p class="note" style="margin-top:14px;font-size:12.6px">Two tabs, matching the two user stories. The active state is colour only — no pill, no fill.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BRAND DEVICES ================= -->
+<section class="sec" id="devices">
+  <div class="wrap">
+    <div class="sec__h">
+      <div>
+        <p class="micro">08 — The open question</p>
+        <h2 class="sec__t">Three candidate brand devices</h2>
+      </div>
+      <div>
+        <p class="sec__n">
+          One recurring visual rule, applied everywhere, is what separates a competent light interface from a
+          recognisable product. All three below live inside the direction above — same paper, same accent,
+          same type — and each one is a different <b>kind</b> of rule: a marker, an image relationship, and a
+          structural device.
+        </p>
+        <p class="sec__n">
+          Each is shown at the two or three sizes it would actually have to survive. <b>Pick one.</b> Two of
+          them can coexist only by weakening both.
+        </p>
+      </div>
+    </div>
+
+    <div class="devs">
+
+      <!-- ===== DEVICE 01 ===== -->
+      <div class="dev">
+        <p class="dev__k">Device 01 · Nutrition marker</p>
+        <h3 class="dev__n">The measure</h3>
+        <p class="dev__r">
+          Every key number carries a short rule beneath it, and <b>the rule’s length is that value as a share
+          of its target</b>. The figure and its scale become a single object, so a number is never shown
+          without its context.
+        </p>
+
+        <div class="dev__demo">
+          <p class="dev__sub">On a hero figure</p>
+          <p class="num" style="font-size:clamp(46px,6vw,60px);font-weight:400;letter-spacing:-.05em;line-height:.9">512</p>
+          <div class="measure" style="margin-top:15px"><i style="width:26%"></i></div>
+          <p class="micro" style="margin-top:10px">26% of a 2,000 kcal day</p>
+        </div>
+
+        <div class="dev__demo">
+          <p class="dev__sub">On rows</p>
+          <div class="f-row" style="border-top:0">
+            <div class="f-row__t"><strong>Breakfast</strong></div>
+            <div class="f-row__v"><b class="num">412</b><div class="measure" style="width:58px;margin-top:6px"><i style="width:21%"></i></div></div>
+          </div>
+          <div class="f-row">
+            <div class="f-row__t"><strong>Lunch</strong></div>
+            <div class="f-row__v"><b class="num">512</b><div class="measure" style="width:58px;margin-top:6px"><i style="width:26%"></i></div></div>
+          </div>
+        </div>
+
+        <div class="dev__demo">
+          <p class="dev__sub">On macro values</p>
+          <div style="display:flex;gap:22px">
+            <div><p style="font-size:12px;color:var(--muted)">Protein</p><p class="num" style="font-size:19px;font-weight:500;margin-top:3px">19 g</p><div class="measure" style="margin-top:7px"><i style="width:38%"></i></div></div>
+            <div><p style="font-size:12px;color:var(--muted)">Carbs</p><p class="num" style="font-size:19px;font-weight:500;margin-top:3px">58 g</p><div class="measure" style="margin-top:7px"><i style="width:23%"></i></div></div>
+            <div><p style="font-size:12px;color:var(--muted)">Fat</p><p class="num" style="font-size:19px;font-weight:500;margin-top:3px">22 g</p><div class="measure" style="margin-top:7px"><i style="width:31%"></i></div></div>
+          </div>
+        </div>
+
+        <div class="dev__foot">
+          <p><b>Recurs on</b> every hero figure, list-row value, macro value and the active tab.</p>
+          <p><b>Strength.</b> It adds information rather than decoration, and works identically at 128 px and at 24 px.</p>
+          <p><b>Risk.</b> The quietest of the three — it may not be enough to make a screenshot recognisable.</p>
+        </div>
+      </div>
+
+      <!-- ===== DEVICE 02 ===== -->
+      <div class="dev">
+        <p class="dev__k">Device 02 · Image + number</p>
+        <h3 class="dev__n">The hanging plate</h3>
+        <p class="dev__r">
+          Food is always cropped to a circle, and <b>the circle hangs past the left edge of its card by a
+          quarter of its diameter</b>. The calorie figure sits on the circle’s centre line. The plate breaks
+          the grid; the number never breaks the plate.
+        </p>
+
+        <div class="dev__demo">
+          <p class="dev__sub">On a recipe card</p>
+          <div class="hang">
+            <div class="photo photo--a circ hang__c" style="width:88px;height:88px"></div>
+            <div style="min-width:0">
+              <p style="font-weight:600;font-size:14.5px;letter-spacing:-.015em;line-height:1.3">Roast squash, lentils &amp; tahini</p>
+              <p class="num" style="font-size:30px;font-weight:400;letter-spacing:-.035em;margin-top:6px;line-height:1">512 <span style="font-size:.42em;color:var(--muted)">kcal</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dev__demo">
+          <p class="dev__sub">On rows</p>
+          <div class="hang" style="padding:11px 14px 11px 0;gap:12px">
+            <div class="photo photo--b circ hang__c" style="width:46px;height:46px"></div>
+            <div class="f-row__t"><strong>Butternut squash</strong><span>Per 100 g</span></div>
+            <b class="num" style="font-weight:500;font-size:16px">64</b>
+          </div>
+          <div class="hang" style="padding:11px 14px 11px 0;gap:12px;margin-top:8px">
+            <div class="photo photo--c circ hang__c" style="width:46px;height:46px"></div>
+            <div class="f-row__t"><strong>Tahini, light</strong><span>Per 15 g</span></div>
+            <b class="num" style="font-weight:500;font-size:16px">89</b>
+          </div>
+        </div>
+
+        <div class="dev__demo">
+          <p class="dev__sub">At mark size</p>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="photo photo--a circ" style="width:30px;height:30px"></div>
+            <div class="photo photo--b circ" style="width:22px;height:22px"></div>
+            <div class="photo photo--c circ" style="width:16px;height:16px"></div>
+            <p class="micro" style="margin-left:4px">Holds down to 16 px</p>
+          </div>
+        </div>
+
+        <div class="dev__foot">
+          <p><b>Recurs on</b> recipe cards, result rows, product headers and the app icon.</p>
+          <p><b>Strength.</b> Makes the food itself the brand — the most appetising option and the most recognisable in a screenshot.</p>
+          <p><b>Risk.</b> It only works where there is a good photograph. Missing or weak imagery breaks the signature, and the hanging geometry needs care at screen edges.</p>
+        </div>
+      </div>
+
+      <!-- ===== DEVICE 03 ===== -->
+      <div class="dev">
+        <p class="dev__k">Device 03 · Macro treatment</p>
+        <h3 class="dev__n">The spine</h3>
+        <p class="dev__r">
+          A 6 px vertical bar, <b>split into three segments by macro share</b>, stands at the left edge of
+          every nutrition block — and everything in that block aligns off it. One object that is
+          simultaneously the macro reading and the layout rail.
+        </p>
+
+        <div class="dev__demo">
+          <p class="dev__sub">On a hero figure</p>
+          <div class="spinerow">
+            <div class="spine" style="align-self:stretch;min-height:76px"><i class="p" style="height:15%"></i><i class="c" style="height:46%"></i><i class="f" style="height:39%"></i></div>
+            <div>
+              <p class="num" style="font-size:clamp(42px,5.4vw,56px);font-weight:400;letter-spacing:-.05em;line-height:.9">512</p>
+              <p class="micro" style="margin-top:11px">P 19 · C 58 · F 22 g</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dev__demo">
+          <p class="dev__sub">On rows</p>
+          <div class="spinerow" style="padding:9px 0;border-top:1px solid var(--line)">
+            <div class="spine" style="align-self:stretch;min-height:34px"><i class="p" style="height:21%"></i><i class="c" style="height:52%"></i><i class="f" style="height:27%"></i></div>
+            <div class="f-row__t"><strong>Breakfast</strong><span>Oats, berries, yoghurt</span></div>
+            <b class="num" style="font-weight:500;font-size:16px;align-self:center">412</b>
+          </div>
+          <div class="spinerow" style="padding:9px 0;border-top:1px solid var(--line)">
+            <div class="spine" style="align-self:stretch;min-height:34px"><i class="p" style="height:15%"></i><i class="c" style="height:46%"></i><i class="f" style="height:39%"></i></div>
+            <div class="f-row__t"><strong>Lunch</strong><span>Roast squash &amp; lentils</span></div>
+            <b class="num" style="font-weight:500;font-size:16px;align-self:center">512</b>
+          </div>
+        </div>
+
+        <div class="dev__demo">
+          <p class="dev__sub">As the mark</p>
+          <div style="display:flex;align-items:flex-end;gap:18px">
+            <div class="spine" style="height:58px;width:18px;flex:0 0 18px"><i class="p" style="height:15%"></i><i class="c" style="height:46%"></i><i class="f" style="height:39%"></i></div>
+            <div class="spine" style="height:40px;width:12px;flex:0 0 12px"><i class="p" style="height:15%"></i><i class="c" style="height:46%"></i><i class="f" style="height:39%"></i></div>
+            <div class="spine" style="height:26px;width:8px;flex:0 0 8px"><i class="p" style="height:15%"></i><i class="c" style="height:46%"></i><i class="f" style="height:39%"></i></div>
+            <p class="micro" style="padding-bottom:3px">Reads at every size</p>
+          </div>
+        </div>
+
+        <div class="dev__foot">
+          <p><b>Recurs on</b> every nutrition block, card edge, list row and the app mark.</p>
+          <p><b>Strength.</b> Always available — it needs no photography, carries real macro data, and doubles as the alignment rail.</p>
+          <p><b>Risk.</b> Closest of the three to a chart. It has to stay thin and rounded, or the dashboard feeling comes straight back.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <footer class="closing">
   <div class="wrap">
-    <p><strong>Where this stops.</strong> Branding exploration only. No application screens, no design system —
-    type scales, spacing tokens, component states, motion and the full icon set are deliberately undefined and
-    follow from whichever direction is chosen. <em>Nota</em> is a placeholder wordmark used purely to make
-    personality comparable; it is not a naming proposal.</p>
-    <p style="margin-top:12px"><strong>On the photography.</strong> Every image on this page is a tone and light
-    study rather than a photograph — it carries the intended grade, contrast and crop, not the subject.
-    Real imagery is the first thing to test once a direction is chosen.</p>
-    <p style="margin-top:12px"><strong>Next.</strong> Pick one direction, or name the parts of each that should be
-    combined. That becomes the basis of the design system, which is then applied to the four screens and eight
-    dedicated states in SCREENS.md.</p>
+    <p><strong>What is locked.</strong> Palette, type system, layout principles, nutrition hierarchy,
+    photography direction, crop rules and icon construction. These are settled unless you want to reopen them.</p>
+    <p style="margin-top:12px"><strong>What is open.</strong> The brand device, and only that. Section 08 holds
+    three candidates and no recommendation — the choice changes what the product looks like in a screenshot
+    more than any other decision left in this stage.</p>
+    <p style="margin-top:12px"><strong>On the photography.</strong> Every image here is a tone and light study
+    rather than a photograph — outbound image sources are unreachable from this environment. They carry the
+    intended grade, contrast and crop, not a subject. Real imagery is the first thing to test once a device is
+    chosen, and it matters most for device 02.</p>
+    <p style="margin-top:12px"><strong>Next.</strong> Select a device. That completes the visual direction, and
+    the design system can then be built against it and applied to the four screens and eight dedicated states
+    in SCREENS.md.</p>
   </div>
 </footer>
 
