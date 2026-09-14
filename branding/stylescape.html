@@ -31,7 +31,6 @@
   --r-sm:14px;
   --display:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --ui:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
 }
 html{-webkit-text-size-adjust:100%}
 body{
@@ -59,44 +58,13 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 .gap-m{margin-top:clamp(24px,3.4vw,40px)}
 .gap-s{margin-top:24px}
 
-/* ---------- food tone studies ---------- */
+/* ---------- food photography ---------- */
 .img{position:relative;overflow:hidden;background:#EFEAE1}
-.img::after{content:"";position:absolute;inset:0;background-image:var(--grain);mix-blend-mode:multiply;opacity:.28;pointer-events:none}
-.img--a{background-image:
-  radial-gradient(22% 20% at 40% 38%,#E79A3E,rgba(231,154,62,0) 62%),
-  radial-gradient(19% 17% at 62% 31%,#BE5028,rgba(190,80,40,0) 64%),
-  radial-gradient(21% 19% at 54% 63%,#D4802F,rgba(212,128,47,0) 64%),
-  radial-gradient(15% 14% at 32% 62%,#6F8140,rgba(111,129,64,0) 66%),
-  radial-gradient(13% 12% at 71% 59%,#F0D9A4,rgba(240,217,164,0) 66%),
-  radial-gradient(12% 11% at 46% 23%,#8E4A2C,rgba(142,74,44,0) 66%),
-  radial-gradient(14% 13% at 24% 42%,#E8B968,rgba(232,185,104,0) 66%),
-  radial-gradient(58% 54% at 50% 52%,rgba(116,76,42,.2),rgba(116,76,42,0) 80%),
-  linear-gradient(165deg,#F1E9DC 0%,#E2D6C3 55%,#CDBEA5 100%);}
-.img--b{background-image:
-  radial-gradient(21% 19% at 57% 40%,#EFB44E,rgba(239,180,78,0) 62%),
-  radial-gradient(18% 17% at 36% 34%,#7C8C3E,rgba(124,140,62,0) 64%),
-  radial-gradient(20% 18% at 48% 64%,#CE7434,rgba(206,116,52,0) 64%),
-  radial-gradient(14% 13% at 68% 64%,#A83E27,rgba(168,62,39,0) 66%),
-  radial-gradient(13% 12% at 30% 58%,#F4E2B6,rgba(244,226,182,0) 66%),
-  radial-gradient(12% 11% at 62% 22%,#5F7038,rgba(95,112,56,0) 66%),
-  radial-gradient(58% 54% at 50% 52%,rgba(104,86,44,.19),rgba(104,86,44,0) 80%),
-  linear-gradient(196deg,#F2ECDD 0%,#E4DAC5 55%,#D0C4A9 100%);}
-.img--c{background-image:
-  radial-gradient(23% 21% at 47% 45%,#D4603C,rgba(212,96,60,0) 62%),
-  radial-gradient(17% 16% at 66% 34%,#EAA648,rgba(234,166,72,0) 64%),
-  radial-gradient(19% 17% at 31% 58%,#8E8A48,rgba(142,138,72,0) 64%),
-  radial-gradient(13% 12% at 58% 66%,#F2E0B4,rgba(242,224,180,0) 66%),
-  radial-gradient(12% 11% at 40% 26%,#9C4028,rgba(156,64,40,0) 66%),
-  radial-gradient(58% 54% at 50% 52%,rgba(120,72,40,.2),rgba(120,72,40,0) 80%),
-  linear-gradient(150deg,#F0E7D9 0%,#E0D2BD 55%,#CBB99E 100%);}
-.img--berry{background-image:
-  radial-gradient(21% 19% at 44% 42%,#8C2F4F,rgba(140,47,79,0) 62%),
-  radial-gradient(18% 16% at 62% 37%,#B44A6C,rgba(180,74,108,0) 64%),
-  radial-gradient(19% 17% at 50% 64%,#5F1E37,rgba(95,30,55,0) 64%),
-  radial-gradient(14% 13% at 32% 58%,#CE93A8,rgba(206,147,168,0) 66%),
-  radial-gradient(12% 11% at 68% 60%,#6C7A44,rgba(108,122,68,0) 66%),
-  radial-gradient(58% 54% at 50% 52%,rgba(76,34,50,.2),rgba(76,34,50,0) 80%),
-  linear-gradient(176deg,#F1E8E6 0%,#DFCFCE 55%,#C7B2B4 100%);}
+.img>img{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+  object-fit:cover;object-position:var(--op,50% 50%);
+  transform:scale(var(--sc,1));transform-origin:var(--op,50% 50%);
+}
 .circ{border-radius:50%}
 </style>
 <style>
@@ -213,7 +181,7 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
         <span>kcal · per 340 g portion</span>
       </div>
     </div>
-    <div class="img img--a circ mast__disc"></div>
+    <div class="img circ mast__disc"><img src="../assets/food/lentil-squash-bowl.png" style="--op:62% 56%;--sc:1.22" alt="Roasted squash and lentil bowl"></div>
   </div>
 </header>
 
@@ -247,8 +215,8 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
         <p class="cap">Macro markers — 7 px dots, never fills or bars</p>
       </div>
       <div style="display:flex;gap:14px;align-items:stretch">
-        <div class="img img--berry" style="flex:1;border-radius:var(--r-md);min-height:170px"></div>
-        <div class="img img--a" style="flex:1;border-radius:var(--r-md);min-height:170px"></div>
+        <div class="img" style="flex:1;border-radius:var(--r-md);min-height:170px"><img src="../assets/food/lentil-stew.png" style="--op:60% 56%;--sc:1.04" alt="Lentil stew"></div>
+        <div class="img" style="flex:1;border-radius:var(--r-md);min-height:170px"><img src="../assets/food/citrus-grain-bowl.png" style="--op:60% 56%;--sc:1.04" alt="Citrus and grain bowl"></div>
       </div>
     </div>
   </div>
@@ -341,19 +309,19 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
 
     <div class="gap-l" style="display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(190px,1fr));align-items:start">
       <div>
-        <div class="img img--a" style="aspect-ratio:4/5;border-radius:var(--r-md)"></div>
+        <div class="img" style="aspect-ratio:4/5;border-radius:var(--r-md)"><img src="../assets/food/lentil-squash-bowl.png" style="--op:50% 50%" alt="Roasted squash and lentil bowl"></div>
         <p class="cap">4:5 — recipe &amp; product hero</p>
       </div>
       <div>
-        <div class="img img--b" style="aspect-ratio:1/1;border-radius:var(--r-md)"></div>
+        <div class="img" style="aspect-ratio:1/1;border-radius:var(--r-md)"><img src="../assets/food/squash-couscous-bowl.png" style="--op:50% 50%" alt="Squash and couscous bowl"></div>
         <p class="cap">1:1 — compact cards</p>
       </div>
       <div>
-        <div class="img img--c circ" style="aspect-ratio:1/1"></div>
+        <div class="img circ" style="aspect-ratio:1/1"><img src="../assets/food/chickpea-bowl.png" style="--op:58% 59%;--sc:1.2" alt="Chickpea bowl"></div>
         <p class="cap">Circle — the bleed crop</p>
       </div>
       <div>
-        <div class="img img--berry" style="aspect-ratio:1/1;border-radius:var(--r-md)"></div>
+        <div class="img" style="aspect-ratio:1/1;border-radius:var(--r-md)"><img src="../assets/food/roasted-lentils-detail.png" style="--op:50% 50%" alt="Roasted lentils, close crop"></div>
         <p class="cap">Ingredient &amp; detail crops</p>
       </div>
     </div>
@@ -364,7 +332,7 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
         <p class="d" style="font-weight:500;font-size:clamp(24px,3.2vw,34px);letter-spacing:-.035em;line-height:1.12;margin-top:18px">Roast squash<br>&amp; red lentils</p>
         <div class="kcal" style="margin-top:26px"><span class="kcal__n num">512</span><span class="kcal__u">kcal</span></div>
       </div>
-      <div class="img img--a circ" style="position:absolute;right:clamp(-150px,-9vw,-60px);top:50%;transform:translateY(-50%);width:clamp(260px,34vw,400px);aspect-ratio:1"></div>
+      <div class="img circ" style="position:absolute;right:clamp(-150px,-9vw,-60px);top:50%;transform:translateY(-50%);width:clamp(260px,34vw,400px);aspect-ratio:1"><img src="../assets/food/lentil-squash-bowl.png" style="--op:62% 56%;--sc:1.22" alt="Roasted squash and lentil bowl"></div>
     </div>
     <p class="cap">Asymmetric crop entering from one side, balanced by type in open space</p>
   </div>
@@ -444,7 +412,7 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
         <div class="screen">
           <div class="screen__p" style="padding-bottom:0;position:relative">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1C1B19" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
-            <div class="img img--a circ" style="position:absolute;right:-52px;top:64px;width:228px;height:228px"></div>
+            <div class="img circ" style="position:absolute;right:-52px;top:64px;width:228px;height:228px"><img src="../assets/food/lentil-squash-bowl.png" style="--op:62% 56%;--sc:1.22" alt="Roasted squash and lentil bowl"></div>
             <p class="sh" style="font-size:27px;margin-top:34px;max-width:196px;position:relative;z-index:2">Roast squash<br>&amp; red lentils</p>
             <div class="kcal" style="margin-top:30px;position:relative;z-index:2">
               <span class="kcal__n num" style="font-size:80px">512</span>
@@ -490,7 +458,7 @@ h1,h2,h3,h4,p,figure,dl,dd{margin:0}
       <!-- FRAGMENT 03 -->
       <div class="dev">
         <div class="screen">
-          <div class="img img--b" style="height:252px;width:100%"></div>
+          <div class="img" style="height:252px;width:100%"><img src="../assets/food/vegetable-grain-bowl.png" style="--op:58% 56%" alt="Vegetable and grain bowl"></div>
           <div class="screen__p">
             <p class="sh" style="font-size:25px;max-width:270px">Roast squash &amp; red lentils</p>
             <div class="meta" style="margin-top:16px">
