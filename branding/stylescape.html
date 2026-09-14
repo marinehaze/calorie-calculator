@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stylescape — Calorie &amp; Nutrition App</title>
+<meta name="description" content="Branding exploration: three visual directions for a mobile calorie and nutrition app.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Chivo:wght@400;600;700;900&family=Public+Sans:wght@400;500;600&family=Azeret+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   STYLESCAPE — page chrome
+   Neutral presentation board. Deliberately quiet so the three
+   directions are the only things with a personality on screen.
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --page-bg:#141517;
+  --page-surface:#1B1D20;
+  --page-ink:#EDEDEC;
+  --page-muted:#8B9096;
+  --page-faint:#5B6067;
+  --page-line:#2B2E32;
+  --board-pad:clamp(16px,4vw,56px);
+  --mono-chrome:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans-chrome:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--page-bg); color:var(--page-ink);
+  font-family:var(--sans-chrome); font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+img{max-width:100%}
+h1,h2,h3,h4,p,ul,ol,figure{margin:0}
+a{color:inherit}
+.wrap{max-width:1360px;margin:0 auto;padding:0 var(--board-pad)}
+
+.eyebrow{
+  font-family:var(--mono-chrome); font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--page-faint);
+}
+
+/* ---------- masthead ---------- */
+.masthead{padding:clamp(40px,7vw,88px) 0 clamp(28px,4vw,44px);border-bottom:1px solid var(--page-line)}
+.masthead__top{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:baseline;margin-bottom:clamp(28px,5vw,56px)}
+.masthead h1{
+  font-family:"Space Grotesk",var(--sans-chrome);
+  font-size:clamp(34px,7.2vw,76px); line-height:.98; letter-spacing:-.035em; font-weight:600;
+  max-width:16ch;
+}
+.masthead h1 em{font-style:normal;color:var(--page-faint)}
+.masthead__lede{
+  margin-top:clamp(20px,3vw,30px); max-width:62ch; color:var(--page-muted);
+  font-size:clamp(15px,1.45vw,17px); line-height:1.65;
+}
+.masthead__body{display:grid;gap:clamp(28px,4vw,60px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:980px){.masthead__body{grid-template-columns:minmax(0,1.32fr) minmax(272px,.68fr);align-items:start}}
+.keys{display:grid;gap:9px}
+.key{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:17px 18px;text-decoration:none;border:1px solid rgba(255,255,255,.08);
+  transition:transform .15s ease;
+}
+.key:hover{transform:translateX(4px)}
+.key__t b{display:block;font-size:19px;line-height:1.1;letter-spacing:-.02em}
+.key__t span{display:block;margin-top:5px;font-family:var(--mono-chrome);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;opacity:.6}
+.key i{width:32px;height:32px;flex:0 0 32px}
+.masthead__meta{
+  margin-top:clamp(24px,4vw,40px);
+  display:grid; gap:1px; background:var(--page-line); border:1px solid var(--page-line);
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.masthead__meta div{background:var(--page-bg);padding:16px 18px}
+.masthead__meta dt{font-family:var(--mono-chrome);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--page-faint);margin-bottom:7px}
+.masthead__meta dd{margin:0;font-size:13.5px;color:var(--page-ink);line-height:1.45}
+
+/* ---------- sticky index ---------- */
+.index{
+  position:sticky; top:0; z-index:50;
+  background:rgba(20,21,23,.88); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--page-line);
+}
+.index__inner{display:flex;gap:4px;align-items:center;overflow-x:auto;scrollbar-width:none;padding:9px 0}
+.index__inner::-webkit-scrollbar{display:none}
+.index a{
+  display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+  padding:7px 13px; text-decoration:none; border:1px solid transparent; border-radius:2px;
+  font-family:var(--mono-chrome); font-size:11px; letter-spacing:.11em; text-transform:uppercase;
+  color:var(--page-muted); transition:color .15s,border-color .15s,background .15s;
+}
+.index a:hover{color:var(--page-ink);border-color:var(--page-line);background:var(--page-surface)}
+.index .dot{width:9px;height:9px;flex:0 0 9px;border-radius:50%}
+.index .sep{flex:1 1 auto;min-width:8px}
+
+/* ---------- plate scaffolding ---------- */
+.plate-block{padding:clamp(36px,6vw,80px) 0 0}
+.plate-tag{
+  display:flex;flex-wrap:wrap;gap:10px 20px;align-items:baseline;justify-content:space-between;
+  padding-bottom:14px; color:var(--page-faint); font-family:var(--mono-chrome);
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+}
+.plate{
+  padding:clamp(22px,4.4vw,60px);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 26px 60px -30px rgba(0,0,0,.85);
+  overflow:hidden;
+}
+.footnote{
+  padding:14px 2px 0; color:var(--page-faint); font-size:12.5px; line-height:1.6; max-width:74ch;
+}
+
+/* ============================================================
+   SHARED SPECIMEN LAYOUT (themed by each direction's vars)
+   ============================================================ */
+.dir__head{display:grid;gap:clamp(18px,3vw,40px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){.dir__head{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:end}}
+.dir__no{font-family:var(--mono-chrome);font-size:11px;letter-spacing:.2em;opacity:.6}
+.dir__name{margin:10px 0 0;line-height:.92;letter-spacing:-.03em}
+.dir__tagline{margin-top:14px;font-size:clamp(15px,1.7vw,19px);line-height:1.45;opacity:.75;max-width:30ch}
+.dir__idea{font-size:14.5px;line-height:1.68;max-width:58ch;opacity:.82}
+.dir__idea + .dir__idea{margin-top:12px}
+
+.rowlabel{
+  font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; opacity:.5;
+  padding-bottom:12px; margin-bottom:clamp(16px,2.4vw,26px);
+}
+.section{margin-top:clamp(36px,5.4vw,72px)}
+.grid2{display:grid;gap:clamp(20px,3vw,40px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:880px){.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.grid3{display:grid;gap:clamp(12px,1.6vw,20px);grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+
+/* palette */
+.swatches{display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
+.sw{padding:14px 14px 16px;min-height:126px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px}
+.sw b{font-size:12px;font-weight:600;letter-spacing:.01em;display:block}
+.sw span{font-size:11px;letter-spacing:.08em;opacity:.66;text-transform:uppercase}
+.sw i{font-style:normal;font-size:10px;letter-spacing:.14em;text-transform:uppercase;opacity:.45;margin-bottom:auto}
+
+/* type specimen */
+.typerow{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5;margin-bottom:10px}
+.typesample{line-height:1;letter-spacing:-.03em;overflow-wrap:anywhere}
+.numsample{line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums}
+</style>
+<style>
+/* ============================================================
+   DIRECTION 01 — INSTRUMENT
+   Dark panel, luminous readout, calibration ticks, radial dial.
+   ============================================================ */
+.d1{
+  --bg:#0A0B0D; --surface:#14171B; --surface-2:#1B1F24;
+  --ink:#F1F4F6; --muted:#98A1AA; --faint:#5E6871;
+  --line:rgba(255,255,255,.10); --line-strong:rgba(255,255,255,.22);
+  --accent:#FF8A00; --accent-dim:rgba(255,138,0,.22);
+  background:var(--bg); color:var(--ink);
+  font-family:"Inter",var(--sans-chrome);
+}
+.d1 .dir__name{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:clamp(42px,8vw,92px)}
+.d1 .dir__tagline{font-family:"Space Grotesk",sans-serif;font-weight:400}
+.d1 .rowlabel{font-family:"JetBrains Mono",monospace;border-bottom:1px solid var(--line)}
+.d1 .dir__no{color:var(--accent);opacity:1}
+.d1 .sw{outline:1px solid var(--line)}
+.d1 .sw b,.d1 .sw span,.d1 .sw i{font-family:"JetBrains Mono",monospace}
+.d1 .typerow{font-family:"JetBrains Mono",monospace}
+
+/* readout */
+.d1-readout{background:var(--surface);border:1px solid var(--line);padding:clamp(20px,2.8vw,34px);position:relative}
+.d1-readout::before{
+  content:"";position:absolute;left:0;top:0;width:34px;height:2px;background:var(--accent);
+}
+.d1-readout__top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--faint)}
+.d1-kcal{display:flex;align-items:flex-start;gap:12px;margin:clamp(12px,2vw,20px) 0 4px}
+.d1-kcal__n{
+  font-family:"JetBrains Mono",monospace;font-weight:700;
+  font-size:clamp(76px,15vw,164px);line-height:.82;letter-spacing:-.045em;
+  font-variant-numeric:tabular-nums;color:var(--ink);
+}
+.d1-kcal__u{font-family:"JetBrains Mono",monospace;font-size:clamp(12px,1.3vw,15px);letter-spacing:.2em;color:var(--accent);padding-top:10px}
+.d1-ruler{
+  height:26px;margin-top:18px;
+  background-image:
+    repeating-linear-gradient(90deg,var(--line-strong) 0 1px,transparent 1px 60px),
+    repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 12px);
+  background-size:100% 100%,100% 52%;
+  background-repeat:no-repeat;
+  background-position:0 0,0 0;
+  border-bottom:1px solid var(--line);
+}
+.d1-readout__foot{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.09em;color:var(--muted)}
+.d1-readout__foot b{color:var(--ink);font-weight:500}
+
+/* macro blocks */
+.d1-macro{background:var(--surface);padding:12px 13px 14px;outline:1px solid var(--line);position:relative}
+.d1-macro::before{content:"";position:absolute;inset:0 auto auto 0;height:1px;width:100%;background:var(--line-strong)}
+.d1-macro dt{display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--faint)}
+.d1-macro dd{margin:9px 0 0;font-family:"JetBrains Mono",monospace;font-weight:500;font-size:clamp(24px,3.1vw,34px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.d1-macro dd small{font-size:.44em;letter-spacing:.1em;color:var(--muted);margin-left:3px}
+.d1-macro .bar{margin-top:12px;height:3px;background:rgba(255,255,255,.09)}
+.d1-macro .bar i{display:block;height:100%}
+.d1-macro--p .bar i{background:var(--accent)}
+.d1-macro--c .bar i{background:rgba(241,244,246,.62)}
+.d1-macro--f .bar i{background:rgba(241,244,246,.28)}
+
+/* dial */
+.d1-dial{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,38px);align-items:center}
+.gauge{position:relative;width:clamp(180px,26vw,232px);aspect-ratio:1/1;flex:0 0 auto}
+.gauge svg{position:absolute;inset:0;width:100%;height:100%}
+.gauge__c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.gauge__pct{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:clamp(30px,4.6vw,44px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.gauge__pct sup{font-size:.42em;vertical-align:super;color:var(--accent);font-weight:500}
+.gauge__lab{font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.19em;text-transform:uppercase;color:var(--faint);margin-top:9px}
+.d1-dial__legend{flex:1 1 200px;min-width:190px}
+.d1-legend-row{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.07em;color:var(--muted)}
+.d1-legend-row b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.d1-legend-row:first-child{border-top:1px solid var(--line-strong)}
+.d1-legend-row--hi b{color:var(--accent)}
+
+/* photo */
+.d1-photo{aspect-ratio:4/3;background:radial-gradient(118% 96% at 30% 16%,#57391F 0%,#26170C 42%,#0B0C0E 78%);position:relative;outline:1px solid var(--line)}
+.d1-photo::after{
+  content:"";position:absolute;inset:14px;opacity:.8;
+  background:
+    linear-gradient(#FF8A00,#FF8A00) left top/24px 1px no-repeat,
+    linear-gradient(#FF8A00,#FF8A00) left top/1px 24px no-repeat,
+    linear-gradient(#FF8A00,#FF8A00) right top/24px 1px no-repeat,
+    linear-gradient(#FF8A00,#FF8A00) right top/1px 24px no-repeat,
+    linear-gradient(#FF8A00,#FF8A00) left bottom/24px 1px no-repeat,
+    linear-gradient(#FF8A00,#FF8A00) left bottom/1px 24px no-repeat,
+    linear-gradient(#FF8A00,#FF8A00) right bottom/24px 1px no-repeat,
+    linear-gradient(#FF8A00,#FF8A00) right bottom/1px 24px no-repeat;
+}
+
+/* ============================================================
+   DIRECTION 02 — LEDGER
+   Warm archive paper, ruled rows, tabular figures, ultramarine.
+   ============================================================ */
+.d2{
+  --bg:#F5F2EC; --surface:#FFFDF8; --surface-2:#EBE6DB;
+  --ink:#14161A; --muted:#6E6A62; --faint:#948E83;
+  --line:#D8D2C4; --line-strong:#14161A;
+  --accent:#1F3BE0; --accent-soft:rgba(31,59,224,.10);
+  background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans",var(--sans-chrome);
+}
+.d2 .dir__name{font-family:"Archivo",sans-serif;font-weight:700;font-size:clamp(42px,8vw,92px)}
+.d2 .dir__tagline{font-family:"Archivo",sans-serif;font-weight:400}
+.d2 .rowlabel{font-family:"IBM Plex Mono",monospace;border-bottom:1px solid var(--line-strong)}
+.d2 .dir__no{color:var(--accent);opacity:1;font-family:"IBM Plex Mono",monospace}
+.d2 .sw{outline:1px solid var(--line)}
+.d2 .sw b,.d2 .sw span,.d2 .sw i{font-family:"IBM Plex Mono",monospace}
+.d2 .typerow{font-family:"IBM Plex Mono",monospace}
+
+.d2-sheet{background:var(--surface);border:1px solid var(--line);padding:clamp(20px,3vw,36px)}
+.d2-entry{display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line-strong);padding-bottom:9px}
+.d2-kcal{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:clamp(14px,2.2vw,24px) 0 clamp(10px,1.6vw,16px);border-bottom:1px solid var(--line)}
+.d2-kcal__n{
+  font-family:"Archivo",sans-serif;font-weight:700;
+  font-size:clamp(78px,15.5vw,170px);line-height:.8;letter-spacing:-.05em;
+  font-variant-numeric:tabular-nums;
+}
+.d2-kcal__side{text-align:right;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);line-height:1.9}
+.d2-kcal__side b{display:block;color:var(--ink);font-weight:500;font-size:13px}
+.d2-kcal__u{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);align-self:flex-start;padding-top:8px}
+
+/* macro ledger table */
+.d2-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.d2-table th{
+  font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--faint);font-weight:400;text-align:right;padding:0 0 8px;border-bottom:1px solid var(--line-strong);
+}
+.d2-table th:first-child{text-align:left}
+.d2-table td{padding:11px 0;border-bottom:1px solid var(--line);text-align:right;font-family:"IBM Plex Mono",monospace;font-size:14px}
+.d2-table td:first-child{text-align:left;font-family:"IBM Plex Sans",sans-serif;font-size:13.5px;font-weight:500;letter-spacing:.01em}
+.d2-table tr:last-child td{border-bottom:3px double var(--line-strong);font-weight:600}
+.d2-table .marg{width:34%;padding-left:20px}
+.d2-table .marg i{display:block;height:6px;background:var(--accent);opacity:.9}
+.d2-table .marg u{display:block;height:6px;background:var(--accent-soft);text-decoration:none}
+
+/* ledger progress */
+.d2-ledger{background:var(--surface);border:1px solid var(--line);padding:clamp(18px,2.6vw,30px)}
+.d2-line{display:grid;grid-template-columns:minmax(88px,1.1fr) minmax(0,3fr) auto;gap:10px 16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.d2-line:first-of-type{border-top:1px solid var(--line-strong)}
+.d2-line__k{font-size:12.5px;letter-spacing:.01em}
+.d2-line__t{position:relative;height:12px;background:var(--surface-2)}
+.d2-line__t i{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.d2-line__t u{position:absolute;top:-5px;bottom:-5px;width:1px;background:var(--ink);text-decoration:none}
+.d2-line__v{font-family:"IBM Plex Mono",monospace;font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.d2-total{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:14px;margin-top:6px;border-top:3px double var(--line-strong)}
+.d2-total span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+.d2-total b{font-family:"Archivo",sans-serif;font-size:clamp(26px,3.4vw,38px);letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
+.d2-total b em{font-style:normal;color:var(--accent)}
+
+.d2-photo{aspect-ratio:1/1;background:linear-gradient(158deg,#E9E1D1 0%,#D3C6AE 54%,#BCAE93 100%);outline:1px solid var(--line);position:relative}
+.d2-photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line-strong)}
+
+/* ============================================================
+   DIRECTION 03 — MATRIX
+   Cool concrete, hard 8px module, hi-vis marking, counted units.
+   ============================================================ */
+.d3{
+  --bg:#E9EBEC; --surface:#FFFFFF; --surface-2:#D3D8DB; --cell:#C7CDD1;
+  --ink:#101316; --muted:#5C646B; --faint:#8A9299;
+  --line:#C2C8CC; --line-strong:#101316;
+  --accent:#D6F32B; --accent-ink:#101316;
+  background:var(--bg); color:var(--ink);
+  font-family:"Public Sans",var(--sans-chrome);
+}
+.d3 .dir__name{font-family:"Chivo",sans-serif;font-weight:900;font-size:clamp(42px,8vw,92px);text-transform:uppercase}
+.d3 .dir__tagline{font-family:"Chivo",sans-serif;font-weight:400}
+.d3 .rowlabel{font-family:"Azeret Mono",monospace;border-bottom:2px solid var(--line-strong)}
+.d3 .dir__no{font-family:"Azeret Mono",monospace;display:inline-block;background:var(--accent);color:var(--accent-ink);padding:4px 9px;opacity:1}
+.d3 .sw{outline:1px solid var(--line)}
+.d3 .sw b,.d3 .sw span,.d3 .sw i{font-family:"Azeret Mono",monospace}
+.d3 .typerow{font-family:"Azeret Mono",monospace}
+
+.d3-module{background:var(--surface);border:2px solid var(--line-strong);padding:clamp(18px,2.8vw,32px)}
+.d3-module--grid{
+  background-image:
+    repeating-linear-gradient(90deg,rgba(16,19,22,.055) 0 1px,transparent 1px 24px),
+    repeating-linear-gradient(180deg,rgba(16,19,22,.055) 0 1px,transparent 1px 24px);
+}
+.d3-tag{display:inline-block;background:var(--line-strong);color:#fff;font-family:"Azeret Mono",monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:4px 8px}
+.d3-kcal{display:flex;align-items:flex-end;gap:clamp(10px,2vw,22px);flex-wrap:wrap;margin-top:18px}
+.d3-kcal__n{
+  font-family:"Chivo",sans-serif;font-weight:900;
+  font-size:clamp(80px,16vw,176px);line-height:.78;letter-spacing:-.055em;
+  font-variant-numeric:tabular-nums;
+}
+.d3-kcal__fig{display:inline-flex;align-items:flex-end;gap:10px;border-bottom:14px solid var(--accent);padding-bottom:8px}
+.d3-kcal__u{font-family:"Azeret Mono",monospace;font-weight:500;font-size:clamp(13px,1.5vw,17px);letter-spacing:.2em;text-transform:uppercase;padding-bottom:clamp(8px,1.4vw,14px)}
+.d3-kcal__meta{padding-bottom:10px;font-family:"Azeret Mono",monospace;font-size:11px;letter-spacing:.1em;line-height:1.9;color:var(--muted);text-transform:uppercase}
+.d3-kcal__meta b{color:var(--ink);font-weight:500}
+
+/* segmented macro meters */
+.d3-seg{display:grid;grid-template-columns:minmax(70px,auto) 1fr minmax(56px,auto);gap:9px 14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.d3-seg:first-of-type{border-top:2px solid var(--line-strong)}
+.d3-seg__k{font-family:"Azeret Mono",monospace;font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+.d3-seg__blocks{display:flex;gap:3px}
+.d3-seg__blocks i{flex:1 1 0;height:20px;background:var(--cell)}
+.d3-seg__blocks i.on{background:var(--accent)}
+.d3-seg__blocks i.half{background:linear-gradient(90deg,var(--accent) 0 50%,var(--cell) 50% 100%)}
+.d3-seg__v{font-family:"Azeret Mono",monospace;font-weight:700;font-size:16px;text-align:right;font-variant-numeric:tabular-nums}
+.d3-seg__v small{font-size:.62em;font-weight:400;color:var(--muted);margin-left:2px}
+
+/* unit matrix */
+.d3-matrix{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:340px}
+.d3-matrix i{aspect-ratio:1/1;background:var(--cell);display:block}
+.d3-matrix i.on{background:var(--accent)}
+.d3-matrix i.cursor{background:var(--line-strong)}
+.d3-count{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:20px}
+.d3-count div{min-width:104px}
+.d3-count dt{font-family:"Azeret Mono",monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.d3-count dd{margin:5px 0 0;font-family:"Chivo",sans-serif;font-weight:700;font-size:clamp(22px,2.8vw,30px);line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.d3-photo{aspect-ratio:1/1;background:linear-gradient(180deg,#CED4D8 0%,#A9B1B7 62%,#8F979D 100%);outline:1px solid var(--line);position:relative}
+.d3-photo::after{content:"";position:absolute;inset:auto 0 0 0;height:8px;background:var(--accent)}
+
+/* ============================================================
+   COMPARISON MATRIX
+   ============================================================ */
+.compare{padding:clamp(44px,7vw,96px) 0 clamp(50px,8vw,110px)}
+.compare__scroll{overflow-x:auto;border:1px solid var(--page-line);margin-top:clamp(22px,3vw,34px)}
+.ctable{width:100%;min-width:820px;border-collapse:collapse;font-size:13.2px}
+.ctable th,.ctable td{padding:13px 16px;border-bottom:1px solid var(--page-line);vertical-align:top;text-align:left}
+.ctable thead th{background:var(--page-surface);position:sticky;top:0;z-index:2}
+.ctable tbody th{
+  width:150px;font-family:var(--mono-chrome);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--page-faint);font-weight:400;background:var(--page-bg);
+}
+.ctable td{color:var(--page-muted);line-height:1.55}
+.ctable td b{color:var(--page-ink);font-weight:600}
+.chead{display:flex;align-items:center;gap:10px}
+.chead .dot{width:12px;height:12px;border-radius:50%;flex:0 0 12px}
+.chead span{font-family:"Space Grotesk",sans-serif;font-size:15px;font-weight:600;letter-spacing:.01em;color:var(--page-ink)}
+.chead em{font-style:normal;font-family:var(--mono-chrome);font-size:10px;letter-spacing:.14em;color:var(--page-faint);margin-left:auto}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono-chrome);font-size:10.5px;letter-spacing:.08em;color:var(--page-ink);margin:0 8px 4px 0}
+.chip i{width:11px;height:11px;display:inline-block;border:1px solid rgba(255,255,255,.18)}
+
+.closing{border-top:1px solid var(--page-line);padding:clamp(28px,4vw,46px) 0 clamp(48px,7vw,90px);color:var(--page-muted);font-size:13.5px;line-height:1.7;max-width:76ch}
+.closing strong{color:var(--page-ink)}
+@media print{
+  .index{display:none}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="masthead__top">
+      <p class="eyebrow">Calorie &amp; Nutrition App — Mobile</p>
+      <p class="eyebrow">Stage 02 / Branding · Stylescape · Round 01</p>
+    </div>
+    <div class="masthead__body">
+      <div>
+        <h1>Three visual directions for <em>“I know exactly what I’m eating.”</em></h1>
+        <p class="masthead__lede">
+          One brand territory — technological, precise, minimal, confident — explored three ways.
+          Each direction is built around the same conviction: the nutrition number is the product.
+          Everything else exists to make that number legible, trustworthy and fast to read.
+          The three are not one design in three accent colours; they differ in colour personality,
+          typography, grid, density and how measurement itself is drawn.
+        </p>
+      </div>
+      <div class="keys">
+        <a class="key" href="#d1" style="background:#0A0B0D;color:#F1F4F6">
+          <span class="key__t"><b style="font-family:'Space Grotesk',sans-serif;font-weight:600">Instrument</b><span>01 · Dark panel · Radial gauge</span></span>
+          <i style="background:#FF8A00"></i>
+        </a>
+        <a class="key" href="#d2" style="background:#F5F2EC;color:#14161A">
+          <span class="key__t"><b style="font-family:'Archivo',sans-serif;font-weight:700">Ledger</b><span>02 · Warm paper · Running balance</span></span>
+          <i style="background:#1F3BE0"></i>
+        </a>
+        <a class="key" href="#d3" style="background:#E9EBEC;color:#101316">
+          <span class="key__t"><b style="font-family:'Chivo',sans-serif;font-weight:900;text-transform:uppercase">Matrix</b><span>03 · Cool concrete · Unit count</span></span>
+          <i style="background:#D6F32B"></i>
+        </a>
+      </div>
+    </div>
+    <dl class="masthead__meta">
+      <div><dt>Scope</dt><dd>Branding exploration only. No application screens, no design system.</dd></div>
+      <div><dt>Product</dt><dd>Calculate calories for a dish or product · Find recipes that suit the user now.</dd></div>
+      <div><dt>Specimen data</dt><dd>Identical across all three, so the comparison is honest.</dd></div>
+      <div><dt>Next step</dt><dd>Select one direction. It becomes the basis of the design system.</dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav class="index" aria-label="Directions">
+  <div class="wrap index__inner">
+    <a href="#d1"><span class="dot" style="background:#FF8A00"></span>01 — Instrument</a>
+    <a href="#d2"><span class="dot" style="background:#1F3BE0"></span>02 — Ledger</a>
+    <a href="#d3"><span class="dot" style="background:#D6F32B"></span>03 — Matrix</a>
+    <span class="sep"></span>
+    <a href="#compare">Side-by-side ↓</a>
+  </div>
+</nav>
+
+<!-- ==========================================================
+     DIRECTION 01 — INSTRUMENT
+     ========================================================== -->
+<section class="plate-block" id="d1">
+  <div class="wrap">
+    <div class="plate-tag">
+      <span>Direction 01</span>
+      <span>Dark base · Signal amber · Circular gauge</span>
+    </div>
+
+    <div class="plate d1">
+
+      <div class="dir__head">
+        <div>
+          <p class="dir__no">01</p>
+          <h2 class="dir__name">Instrument</h2>
+          <p class="dir__tagline">Readout, not decoration.</p>
+        </div>
+        <div>
+          <p class="dir__idea">
+            The app behaves like a measuring instrument rather than a lifestyle companion.
+            A near-black panel, a single luminous readout, and calibration marks that admit the
+            number was <em>measured</em> — not guessed. Hairlines divide, nothing encloses.
+          </p>
+          <p class="dir__idea">
+            Amber is the only light source on the panel, so the calorie figure is literally the
+            brightest thing on screen. Every supporting value is typeset in monospace at a fraction
+            of its size, the way a lab display separates result from parameters.
+          </p>
+        </div>
+      </div>
+
+      <!-- palette -->
+      <div class="section">
+        <p class="rowlabel">Palette</p>
+        <div class="swatches">
+          <div class="sw" style="background:#0A0B0D;color:#F1F4F6"><i>Primary</i><b>Panel Black</b><span>#0A0B0D</span></div>
+          <div class="sw" style="background:#14171B;color:#F1F4F6"><i>Surface</i><b>Graphite</b><span>#14171B</span></div>
+          <div class="sw" style="background:#F1F4F6;color:#0A0B0D"><i>Secondary</i><b>Readout White</b><span>#F1F4F6</span></div>
+          <div class="sw" style="background:#98A1AA;color:#0A0B0D"><i>Support</i><b>Titanium</b><span>#98A1AA</span></div>
+          <div class="sw" style="background:#FF8A00;color:#0A0B0D"><i>Accent</i><b>Signal Amber</b><span>#FF8A00</span></div>
+        </div>
+        <p class="dir__idea" style="margin-top:18px">
+          <b style="font-weight:600">Why amber.</b> Amber is the colour of instrument readouts, calibration
+          marks and night-legible gauges — it carries an association with <em>measurement</em>, not with food
+          or wellness. It is warm enough to keep a dark interface humane at 21:00, and it is the single
+          highest-luminance element in the system, so attention lands on the number by physics rather than
+          by styling. Deliberately not green: nothing here should suggest a diet product.
+        </p>
+      </div>
+
+      <!-- typography -->
+      <div class="section">
+        <p class="rowlabel">Typography</p>
+        <div class="grid2">
+          <div>
+            <p class="typerow"><span>Headline</span><span>Space Grotesk · 500/600</span></p>
+            <p class="typesample" style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(30px,4.6vw,52px)">Know exactly<br>what you eat</p>
+            <p class="typerow" style="margin-top:26px"><span>Body</span><span>Inter · 400/500</span></p>
+            <p style="font-size:14.5px;line-height:1.65;max-width:44ch;opacity:.8">
+              Space Grotesk carries a slight technical irregularity in its geometry — it reads engineered
+              rather than corporate. Inter sits underneath it doing the quiet work at 13–15 px.
+            </p>
+          </div>
+          <div>
+            <p class="typerow"><span>Numerals</span><span>JetBrains Mono · 500/700 · tabular</span></p>
+            <p class="numsample" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(30px,4.4vw,50px)">0123456789</p>
+            <p class="numsample" style="font-family:'JetBrains Mono',monospace;font-weight:400;font-size:clamp(17px,2.1vw,24px);margin-top:14px;color:#98A1AA">642 · 34 g · 201 kcal/100 g</p>
+            <p style="font-size:14.5px;line-height:1.65;max-width:44ch;opacity:.8;margin-top:20px">
+              Every figure is monospaced and tabular. Values stay in the same column while they recalculate,
+              so a portion change reads as a number moving — never as a layout shifting.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- hero number -->
+      <div class="section">
+        <p class="rowlabel">Key visual anchor — calorie readout</p>
+        <div class="d1-readout">
+          <div class="d1-readout__top">
+            <span>Chicken teriyaki bowl</span>
+            <span>Portion 320 g</span>
+          </div>
+          <div class="d1-kcal">
+            <span class="d1-kcal__n">642</span>
+            <span class="d1-kcal__u">KCAL</span>
+          </div>
+          <div class="d1-ruler" aria-hidden="true"></div>
+          <div class="d1-readout__foot">
+            <span>PER 100 G <b>201 KCAL</b></span>
+            <span>SOURCE <b>VERIFIED DB</b></span>
+            <span>ITEMS <b>01</b></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- macros -->
+      <div class="section">
+        <p class="rowlabel">Protein · Carbs · Fat — hairline data blocks</p>
+        <div class="grid3">
+          <dl class="d1-macro d1-macro--p"><div><dt><span>Protein</span><span>21%</span></dt><dd>34<small>G</small><div class="bar"><i style="width:21%"></i></div></dd></div></dl>
+          <dl class="d1-macro d1-macro--c"><div><dt><span>Carbs</span><span>45%</span></dt><dd>72<small>G</small><div class="bar"><i style="width:45%"></i></div></dd></div></dl>
+          <dl class="d1-macro d1-macro--f"><div><dt><span>Fat</span><span>34%</span></dt><dd>24<small>G</small><div class="bar"><i style="width:34%"></i></div></dd></div></dl>
+        </div>
+        <p class="dir__idea" style="margin-top:16px">
+          Hard rectangles with a single hairline cap — no pills, no rounded chips. The micro-bar under each
+          value encodes share of energy, and only protein carries the accent, so the blocks rank themselves
+          without three competing colours.
+        </p>
+      </div>
+
+      <!-- progress -->
+      <div class="section">
+        <p class="rowlabel">Progress — radial gauge</p>
+        <div class="d1-dial">
+          <div class="gauge">
+            <svg viewBox="0 0 200 200" role="img" aria-label="1,608 of 2,200 kcal, 73 percent">
+              <g stroke-linecap="butt"><line x1="100.00" y1="14.00" x2="100.00" y2="0.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="109.62" y1="8.50" x2="110.45" y2="0.55" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="119.13" y1="10.01" x2="120.79" y2="2.19" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="128.43" y1="12.50" x2="130.90" y2="4.89" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="137.42" y1="15.95" x2="140.67" y2="8.65" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="143.00" y1="25.52" x2="150.00" y2="13.40" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="154.08" y1="25.57" x2="158.78" y2="19.10" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="161.56" y1="31.63" x2="166.91" y2="25.69" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="168.37" y1="38.44" x2="174.31" y2="33.09" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="174.43" y1="45.92" x2="180.90" y2="41.22" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="174.48" y1="57.00" x2="186.60" y2="50.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="184.05" y1="62.58" x2="191.35" y2="59.33" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="187.50" y1="71.57" x2="195.11" y2="69.10" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="189.99" y1="80.87" x2="197.81" y2="79.21" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="191.50" y1="90.38" x2="199.45" y2="89.55" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="186.00" y1="100.00" x2="200.00" y2="100.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="191.50" y1="109.62" x2="199.45" y2="110.45" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="189.99" y1="119.13" x2="197.81" y2="120.79" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="187.50" y1="128.43" x2="195.11" y2="130.90" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="184.05" y1="137.42" x2="191.35" y2="140.67" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="174.48" y1="143.00" x2="186.60" y2="150.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="174.43" y1="154.08" x2="180.90" y2="158.78" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="168.37" y1="161.56" x2="174.31" y2="166.91" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="161.56" y1="168.37" x2="166.91" y2="174.31" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="154.08" y1="174.43" x2="158.78" y2="180.90" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="143.00" y1="174.48" x2="150.00" y2="186.60" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="137.42" y1="184.05" x2="140.67" y2="191.35" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="128.43" y1="187.50" x2="130.90" y2="195.11" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="119.13" y1="189.99" x2="120.79" y2="197.81" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="109.62" y1="191.50" x2="110.45" y2="199.45" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="100.00" y1="186.00" x2="100.00" y2="200.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="90.38" y1="191.50" x2="89.55" y2="199.45" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="80.87" y1="189.99" x2="79.21" y2="197.81" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="71.57" y1="187.50" x2="69.10" y2="195.11" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="62.58" y1="184.05" x2="59.33" y2="191.35" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="57.00" y1="174.48" x2="50.00" y2="186.60" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="45.92" y1="174.43" x2="41.22" y2="180.90" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="38.44" y1="168.37" x2="33.09" y2="174.31" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="31.63" y1="161.56" x2="25.69" y2="166.91" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="25.57" y1="154.08" x2="19.10" y2="158.78" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="25.52" y1="143.00" x2="13.40" y2="150.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="15.95" y1="137.42" x2="8.65" y2="140.67" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="12.50" y1="128.43" x2="4.89" y2="130.90" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="10.01" y1="119.13" x2="2.19" y2="120.79" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="8.50" y1="109.62" x2="0.55" y2="110.45" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="14.00" y1="100.00" x2="0.00" y2="100.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="8.50" y1="90.38" x2="0.55" y2="89.55" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="10.01" y1="80.87" x2="2.19" y2="79.21" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="12.50" y1="71.57" x2="4.89" y2="69.10" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="15.95" y1="62.58" x2="8.65" y2="59.33" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="25.52" y1="57.00" x2="13.40" y2="50.00" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="25.57" y1="45.92" x2="19.10" y2="41.22" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="31.63" y1="38.44" x2="25.69" y2="33.09" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="38.44" y1="31.63" x2="33.09" y2="25.69" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="45.92" y1="25.57" x2="41.22" y2="19.10" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="57.00" y1="25.52" x2="50.00" y2="13.40" stroke="rgba(255,255,255,.42)" stroke-width="1.4"></line><line x1="62.58" y1="15.95" x2="59.33" y2="8.65" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="71.57" y1="12.50" x2="69.10" y2="4.89" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="80.87" y1="10.01" x2="79.21" y2="2.19" stroke="rgba(255,255,255,.20)" stroke-width="1"></line><line x1="90.38" y1="8.50" x2="89.55" y2="0.55" stroke="rgba(255,255,255,.20)" stroke-width="1"></line></g>
+              <circle cx="100" cy="100" r="78" fill="none" stroke="rgba(255,255,255,.09)" stroke-width="10"></circle>
+              <circle cx="100" cy="100" r="78" fill="none" stroke="#FF8A00" stroke-width="10"
+                      stroke-dasharray="358.3 490.1" transform="rotate(-90 100 100)"></circle>
+              <line x1="100" y1="2" x2="100" y2="16" stroke="#F1F4F6" stroke-width="2.5" transform="rotate(263.2 100 100)"></line>
+            </svg>
+            <div class="gauge__c">
+              <div class="gauge__pct">73<sup>%</sup></div>
+              <div class="gauge__lab">of daily target</div>
+            </div>
+          </div>
+          <div class="d1-dial__legend">
+            <div class="d1-legend-row"><span>CONSUMED</span><b>1,608 KCAL</b></div>
+            <div class="d1-legend-row d1-legend-row--hi"><span>REMAINING</span><b>592 KCAL</b></div>
+            <div class="d1-legend-row"><span>TARGET</span><b>2,200 KCAL</b></div>
+            <div class="d1-legend-row"><span>THIS DISH</span><b>+642 KCAL</b></div>
+          </div>
+        </div>
+        <p class="dir__idea" style="margin-top:16px">
+          A full tick ring at 6° intervals with a white index mark at the current position — the ring is a
+          dial, not a decorative donut. It reads as calibration, and it scales down to 28 px as a status
+          glyph without losing meaning.
+        </p>
+      </div>
+
+      <!-- detail + photo -->
+      <div class="section">
+        <p class="rowlabel">Grid, density &amp; photography</p>
+        <div class="grid2">
+          <div>
+            <div class="d1-photo" role="img" aria-label="Photography tone reference"></div>
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#5E6871;margin-top:10px">
+              Photography tone reference — not final imagery
+            </p>
+          </div>
+          <div>
+            <p class="dir__idea"><b style="font-weight:600">Grid.</b> 12 columns, 8 px base unit, visible hairlines at column boundaries in dense areas. Alignment is stated, not implied.</p>
+            <p class="dir__idea"><b style="font-weight:600">Density.</b> High. This direction can hold a multi-item dish with eight rows and a running total without feeling crowded — the hairlines do the separating that whitespace would otherwise have to.</p>
+            <p class="dir__idea"><b style="font-weight:600">Photography.</b> One image per screen, maximum. Single warm key light, deep falloff into the panel black, hard corner crop marks. The food emerges from the same darkness the UI sits on, so photography never becomes a second background.</p>
+            <p class="dir__idea"><b style="font-weight:600">Avoids.</b> Glow effects, soft gradients, rounded cards, coloured macro trios, any circle that isn't measuring something.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="footnote">01 — Strongest at night and in the Nutrition Result screen, where a single dominant number is the entire point. The most “device-like” of the three.</p>
+  </div>
+</section>
+
+<!-- ==========================================================
+     DIRECTION 02 — LEDGER
+     ========================================================== -->
+<section class="plate-block" id="d2">
+  <div class="wrap">
+    <div class="plate-tag">
+      <span>Direction 02</span>
+      <span>Warm paper base · Ultramarine · Ledger progress</span>
+    </div>
+
+    <div class="plate d2">
+
+      <div class="dir__head">
+        <div>
+          <p class="dir__no">02</p>
+          <h2 class="dir__name">Ledger</h2>
+          <p class="dir__tagline">Every gram accounted for.</p>
+        </div>
+        <div>
+          <p class="dir__idea">
+            Nutrition as a precise account. The visual language is the ruled book, the index card and the
+            technical drawing: horizontal rules that carry information, figures right-aligned so they stack
+            into a readable column, and a double rule under anything that totals.
+          </p>
+          <p class="dir__idea">
+            Where Instrument is a device, Ledger is a <em>record</em>. That shifts the emotional register from
+            monitoring to bookkeeping — calm, literate, unhurried — which is exactly the tone for a product
+            about awareness rather than restriction. Paper white, ink black, one blue for entries.
+          </p>
+        </div>
+      </div>
+
+      <!-- palette -->
+      <div class="section">
+        <p class="rowlabel">Palette</p>
+        <div class="swatches">
+          <div class="sw" style="background:#F5F2EC;color:#14161A"><i>Primary</i><b>Archive Paper</b><span>#F5F2EC</span></div>
+          <div class="sw" style="background:#FFFDF8;color:#14161A"><i>Surface</i><b>Sheet</b><span>#FFFDF8</span></div>
+          <div class="sw" style="background:#14161A;color:#F5F2EC"><i>Secondary</i><b>Ink</b><span>#14161A</span></div>
+          <div class="sw" style="background:#D8D2C4;color:#14161A"><i>Support</i><b>Rule</b><span>#D8D2C4</span></div>
+          <div class="sw" style="background:#1F3BE0;color:#FFFFFF"><i>Accent</i><b>Ultramarine</b><span>#1F3BE0</span></div>
+        </div>
+        <p class="dir__idea" style="margin-top:18px">
+          <b style="font-weight:600">Why ultramarine on warm paper.</b> This pair belongs to blueprints, library
+          stamps, ledger ink and technical annotation — records kept carefully by someone. The warmth of the
+          paper (#F5F2EC, not white) keeps a data-dense screen from feeling clinical, while true ultramarine
+          is cold, saturated and entirely free of food or wellness association. It marks entries and targets
+          only; it never decorates.
+        </p>
+      </div>
+
+      <!-- typography -->
+      <div class="section">
+        <p class="rowlabel">Typography</p>
+        <div class="grid2">
+          <div>
+            <p class="typerow"><span>Headline</span><span>Archivo · 600/700</span></p>
+            <p class="typesample" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,52px)">Know exactly<br>what you eat</p>
+            <p class="typerow" style="margin-top:26px"><span>Body</span><span>IBM Plex Sans · 400/500</span></p>
+            <p style="font-size:14.5px;line-height:1.68;max-width:44ch;color:#6E6A62">
+              Archivo is a tight American grotesk built for small-space signage — it sets large, dense
+              headlines without the fashion tone of a display face. IBM Plex Sans reads as documentation.
+            </p>
+          </div>
+          <div>
+            <p class="typerow"><span>Numerals</span><span>IBM Plex Mono · 400/600 · tabular</span></p>
+            <p class="numsample" style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:clamp(30px,4.4vw,50px)">0123456789</p>
+            <p class="numsample" style="font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:clamp(17px,2.1vw,24px);margin-top:14px;color:#6E6A62">642 · 34 g · 201 kcal/100 g</p>
+            <p style="font-size:14.5px;line-height:1.68;max-width:44ch;color:#6E6A62;margin-top:20px">
+              One family for body and figures, so an ingredient list and its amounts share a voice.
+              Plex Mono’s narrow figures let a four-column ledger fit a 360 px screen without abbreviation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- hero number -->
+      <div class="section">
+        <p class="rowlabel">Key visual anchor — calorie entry</p>
+        <div class="d2-sheet">
+          <div class="d2-entry">
+            <span>Entry — Chicken teriyaki bowl</span>
+            <span>14 Sep · 13:40</span>
+          </div>
+          <div class="d2-kcal">
+            <div style="display:flex;align-items:flex-start;gap:10px">
+              <span class="d2-kcal__n">642</span>
+              <span class="d2-kcal__u">kcal</span>
+            </div>
+            <div class="d2-kcal__side">
+              portion <b>320 g</b>
+              per 100 g <b>201 kcal</b>
+              items <b>1</b>
+            </div>
+          </div>
+          <p style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#948E83">
+            Verified database · portion set by user
+          </p>
+        </div>
+      </div>
+
+      <!-- macros -->
+      <div class="section">
+        <p class="rowlabel">Protein · Carbs · Fat — ruled ledger rows</p>
+        <div class="d2-sheet">
+          <table class="d2-table">
+            <thead>
+              <tr><th>Macronutrient</th><th>Grams</th><th>kcal</th><th>Energy</th><th class="marg">Share</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Protein</td><td>34</td><td>136</td><td>21%</td><td class="marg"><i style="width:21%"></i></td></tr>
+              <tr><td>Carbohydrate</td><td>72</td><td>288</td><td>45%</td><td class="marg"><i style="width:45%"></i></td></tr>
+              <tr><td>Fat</td><td>24</td><td>216</td><td>34%</td><td class="marg"><i style="width:34%"></i></td></tr>
+              <tr><td>Total</td><td>130</td><td>642</td><td>100%</td><td class="marg"><u style="width:100%"></u></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="dir__idea" style="margin-top:16px">
+          The macros are a table because they <em>are</em> a table. Right-aligned tabular figures let the eye
+          compare down a column; the margin bar is a reading aid, not the primary encoding. A missing value
+          prints as an em dash in the grams column — never as a zero.
+        </p>
+      </div>
+
+      <!-- progress -->
+      <div class="section">
+        <p class="rowlabel">Progress — running ledger</p>
+        <div class="d2-ledger">
+          <div class="d2-line">
+            <div class="d2-line__k">Breakfast</div>
+            <div class="d2-line__t"><i style="width:17.2%"></i><u style="left:91.7%"></u></div>
+            <div class="d2-line__v">412 → 412</div>
+          </div>
+          <div class="d2-line">
+            <div class="d2-line__k">Lunch</div>
+            <div class="d2-line__t"><i style="width:40.3%"></i><u style="left:91.7%"></u></div>
+            <div class="d2-line__v">554 → 966</div>
+          </div>
+          <div class="d2-line">
+            <div class="d2-line__k">This dish</div>
+            <div class="d2-line__t"><i style="width:67.0%"></i><u style="left:91.7%"></u></div>
+            <div class="d2-line__v">642 → 1,608</div>
+          </div>
+          <div class="d2-total">
+            <span>Balance against target 2,200</span>
+            <b><em>592</em> kcal remaining</b>
+          </div>
+        </div>
+        <p class="dir__idea" style="margin-top:16px">
+          A ledger, not a meter: each entry extends the running balance, the black tick marks the target, and
+          overshoot simply continues past it — the bar has room beyond the marker, so exceeding a target is
+          reported as a fact rather than dramatised as a failure.
+        </p>
+      </div>
+
+      <!-- detail + photo -->
+      <div class="section">
+        <p class="rowlabel">Grid, density &amp; photography</p>
+        <div class="grid2">
+          <div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+              <div class="d2-photo" role="img" aria-label="Photography tone reference"></div>
+              <div class="d2-photo" role="img" aria-label="Photography tone reference" style="background:linear-gradient(158deg,#DED6C4 0%,#C3B59B 55%,#A99B80 100%)"></div>
+              <div class="d2-photo" role="img" aria-label="Photography tone reference" style="background:linear-gradient(158deg,#EFE9DC 0%,#D9CDB8 55%,#C4B69B 100%)"></div>
+            </div>
+            <p style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#948E83;margin-top:10px">
+              Photography tone reference — not final imagery
+            </p>
+          </div>
+          <div>
+            <p class="dir__idea"><b style="font-weight:600">Grid.</b> A baseline grid before a column grid. Type sits on a 4 px baseline and every rule falls on it, so rules read as ruling rather than as borders.</p>
+            <p class="dir__idea"><b style="font-weight:600">Density.</b> Medium, with generous leading. More air than Instrument, but the air is between rows, not around cards — there are no cards.</p>
+            <p class="dir__idea"><b style="font-weight:600">Photography.</b> Small, catalogued, fixed 1:1 plates at a consistent size — reference images in an index, flat and evenly lit, slightly warm. Used in recipe ingredient lists for recognition, never full-bleed, always with a rule and a caption beneath.</p>
+            <p class="dir__idea"><b style="font-weight:600">Avoids.</b> Shadows, cards, gradients, coloured backgrounds. Hierarchy comes from rule weight and figure alignment only.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="footnote">02 — Strongest on Recipe Detail and multi-item dishes, where ingredients, amounts and per-serving nutrition all want to be read as one accounted list. The most literate and the most printable of the three.</p>
+  </div>
+</section>
+
+<!-- ==========================================================
+     DIRECTION 03 — MATRIX
+     ========================================================== -->
+<section class="plate-block" id="d3">
+  <div class="wrap">
+    <div class="plate-tag">
+      <span>Direction 03</span>
+      <span>Cool concrete base · Hi-vis marking · Counted units</span>
+    </div>
+
+    <div class="plate d3">
+
+      <div class="dir__head">
+        <div>
+          <p class="dir__no">03</p>
+          <h2 class="dir__name">Matrix</h2>
+          <p class="dir__tagline">Everything is countable.</p>
+        </div>
+        <div>
+          <p class="dir__idea">
+            Food resolved into discrete units. Nothing here is drawn as a continuous curve or a smooth bar —
+            quantities are <em>counted</em> in cells, because a count is something you can verify by looking.
+            One cell is 22 kcal; seventy-three of them are filled.
+          </p>
+          <p class="dir__idea">
+            The result is a system where measurement is the graphic language itself. A hard 8 px module
+            governs every edge, the base is cool poured-concrete grey, and exactly one hi-vis colour marks
+            the measured part. It is the most graphic and the most contemporary of the three.
+          </p>
+        </div>
+      </div>
+
+      <!-- palette -->
+      <div class="section">
+        <p class="rowlabel">Palette</p>
+        <div class="swatches">
+          <div class="sw" style="background:#E9EBEC;color:#101316"><i>Primary</i><b>Concrete</b><span>#E9EBEC</span></div>
+          <div class="sw" style="background:#C7CDD1;color:#101316"><i>Unit cell</i><b>Cast Grey</b><span>#C7CDD1</span></div>
+          <div class="sw" style="background:#101316;color:#E9EBEC"><i>Secondary</i><b>Carbon</b><span>#101316</span></div>
+          <div class="sw" style="background:#5C646B;color:#FFFFFF"><i>Support</i><b>Slate</b><span>#5C646B</span></div>
+          <div class="sw" style="background:#D6F32B;color:#101316"><i>Accent</i><b>Hi-Vis</b><span>#D6F32B</span></div>
+        </div>
+        <p class="dir__idea" style="margin-top:18px">
+          <b style="font-weight:600">Why hi-vis on concrete.</b> #D6F32B is a marking colour — safety tape,
+          calibration marks, highlighter, test equipment. It is the exact opposite of the sage and mint
+          greens that signal “wellness”: it is aggressive, synthetic and industrial, and it appears only on
+          the part of a value that has actually been measured. Against cold neutral greys it never reads as
+          nature. Because it is the only saturated element in the system, filled always means counted.
+        </p>
+      </div>
+
+      <!-- typography -->
+      <div class="section">
+        <p class="rowlabel">Typography</p>
+        <div class="grid2">
+          <div>
+            <p class="typerow"><span>Headline</span><span>Chivo · 700/900</span></p>
+            <p class="typesample" style="font-family:'Chivo',sans-serif;font-weight:900;font-size:clamp(30px,4.6vw,52px);text-transform:uppercase">Know exactly<br>what you eat</p>
+            <p class="typerow" style="margin-top:26px"><span>Body</span><span>Public Sans · 400/500</span></p>
+            <p style="font-size:14.5px;line-height:1.65;max-width:44ch;color:#5C646B">
+              Chivo at 900 is a blunt structural grotesk — set in uppercase it becomes a block, which is
+              consistent with a system built from blocks. Public Sans stays neutral and legal-clear beneath it.
+            </p>
+          </div>
+          <div>
+            <p class="typerow"><span>Numerals</span><span>Azeret Mono · 500/700 · tabular</span></p>
+            <p class="numsample" style="font-family:'Azeret Mono',monospace;font-weight:700;font-size:clamp(28px,4.2vw,48px)">0123456789</p>
+            <p class="numsample" style="font-family:'Azeret Mono',monospace;font-weight:400;font-size:clamp(16px,2vw,23px);margin-top:14px;color:#5C646B">642 · 34 g · 201 kcal/100 g</p>
+            <p style="font-size:14.5px;line-height:1.65;max-width:44ch;color:#5C646B;margin-top:20px">
+              Azeret Mono has squared terminals and near-rectangular counters, so its figures visually belong
+              to the same family as the unit cells. Headline figures switch to Chivo 900 for maximum mass.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- hero number -->
+      <div class="section">
+        <p class="rowlabel">Key visual anchor — calorie block</p>
+        <div class="d3-module d3-module--grid">
+          <span class="d3-tag">Chicken teriyaki bowl · 320 g</span>
+          <div class="d3-kcal">
+            <div class="d3-kcal__fig">
+              <span class="d3-kcal__n">642</span>
+              <span class="d3-kcal__u">kcal</span>
+            </div>
+            <div class="d3-kcal__meta">
+              <b>201</b> per 100 g<br>
+              <b>29</b> units of 22 kcal<br>
+              <b>1</b> item
+            </div>
+          </div>
+        </div>
+        <p class="dir__idea" style="margin-top:16px">
+          The figure is set in the heaviest weight available and cropped tight to its own cap height, so it
+          behaves as a shape on the grid rather than as text in a layout. The hi-vis rule beneath it is a measurement
+          baseline, not an underline — it is the only ornament permitted anywhere in the system.
+        </p>
+      </div>
+
+      <!-- macros -->
+      <div class="section">
+        <p class="rowlabel">Protein · Carbs · Fat — segmented unit meters</p>
+        <div class="d3-module">
+          <div class="d3-seg">
+            <div class="d3-seg__k">Protein</div>
+            <div class="d3-seg__blocks"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="d3-seg__v">34<small>g</small></div>
+          </div>
+          <div class="d3-seg">
+            <div class="d3-seg__k">Carbs</div>
+            <div class="d3-seg__blocks"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="half"></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="d3-seg__v">72<small>g</small></div>
+          </div>
+          <div class="d3-seg">
+            <div class="d3-seg__k">Fat</div>
+            <div class="d3-seg__blocks"><i class="on"></i><i class="on"></i><i class="on"></i><i class="half"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="d3-seg__v">24<small>g</small></div>
+          </div>
+          <p style="font-family:'Azeret Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5C646B;margin-top:14px">
+            1 block = 10% of this dish’s energy · half block = 5%
+          </p>
+        </div>
+        <p class="dir__idea" style="margin-top:16px">
+          Ten hard blocks per macro, filled by share of energy. Because the three rows always sum to ten
+          filled blocks, the split is comparable at a glance without a legend, a colour code or a pie.
+        </p>
+      </div>
+
+      <!-- progress -->
+      <div class="section">
+        <p class="rowlabel">Progress — unit matrix</p>
+        <div class="grid2">
+          <div class="d3-module">
+            <div class="d3-matrix" role="img" aria-label="73 of 100 units consumed"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="cursor"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p style="font-family:'Azeret Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#5C646B;margin-top:16px">
+              100 units = 2,200 kcal daily target · 1 unit = 22 kcal
+            </p>
+          </div>
+          <div>
+            <dl class="d3-count" style="margin-top:0">
+              <div><dt>Consumed</dt><dd>1,608</dd></div>
+              <div><dt>Remaining</dt><dd>592</dd></div>
+              <div><dt>Units left</dt><dd>27</dd></div>
+            </dl>
+            <p class="dir__idea" style="margin-top:26px">
+              No arc, no bar. The day is a hundred units and you can count what is left — the carbon cell
+              marks the current position. Overshoot adds a second short row below the grid in carbon rather
+              than turning anything red, so exceeding a target is shown, not scolded.
+            </p>
+            <p class="dir__idea">
+              The same matrix works at three sizes: 100 cells for a day, 10 cells for a meal, a single cell
+              as an inline unit marker in a list.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- detail + photo -->
+      <div class="section">
+        <p class="rowlabel">Grid, density &amp; photography</p>
+        <div class="grid2">
+          <div>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+              <div class="d3-photo" role="img" aria-label="Photography tone reference"></div>
+              <div class="d3-photo" role="img" aria-label="Photography tone reference" style="background:linear-gradient(180deg,#D7DCDF 0%,#B5BCC1 62%,#9AA2A8 100%)"></div>
+            </div>
+            <p style="font-family:'Azeret Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A9299;margin-top:10px">
+              Photography tone reference — not final imagery
+            </p>
+          </div>
+          <div>
+            <p class="dir__idea"><b style="font-weight:600">Grid.</b> An 8 px module made visible. Everything is a whole number of cells wide; nothing floats between them. The grid is the composition, not a guide behind it.</p>
+            <p class="dir__idea"><b style="font-weight:600">Density.</b> Airy but rigid — large empty modules are allowed, half-modules are not. The most graphic of the three and the one that reads best at a glance.</p>
+            <p class="dir__idea"><b style="font-weight:600">Photography.</b> Hard 1:1 crops occupying exactly one module, cool and evenly lit, shot from directly above. An image is a tile in the matrix like any other tile; a hi-vis bar beneath it ties it to the system.</p>
+            <p class="dir__idea"><b style="font-weight:600">Avoids.</b> Rounded corners, shadows, gradients, any curve at all. Curvature would break the premise that everything is a discrete unit.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="footnote">03 — Strongest on Recipe Discovery, where cards, filters and food images all need to sit on one visible module. The most distinctive at a distance, and the most demanding to keep disciplined.</p>
+  </div>
+</section>
+
+<!-- ==========================================================
+     SIDE-BY-SIDE
+     ========================================================== -->
+<section class="compare" id="compare">
+  <div class="wrap">
+    <p class="eyebrow">Comparison</p>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,4vw,44px);letter-spacing:-.03em;line-height:1.05;margin-top:12px;max-width:20ch">
+      The three directions, attribute by attribute
+    </h2>
+    <p style="color:var(--page-muted);max-width:64ch;margin-top:14px;font-size:14.5px;line-height:1.65">
+      Same specimen data throughout — a 320 g chicken teriyaki bowl at 642 kcal, and a day at
+      1,608 of 2,200 kcal. What differs is the personality, not the numbers.
+    </p>
+
+    <div class="compare__scroll">
+      <table class="ctable">
+        <thead>
+          <tr>
+            <th style="background:var(--page-surface)"></th>
+            <th><div class="chead"><span class="dot" style="background:#FF8A00"></span><span>01 Instrument</span><em>Dark</em></div></th>
+            <th><div class="chead"><span class="dot" style="background:#1F3BE0"></span><span>02 Ledger</span><em>Paper</em></div></th>
+            <th><div class="chead"><span class="dot" style="background:#D6F32B"></span><span>03 Matrix</span><em>Concrete</em></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>In one line</th>
+            <td><b>A measuring device.</b> Luminous readout on a dark panel.</td>
+            <td><b>A kept record.</b> Ruled entries on warm paper.</td>
+            <td><b>A counted system.</b> Discrete units on a visible module.</td>
+          </tr>
+          <tr>
+            <th>Colour personality</th>
+            <td>
+              <span class="chip"><i style="background:#0A0B0D"></i>#0A0B0D</span>
+              <span class="chip"><i style="background:#F1F4F6"></i>#F1F4F6</span>
+              <span class="chip"><i style="background:#FF8A00"></i>#FF8A00</span>
+              <br>Warm, nocturnal, instrument-lit.
+            </td>
+            <td>
+              <span class="chip"><i style="background:#F5F2EC"></i>#F5F2EC</span>
+              <span class="chip"><i style="background:#14161A"></i>#14161A</span>
+              <span class="chip"><i style="background:#1F3BE0"></i>#1F3BE0</span>
+              <br>Cool ink on warm paper, archival.
+            </td>
+            <td>
+              <span class="chip"><i style="background:#E9EBEC"></i>#E9EBEC</span>
+              <span class="chip"><i style="background:#101316"></i>#101316</span>
+              <span class="chip"><i style="background:#D6F32B"></i>#D6F32B</span>
+              <br>Cold neutral with one industrial marker.
+            </td>
+          </tr>
+          <tr>
+            <th>Base</th>
+            <td>Dark, single surface family.</td>
+            <td>Light warm paper, no cards.</td>
+            <td>Light cool concrete, hard modules.</td>
+          </tr>
+          <tr>
+            <th>Headline / body</th>
+            <td>Space Grotesk / Inter</td>
+            <td>Archivo / IBM Plex Sans</td>
+            <td>Chivo 900 uppercase / Public Sans</td>
+          </tr>
+          <tr>
+            <th>Numerals</th>
+            <td>JetBrains Mono, tabular — everything monospaced.</td>
+            <td>IBM Plex Mono, tabular — right-aligned in columns.</td>
+            <td>Chivo 900 for the hero figure, Azeret Mono for data.</td>
+          </tr>
+          <tr>
+            <th>Calorie treatment</th>
+            <td>Monospaced readout under a calibration ruler.</td>
+            <td>Ledger entry, flush left, with a rule above and portion facts right.</td>
+            <td>Ultra-bold cropped figure with a hi-vis mark on the trailing digits.</td>
+          </tr>
+          <tr>
+            <th>Macro treatment</th>
+            <td>Three hairline-capped rectangles, one accent bar.</td>
+            <td>A ruled four-column table closed by a double rule.</td>
+            <td>Ten hard blocks per macro, filled by share of energy.</td>
+          </tr>
+          <tr>
+            <th>Progress</th>
+            <td><b>Circular.</b> Tick-ring gauge with an index mark.</td>
+            <td><b>Linear / ledger.</b> Running balance with a target tick.</td>
+            <td><b>Counted.</b> 10 × 10 unit matrix, one cell = 22 kcal.</td>
+          </tr>
+          <tr>
+            <th>Density</th>
+            <td>High — hairlines separate, not whitespace.</td>
+            <td>Medium — air between rows, generous leading.</td>
+            <td>Modular — large empty cells allowed, half cells not.</td>
+          </tr>
+          <tr>
+            <th>Photography</th>
+            <td>One image per screen; warm key, deep falloff into black.</td>
+            <td>Small catalogued 1:1 plates, flat and warm, captioned.</td>
+            <td>Cool overhead 1:1 crops, each exactly one module.</td>
+          </tr>
+          <tr>
+            <th>Strongest on</th>
+            <td>Nutrition Result — one dominant number.</td>
+            <td>Recipe Detail &amp; multi-item dishes — lists that total.</td>
+            <td>Recipe Discovery — cards, filters and imagery on one grid.</td>
+          </tr>
+          <tr>
+            <th>Main risk</th>
+            <td>Dark-only can feel clinical; food photography is harder to light.</td>
+            <td>Can read as conservative or spreadsheet-like if rules get heavy.</td>
+            <td>Hi-vis accent needs discipline; the module must never be broken.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="closing">
+  <div class="wrap">
+    <p><strong>Where this stops.</strong> This is a branding exploration only — no application screens and no
+    design system. Type scales, spacing tokens, component states, icons and motion are deliberately not defined
+    here; they follow from whichever direction is chosen.</p>
+    <p style="margin-top:12px"><strong>Next.</strong> Select one direction — or name the parts of two that should
+    be combined — and it becomes the basis of the design system, which is then applied to the four screens and
+    eight dedicated states in SCREENS.md.</p>
+  </div>
+</footer>
+
+</body>
+</html>
