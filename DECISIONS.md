@@ -55,7 +55,7 @@ Differentiation comes from execution, not decoration:
 - **Unusually clear nutrition hierarchy** — one hero number, one secondary pair, one macro grid, and nothing else competing for attention. Most competitors fragment this across widgets.
 - **Precise product behaviour** — portion editing, live recalculation, honest missing data, and recovery from empty states handled better than the category handles them.
 - **A distinctive food + data composition** — the asymmetric crop entering from one edge, balanced by typography and figures in open space. Data never sits on food.
-- **Typography** — Plus Jakarta Sans against Inter Tight, with hero figures made present by scale and space rather than weight.
+- **Typography** — Plus Jakarta Sans against Inter Tight, with hero figures given presence by scale, spacing and a medium weight chosen for at-a-glance readability.
 - **A consistent visual signature** applied without exception, so the product is recognised by its rhythm rather than by an ornament.
 - **Strong execution over novelty.** The distinctiveness has to survive daily use, which decorative novelty does not.
 
