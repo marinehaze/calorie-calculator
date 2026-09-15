@@ -1,0 +1,47 @@
+/* Stepper — servings on Recipe Detail, amount in the portion sheet.
+   Changing it recomputes the figures in place; there is no confirm step. */
+
+.ds-stepper { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-2); }
+
+.ds-stepper__label { font-size: var(--ds-text-label); color: var(--ds-ink-2); }
+
+.ds-stepper__control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-half);
+  background: var(--ds-soft);
+  border-radius: var(--ds-radius-sm);
+  padding: var(--ds-space-half);
+}
+
+.ds-stepper__value {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-medium);
+  font-size: var(--ds-text-value);
+  letter-spacing: var(--ds-tracking-value);
+  min-width: 56px;
+  text-align: center;
+  color: var(--ds-ink);
+}
+
+.ds-stepper__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-touch-min);
+  height: var(--ds-touch-min);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  box-shadow: var(--ds-shadow-thumb);
+  cursor: pointer;
+  transition: background var(--ds-duration) var(--ds-ease);
+}
+.ds-stepper__button:hover:not(:disabled) { background: var(--ds-canvas); }
+.ds-stepper__button:disabled {
+  cursor: not-allowed;
+  color: var(--ds-disabled-fg);
+  background: var(--ds-disabled-bg);
+  box-shadow: none;
+}

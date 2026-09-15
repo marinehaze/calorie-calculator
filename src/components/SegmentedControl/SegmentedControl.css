@@ -1,0 +1,38 @@
+/* Segmented control — Portion / Per 100 g on Nutrition Result.
+   Two or three options, always mutually exclusive, always short labels. */
+
+.ds-segmented {
+  display: inline-flex;
+  background: var(--ds-soft);
+  border-radius: var(--ds-radius-sm);
+  padding: var(--ds-space-half);
+  gap: var(--ds-space-half);
+}
+
+.ds-segmented__option {
+  border: 0;
+  background: transparent;
+  /* The stylescape's segment was ~37px tall; raised to 44 to meet the
+     touch minimum. Nothing else about it changed. */
+  min-height: var(--ds-touch-min);
+  padding-inline: var(--ds-space-2);
+  border-radius: 11px;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--ds-duration) var(--ds-ease),
+              color var(--ds-duration) var(--ds-ease);
+}
+
+/* Selected — the thumb lifts to surface with the one permitted small shadow,
+   and the label goes to ink at medium weight. */
+.ds-segmented__option[aria-checked='true'] {
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-medium);
+  box-shadow: var(--ds-shadow-thumb);
+}
+
+.ds-segmented__option:disabled { color: var(--ds-disabled-fg); cursor: not-allowed; }

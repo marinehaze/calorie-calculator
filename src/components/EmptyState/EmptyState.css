@@ -1,0 +1,65 @@
+/* Empty state — first run, no results, no matching recipes, error.
+   SCREENS.md calls the recovery states load-bearing: "trust is lost here if
+   it's a shrug". So every one of these carries a way forward, not just a
+   sentence. */
+
+.ds-empty-state { text-align: left; padding-block: var(--ds-space-5); }
+
+/* A circular food crop instead of a drawn illustration: the direction is
+   food-led, and an empty screen is where that matters most. */
+.ds-empty-state__media { width: 140px; margin-bottom: var(--ds-space-4); }
+
+.ds-empty-state__title {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-title);
+  line-height: var(--ds-leading-title);
+  text-wrap: balance;
+}
+
+.ds-empty-state__body {
+  margin-top: var(--ds-space-1);
+  font-size: var(--ds-text-body);
+  line-height: var(--ds-leading-body);
+  color: var(--ds-ink-2);
+  max-width: 34ch;
+}
+
+/* The binding constraint, named. "No matching recipes" has to say *which*
+   filter emptied the list and offer to relax that one.
+
+   A berry rule rather than a filled card: a container here would be one more
+   box in a system that separates by space, and the insight belongs to the
+   sentence above it rather than sitting apart from it. The same 2px inset rule
+   marks a flagged ingredient, so "this is the thing acting on your results" is
+   one idiom in the product, not two.
+
+   This is the one place outside a primary action where berry is allowed to
+   mark emphasis. */
+.ds-empty-state__insight {
+  margin-top: var(--ds-space-3);
+  padding-left: var(--ds-space-2);
+  box-shadow: inset 2px 0 0 var(--ds-berry);
+  font-size: var(--ds-text-label);
+  line-height: var(--ds-leading-body);
+  color: var(--ds-ink-2);
+  max-width: 34ch;
+}
+
+/* The lead names the binding constraint; the detail carries the consequence
+   and previews the outcome of relaxing it. The lead is ink at medium weight,
+   so the rule is never the only thing marking it. */
+.ds-empty-state__insight-lead {
+  display: block;
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-medium);
+}
+
+.ds-empty-state__actions {
+  margin-top: var(--ds-space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1);
+  align-items: stretch;
+}

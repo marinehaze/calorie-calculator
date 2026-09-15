@@ -1,0 +1,31 @@
+/* Nav bar — the minimum the four screens need: a way back, and sometimes a
+   title. No shadow, no fill: it sits on the screen's own ground. */
+
+.ds-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  min-height: var(--ds-touch-min);
+  /* The title is nowrap + ellipsis, which gives this bar a wide min-content
+     size. min-width: 0 lets it shrink in a flex or grid parent so the ellipsis
+     actually engages instead of the bar overflowing. */
+  min-width: 0;
+  /* Pull the icon button back to the 24px margin: its 44px box is wider than
+     its 24px glyph, and the glyph is what should line up with the text below. */
+  margin-left: -10px;
+}
+
+.ds-nav-bar__title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-title);
+  line-height: var(--ds-leading-title);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ds-nav-bar__trailing { margin-right: -10px; display: flex; flex: 0 0 auto; }

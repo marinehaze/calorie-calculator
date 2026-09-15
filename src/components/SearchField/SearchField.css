@@ -1,0 +1,64 @@
+/* Search field — the entry point of both stories.
+   Barcode sits inside the field: SCREENS.md treats scanning as an input
+   shortcut on this screen, not a destination, so it belongs to the input. */
+
+.ds-search-field {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  height: var(--ds-control-h);
+  /* An <input> has an intrinsic size, so the field needs an explicit floor of
+     zero to shrink into a narrow flex or grid parent. */
+  min-width: 0;
+  padding-inline: var(--ds-space-2) var(--ds-space-1);
+  background: var(--ds-soft);
+  border-radius: var(--ds-radius-sm);
+  transition: box-shadow var(--ds-duration) var(--ds-ease);
+}
+
+/* The field is focused as a whole, so the ring surrounds the control rather
+   than the bare <input> inside it. */
+.ds-search-field:focus-within {
+  box-shadow: 0 0 0 var(--ds-focus-width) var(--ds-focus-color);
+}
+.ds-search-field:focus-within .ds-search-field__input:focus-visible { outline: none; }
+
+.ds-search-field__icon { color: var(--ds-ink-2); display: flex; flex: 0 0 auto; }
+
+.ds-search-field__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-control);
+  letter-spacing: var(--ds-tracking-body);
+  color: var(--ds-ink);
+  padding: 0;
+  height: 100%;
+}
+.ds-search-field__input::placeholder { color: var(--ds-ink-2); }
+.ds-search-field__input:disabled { color: var(--ds-disabled-fg); -webkit-text-fill-color: var(--ds-disabled-fg); }
+
+/* A hairline divider before the barcode action, so the two inputs read as
+   two inputs rather than one long control. */
+.ds-search-field__divider {
+  width: var(--ds-border);
+  height: var(--ds-space-3);
+  background: var(--ds-line-strong);
+  flex: 0 0 auto;
+}
+
+.ds-search-field__spinner {
+  width: var(--ds-icon-sm);
+  height: var(--ds-icon-sm);
+  border-radius: var(--ds-radius-circle);
+  border: 2px solid var(--ds-ink-2);
+  border-top-color: transparent;
+  animation: ds-spin 720ms linear infinite;
+  flex: 0 0 auto;
+  margin-inline: 12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-search-field__spinner { animation-duration: 2400ms; }
+}

@@ -1,0 +1,37 @@
+/* Portion / Per 100 g — one secondary pair, directly under the hero.
+   Two halves on one hairline: they are a comparison, so they share a rule
+   rather than sitting in two separate cards. */
+
+.ds-portion-pair { display: flex; }
+
+.ds-portion-pair__cell { flex: 1; min-width: 0; }
+.ds-portion-pair__cell:first-child { padding-right: var(--ds-space-3); }
+.ds-portion-pair__cell + .ds-portion-pair__cell {
+  padding-left: var(--ds-space-3);
+  border-left: var(--ds-border) solid var(--ds-line);
+}
+
+.ds-portion-pair__value {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-medium);
+  font-size: var(--ds-text-value);
+  letter-spacing: var(--ds-tracking-value);
+  color: var(--ds-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-portion-pair__value--unavailable {
+  font-family: var(--ds-font-ui);
+  font-weight: var(--ds-weight-regular);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+  letter-spacing: 0;
+}
+
+.ds-portion-pair__label {
+  display: block;
+  margin-top: 5px;
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+}

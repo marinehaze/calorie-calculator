@@ -1,0 +1,38 @@
+/* Tab bar — two destinations, no home screen (SCREENS.md).
+   A hairline above, nothing else: no fill, no elevation. */
+
+.ds-tab-bar {
+  display: flex;
+  border-top: var(--ds-border) solid var(--ds-line);
+  background: var(--ds-surface);
+  padding-block: var(--ds-space-1);
+  /* Clears the home indicator on a modern handset. */
+  padding-bottom: calc(var(--ds-space-1) + env(safe-area-inset-bottom, 0px));
+}
+
+.ds-tab-bar__tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-half);
+  min-height: var(--ds-touch-min);
+  padding: var(--ds-space-1) var(--ds-space-half);
+  border: 0;
+  background: transparent;
+  color: var(--ds-ink-2);
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-eyebrow);
+  letter-spacing: var(--ds-tracking-body);
+  cursor: pointer;
+  border-radius: var(--ds-radius-sm);
+  transition: color var(--ds-duration) var(--ds-ease);
+}
+
+/* Selected — berry plus medium weight, so the current tab is not identified
+   by colour alone. */
+.ds-tab-bar__tab[aria-current='page'] {
+  color: var(--ds-berry);
+  font-weight: var(--ds-weight-medium);
+}

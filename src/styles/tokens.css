@@ -1,0 +1,172 @@
+/* =========================================================================
+   Design tokens — calorie & nutrition app
+   -------------------------------------------------------------------------
+   Every value here is taken from the approved stylescape
+   (branding/stylescape.html) or from DECISIONS.md. Nothing is invented.
+
+   Components must read tokens, never a raw hex, px size or font family.
+   ========================================================================= */
+
+:root {
+  color-scheme: light; /* DECISIONS.md: the dark instrument panel was removed. */
+
+  /* ---------------------------------------------------------------------
+     COLOUR — neutral ground, one berry, food supplies everything else.
+     --------------------------------------------------------------------- */
+
+  /* Ground */
+  --ds-canvas:        #FBFAF8;  /* app background */
+  --ds-surface:       #FFFFFF;  /* cards, sheets, raised areas */
+  --ds-soft:          #F4F1EC;  /* soft fill: segmented track, skeletons, thumbs */
+
+  /* Text — both product text colours are AA on every approved ground.
+     ink   17.21 : 1 on surface,  16.50 : 1 on canvas
+     ink-2  5.55 : 1 on surface,   5.32 : 1 on canvas,  4.92 : 1 on soft
+     The stylescape's third ink (#8C877F, 3.57 : 1) is annotation chrome and is
+     deliberately NOT defined here — see DESIGN_SYSTEM.md, Accessibility. */
+  --ds-ink:           #1C1B19;  /* primary text, values, headings */
+  --ds-ink-2:         #6B6863;  /* labels, units, secondary text */
+
+  /* Hairlines — decorative separation only, never the sole identifier of a
+     control and never a focus indicator. */
+  --ds-line:          #EAE6E0;  /* row dividers, section rules */
+  --ds-line-strong:   #DFDAD2;  /* secondary button hairline, input hairline */
+
+  /* Bramble — marks exactly four things: the primary action, an active state,
+     a selected value, and occasional hero emphasis. Nothing else. */
+  --ds-berry:         #8A3355;  /* 7.82 : 1 on surface — safe as text */
+  --ds-berry-deep:    #732643;  /* pressed / hover */
+  --ds-berry-soft:    #F7EDF1;  /* quiet button + selected chip tint */
+  --ds-on-berry:      #FFFFFF;  /* 7.82 : 1 on berry */
+
+  /* Applied-filter chip boundary: the approved berry at 70%, which composites
+     over the berry-soft tint to #AB6B84 — 3.90 : 1 against canvas, clearing
+     the 3 : 1 that WCAG 1.4.11 asks of a control boundary. Not a new hue: the
+     approved berry at reduced alpha. */
+  --ds-berry-line:    rgba(138, 51, 85, 0.7);
+
+  /* Macro markers — 7px dots only. Never a fill, never a bar, and never the
+     only carrier of meaning: every dot is paired with its text label. */
+  --ds-macro-protein: #8A3355;
+  --ds-macro-carbs:   #C08442;
+  --ds-macro-fat:     #5F7185;
+
+  /* ---------------------------------------------------------------------
+     TYPOGRAPHY
+     Plus Jakarta Sans = presence (headings, values, hero figures).
+     Inter Tight       = everything you read (body, labels, controls, nav).
+     Weight 300 is not loaded and must not be reintroduced.
+     --------------------------------------------------------------------- */
+  --ds-font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ds-font-ui:      "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --ds-weight-regular:  400;
+  --ds-weight-medium:   500;  /* the approved hero calorie weight */
+  --ds-weight-semibold: 600;
+
+  /* Sizes — true 390px values, straight from stylescape section 08.
+     Nothing in the interface falls below 14px. */
+  --ds-text-hero-lg:    76px;  /* Nutrition Result hero calorie */
+  --ds-text-hero-md:    56px;  /* Recipe Detail kcal per serving */
+  --ds-text-hero-sm:    40px;  /* hero inside a sheet or compact block */
+  --ds-text-display:    34px;  /* screen / recipe title */
+  --ds-text-heading:    27px;  /* item name on Nutrition Result */
+  --ds-text-title:      22px;  /* section + sheet titles */
+  --ds-text-value-lg:   24px;  /* macro value */
+  --ds-text-value:      20px;  /* portion / per-100g value */
+  --ds-text-control:    17px;  /* button + search field label */
+  --ds-text-body:       16px;  /* body, ingredient name, row title */
+  --ds-text-label:      15px;  /* labels, units, meta, amounts */
+  --ds-text-eyebrow:    14px;  /* uppercase eyebrow — the floor */
+
+  /* Line heights */
+  --ds-leading-hero:    0.92;
+  --ds-leading-display: 1.12;
+  --ds-leading-title:   1.14;
+  --ds-leading-tight:   1;
+  --ds-leading-body:    1.6;
+  --ds-leading-ui:      1.45;
+
+  /* Tracking */
+  --ds-tracking-hero:    -0.04em;
+  --ds-tracking-display: -0.03em;
+  --ds-tracking-title:   -0.025em;
+  --ds-tracking-value:   -0.02em;
+  --ds-tracking-body:    -0.005em;
+  --ds-tracking-eyebrow:  0.1em;
+
+  /* ---------------------------------------------------------------------
+     LAYOUT — 390px screen, 24px outer margin, 342px content, 8px rhythm.
+     --------------------------------------------------------------------- */
+  --ds-screen-width:  390px;
+  --ds-screen-margin: 24px;
+  --ds-content-width: 342px;
+
+  --ds-space-half: 4px;   /* icon-to-label gaps only */
+  --ds-space-1:    8px;
+  --ds-space-2:   16px;
+  --ds-space-3:   24px;
+  --ds-space-4:   32px;
+  --ds-space-5:   40px;
+  --ds-space-6:   48px;
+  --ds-space-7:   56px;
+  /* 8 and 16 inside a group; 24–40 between major sections. */
+
+  /* ---------------------------------------------------------------------
+     RADIUS — large radii on large surfaces only; small elements stay squarer.
+     --------------------------------------------------------------------- */
+  --ds-radius-sm:     14px;  /* controls: chips, fields, segmented track */
+  --ds-radius-md:     20px;  /* media: cards, image crops */
+  --ds-radius-lg:     28px;  /* surfaces: sheets, panels, pill buttons */
+  --ds-radius-pill:  999px;
+  --ds-radius-circle:  50%;
+
+  /* ---------------------------------------------------------------------
+     SIZING & TOUCH
+     Every interactive element is at least 44 x 44px.
+     --------------------------------------------------------------------- */
+  --ds-touch-min:    44px;
+  --ds-control-h:    56px;  /* primary action, search field */
+  --ds-control-h-sm: 44px;  /* chips, icon buttons, stepper buttons */
+  --ds-icon:         24px;
+  --ds-icon-sm:      20px;
+  --ds-dot:           7px;  /* macro marker */
+
+  /* The bleed crop: how far the circle runs past the screen edge, and the
+     width of the type column that holds the open side. Together they
+     guarantee the rule that data never sits on food. */
+  --ds-bleed-offset:     -52px;
+  --ds-bleed-size:       228px;
+  --ds-bleed-type-width: 196px;
+
+  /* ---------------------------------------------------------------------
+     BORDERS, FOCUS, ELEVATION, MOTION
+     --------------------------------------------------------------------- */
+  --ds-border: 1px;
+
+  /* Focus ring: berry at 7.82 : 1 on every approved ground — far above the
+     3 : 1 required of a non-text indicator. */
+  --ds-focus-width:  2px;
+  --ds-focus-offset: 3px;
+  --ds-focus-color:  var(--ds-berry);
+
+  /* Exactly two shadows exist in this system. No decorative elevation. */
+  --ds-shadow-thumb: 0 1px 2px rgba(28, 27, 25, 0.09); /* segmented thumb */
+  --ds-shadow-sheet: 0 -8px 40px -12px rgba(28, 27, 25, 0.28); /* bottom sheet */
+
+  --ds-duration: 160ms;
+  --ds-ease: ease;
+
+  --ds-z-sheet:   100;
+  --ds-z-overlay:  90;
+  --ds-z-banner:  110;
+
+  /* Disabled — reduced, never faint. Disabled text stays on ink-2 (4.9 : 1+)
+     rather than dropping opacity on the whole control. */
+  --ds-disabled-fg: var(--ds-ink-2);
+  --ds-disabled-bg: var(--ds-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --ds-duration: 1ms; }
+}

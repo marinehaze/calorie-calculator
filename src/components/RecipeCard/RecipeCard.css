@@ -1,0 +1,73 @@
+/* Recipe card — the one card in the system, and it is not a box.
+   Media with a radius, then type on the screen's own ground. No border, no
+   fill, no shadow: the photograph already separates one recipe from the next. */
+
+.ds-recipe-card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font-family: var(--ds-font-ui);
+  color: var(--ds-ink);
+  cursor: pointer;
+}
+
+.ds-recipe-card__media { position: relative; }
+
+.ds-recipe-card__body { padding-top: var(--ds-space-2); }
+
+.ds-recipe-card__title {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-title);
+  line-height: var(--ds-leading-title);
+  text-wrap: balance;
+}
+
+/* Meta on one line: time, servings, diet, separated by a dot. */
+.ds-recipe-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ds-space-1) 0;
+  margin-top: var(--ds-space-1);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+}
+.ds-recipe-card__meta > * + *::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: var(--ds-radius-circle);
+  background: var(--ds-line-strong);
+  margin-inline: var(--ds-space-1);
+  vertical-align: middle;
+}
+
+.ds-recipe-card__kcal {
+  margin-top: var(--ds-space-2);
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.ds-recipe-card__kcal b {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-medium);
+  font-size: var(--ds-text-value);
+  letter-spacing: var(--ds-tracking-value);
+  font-variant-numeric: tabular-nums;
+}
+.ds-recipe-card__kcal span { font-size: var(--ds-text-label); color: var(--ds-ink-2); }
+
+/* Compact — a horizontal variant for a dense results list. */
+.ds-recipe-card--compact { display: flex; gap: var(--ds-space-2); align-items: center; min-height: var(--ds-touch-min); }
+.ds-recipe-card--compact .ds-recipe-card__media { flex: 0 0 96px; width: 96px; }
+.ds-recipe-card--compact .ds-recipe-card__body { padding-top: 0; flex: 1; min-width: 0; }
+.ds-recipe-card--compact .ds-recipe-card__title { font-size: var(--ds-text-body); font-weight: var(--ds-weight-medium); }
+.ds-recipe-card--compact .ds-recipe-card__kcal { margin-top: var(--ds-space-1); }
+
+.ds-recipe-list { display: grid; gap: var(--ds-space-5); }
+.ds-recipe-list--compact { gap: var(--ds-space-3); }
