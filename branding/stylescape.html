@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bramble Stylescape</title>
+<meta name="description" content="Final visual direction for the calorie and nutrition app.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  color-scheme:light;
+  --bg:#FBFAF8;
+  --surface:#FFFFFF;
+  --soft:#F4F1EC;
+  --ink:#1C1B19;
+  --ink-2:#6B6863;
+  --ink-3:#8C877F;
+  --line:#EAE6E0;
+  --line-2:#DFDAD2;
+  --berry:#8A3355;
+  --berry-deep:#732643;
+  --berry-soft:#F7EDF1;
+  --m-p:#8A3355;
+  --m-c:#C08442;
+  --m-f:#5F7185;
+  --r-lg:28px;
+  --r-md:20px;
+  --r-sm:14px;
+  /* typography tokens — components read these, never a raw family */
+  --font-display:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-ui:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-ui);font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,p,figure,dl,dd{margin:0}
+:focus-visible{outline:2px solid var(--berry);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:clamp(20px,5vw,72px)}
+.num{font-variant-numeric:tabular-nums}
+.d{font-family:var(--font-display)}
+
+/* section rhythm — generous */
+.sec{padding-block:clamp(56px,9vw,132px)}
+.sec--line{border-top:1px solid var(--line)}
+.lab{
+  font-size:12.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;gap:12px;align-items:baseline;
+}
+.lab b{color:var(--berry);font-weight:500}
+.h2{font-family:var(--font-display);font-weight:500;font-size:clamp(28px,4.2vw,46px);letter-spacing:-.035em;line-height:1.08;margin-top:22px;text-wrap:balance;max-width:17ch}
+.sub{margin-top:16px;color:var(--ink-2);font-size:16px;line-height:1.6;max-width:48ch}
+.gap-l{margin-top:clamp(36px,5.4vw,64px)}
+.gap-m{margin-top:clamp(24px,3.4vw,40px)}
+.gap-s{margin-top:24px}
+
+/* ---------- food photography ---------- */
+.img{position:relative;overflow:hidden;background:#EFEAE1}
+.img>img{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+  object-fit:cover;object-position:var(--op,50% 50%);
+  transform:scale(var(--sc,1));transform-origin:var(--op,50% 50%);
+}
+.circ{border-radius:50%}
+</style>
+<style>
+/* ---------- masthead / signature composition ---------- */
+.mast{position:relative;overflow:hidden;padding-block:clamp(44px,7vw,92px) clamp(56px,9vw,124px)}
+.mast__grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(34px,5vw,60px)}
+@media(min-width:900px){.mast__grid{grid-template-columns:minmax(0,1fr) minmax(0,.82fr);align-items:center}}
+.mast h1{font-family:var(--font-display);font-weight:500;font-size:clamp(38px,6.6vw,74px);line-height:1.02;letter-spacing:-.042em;max-width:13ch;text-wrap:balance}
+.mast__k{margin-top:clamp(30px,4.4vw,48px);display:flex;align-items:baseline;gap:12px}
+.mast__k b{font-family:var(--font-display);font-weight:500;font-size:clamp(72px,12vw,136px);letter-spacing:-.05em;line-height:.85}
+.mast__k span{font-size:clamp(15px,1.5vw,18px);color:var(--ink-2)}
+.mast__disc{position:relative;justify-self:end;width:min(100%,460px);aspect-ratio:1}
+@media(min-width:900px){.mast__disc{margin-right:clamp(-120px,-8vw,-40px)}}
+
+/* ---------- palette ---------- */
+.pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:clamp(10px,1.4vw,18px)}
+.sw{border-radius:var(--r-md);aspect-ratio:5/4;display:flex;flex-direction:column;justify-content:flex-end;padding:18px}
+.sw b{font-size:15px;font-weight:500;letter-spacing:-.01em}
+.sw span{font-size:13.5px;opacity:.72;margin-top:1px}
+.accents{display:flex;flex-wrap:wrap;gap:28px;align-items:center}
+.acc{display:flex;align-items:center;gap:11px;font-size:15px;color:var(--ink-2)}
+.acc i{width:12px;height:12px;border-radius:50%;flex:0 0 12px}
+
+/* ---------- typography ---------- */
+.ty{padding:clamp(20px,2.6vw,30px) 0;border-top:1px solid var(--line);display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:780px){.ty{grid-template-columns:210px minmax(0,1fr);gap:36px;align-items:baseline}}
+.ty:last-child{border-bottom:1px solid var(--line)}
+.ty__m{font-size:13.5px;color:var(--ink-3);line-height:1.5}
+.ty__m b{display:block;color:var(--ink-2);font-weight:500}
+.ty__s{min-width:0;overflow-wrap:anywhere}
+
+/* ---------- spacing / radius / grid ---------- */
+.spec{display:grid;gap:clamp(24px,3.4vw,44px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:860px){.spec{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.spec__t{font-size:15px;font-weight:500;margin-bottom:20px}
+.steps{display:flex;align-items:flex-end;gap:10px}
+.steps div{text-align:center}
+.steps i{display:block;background:#E7D0DA;border-radius:4px;width:34px}
+.steps span{display:block;margin-top:9px;font-size:13px;color:var(--ink-2)}
+.radii{display:flex;align-items:flex-end;gap:14px}
+.radii div{text-align:center}
+.radii i{display:block;width:78px;height:78px;background:var(--soft);box-shadow:inset 0 0 0 1px var(--line)}
+.radii span{display:block;margin-top:9px;font-size:13px;color:var(--ink-2)}
+.gridfig{background:var(--soft);border-radius:var(--r-md);padding:18px;display:flex;gap:0}
+.gridfig i{flex:0 0 24px;background:#E7D0DA;border-radius:4px}
+.gridfig u{flex:1;background:var(--surface);border-radius:6px;text-decoration:none;min-height:104px}
+.gridfig+span{display:block;margin-top:12px;font-size:13.5px;color:var(--ink-2)}
+
+/* ---------- nutrition components ---------- */
+.kcal{display:flex;align-items:baseline;gap:11px}
+.kcal__n{font-family:var(--font-display);font-weight:500;letter-spacing:-.048em;line-height:.86;font-size:clamp(64px,9vw,96px)}
+.kcal__u{font-size:17px;color:var(--ink-2)}
+.pair{display:flex}
+.pair>div{flex:1;min-width:0}
+.pair>div+div{padding-left:clamp(18px,3vw,28px);border-left:1px solid var(--line)}
+.pair>div:first-child{padding-right:clamp(18px,3vw,28px)}
+.pair b{display:block;font-family:var(--font-display);font-weight:500;font-size:20px;letter-spacing:-.02em}
+.pair span{display:block;margin-top:5px;font-size:14.5px;color:var(--ink-2)}
+.macros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.macro b{display:block;font-family:var(--font-display);font-weight:500;font-size:24px;letter-spacing:-.022em;line-height:1}
+.macro span{display:flex;align-items:center;gap:8px;margin-top:9px;font-size:15px;color:var(--ink-2)}
+.macro i{width:7px;height:7px;border-radius:50%;flex:0 0 7px}
+.ing{display:flex;align-items:center;gap:14px;padding:15px 0;border-top:1px solid var(--line)}
+.ing:last-child{border-bottom:1px solid var(--line)}
+.ing__n{flex:1;min-width:0;font-size:16px;letter-spacing:-.005em}
+.ing__a{font-size:15px;color:var(--ink-2);text-align:right;flex:0 0 66px}
+.ing__k{font-size:16px;font-weight:500;text-align:right;flex:0 0 78px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding-inline:30px;border-radius:28px;border:0;font-family:var(--font-ui);font-size:17px;font-weight:500;letter-spacing:-.005em;cursor:pointer;transition:background .16s}
+.btn--p{background:var(--berry);color:#fff}
+.btn--p:hover{background:var(--berry-deep)}
+.btn--s{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2)}
+.btn--s:hover{background:var(--soft)}
+.btn--q{background:var(--berry-soft);color:var(--berry)}
+.btn--full{width:100%}
+.specimen{background:var(--surface);border-radius:var(--r-lg);padding:clamp(24px,3.4vw,40px)}
+.cap{margin-top:14px;font-size:13.5px;color:var(--ink-3)}
+.two{display:grid;gap:clamp(16px,2.4vw,28px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:820px){.two{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.three{display:grid;gap:clamp(16px,2.2vw,26px);grid-template-columns:minmax(0,1fr)}
+@media(min-width:760px){.three{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ---------- mobile fragments ---------- */
+.rail{overflow-x:auto;padding-bottom:10px;-webkit-overflow-scrolling:touch}
+.rail__in{display:flex;gap:clamp(20px,3vw,44px);width:max-content;padding-inline:clamp(20px,5vw,72px)}
+.dev{flex:0 0 390px;width:390px}
+.screen{
+  width:390px;background:var(--surface);border-radius:var(--r-lg);overflow:hidden;position:relative;
+  box-shadow:0 34px 64px -44px rgba(28,27,25,.42),0 0 0 1px rgba(28,27,25,.045);
+}
+.screen__p{padding:24px}
+.screen__fade{height:56px;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff)}
+.dev__cap{margin-top:16px;font-size:13.5px;color:var(--ink-3)}
+.dev__cap b{display:block;color:var(--ink);font-weight:500;font-size:15px;margin-bottom:3px}
+.sh{font-family:var(--font-display);font-weight:600;letter-spacing:-.028em;line-height:1.14}
+.meta{display:flex;gap:18px;font-size:15px;color:var(--ink-2)}
+.meta span{display:flex;align-items:center;gap:7px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--line-2);flex:0 0 5px}
+.seg{display:inline-flex;background:var(--soft);border-radius:var(--r-sm);padding:3px}
+.seg span{padding:8px 14px;border-radius:11px;font-size:14.5px;color:var(--ink-2);white-space:nowrap}
+.seg span.on{background:var(--surface);color:var(--ink);font-weight:500;box-shadow:0 1px 2px rgba(28,27,25,.09)}
+/* ---------- type at mobile size ---------- */
+.tm{padding:24px 0;border-top:1px solid var(--line);display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:780px){.tm{grid-template-columns:216px minmax(0,1fr);gap:40px;align-items:start}}
+.tm:first-of-type{border-top:0;padding-top:0}
+.tm:last-of-type{padding-bottom:0}
+.tm__l{font-size:13.5px;color:var(--ink-3);line-height:1.5}
+.tm__l b{display:block;color:var(--ink);font-weight:500;font-size:14.5px;margin-bottom:3px}
+.tm__s{min-width:0;max-width:342px}
+.closing{border-top:1px solid var(--line);padding-block:clamp(32px,4.4vw,52px) clamp(48px,7vw,96px);color:var(--ink-2);font-size:15px;line-height:1.65;max-width:62ch}
+.closing b{color:var(--ink);font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap mast__grid">
+    <div>
+      <p class="lab">Calorie &amp; Nutrition App <b>Final visual direction</b></p>
+      <h1 style="margin-top:26px">Light, open, built around one number.</h1>
+      <div class="mast__k">
+        <b class="num">512</b>
+        <span>kcal · per 340 g portion</span>
+      </div>
+    </div>
+    <div class="img circ mast__disc"><img src="../assets/food/lentil-squash-bowl.png" style="--op:62% 56%;--sc:1.22" alt="Roasted squash and lentil bowl"></div>
+  </div>
+</header>
+
+<!-- ============ 01 COLOUR ============ -->
+<section class="sec sec--line">
+  <div class="wrap">
+    <p class="lab"><b>01</b> Colour</p>
+    <h2 class="h2">Neutral ground, one berry, food for everything else.</h2>
+
+    <div class="gap-l pal">
+      <div class="sw" style="background:#FBFAF8;color:#1C1B19;box-shadow:inset 0 0 0 1px #EAE6E0"><b>Canvas</b><span>#FBFAF8</span></div>
+      <div class="sw" style="background:#FFFFFF;color:#1C1B19;box-shadow:inset 0 0 0 1px #EAE6E0"><b>Surface</b><span>#FFFFFF</span></div>
+      <div class="sw" style="background:#F4F1EC;color:#1C1B19"><b>Soft fill</b><span>#F4F1EC</span></div>
+      <div class="sw" style="background:#1C1B19;color:#FBFAF8"><b>Ink</b><span>#1C1B19</span></div>
+      <div class="sw" style="background:#6B6863;color:#FFFFFF"><b>Ink 2</b><span>#6B6863</span></div>
+      <div class="sw" style="background:#8A3355;color:#FFFFFF"><b>Bramble</b><span>#8A3355</span></div>
+    </div>
+
+    <div class="gap-m two">
+      <div>
+        <p style="font-size:15px;color:var(--ink-2);line-height:1.6;max-width:44ch">
+          Bramble marks four things: the primary action, an active state, a selected value, and the
+          occasional hero emphasis. Everywhere else the interface stays neutral so photography can carry the
+          colour.
+        </p>
+        <div class="gap-s accents">
+          <span class="acc"><i style="background:#8A3355"></i>Protein · #8A3355</span>
+          <span class="acc"><i style="background:#C08442"></i>Carbs · #C08442</span>
+          <span class="acc"><i style="background:#5F7185"></i>Fat · #5F7185</span>
+        </div>
+        <p class="cap">Macro markers — 7 px dots, never fills or bars</p>
+      </div>
+      <div style="display:flex;gap:14px;align-items:stretch">
+        <div class="img" style="flex:1;border-radius:var(--r-md);min-height:170px"><img src="../assets/food/lentil-stew.png" style="--op:60% 56%;--sc:1.04" alt="Lentil stew"></div>
+        <div class="img" style="flex:1;border-radius:var(--r-md);min-height:170px"><img src="../assets/food/citrus-grain-bowl.png" style="--op:60% 56%;--sc:1.04" alt="Citrus and grain bowl"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 TYPOGRAPHY ============ -->
+<section class="sec sec--line">
+  <div class="wrap">
+    <p class="lab"><b>02</b> Typography</p>
+    <h2 class="h2">Plus Jakarta Sans for presence. Inter Tight for everything you read.</h2>
+
+    <div class="gap-l">
+      <div class="ty">
+        <div class="ty__m"><b>Hero figure</b>Plus Jakarta Sans 500 · 96 / −4% · tabular</div>
+        <div class="ty__s d num" style="font-weight:500;font-size:clamp(58px,8.4vw,96px);letter-spacing:-.04em;line-height:.92">512</div>
+      </div>
+      <div class="ty">
+        <div class="ty__m"><b>Display</b>Plus Jakarta Sans 600 · 34 / −3%</div>
+        <div class="ty__s d" style="font-weight:600;font-size:clamp(25px,3.4vw,34px);letter-spacing:-.03em;line-height:1.1">Roast squash &amp; red lentils</div>
+      </div>
+      <div class="ty">
+        <div class="ty__m"><b>Title</b>Plus Jakarta Sans 600 · 22 / −2.5%</div>
+        <div class="ty__s d" style="font-weight:600;font-size:22px;letter-spacing:-.025em">Today’s portion</div>
+      </div>
+      <div class="ty">
+        <div class="ty__m"><b>Value</b>Plus Jakarta Sans 500 · 20 · tabular</div>
+        <div class="ty__s d num" style="font-weight:500;font-size:20px;letter-spacing:-.02em">340 g · 151 kcal</div>
+      </div>
+      <div class="ty">
+        <div class="ty__m"><b>Body</b>Inter Tight 400 · 16 / 1.55</div>
+        <div class="ty__s" style="font-size:16px;line-height:1.55;max-width:50ch">Roasted until the edges catch, then folded through lentils with lemon and tahini.</div>
+      </div>
+      <div class="ty">
+        <div class="ty__m"><b>Label</b>Inter Tight 400 · 15 · Ink 2</div>
+        <div class="ty__s" style="font-size:15px;color:var(--ink-2)">Per 100 g</div>
+      </div>
+      <div class="ty">
+        <div class="ty__m"><b>Caption</b>Inter Tight 500 · 12.5 · +0.14em</div>
+        <div class="ty__s" style="font-size:12.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)">Verified source</div>
+      </div>
+    </div>
+    <p class="cap" style="max-width:52ch">Nothing in the interface falls below 14 px except the uppercase caption, which is used sparingly. Hierarchy comes from scale and space, not from shrinking text.</p>
+  </div>
+</section>
+
+<!-- ============ 03 GRID ============ -->
+<section class="sec sec--line">
+  <div class="wrap">
+    <p class="lab"><b>03</b> Grid, spacing, radius</p>
+    <h2 class="h2">390 px, 24 px margins, an 8 px rhythm.</h2>
+
+    <div class="gap-l spec">
+      <div>
+        <p class="spec__t">Spacing scale</p>
+        <div class="steps">
+          <div><i style="height:8px"></i><span>8</span></div>
+          <div><i style="height:16px"></i><span>16</span></div>
+          <div><i style="height:24px"></i><span>24</span></div>
+          <div><i style="height:32px"></i><span>32</span></div>
+          <div><i style="height:40px"></i><span>40</span></div>
+        </div>
+        <p class="cap">24–40 px between major sections. 8 and 16 inside a group.</p>
+      </div>
+      <div>
+        <p class="spec__t">Radius</p>
+        <div class="radii">
+          <div><i style="border-radius:14px"></i><span>14 · controls</span></div>
+          <div><i style="border-radius:20px"></i><span>20 · media</span></div>
+          <div><i style="border-radius:28px"></i><span>28 · surfaces</span></div>
+        </div>
+        <p class="cap">Large radii on large surfaces only. Small elements stay squarer.</p>
+      </div>
+      <div>
+        <p class="spec__t">Margins</p>
+        <div class="gridfig">
+          <i></i><u></u><i></i>
+        </div>
+        <span>390 px screen · 24 px outer margin · 342 px content</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 FOOD ============ -->
+<section class="sec sec--line">
+  <div class="wrap">
+    <p class="lab"><b>04</b> Food &amp; crop direction</p>
+    <h2 class="h2">Daylight, one soft source, the dish filling the frame.</h2>
+    <p class="sub">Crops enter the layout from an edge rather than sitting inside a rectangle. Type and data hold the open side.</p>
+
+    <div class="gap-l" style="display:grid;gap:clamp(14px,2vw,22px);grid-template-columns:repeat(auto-fit,minmax(190px,1fr));align-items:start">
+      <div>
+        <div class="img" style="aspect-ratio:4/5;border-radius:var(--r-md)"><img src="../assets/food/lentil-squash-bowl.png" style="--op:50% 50%" alt="Roasted squash and lentil bowl"></div>
+        <p class="cap">4:5 — recipe &amp; product hero</p>
+      </div>
+      <div>
+        <div class="img" style="aspect-ratio:1/1;border-radius:var(--r-md)"><img src="../assets/food/squash-couscous-bowl.png" style="--op:50% 50%" alt="Squash and couscous bowl"></div>
+        <p class="cap">1:1 — compact cards</p>
+      </div>
+      <div>
+        <div class="img circ" style="aspect-ratio:1/1"><img src="../assets/food/chickpea-bowl.png" style="--op:58% 59%;--sc:1.2" alt="Chickpea bowl"></div>
+        <p class="cap">Circle — the bleed crop</p>
+      </div>
+      <div>
+        <div class="img" style="aspect-ratio:1/1;border-radius:var(--r-md)"><img src="../assets/food/roasted-lentils-detail.png" style="--op:50% 50%" alt="Roasted lentils, close crop"></div>
+        <p class="cap">Ingredient &amp; detail crops</p>
+      </div>
+    </div>
+
+    <div class="gap-m specimen" style="position:relative;overflow:hidden;min-height:300px;display:flex;align-items:center">
+      <div style="position:relative;z-index:2;max-width:min(58%,420px)">
+        <p class="lab" style="color:var(--ink-3)">The signature</p>
+        <p class="d" style="font-weight:500;font-size:clamp(24px,3.2vw,34px);letter-spacing:-.035em;line-height:1.12;margin-top:18px">Citrus, barley<br>&amp; pistachio</p>
+        <div class="kcal" style="margin-top:26px"><span class="kcal__n num">512</span><span class="kcal__u">kcal</span></div>
+      </div>
+      <div class="img circ" style="position:absolute;right:clamp(-150px,-9vw,-60px);top:50%;transform:translateY(-50%);width:clamp(260px,34vw,400px);aspect-ratio:1"><img src="../assets/food/citrus-grain-bowl.png" style="--op:66% 62%;--sc:1.34" alt="Citrus, barley and pistachio bowl"></div>
+    </div>
+    <p class="cap">Asymmetric crop entering from one side, balanced by type in open space</p>
+  </div>
+</section>
+
+<!-- ============ 05 NUTRITION ============ -->
+<section class="sec sec--line">
+  <div class="wrap">
+    <p class="lab"><b>05</b> Nutrition data</p>
+    <h2 class="h2">Calories lead. Everything else lines up beneath them.</h2>
+
+    <div class="gap-l two" style="align-items:start">
+      <div class="specimen">
+        <p style="font-size:15px;color:var(--ink-2)">Per portion</p>
+        <div class="kcal" style="margin-top:14px"><span class="kcal__n num">512</span><span class="kcal__u">kcal</span></div>
+        <div class="pair" style="margin-top:36px">
+          <div><b class="num">340 g</b><span>Portion</span></div>
+          <div><b class="num">151 kcal</b><span>Per 100 g</span></div>
+        </div>
+      </div>
+      <div style="display:grid;gap:clamp(16px,2.4vw,28px);align-content:start">
+        <div class="specimen">
+          <div class="macros">
+            <div class="macro"><b class="num">19 g</b><span><i style="background:var(--m-p)"></i>Protein</span></div>
+            <div class="macro"><b class="num">58 g</b><span><i style="background:var(--m-c)"></i>Carbs</span></div>
+            <div class="macro"><b class="num">22 g</b><span><i style="background:var(--m-f)"></i>Fat</span></div>
+          </div>
+        </div>
+        <div class="specimen">
+          <div class="ing"><span class="ing__n">Butternut squash</span><span class="ing__a num">180 g</span><span class="ing__k num">115</span></div>
+          <div class="ing"><span class="ing__n">Red lentils, dry</span><span class="ing__a num">60 g</span><span class="ing__k num">209</span></div>
+          <div class="ing"><span class="ing__n">Tahini</span><span class="ing__a num">15 g</span><span class="ing__k num">89</span></div>
+          <div class="ing"><span class="ing__n">Olive oil</span><span class="ing__a num">11 g</span><span class="ing__k num">99</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="cap">Three columns on one grid, equal weight. Amounts and calories hold fixed right-hand columns.</p>
+  </div>
+</section>
+
+<!-- ============ 06 ACTION ============ -->
+<section class="sec sec--line">
+  <div class="wrap">
+    <p class="lab"><b>06</b> Action</p>
+    <h2 class="h2">One berry button per surface.</h2>
+
+    <div class="gap-l three" style="align-items:start">
+      <div class="specimen">
+        <button class="btn btn--p btn--full" type="button">Add to my day</button>
+        <p class="cap">Primary · 56 px · radius 28</p>
+      </div>
+      <div class="specimen">
+        <button class="btn btn--s btn--full" type="button">Change portion</button>
+        <p class="cap">Secondary · 1 px hairline</p>
+      </div>
+      <div class="specimen">
+        <button class="btn btn--q btn--full" type="button">Save recipe</button>
+        <p class="cap">Quiet · berry on tint</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 MOBILE FRAGMENTS ============ -->
+<section class="sec sec--line">
+  <div class="wrap">
+    <p class="lab"><b>07</b> Mobile fragments</p>
+    <h2 class="h2">390 px, in context.</h2>
+    <p class="sub">Slices of real surfaces, not finished screens — each one cut off where the scroll continues.</p>
+  </div>
+
+  <div class="gap-l rail">
+    <div class="rail__in">
+
+      <!-- FRAGMENT 01 -->
+      <div class="dev">
+        <div class="screen">
+          <div class="screen__p" style="padding-bottom:0;position:relative">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#1C1B19" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg>
+            <div class="img circ" style="position:absolute;right:-52px;top:64px;width:228px;height:228px"><img src="../assets/food/squash-couscous-bowl.png" style="--op:44% 60%;--sc:1.12" alt="Roast squash and couscous bowl"></div>
+            <p class="sh" style="font-size:27px;margin-top:34px;max-width:196px;position:relative;z-index:2">Roast squash<br>&amp; couscous</p>
+            <div class="kcal" style="margin-top:30px;position:relative;z-index:2">
+              <span class="kcal__n num" style="font-size:80px">512</span>
+              <span class="kcal__u">kcal</span>
+            </div>
+            <div class="pair" style="margin-top:36px;position:relative;z-index:2">
+              <div><b class="num">340 g</b><span>Portion</span></div>
+              <div><b class="num">151 kcal</b><span>Per 100 g</span></div>
+            </div>
+            <div style="height:32px"></div>
+          </div>
+          <div class="screen__fade"></div>
+        </div>
+        <p class="dev__cap"><b>Nutrition result — top</b>The signature: crop entering from the right, type and number holding the open left.</p>
+      </div>
+
+      <!-- FRAGMENT 02 -->
+      <div class="dev">
+        <div class="screen">
+          <div class="screen__p" style="padding-bottom:0">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+              <p class="sh" style="font-size:22px">Nutrition</p>
+              <span class="seg"><span class="on">Portion</span><span>100 g</span></span>
+            </div>
+            <div class="macros" style="margin-top:32px">
+              <div class="macro"><b class="num">19 g</b><span><i style="background:var(--m-p)"></i>Protein</span></div>
+              <div class="macro"><b class="num">58 g</b><span><i style="background:var(--m-c)"></i>Carbs</span></div>
+              <div class="macro"><b class="num">22 g</b><span><i style="background:var(--m-f)"></i>Fat</span></div>
+            </div>
+            <p style="margin-top:40px;font-size:15px;color:var(--ink-2)">Ingredients</p>
+            <div style="margin-top:8px">
+              <div class="ing"><span class="ing__n">Butternut squash</span><span class="ing__a num">180 g</span><span class="ing__k num">115</span></div>
+              <div class="ing"><span class="ing__n">Couscous, dry</span><span class="ing__a num">60 g</span><span class="ing__k num">214</span></div>
+              <div class="ing" style="border-bottom:0"><span class="ing__n">Feta</span><span class="ing__a num">30 g</span><span class="ing__k num">79</span></div>
+            </div>
+            <div style="height:20px"></div>
+          </div>
+          <div class="screen__fade"></div>
+        </div>
+        <p class="dev__cap"><b>Nutrition detail — mid scroll</b>Macros on one grid with equal weight; amounts and calories hold fixed columns.</p>
+      </div>
+
+      <!-- FRAGMENT 03 -->
+      <div class="dev">
+        <div class="screen">
+          <div class="img" style="height:252px;width:100%"><img src="../assets/food/lentil-squash-bowl.png" style="--op:58% 52%;--sc:1.12" alt="Roasted squash and lentil bowl"></div>
+          <div class="screen__p">
+            <p class="sh" style="font-size:25px;max-width:270px">Roast squash &amp; red lentils</p>
+            <div class="meta" style="margin-top:16px">
+              <span>35 min</span>
+              <span><i class="dot"></i>4 servings</span>
+              <span><i class="dot"></i>Vegetarian</span>
+            </div>
+            <div class="kcal" style="margin-top:34px">
+              <span class="kcal__n num" style="font-size:56px">512</span>
+              <span class="kcal__u">kcal per serving</span>
+            </div>
+            <button class="btn btn--p btn--full" type="button" style="margin-top:34px">Add to my day</button>
+            <div style="height:8px"></div>
+          </div>
+        </div>
+        <p class="dev__cap"><b>Recipe — header</b>Large 4:5 crop, meta on one line, one berry action.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 TYPE AT MOBILE SIZE ============ -->
+<section class="sec sec--line" id="type-mobile">
+  <div class="wrap">
+    <p class="lab"><b>08</b> Type at mobile size</p>
+    <h2 class="h2">The eight settings that carry the product.</h2>
+    <p class="sub">Rendered at true 390&nbsp;px values — nothing in this section is scaled up for the page.</p>
+
+    <div class="gap-l specimen">
+
+      <div class="tm">
+        <div class="tm__l"><b>1 · Major title</b>Plus Jakarta Sans 600<br>34 px / 1.12 / −3%</div>
+        <div class="tm__s">
+          <p style="font-family:var(--font-display);font-weight:600;font-size:34px;line-height:1.12;letter-spacing:-.03em">Roast squash &amp; red lentils</p>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>2 · Body paragraph</b>Inter Tight 400<br>16 px / 1.6</div>
+        <div class="tm__s">
+          <p style="font-size:16px;line-height:1.6">Roasted until the edges catch, then folded through lentils with lemon and tahini. Best warm, and it keeps for two days.</p>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>3 · Hero calorie + unit</b>Plus Jakarta Sans 500 · 76 px<br>unit Inter Tight 400 · 17 px</div>
+        <div class="tm__s">
+          <div style="display:flex;align-items:baseline;gap:11px">
+            <span class="num" style="font-family:var(--font-display);font-weight:500;font-size:76px;line-height:.92;letter-spacing:-.04em">512</span>
+            <span style="font-size:17px;color:var(--ink-2)">kcal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>4 · Portion / per-100 g</b>Values Plus Jakarta Sans 500 · 20 px<br>labels Inter Tight 400 · 15 px</div>
+        <div class="tm__s">
+          <div class="pair">
+            <div><b class="num">340 g</b><span>Portion</span></div>
+            <div><b class="num">151 kcal</b><span>Per 100 g</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>5 · Macro value + label</b>Values Plus Jakarta Sans 500 · 24 px<br>labels Inter Tight 400 · 15 px</div>
+        <div class="tm__s">
+          <div class="macros">
+            <div class="macro"><b class="num">19 g</b><span><i style="background:var(--m-p)"></i>Protein</span></div>
+            <div class="macro"><b class="num">58 g</b><span><i style="background:var(--m-c)"></i>Carbs</span></div>
+            <div class="macro"><b class="num">22 g</b><span><i style="background:var(--m-f)"></i>Fat</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>6 · Ingredient row</b>Inter Tight 400 · 16 px<br>amount 15 px · value 16 px / 500</div>
+        <div class="tm__s">
+          <div class="ing"><span class="ing__n">Butternut squash</span><span class="ing__a num">180 g</span><span class="ing__k num">115</span></div>
+          <div class="ing" style="border-bottom:0"><span class="ing__n">Red lentils, dry</span><span class="ing__a num">60 g</span><span class="ing__k num">209</span></div>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>7 · Primary button</b>Inter Tight 500<br>17 px · 56 px tall</div>
+        <div class="tm__s">
+          <button class="btn btn--p btn--full" type="button">Add to my day</button>
+        </div>
+      </div>
+
+      <div class="tm">
+        <div class="tm__l"><b>8 · Small secondary label</b>Inter Tight 500<br>14 px / +0.1em</div>
+        <div class="tm__s">
+          <p style="font-size:14px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)">Verified source</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="cap">Tabular figures throughout. The annotation column is stylescape chrome, not interface type.</p>
+  </div>
+</section>
+
+<footer class="closing">
+  <div class="wrap">
+    <p><b>Locked:</b> palette, type pairing and scale, 8 px spacing, radii, crop rules, nutrition hierarchy and the action treatment.</p>
+    <p style="margin-top:10px"><b>Imagery:</b> all photography is the real food shot set in <code>assets/food/</code>, cropped by the rules in section 04 — 4:5, 1:1 and the bleed circle.</p>
+    <p style="margin-top:10px"><b>Next:</b> on your confirmation, this becomes the design system, then the four screens and eight dedicated states in SCREENS.md.</p>
+  </div>
+</footer>
+
+</body>
+</html>
