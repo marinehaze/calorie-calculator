@@ -49,7 +49,8 @@ hex, pixel size or font family.**
 | `--ds-ink` | `#1C1B19` | Primary text, values, headings |
 | `--ds-ink-2` | `#6B6863` | Labels, units, secondary text, disabled text |
 | `--ds-line` | `#EAE6E0` | Row dividers, section rules |
-| `--ds-line-strong` | `#DFDAD2` | Secondary button and field hairlines |
+| `--ds-line-strong` | `#DFDAD2` | Field hairlines, card edges, sheet grabber |
+| `--ds-line-control` | `#8C877F` | Secondary button boundary — non-text only, 3.42 : 1 on canvas |
 | `--ds-berry` | `#8A3355` | Primary action; selected / active state; constraint emphasis |
 | `--ds-berry-deep` | `#732643` | **Derived state only** — hover / pressed on a bramble surface |
 | `--ds-berry-soft` | `#F7EDF1` | Quiet button; selected and applied chip tint |
@@ -77,10 +78,14 @@ filters still reads as one controlled accent:
 | **Applied filter** | berry-soft | berry @ 70% | regular | × |
 | **Selected toggle** | berry-soft | full berry | medium | ✓ |
 
-**The stylescape's third ink (`#8C877F`) is not a token here.** It measures
-3.57 : 1 on surface and fails AA for normal text. It was stylescape annotation
-chrome, and the stylescape's own mobile section already used `ink-2` for the
-product eyebrow. Muted product text is `--ds-ink-2` throughout.
+**The stylescape's third ink (`#8C877F`) is not a text colour.** It measures
+3.57 : 1 on surface and fails AA for normal text, so nothing is written in it.
+It was stylescape annotation chrome, and the stylescape's own mobile section
+already used `ink-2` for the product eyebrow. Muted product text is
+`--ds-ink-2` throughout. The value survives in exactly one place — as
+`--ds-line-control`, the secondary button's boundary — where the bar is the
+3 : 1 that WCAG 1.4.11 asks of a control edge, not the 4.5 : 1 that 1.4.3 asks
+of text.
 
 ### Typography
 
@@ -331,7 +336,7 @@ which is why the clearance is now enforced by tokens instead of by eye.
 
 ## 5. Accessibility decisions
 
-Verified by `npm run audit`: all 59 stories, at 390px, in headless Chromium.
+Verified by `npm run audit`: all 63 stories, at 390px, in headless Chromium.
 **0 WCAG 2.1 A/AA violations (axe-core), 0 horizontal overflow, 0 touch targets
 under 44px.**
 
@@ -347,10 +352,15 @@ grounds:
 | Bramble on berry-soft | 6.83 |
 | Bramble on berry-soft — selected and applied chips | 6.83 |
 | Applied chip border (berry @ 70%) vs canvas — non-text, needs 3.0 | 3.90 |
+| Secondary button boundary (`#8C877F`) vs surface / canvas — non-text, needs 3.0 | 3.57 / 3.42 |
 
-The stylescape's `#8C877F` (3.57 : 1) was **not** promoted into a product text
-token. The macro markers are absent from this table because none of them is
-ever text: carbs (`#C08442`) is 3.17 : 1 and exists only as a 7px dot beside
+The stylescape's `#8C877F` is a boundary colour, never a text colour. At
+3.57 : 1 it clears the 3 : 1 that 1.4.11 asks of a control edge and falls short
+of the 4.5 : 1 that 1.4.3 asks of text, so it is defined once, as
+`--ds-line-control`, and nothing is ever written in it.
+
+The macro markers are absent from this table because none of them is ever
+text: carbs (`#C08442`) is 3.17 : 1 and exists only as a 7px dot beside
 the word "Carbs".
 
 **Touch targets.** Every interactive element is at least 44 × 44, verified
@@ -430,16 +440,6 @@ none of them is a primary action.
 16px gap measured **−2px** in the browser — the title's line box overlapped the
 crop, and long titles broke wherever they landed instead of balancing. Both now
 carry `display: block`, and the gap is `--ds-space-3` (24px).
-
-### Known deviation
-
-The secondary button's hairline is `--ds-line-strong` (1.39 : 1 against
-surface), below the 3 : 1 that WCAG 1.4.11 asks of a control boundary. This is
-the approved stylescape treatment, and darkening it to 3 : 1 would require a
-mid-grey that visibly breaks the light, airy direction. It is retained because
-the control is identified by its 17px ink label (17.21 : 1) and its 56px
-target, not by the hairline, and its focus ring is well over 3 : 1. Flagged
-here rather than silently changed or silently ignored.
 
 ---
 
