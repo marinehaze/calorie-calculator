@@ -50,7 +50,7 @@ hex, pixel size or font family.**
 | `--ds-ink-2` | `#6B6863` | Labels, units, secondary text, disabled text |
 | `--ds-line` | `#EAE6E0` | Row dividers, section rules |
 | `--ds-line-strong` | `#DFDAD2` | Field hairlines, card edges, sheet grabber |
-| `--ds-line-control` | `#8C877F` | Secondary button boundary — non-text only, 3.42 : 1 on canvas |
+| `--ds-line-control` | `#8C877F` | Secondary button and unselected filter chip boundary — non-text only, 3.57 : 1 on surface, 3.42 : 1 on canvas |
 | `--ds-berry` | `#8A3355` | Primary action; selected / active state; constraint emphasis |
 | `--ds-berry-deep` | `#732643` | **Derived state only** — hover / pressed on a bramble surface |
 | `--ds-berry-soft` | `#F7EDF1` | Quiet button; selected and applied chip tint |
@@ -82,10 +82,10 @@ filters still reads as one controlled accent:
 3.57 : 1 on surface and fails AA for normal text, so nothing is written in it.
 It was stylescape annotation chrome, and the stylescape's own mobile section
 already used `ink-2` for the product eyebrow. Muted product text is
-`--ds-ink-2` throughout. The value survives in exactly one place — as
-`--ds-line-control`, the secondary button's boundary — where the bar is the
-3 : 1 that WCAG 1.4.11 asks of a control edge, not the 4.5 : 1 that 1.4.3 asks
-of text.
+`--ds-ink-2` throughout. The value survives as `--ds-line-control`, the
+boundary of the two controls whose fill matches their ground — the secondary
+button and the unselected filter chip — where the bar is the 3 : 1 that WCAG
+1.4.11 asks of a control edge, not the 4.5 : 1 that 1.4.3 asks of text.
 
 ### Typography
 
@@ -353,11 +353,13 @@ grounds:
 | Bramble on berry-soft — selected and applied chips | 6.83 |
 | Applied chip border (berry @ 70%) vs canvas — non-text, needs 3.0 | 3.90 |
 | Secondary button boundary (`#8C877F`) vs surface / canvas — non-text, needs 3.0 | 3.57 / 3.42 |
+| Unselected chip boundary (`#8C877F`) vs surface — non-text, needs 3.0 | 3.57 |
 
 The stylescape's `#8C877F` is a boundary colour, never a text colour. At
 3.57 : 1 it clears the 3 : 1 that 1.4.11 asks of a control edge and falls short
 of the 4.5 : 1 that 1.4.3 asks of text, so it is defined once, as
-`--ds-line-control`, and nothing is ever written in it.
+`--ds-line-control`, used only where a boundary is the sole thing identifying
+a control, and nothing is ever written in it.
 
 The macro markers are absent from this table because none of them is ever
 text: carbs (`#C08442`) is 3.17 : 1 and exists only as a 7px dot beside

@@ -34,8 +34,10 @@
   --ds-line-strong:   #DFDAD2;  /* input rules, card edges, sheet grabber */
 
   /* Control boundary — the one line that DOES identify a control, so it has to
-     clear 1.4.11: 3.57 : 1 on surface, 3.42 : 1 on canvas. Non-text only. */
-  --ds-line-control:  #8C877F;  /* secondary button boundary */
+     clear 1.4.11: 3.57 : 1 on surface, 3.42 : 1 on canvas. Non-text only.
+     Both users are controls whose fill matches their ground, so the boundary
+     is the only thing saying a control is there. */
+  --ds-line-control:  #8C877F;  /* secondary button + unselected filter chip */
 
   /* Bramble — marks exactly four things: the primary action, an active state,
      a selected value, and occasional hero emphasis. Nothing else. */

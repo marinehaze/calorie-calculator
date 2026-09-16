@@ -38,7 +38,7 @@
   background: var(--ds-surface);
   color: var(--ds-ink);
   font-weight: var(--ds-weight-regular);
-  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-line-strong);
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-line-control);
 }
 .ds-filter-chip--toggle:hover:not(:disabled) { background: var(--ds-soft); }
 
