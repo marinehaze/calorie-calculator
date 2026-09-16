@@ -62,6 +62,17 @@
 .ds-button[aria-busy='true'] { cursor: progress; }
 .ds-button[aria-busy='true'] .ds-button__label { visibility: hidden; }
 
+/* The primary action keeps its berry fill while busy.
+   The button is still `disabled` so it cannot be fired twice, but the disabled
+   *appearance* would be wrong here: soft fill plus ink-2 is exactly the real
+   disabled state, so "working on it" and "you cannot do this" would have been
+   identical but for a 20px spinner. Retaining the fill keeps them distinct,
+   and the white spinner sits on berry at 7.82 : 1. */
+.ds-button--primary[aria-busy='true']:disabled {
+  background: var(--ds-berry);
+  color: var(--ds-on-berry);
+}
+
 .ds-button__spinner {
   position: absolute;
   width: 20px;

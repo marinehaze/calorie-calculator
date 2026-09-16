@@ -37,7 +37,21 @@ export const Colour = {
         <Swatch token="--ds-ink" name="Ink" value="#1C1B19" on="#FBFAF8" />
         <Swatch token="--ds-ink-2" name="Ink 2" value="#6B6863" on="#FFFFFF" />
         <Swatch token="--ds-berry" name="Bramble" value="#8A3355" on="#FFFFFF" />
-        <Swatch token="--ds-berry-deep" name="Bramble deep" value="#732643" on="#FFFFFF" />
+      </div>
+
+      <div style={{ marginTop: 32 }}>
+        <Note>Derived interaction states — not palette colours, and never used on their own</Note>
+        <div style={{ display: 'grid', gap: 10 }}>
+          {[
+            ['--ds-berry-deep', 'Bramble deep', '#732643', 'Hover and pressed for a bramble surface. Only ever reached from bramble.'],
+            ['--ds-berry-line', 'Bramble line', 'berry @ 70%', 'The applied-filter chip boundary. The approved bramble at reduced alpha.'],
+          ].map(([token, label, value, use]) => (
+            <span key={token} style={{ display: 'flex', alignItems: 'flex-start', gap: 11, font: '400 15px/1.45 var(--ds-font-ui)', color: 'var(--ds-ink-2)' }}>
+              <i style={{ width: 16, height: 16, borderRadius: 4, background: `var(${token})`, flex: '0 0 16px', marginTop: 3 }} />
+              <span><b style={{ color: 'var(--ds-ink)', fontWeight: 500 }}>{label}</b> · {value}<br />{use}</span>
+            </span>
+          ))}
+        </div>
       </div>
 
       <div style={{ marginTop: 32 }}>
@@ -57,9 +71,10 @@ export const Colour = {
       </div>
 
       <p style={{ font: '400 15px/1.6 var(--ds-font-ui)', color: 'var(--ds-ink-2)', marginTop: 24, maxWidth: '40ch' }}>
-        Bramble marks four things: the primary action, an active state, a selected value,
-        and the occasional hero emphasis. Everywhere else stays neutral so photography
-        carries the colour.
+        Bramble marks the primary action, the selected or active state, constraint
+        emphasis, and the occasional hero emphasis. Everywhere else stays neutral so
+        photography carries the colour. Bramble deep and bramble line are derived from
+        it and are never an independent accent.
       </p>
     </Frame>
   ),

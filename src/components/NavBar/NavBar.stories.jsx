@@ -13,15 +13,15 @@ export const Variants = {
     <Frame>
       <Stack gap={32}>
         <div>
-          <Note>Back only — Nutrition Result, where the dish name is the largest thing below and a title would compete</Note>
+          <Note>Back only — Nutrition Result, a drill-down. No tab bar; the dish name below makes a title redundant</Note>
           <NavBar onBack={() => {}} />
         </div>
         <div>
-          <Note>Back and title — Recipe Detail</Note>
+          <Note>Back and title — Recipe Detail, a drill-down. No tab bar</Note>
           <NavBar onBack={() => {}} title="Recipe" />
         </div>
         <div>
-          <Note>Title and trailing action — Recipe Discovery</Note>
+          <Note>Title and filter action, no back — Recipe Discovery, a root screen that also shows the tab bar</Note>
           <NavBar title="Recipes" trailing={<IconButton icon={<IconFilter />} label="Filters" />} />
         </div>
         <div>

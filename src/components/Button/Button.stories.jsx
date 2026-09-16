@@ -39,7 +39,7 @@ export const States = {
     <Frame>
       <Stack gap={24}>
         <div><Note>Default</Note><Button fullWidth>Apply filters</Button></div>
-        <div><Note>Loading — the label holds the width, no reflow</Note>
+        <div><Note>Loading — berry fill retained, so it never reads as disabled</Note>
           <Button fullWidth loading loadingLabel="Applying filters">Apply filters</Button>
         </div>
         <div><Note>Disabled — still readable at 4.92 : 1</Note><Button fullWidth disabled>Apply filters</Button></div>

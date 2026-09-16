@@ -51,9 +51,9 @@ hex, pixel size or font family.**
 | `--ds-line` | `#EAE6E0` | Row dividers, section rules |
 | `--ds-line-strong` | `#DFDAD2` | Secondary button and field hairlines |
 | `--ds-berry` | `#8A3355` | Primary action; selected / active state; constraint emphasis |
-| `--ds-berry-deep` | `#732643` | Hover / pressed |
+| `--ds-berry-deep` | `#732643` | **Derived state only** — hover / pressed on a bramble surface |
 | `--ds-berry-soft` | `#F7EDF1` | Quiet button; selected and applied chip tint |
-| `--ds-berry-line` | berry @ 70% | Applied-filter chip boundary — 3.90 : 1 on canvas |
+| `--ds-berry-line` | berry @ 70% | **Derived state only** — applied-filter chip boundary, 3.90 : 1 on canvas |
 | `--ds-macro-protein` | `#8A3355` | 7px marker dot only |
 | `--ds-macro-carbs` | `#C08442` | 7px marker dot only |
 | `--ds-macro-fat` | `#5F7185` | 7px marker dot only |
@@ -61,6 +61,12 @@ hex, pixel size or font family.**
 Bramble marks the primary action, the selected or active state, constraint
 emphasis, and occasional hero emphasis. Everything else stays neutral so
 photography carries the colour.
+
+**Bramble deep and bramble line are not palette colours.** Both are derived
+from bramble — one darkened for hover and pressed, one at 70% alpha for a
+control boundary — and neither is ever used as an independent accent. A surface
+only reaches bramble deep by first being bramble. Storybook presents them under
+*derived interaction states*, away from the palette grid, for the same reason.
 
 Selection is graded rather than binary, so a screen carrying several active
 filters still reads as one controlled accent:
@@ -137,8 +143,8 @@ Public API is `src/index.js`.
 | **SearchField** | Barcode action lives *inside* the field. Empty, typed, loading, disabled | Food Search, Recipe Discovery |
 | **FilterChip** | `toggle` — selected takes berry tint, full berry border, medium weight, check. `remove` — the applied set, one step down at a 70% border and regular weight, with × ; no selected state | Recipe Discovery |
 | **SegmentedControl** | Radiogroup with arrow-key support. `default` (pill) and `text` (no track) — see §3 | Nutrition Result; portion sheet |
-| **TabBar** | Two tabs. No home screen | App shell |
-| **NavBar** | Back, optional title, optional trailing action | Nutrition Result, Recipe Detail |
+| **TabBar** | Two tabs. No home screen | Food Search, Recipe Discovery — root screens only |
+| **NavBar** | Back + optional title on drill-downs; title + trailing action on Recipe Discovery | All four screens — see §3 |
 | **Stepper** | Live-announced value. `default` (label + track) and `bare` (no label, no track) | Servings; portion sheet |
 
 ### Nutrition
@@ -229,6 +235,26 @@ ground — not a box. Do not wrap information in a container to group it; use
 space.
 
 **Data never sits on food.** See §4.
+
+**Navigation is two-level, and the tab bar belongs to the root only.**
+
+| Screen | TabBar | NavBar |
+|---|---|---|
+| Food Search | **visible** | — (the search field is the header) |
+| Recipe Discovery | **visible** | title + filter action, no back |
+| Nutrition Result | **not shown** | back only, no title |
+| Recipe Detail | **not shown** | back + title |
+
+`TabBar` is root navigation between Calculate and Recipes. Nutrition Result and
+Recipe Detail are drill-downs reached from a list, so they replace the tab bar
+with a back control rather than showing both: a tab bar on a drill-down offers
+a lateral move out of a task the user is mid-way through.
+
+`NavBar` therefore serves two jobs. On a drill-down it carries the back control
+and, where the screen needs one, a title — Nutrition Result omits the title
+because the dish name is already the largest thing on the screen. On Recipe
+Discovery it is a plain header: a title and the filter action, with no back
+control, sitting above a screen that still shows the tab bar.
 
 **Applied filters wrap; they never scroll sideways.** The set is small and
 bounded, and a chip cut off at the screen edge reads as broken rather than as

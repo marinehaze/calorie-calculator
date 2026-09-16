@@ -6,6 +6,10 @@ import './Button.css';
  * One berry button per surface. `secondary` is the hairline alternative and
  * `quiet` is berry on its own tint, for a supporting action that repeats.
  * Height is 56px (44px when small), so every button clears the 44px target.
+ *
+ * `loading` sets `disabled` so the action cannot be fired twice, and
+ * `aria-busy` so the state is announced. The primary variant keeps its berry
+ * fill while busy — see Button.css — so loading never reads as disabled.
  */
 export const Button = ({
   children,
