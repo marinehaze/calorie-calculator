@@ -1,0 +1,44 @@
+/* Hero calorie value — the answer both stories are looking for.
+   Plus Jakarta Sans 500. Weight 300 is not loaded and is not an option here. */
+
+.ds-hero-calories { display: flex; align-items: baseline; gap: 11px; }
+
+/* Centred where the surrounding block is centred — the portion sheet. Screens
+   should not reach into this component to move it. */
+.ds-hero-calories--center { justify-content: center; }
+
+.ds-hero-calories__value {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-medium);
+  letter-spacing: var(--ds-tracking-hero);
+  line-height: var(--ds-leading-hero);
+  color: var(--ds-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-hero-calories--lg .ds-hero-calories__value { font-size: var(--ds-text-hero-lg); }
+.ds-hero-calories--md .ds-hero-calories__value { font-size: var(--ds-text-hero-md); }
+.ds-hero-calories--sm .ds-hero-calories__value { font-size: var(--ds-text-hero-sm); }
+
+/* The unit never competes with the value it belongs to. */
+.ds-hero-calories__unit {
+  font-family: var(--ds-font-ui);
+  font-weight: var(--ds-weight-regular);
+  font-size: var(--ds-text-control);
+  color: var(--ds-ink-2);
+  letter-spacing: var(--ds-tracking-body);
+}
+
+/* Recalculating — the figure dims very slightly in place. No spinner, no
+   layout shift: SCREENS.md requires numbers to transition, not block. */
+.ds-hero-calories--pending .ds-hero-calories__value {
+  opacity: .55;
+  transition: opacity var(--ds-duration) var(--ds-ease);
+}
+
+/* Missing data is stated in words, never rendered as a zero. */
+.ds-hero-calories__unavailable {
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-body);
+  color: var(--ds-ink-2);
+}

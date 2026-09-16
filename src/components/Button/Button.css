@@ -1,0 +1,90 @@
+/* Button — one berry action per surface. */
+
+.ds-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-1);
+  position: relative;
+  height: var(--ds-control-h);
+  min-width: var(--ds-touch-min);
+  padding-inline: var(--ds-space-4);
+  border: 0;
+  border-radius: var(--ds-radius-lg);
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-control);
+  font-weight: var(--ds-weight-medium);
+  letter-spacing: var(--ds-tracking-body);
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background var(--ds-duration) var(--ds-ease),
+              box-shadow var(--ds-duration) var(--ds-ease);
+}
+
+.ds-button--small { height: var(--ds-control-h-sm); padding-inline: var(--ds-space-3); }
+.ds-button--full  { width: 100%; }
+
+/* Primary — white on berry, 7.82 : 1. */
+.ds-button--primary { background: var(--ds-berry); color: var(--ds-on-berry); }
+.ds-button--primary:hover:not(:disabled) { background: var(--ds-berry-deep); }
+.ds-button--primary:active:not(:disabled) { background: var(--ds-berry-deep); }
+
+/* Secondary — a hairline, because a second filled button would compete. */
+.ds-button--secondary {
+  background: transparent;
+  color: var(--ds-ink);
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-line-control);
+}
+.ds-button--secondary:hover:not(:disabled) { background: var(--ds-soft); }
+.ds-button--secondary:active:not(:disabled) {
+  background: var(--ds-soft);
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-ink-2);
+}
+
+/* Quiet — berry on its own tint. For a supporting action that repeats,
+   such as "add another item". */
+.ds-button--quiet { background: var(--ds-berry-soft); color: var(--ds-berry); }
+.ds-button--quiet:hover:not(:disabled) { background: #F1E1E8; }
+.ds-button--quiet:active:not(:disabled) { background: #F1E1E8; }
+
+/* Disabled — reduced, never faint. Text stays at ink-2 on soft (4.92 : 1),
+   so a disabled control is still readable rather than greyed into noise. */
+.ds-button:disabled {
+  cursor: not-allowed;
+  background: var(--ds-disabled-bg);
+  color: var(--ds-disabled-fg);
+  box-shadow: none;
+}
+
+/* Loading — the label stays in place (holding the button's width) and is
+   hidden from sight only; the spinner is announced by aria-busy + live text. */
+.ds-button[aria-busy='true'] { cursor: progress; }
+.ds-button[aria-busy='true'] .ds-button__label { visibility: hidden; }
+
+/* The primary action keeps its berry fill while busy.
+   The button is still `disabled` so it cannot be fired twice, but the disabled
+   *appearance* would be wrong here: soft fill plus ink-2 is exactly the real
+   disabled state, so "working on it" and "you cannot do this" would have been
+   identical but for a 20px spinner. Retaining the fill keeps them distinct,
+   and the white spinner sits on berry at 7.82 : 1. */
+.ds-button--primary[aria-busy='true']:disabled {
+  background: var(--ds-berry);
+  color: var(--ds-on-berry);
+}
+
+.ds-button__spinner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--ds-radius-circle);
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  opacity: 0.9;
+  animation: ds-spin 720ms linear infinite;
+}
+
+@keyframes ds-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .ds-button__spinner { animation-duration: 2400ms; }
+}

@@ -1,0 +1,49 @@
+/* Banner — the one app-wide offline / error surface (SCREENS.md defines it
+   once, not per screen).
+
+   It is not red. DECISIONS.md removed alarm colour from this product, and a
+   dropped connection is not the user's mistake. Soft fill, ink text, and a
+   berry text action to retry. */
+
+.ds-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2);
+  background: var(--ds-soft);
+  border-radius: var(--ds-radius-sm);
+  color: var(--ds-ink);
+}
+
+/* Centred against the title + body block as a whole, not against the first
+   line. align-self overrides the container's flex-start, which keeps Retry
+   where it is. */
+.ds-banner__icon { flex: 0 0 auto; color: var(--ds-ink-2); display: flex; align-self: center; }
+
+.ds-banner__text { flex: 1; min-width: 0; font-size: var(--ds-text-label); line-height: var(--ds-leading-ui); }
+
+/* The status gets its own line so it is findable at a glance; the explanation
+   follows underneath. Both are block-level, which is the whole change — the
+   copy is kept to one line each so the banner does not grow taller for it. */
+.ds-banner__title { display: block; font-weight: var(--ds-weight-medium); }
+.ds-banner__body { display: block; color: var(--ds-ink-2); }
+
+/* A text button, but still a 44px target: the padding is negative-margined
+   back so the visible label stays aligned with the text above it. */
+.ds-banner__action {
+  flex: 0 0 auto;
+  min-height: var(--ds-touch-min);
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--ds-space-1);
+  margin: calc(var(--ds-space-1) * -1) calc(var(--ds-space-1) * -1) calc(var(--ds-space-1) * -1) 0;
+  border: 0;
+  background: transparent;
+  color: var(--ds-berry);
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  font-weight: var(--ds-weight-medium);
+  border-radius: var(--ds-radius-sm);
+  cursor: pointer;
+}
+.ds-banner__action:hover { background: var(--ds-berry-soft); }

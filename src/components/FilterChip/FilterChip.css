@@ -1,0 +1,104 @@
+/* Filter chip — the visible definition of "suitable for me".
+   Radius sm, not a full pill: the direction avoids a pill on every element.
+
+   Both states belong to one berry family, separated by emphasis rather than
+   by hue:
+
+     unselected toggle   white, neutral hairline, ink          (no berry)
+     applied filter      berry tint, 70% berry border, regular  (lower)
+     selected toggle     berry tint, full berry border, medium + check (higher)
+
+   The applied chip sits deliberately below the selected toggle: a screen can
+   carry four applied filters at once, and four chips at full strength would
+   stop being one controlled accent. */
+
+.ds-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  min-height: var(--ds-touch-min);
+  padding-inline: var(--ds-space-2);
+  border: 0;
+  border-radius: var(--ds-radius-sm);
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  letter-spacing: var(--ds-tracking-body);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--ds-duration) var(--ds-ease),
+              box-shadow var(--ds-duration) var(--ds-ease),
+              color var(--ds-duration) var(--ds-ease);
+}
+
+/* ---------------------------------------------------------------- toggle
+   Inside the filter sheet: a value you switch on and off. */
+
+/* Unselected — white on the sheet's own ground, ink text, no berry at all. */
+.ds-filter-chip--toggle {
+  background: var(--ds-surface);
+  color: var(--ds-ink);
+  font-weight: var(--ds-weight-regular);
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-line-control);
+}
+.ds-filter-chip--toggle:hover:not(:disabled) { background: var(--ds-soft); }
+
+/* Selected — berry tint, full berry border, berry text at medium weight, and
+   a check. Four signals against the unselected chip, only one of which is a
+   hue, so selection still reads in greyscale. Berry text is 6.83 : 1 on its
+   own tint. */
+.ds-filter-chip--toggle[aria-pressed='true'] {
+  background: var(--ds-berry-soft);
+  color: var(--ds-berry);
+  font-weight: var(--ds-weight-medium);
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-berry);
+}
+.ds-filter-chip--toggle[aria-pressed='true']:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-berry-deep);
+}
+
+.ds-filter-chip__check { display: flex; margin-left: -2px; }
+
+/* ---------------------------------------------------------------- remove
+   Under the search field: the filters currently in force. Every chip here is
+   active by definition — it only exists because it is applied — so there is no
+   selected state to signal. The whole chip is the remove target. */
+.ds-filter-chip--remove {
+  background: var(--ds-berry-soft);
+  color: var(--ds-berry);
+  font-weight: var(--ds-weight-regular);
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-berry-line);
+}
+/* Hover firms the boundary to full berry — the control answers the pointer
+   without changing what it is. */
+.ds-filter-chip--remove:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 var(--ds-border) var(--ds-berry);
+}
+
+/* The × is decoration: the whole chip is the target, which keeps one 44px
+   target instead of nesting a small one inside a larger one. It stays because
+   the applied chip now shares the berry family with the selected toggle, and
+   it is the only mark saying that a tap removes rather than toggles. */
+.ds-filter-chip__remove { display: flex; color: currentColor; opacity: .8; margin-right: -2px; }
+
+/* -------------------------------------------------------------- disabled */
+.ds-filter-chip:disabled {
+  cursor: not-allowed;
+  background: var(--ds-disabled-bg);
+  color: var(--ds-disabled-fg);
+  box-shadow: none;
+}
+
+/* ------------------------------------------------------------ containers */
+
+/* The filters in force, under the search field. They wrap onto as many lines
+   as they need: the set is small and bounded, and a chip that is half off the
+   screen edge reads as broken rather than as scrollable. */
+.ds-filter-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1);
+  padding-block: var(--ds-space-half);
+}
+
+/* Inside the filter sheet chips wrap the same way. */
+.ds-filter-chip-group { display: flex; flex-wrap: wrap; gap: var(--ds-space-1); }

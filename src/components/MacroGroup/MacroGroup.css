@@ -1,0 +1,58 @@
+/* Macro group — protein, carbs and fat on one grid at equal visual weight.
+   Three columns, never a bar, a ring or a stacked chart: that is the
+   dashboard this product is not. */
+
+.ds-macro-group {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-2);
+}
+
+/* Term first in the DOM, value first to the eye. */
+.ds-macro { display: flex; flex-direction: column-reverse; }
+.ds-macro__value-wrap { margin: 0; }
+
+.ds-macro__value {
+  display: block;
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-medium);
+  font-size: var(--ds-text-value-lg);
+  letter-spacing: -0.022em;
+  line-height: var(--ds-leading-tight);
+  color: var(--ds-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-macro__value--unavailable {
+  font-family: var(--ds-font-ui);
+  font-weight: var(--ds-weight-regular);
+  font-size: var(--ds-text-label);
+  line-height: var(--ds-leading-ui);
+  color: var(--ds-ink-2);
+  letter-spacing: 0;
+}
+
+.ds-macro__label {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  margin-top: 9px;
+  font-size: var(--ds-text-label);
+  font-weight: var(--ds-weight-regular);
+  color: var(--ds-ink-2);
+}
+
+/* The marker is a 7px dot and nothing else. It reinforces the label it sits
+   next to; it never carries the meaning on its own, which is why the word
+   "Protein" is always present. */
+.ds-macro__dot {
+  width: var(--ds-dot);
+  height: var(--ds-dot);
+  flex: 0 0 var(--ds-dot);
+  border-radius: var(--ds-radius-circle);
+}
+
+.ds-macro-group--pending .ds-macro__value {
+  opacity: .55;
+  transition: opacity var(--ds-duration) var(--ds-ease);
+}

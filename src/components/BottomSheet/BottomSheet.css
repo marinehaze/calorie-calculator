@@ -1,0 +1,97 @@
+/* Bottom sheet — one behaviour for all three sheets in SCREENS.md:
+   portion adjustment, item swap, and filters.
+
+   A sheet is a decision made inside a task. It is never a destination, which
+   is why none of the three is a screen. */
+
+.ds-sheet-root { position: fixed; inset: 0; z-index: var(--ds-z-sheet); display: flex; align-items: flex-end; justify-content: center; }
+/* For a story or a device frame: scope the sheet to its container. */
+.ds-sheet-root--contained { position: absolute; }
+
+.ds-sheet__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 27, 25, 0.32);
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  z-index: var(--ds-z-overlay);
+  animation: ds-sheet-fade var(--ds-duration) var(--ds-ease);
+}
+
+.ds-sheet {
+  position: relative;
+  z-index: var(--ds-z-sheet);
+  width: 100%;
+  max-width: var(--ds-screen-width);
+  max-height: 88%;
+  display: flex;
+  flex-direction: column;
+  background: var(--ds-surface);
+  /* Surfaces take the large radius — and only on the edges that are visible. */
+  border-radius: var(--ds-radius-lg) var(--ds-radius-lg) 0 0;
+  box-shadow: var(--ds-shadow-sheet);
+  animation: ds-sheet-rise 220ms var(--ds-ease);
+}
+
+@keyframes ds-sheet-rise { from { transform: translateY(16px); opacity: .6; } }
+@keyframes ds-sheet-fade { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .ds-sheet, .ds-sheet__scrim { animation: none; }
+}
+
+.ds-sheet:focus { outline: none; }
+
+.ds-sheet__grabber {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--ds-radius-pill);
+  background: var(--ds-line-strong);
+  margin: var(--ds-space-1) auto 0;
+  flex: 0 0 auto;
+}
+
+.ds-sheet__head {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding: var(--ds-space-2) var(--ds-screen-margin) 0;
+  flex: 0 0 auto;
+}
+
+.ds-sheet__title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-title);
+  line-height: var(--ds-leading-title);
+}
+
+.ds-sheet__close { margin-right: -10px; }
+
+.ds-sheet__body {
+  padding: var(--ds-space-3) var(--ds-screen-margin);
+  overflow-y: auto;
+  flex: 1 1 auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* The footer holds the one primary action and stays put while the body
+   scrolls, so "Apply filters" is never below the fold.
+
+   The rule above it says "there is more content up there". A sheet whose body
+   never scrolls has nothing to say that about, so it can drop the rule —
+   see footerDivider={false}. */
+.ds-sheet__footer {
+  padding: var(--ds-space-2) var(--ds-screen-margin);
+  padding-bottom: calc(var(--ds-space-3) + env(safe-area-inset-bottom, 0px));
+  border-top: var(--ds-border) solid var(--ds-line);
+  background: var(--ds-surface);
+  flex: 0 0 auto;
+  display: grid;
+  gap: var(--ds-space-1);
+}
+
+.ds-sheet__footer--flush { border-top: 0; padding-top: 0; }

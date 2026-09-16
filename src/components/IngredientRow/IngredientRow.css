@@ -1,0 +1,72 @@
+/* Ingredient row — the fourth and last level of the nutrition hierarchy.
+   Amounts and calories hold fixed right-hand columns so the numbers form a
+   column the eye can run down, rather than ragged text. */
+
+.ds-ingredient-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding-block: 15px;
+  border-top: var(--ds-border) solid var(--ds-line);
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border-left: 0; border-right: 0; border-bottom: 0;
+  font-family: var(--ds-font-ui);
+  color: var(--ds-ink);
+}
+
+/* When the row is a button (swap a mis-matched item), it still needs 44px. */
+.ds-ingredient-row--interactive {
+  cursor: pointer;
+  min-height: var(--ds-touch-min);
+  border-radius: 0;
+}
+.ds-ingredient-row--interactive:hover { background: var(--ds-canvas); }
+
+.ds-ingredient-item { display: block; }
+.ds-ingredient-list > .ds-ingredient-item:last-child .ds-ingredient-row {
+  border-bottom: var(--ds-border) solid var(--ds-line);
+}
+.ds-ingredient-list--open > .ds-ingredient-item:last-child .ds-ingredient-row { border-bottom: 0; }
+
+.ds-ingredient-row__name {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--ds-text-body);
+  letter-spacing: var(--ds-tracking-body);
+  overflow-wrap: anywhere;
+}
+
+.ds-ingredient-row__amount {
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+  text-align: right;
+  flex: 0 0 66px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-ingredient-row__kcal {
+  font-size: var(--ds-text-body);
+  font-weight: var(--ds-weight-medium);
+  text-align: right;
+  flex: 0 0 78px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ds-ingredient-row__kcal--unavailable {
+  font-weight: var(--ds-weight-regular);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+}
+
+/* Flagged — an ingredient that conflicts with an active filter.
+   A berry marker plus a berry note under the name. The note is the carrier of
+   meaning; the marker only helps you find it. */
+.ds-ingredient-row__flag {
+  display: block;
+  margin-top: 3px;
+  font-size: var(--ds-text-eyebrow);
+  color: var(--ds-berry);
+}
+.ds-ingredient-row--flagged { box-shadow: inset 2px 0 0 var(--ds-berry); padding-left: var(--ds-space-2); }

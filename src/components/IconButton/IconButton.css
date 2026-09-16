@@ -1,0 +1,35 @@
+/* Icon button — back, clear, close, barcode, stepper.
+   Always 44 x 44 minimum, even where the glyph is 24px. */
+
+.ds-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ds-touch-min);
+  height: var(--ds-touch-min);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ds-ink);
+  border-radius: var(--ds-radius-circle);
+  cursor: pointer;
+  transition: background var(--ds-duration) var(--ds-ease);
+}
+
+.ds-icon-button:hover:not(:disabled)  { background: var(--ds-soft); }
+.ds-icon-button:active:not(:disabled) { background: var(--ds-line); }
+
+/* Soft — a visible affordance where the icon sits on photography or needs to
+   read as a control in its own right (barcode inside the search field). */
+.ds-icon-button--soft { background: var(--ds-soft); }
+.ds-icon-button--soft:hover:not(:disabled) { background: var(--ds-line); }
+
+.ds-icon-button:disabled {
+  cursor: not-allowed;
+  color: var(--ds-disabled-fg);
+  background: transparent;
+}
+.ds-icon-button--soft:disabled {
+  background: var(--ds-disabled-bg);
+  color: var(--ds-disabled-fg);
+}

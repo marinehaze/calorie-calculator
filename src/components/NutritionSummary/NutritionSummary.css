@@ -1,0 +1,53 @@
+/* Nutrition summary — one block, used full-size on Nutrition Result and
+   summarised on Recipe Detail. It is the join between the two stories.
+
+   The hierarchy is fixed and is the component's whole point:
+     calories -> portion / per 100 g -> protein / carbs / fat -> ingredients
+   Nothing may be inserted above the calories, and nothing may be promoted to
+   sit beside them. */
+
+.ds-nutrition { display: block; }
+
+.ds-nutrition__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+}
+
+.ds-nutrition__title {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-title);
+  line-height: var(--ds-leading-title);
+}
+
+.ds-nutrition__basis-label { font-size: var(--ds-text-label); color: var(--ds-ink-2); }
+
+/* Rhythm: 16 inside a group, 32 between levels, 40 before the ingredient list.
+   No card, no border, no shadow around any of it — the levels are separated by
+   space, which is the only separator this direction needs. */
+.ds-nutrition__hero        { margin-top: var(--ds-space-2); }
+.ds-nutrition__pair        { margin-top: var(--ds-space-4); }
+.ds-nutrition__macros      { margin-top: var(--ds-space-4); }
+.ds-nutrition__ingredients { margin-top: var(--ds-space-5); }
+
+.ds-nutrition--summary .ds-nutrition__pair   { margin-top: var(--ds-space-3); }
+.ds-nutrition--summary .ds-nutrition__macros { margin-top: var(--ds-space-3); }
+
+.ds-nutrition__section-label {
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+  margin-bottom: var(--ds-space-1);
+}
+
+/* Source / estimate line. DECISIONS.md: uncertainty is a label on the portion
+   and source line, not a designed state and not a warning. */
+.ds-nutrition__note {
+  margin-top: var(--ds-space-3);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+  line-height: var(--ds-leading-ui);
+}

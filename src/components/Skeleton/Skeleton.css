@@ -1,0 +1,29 @@
+/* Skeleton — one loading pattern for list rows and recipe cards.
+   Soft fill, a very slow pulse, and the real layout underneath, so the page
+   does not move when the data lands. */
+
+.ds-skeleton {
+  background: var(--ds-soft);
+  border-radius: var(--ds-radius-sm);
+  animation: ds-skeleton-pulse 1600ms ease-in-out infinite;
+}
+@keyframes ds-skeleton-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) {
+  .ds-skeleton { animation: none; opacity: .8; }
+}
+
+.ds-skeleton--media { border-radius: var(--ds-radius-md); }
+.ds-skeleton--circle { border-radius: var(--ds-radius-circle); }
+
+.ds-skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-2);
+  padding-block: var(--ds-space-2);
+  border-top: var(--ds-border) solid var(--ds-line);
+}
+.ds-skeleton-list > .ds-skeleton-row:first-child { border-top: 0; }
+.ds-skeleton-row__text { flex: 1; display: grid; gap: var(--ds-space-1); }
+
+.ds-skeleton-card { display: grid; gap: var(--ds-space-2); }
+.ds-skeleton-cards { display: grid; gap: var(--ds-space-5); }
