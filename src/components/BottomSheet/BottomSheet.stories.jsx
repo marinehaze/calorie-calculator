@@ -33,36 +33,107 @@ const Stage = ({ children, trigger }) => (
 
 /** All three sheets in SCREENS.md are this component: portion, item swap and
  *  filters. Escape and a scrim tap both close; focus is trapped while open and
- *  returns to whatever opened it. */
-export const PortionSheet = {
-  render: () => {
+ *  returns to whatever opened it.
+ *
+ *  The portion sheet answers one question and shows one consequence:
+ *
+ *    How much?  ->  unit  ->  amount  ->  what it comes to
+ *
+ *  The unit switch is the text SegmentedControl, because here it is only a
+ *  mode — the amount stepper below it is the interaction. The stepper is bare,
+ *  so the calorie figure stays the strongest value on the surface. Per-100g
+ *  data is deliberately absent: it lives on Nutrition Result and adds nothing
+ *  to this task. */
+const PortionSheetSurface = ({ initialUnit }) => {
+  {
     const [open, setOpen] = useState(true);
+    const [unit, setUnit] = useState(initialUnit);
     const [grams, setGrams] = useState(340);
-    const [unit, setUnit] = useState('g');
-    const kcal = Math.round(grams * 1.506);
+    const [portions, setPortions] = useState(1);
+
+    const gramsPerPortion = 340;
+    const kcalPer100 = 150.6;
+    const totalGrams = unit === 'g' ? grams : portions * gramsPerPortion;
+    const kcal = Math.round((totalGrams * kcalPer100) / 100);
+
     return (
       <Stage trigger={<Button variant="secondary" fullWidth onClick={() => setOpen(true)}>Change portion</Button>}>
-        <BottomSheet contained open={open} onClose={() => setOpen(false)} title="Portion"
-          footer={<Button fullWidth onClick={() => setOpen(false)}>Done</Button>}>
-          <SegmentedControl
-            label="Unit"
-            value={unit}
-            onChange={setUnit}
-            options={[{ value: 'g', label: 'Grams' }, { value: 'portion', label: 'Portions' }]}
-          />
-          <div style={{ marginTop: 24 }}>
-            <Stepper label="Amount" value={grams} unit="g" step={10} min={10} max={2000} onChange={setGrams} />
+        <BottomSheet
+          contained
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Portion"
+          footerDivider={false}
+          footer={<Button fullWidth onClick={() => setOpen(false)}>Done</Button>}
+        >
+          <p style={{ font: '400 16px/1.4 var(--ds-font-ui)', color: 'var(--ds-ink-2)', margin: 0 }}>
+            How much?
+          </p>
+
+          {/* The control is inline-flex, so the surface centres it. */}
+          <div style={{ marginTop: 'var(--ds-space-3)', display: 'flex', justifyContent: 'center' }}>
+            <SegmentedControl
+              variant="text"
+              label="Unit"
+              value={unit}
+              onChange={setUnit}
+              options={[{ value: 'g', label: 'Grams' }, { value: 'portion', label: 'Portions' }]}
+            />
           </div>
-          <div style={{ marginTop: 32 }}>
-            {/* The total recalculates live behind the sheet; it is echoed here
-                so the user sees the consequence of the control they are using. */}
-            <p style={{ font: '400 15px var(--ds-font-ui)', color: 'var(--ds-ink-2)', margin: '0 0 8px' }}>New total</p>
-            <HeroCalories value={kcal} size="sm" />
+
+          <div style={{ marginTop: 'var(--ds-space-3)' }}>
+            {unit === 'g' ? (
+              <Stepper variant="bare" label="amount" value={grams} unit="g" step={10} min={10} max={2000} onChange={setGrams} />
+            ) : (
+              <Stepper
+                variant="bare"
+                label="amount"
+                value={portions}
+                unit={portions === 1 ? 'portion' : 'portions'}
+                step={1} min={1} max={20}
+                onChange={setPortions}
+              />
+            )}
+          </div>
+
+          {/* Only in Portions mode, and attached to the amount it explains. */}
+          {unit === 'portion' && (
+            <p style={{
+              margin: 'var(--ds-space-1) 0 0', textAlign: 'center',
+              font: '400 14px/1.4 var(--ds-font-ui)', color: 'var(--ds-ink-2)',
+            }}>
+              1 portion = {gramsPerPortion} g
+            </p>
+          )}
+
+          <hr style={{ border: 0, borderTop: '1px solid var(--ds-line)', margin: 'var(--ds-space-3) 0 0' }} />
+
+          <div style={{ marginTop: 'var(--ds-space-3)', textAlign: 'center' }}>
+            <HeroCalories value={kcal} size="sm" align="center" />
+            <p style={{
+              margin: 'var(--ds-space-1) 0 var(--ds-space-4)',
+              font: '400 15px/1.4 var(--ds-font-ui)', color: 'var(--ds-ink-2)',
+            }}>
+              for this amount
+            </p>
           </div>
         </BottomSheet>
       </Stage>
     );
-  },
+  }
+};
+
+/** A · Grams selected — the default. */
+export const PortionSheet = {
+  name: 'Portion Sheet (grams)',
+  render: () => <PortionSheetSurface initialUnit="g" />,
+};
+
+/** B · Portions selected. The equivalence line appears only here, directly
+ *  under the amount it explains. */
+export const PortionSheetPortions = {
+  name: 'Portion Sheet (portions)',
+  render: () => <PortionSheetSurface initialUnit="portion" />,
 };
 
 /** The item-swap sheet reuses Food Search's result list, exactly as SCREENS.md

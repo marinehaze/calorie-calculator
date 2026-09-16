@@ -79,7 +79,11 @@
 }
 
 /* The footer holds the one primary action and stays put while the body
-   scrolls, so "Apply filters" is never below the fold. */
+   scrolls, so "Apply filters" is never below the fold.
+
+   The rule above it says "there is more content up there". A sheet whose body
+   never scrolls has nothing to say that about, so it can drop the rule —
+   see footerDivider={false}. */
 .ds-sheet__footer {
   padding: var(--ds-space-2) var(--ds-screen-margin);
   padding-bottom: calc(var(--ds-space-3) + env(safe-area-inset-bottom, 0px));
@@ -89,3 +93,5 @@
   display: grid;
   gap: var(--ds-space-1);
 }
+
+.ds-sheet__footer--flush { border-top: 0; padding-top: 0; }

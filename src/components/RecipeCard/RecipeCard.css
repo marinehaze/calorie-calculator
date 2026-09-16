@@ -16,9 +16,13 @@
 
 .ds-recipe-card__media { position: relative; }
 
-.ds-recipe-card__body { padding-top: var(--ds-space-2); }
+/* display:block is load-bearing, not tidiness: these are <span>s, and
+   padding-top and text-wrap:balance are both inert on an inline box. Without
+   it the declared gap rendered as roughly zero and the title sat on the crop. */
+.ds-recipe-card__body { display: block; padding-top: var(--ds-space-3); }
 
 .ds-recipe-card__title {
+  display: block;
   font-family: var(--ds-font-display);
   font-weight: var(--ds-weight-semibold);
   font-size: var(--ds-text-title);
@@ -62,12 +66,4 @@
 }
 .ds-recipe-card__kcal span { font-size: var(--ds-text-label); color: var(--ds-ink-2); }
 
-/* Compact — a horizontal variant for a dense results list. */
-.ds-recipe-card--compact { display: flex; gap: var(--ds-space-2); align-items: center; min-height: var(--ds-touch-min); }
-.ds-recipe-card--compact .ds-recipe-card__media { flex: 0 0 96px; width: 96px; }
-.ds-recipe-card--compact .ds-recipe-card__body { padding-top: 0; flex: 1; min-width: 0; }
-.ds-recipe-card--compact .ds-recipe-card__title { font-size: var(--ds-text-body); font-weight: var(--ds-weight-medium); }
-.ds-recipe-card--compact .ds-recipe-card__kcal { margin-top: var(--ds-space-1); }
-
 .ds-recipe-list { display: grid; gap: var(--ds-space-5); }
-.ds-recipe-list--compact { gap: var(--ds-space-3); }

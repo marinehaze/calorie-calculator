@@ -24,16 +24,12 @@
 .ds-icon-button--soft { background: var(--ds-soft); }
 .ds-icon-button--soft:hover:not(:disabled) { background: var(--ds-line); }
 
-/* Berry — reserved for the one selected/primary icon action on a surface. */
-.ds-icon-button--berry { background: var(--ds-berry); color: var(--ds-on-berry); }
-.ds-icon-button--berry:hover:not(:disabled) { background: var(--ds-berry-deep); }
-
 .ds-icon-button:disabled {
   cursor: not-allowed;
   color: var(--ds-disabled-fg);
   background: transparent;
 }
-.ds-icon-button--soft:disabled, .ds-icon-button--berry:disabled {
+.ds-icon-button--soft:disabled {
   background: var(--ds-disabled-bg);
   color: var(--ds-disabled-fg);
 }

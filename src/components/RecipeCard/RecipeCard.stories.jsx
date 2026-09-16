@@ -1,5 +1,5 @@
 import { RecipeCard, RecipeList } from './RecipeCard';
-import { Frame, Note } from '../../lib/Frame';
+import { Frame } from '../../lib/Frame';
 import { recipes } from '../../lib/sampleData';
 
 export default {
@@ -9,28 +9,16 @@ export default {
 
 /** Recipe Discovery. Deliberately not a box: media with a radius, then type on
  *  the screen's own ground. A container around every recipe would turn this
- *  into an ecommerce grid, and the photography already separates the items. */
+ *  into an ecommerce grid, and the photography already separates the items.
+ *
+ *  24px between the crop and the title — enough that the title is not sitting
+ *  on the photograph, not so much that the card reads as two blocks. */
 export const Browse = {
   render: () => (
     <Frame background="canvas">
       <RecipeList>
         {recipes.slice(0, 3).map((r) => (
           <RecipeCard key={r.id} {...r} onClick={() => {}} />
-        ))}
-      </RecipeList>
-    </Frame>
-  ),
-};
-
-/** Compact, for when a longer filtered list needs to be scannable rather than
- *  browsable. */
-export const Compact = {
-  render: () => (
-    <Frame background="canvas">
-      <Note>Same data, denser list</Note>
-      <RecipeList compact>
-        {recipes.slice(2, 6).map((r) => (
-          <RecipeCard key={r.id} {...r} compact onClick={() => {}} />
         ))}
       </RecipeList>
     </Frame>

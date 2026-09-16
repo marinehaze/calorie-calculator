@@ -2,12 +2,21 @@ import './SegmentedControl.css';
 
 /**
  * SegmentedControl — a mutually exclusive switch between two readings of the
- * same number (Portion / Per 100 g). It is a radiogroup, not a tab list: it
- * changes the basis of the value on screen, not the screen.
+ * same value. It is a radiogroup, not a tab list: it changes the basis of what
+ * is on screen, not the screen.
+ *
+ *   variant="default"  the pill. Use where the switch is the interaction —
+ *                      Portion / Per 100 g on Nutrition Result.
+ *   variant="text"     plain text options, no track. Use where the switch is
+ *                      only a mode and something below it is the real
+ *                      interaction — Grams / Portions in the portion sheet.
+ *
+ * Both variants are the same component with the same radiogroup semantics and
+ * the same 44px targets; only the clothes differ.
  *
  * Arrow keys move between options, which is what a radiogroup owes a keyboard.
  */
-export const SegmentedControl = ({ options, value, onChange, label, disabled = false }) => {
+export const SegmentedControl = ({ options, value, onChange, label, variant = 'default', disabled = false }) => {
   const onKeyDown = (e) => {
     const i = options.findIndex((o) => o.value === value);
     if (i < 0) return;
@@ -21,7 +30,12 @@ export const SegmentedControl = ({ options, value, onChange, label, disabled = f
   };
 
   return (
-    <div className="ds-segmented" role="radiogroup" aria-label={label} onKeyDown={onKeyDown}>
+    <div
+      className={['ds-segmented', variant === 'text' && 'ds-segmented--text'].filter(Boolean).join(' ')}
+      role="radiogroup"
+      aria-label={label}
+      onKeyDown={onKeyDown}
+    >
       {options.map((o) => {
         const checked = o.value === value;
         return (
@@ -35,7 +49,7 @@ export const SegmentedControl = ({ options, value, onChange, label, disabled = f
             className="ds-segmented__option"
             onClick={() => onChange?.(o.value)}
           >
-            {o.label}
+            <span className="ds-segmented__label">{o.label}</span>
           </button>
         );
       })}

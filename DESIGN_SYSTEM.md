@@ -128,7 +128,7 @@ Public API is `src/index.js`.
 | Component | States | Used by |
 |---|---|---|
 | **Button** | primary / secondary / quiet; default, hover, pressed, **loading**, **disabled**; `small` (44px) | All four screens |
-| **IconButton** | plain / soft / berry; disabled | Back, clear, close, barcode |
+| **IconButton** | plain / soft; disabled | Back, clear, close, barcode, filter |
 
 ### Input & navigation
 
@@ -136,10 +136,10 @@ Public API is `src/index.js`.
 |---|---|---|
 | **SearchField** | Barcode action lives *inside* the field. Empty, typed, loading, disabled | Food Search, Recipe Discovery |
 | **FilterChip** | `toggle` — selected takes berry tint, full berry border, medium weight, check. `remove` — the applied set, one step down at a 70% border and regular weight, with × ; no selected state | Recipe Discovery |
-| **SegmentedControl** | Radiogroup with arrow-key support | Nutrition Result (Portion / 100 g) |
+| **SegmentedControl** | Radiogroup with arrow-key support. `default` (pill) and `text` (no track) — see §3 | Nutrition Result; portion sheet |
 | **TabBar** | Two tabs. No home screen | App shell |
 | **NavBar** | Back, optional title, optional trailing action | Nutrition Result, Recipe Detail |
-| **Stepper** | Live-announced value | Servings; portion sheet |
+| **Stepper** | Live-announced value. `default` (label + track) and `bare` (no label, no track) | Servings; portion sheet |
 
 ### Nutrition
 
@@ -157,7 +157,7 @@ Public API is `src/index.js`.
 |---|---|
 | **FoodImage** | Focal-point crop API — see §4 |
 | **FoodResultRow** | Search match; reused in the item-swap sheet. No selected state — see §3 |
-| **RecipeCard** | Full and `compact` |
+| **RecipeCard** | One density — SCREENS.md gives Recipe Discovery a single list layout |
 
 ### Feedback & states
 
@@ -205,6 +205,24 @@ that are not hue, so selection survives greyscale and colour blindness. The
 current tab changes colour *and* weight. Macro dots always sit beside their
 text label. A flagged ingredient carries a sentence, and the berry rule only
 helps you find it.
+
+**One switch, two weights.** `SegmentedControl` has a `default` pill and a
+`text` variant, and which one a screen uses is decided by what sits next to it,
+not by taste:
+
+- **`default`** where the switch *is* the interaction — Portion / Per 100 g on
+  Nutrition Result, where changing the basis is the thing the user came to do.
+- **`text`** where the switch is only a mode and something below it is the
+  interaction — Grams / Portions in the portion sheet, where the amount stepper
+  is what gets touched and the calorie figure is what gets read.
+
+Both are the same component with the same radiogroup semantics, the same
+keyboard behaviour and the same 44px targets. Only the clothes differ, so a
+screen never has to pick between two components that do one job.
+
+The same rule governs `Stepper`: `default` where the control is labelled and
+sits in a row of settings; `bare` where it stands alone under its own heading
+and must not outweigh the value it feeds.
 
 **Cards are used once.** `RecipeCard` is media plus type on the screen's own
 ground — not a box. Do not wrap information in a container to group it; use
@@ -352,6 +370,7 @@ would have done.
 | Primary `Button`, berry `IconButton` | The primary action |
 | `FilterChip` selected toggle | Selected value — full border, medium weight, check |
 | `FilterChip` applied filter | Active value, one step down — 70% border, regular, × |
+| `SegmentedControl` text, active option | Selected mode — berry text and underline, with medium weight |
 | `TabBar` current tab | The active destination — one marker, paired with medium weight |
 | `EmptyState` insight rule | Constraint emphasis |
 | `IngredientRow` flagged rule | Constraint emphasis — the same idiom |
@@ -363,16 +382,28 @@ with the approved stylescape, not a repeated one.
 `FoodResultRow` no longer appears in this table. Its selected / current-match
 state was removed entirely — see below.
 
-### Removed: FoodResultRow's current-match state
+### Removed, because SCREENS.md does not require them
 
-SCREENS.md line 136 requires the item-swap sheet and says only that it
-*"reuses Screen 1's result-list pattern inside a sheet"*. It does not ask for
-the current match to be marked, and marking it would offer the user back the
-entry they opened the sheet to reject. The `selected` prop, the `aria-current`
-styling and the berry inset rule are gone; the swap-sheet story now lists
-alternatives only.
+**`FoodResultRow`'s current-match state.** SCREENS.md line 136 requires the
+item-swap sheet and says only that it *"reuses Screen 1's result-list pattern
+inside a sheet"*. It does not ask for the current match to be marked, and
+marking it would offer the user back the entry they opened the sheet to reject.
+The sheet stays; the state is gone, and the story lists alternatives only.
 
-The sheet itself stays — it is in scope. Only the unrequired state went.
+**`RecipeCard`'s compact variant.** Screen 3 has one list layout. "Filters
+applied" is the same list with *fewer cards*, not a denser one.
+
+**`IconButton`'s berry variant.** Every icon action across the four screens —
+barcode, clear, back, close, filter — is covered by `plain` and `soft`, and
+none of them is a primary action.
+
+### Fixed: the Recipe Card gap that never rendered
+
+`.ds-recipe-card__body` and `.ds-recipe-card__title` are `<span>`s, and both
+`padding-top` and `text-wrap: balance` are inert on an inline box. The declared
+16px gap measured **−2px** in the browser — the title's line box overlapped the
+crop, and long titles broke wherever they landed instead of balancing. Both now
+carry `display: block`, and the gap is `--ds-space-3` (24px).
 
 ### Known deviation
 

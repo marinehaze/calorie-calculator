@@ -45,3 +45,58 @@
   background: var(--ds-disabled-bg);
   box-shadow: none;
 }
+
+
+/* ---------------------------------------------------------------- bare
+   No label, no track. The three parts are bound by alignment and open space
+   instead of a background shape, so the control sits quietly under whatever
+   it is adjusting.
+
+   Used in the portion sheet, where the calorie result below must stay the
+   strongest value on the surface — hence a 24px amount against a 40px result.
+
+   The buttons lose their fill and shadow but keep the full 44 x 44 target:
+   this variant is quieter, not smaller. */
+.ds-stepper--bare { justify-content: center; }
+
+.ds-stepper--bare .ds-stepper__control {
+  background: transparent;
+  padding: 0;
+  gap: var(--ds-space-4);
+}
+
+.ds-stepper--bare .ds-stepper__button {
+  border-radius: var(--ds-radius-circle);
+  background: var(--ds-soft);
+  color: var(--ds-ink-2);
+  box-shadow: none;
+}
+.ds-stepper--bare .ds-stepper__button:hover:not(:disabled) {
+  background: var(--ds-line);
+  color: var(--ds-ink);
+}
+.ds-stepper--bare .ds-stepper__button:disabled {
+  background: var(--ds-disabled-bg);
+  color: var(--ds-disabled-fg);
+}
+
+.ds-stepper--bare .ds-stepper__value {
+  min-width: 120px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+}
+.ds-stepper--bare .ds-stepper__num {
+  font-size: var(--ds-text-value-lg);
+  letter-spacing: -0.022em;
+}
+/* The unit steps back so the figure reads first, and so the whole control
+   stays below the calorie result in weight. */
+.ds-stepper--bare .ds-stepper__unit {
+  font-family: var(--ds-font-ui);
+  font-weight: var(--ds-weight-regular);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0;
+  color: var(--ds-ink-2);
+}

@@ -3,6 +3,10 @@
 
 .ds-hero-calories { display: flex; align-items: baseline; gap: 11px; }
 
+/* Centred where the surrounding block is centred — the portion sheet. Screens
+   should not reach into this component to move it. */
+.ds-hero-calories--center { justify-content: center; }
+
 .ds-hero-calories__value {
   font-family: var(--ds-font-display);
   font-weight: var(--ds-weight-medium);

@@ -9,8 +9,8 @@ import { FoodImage } from '../FoodImage/FoodImage';
  * the ecommerce grid this direction avoids, and the photography already does
  * the separating.
  *
- * `compact` is the horizontal variant, for when a longer list needs to be
- * scannable rather than browsable.
+ * One density only. SCREENS.md gives Recipe Discovery a single list layout —
+ * "filters applied" is the same list with fewer cards, not a denser one.
  */
 export const RecipeCard = ({
   title,
@@ -20,21 +20,15 @@ export const RecipeCard = ({
   kcalPerServing,
   image,
   focal,
-  compact = false,
   onClick,
   ...rest
 }) => (
   <li>
-    <button
-      type="button"
-      className={['ds-recipe-card', compact && 'ds-recipe-card--compact'].filter(Boolean).join(' ')}
-      onClick={onClick}
-      {...rest}
-    >
+    <button type="button" className="ds-recipe-card" onClick={onClick} {...rest}>
       <span className="ds-recipe-card__media">
         <FoodImage
           src={image}
-          crop={compact ? 'square' : 'landscape'}
+          crop="landscape"
           focalX={focal?.x}
           focalY={focal?.y}
           scale={focal?.scale}
@@ -58,8 +52,6 @@ export const RecipeCard = ({
   </li>
 );
 
-export const RecipeList = ({ children, compact = false, label = 'Recipes' }) => (
-  <ul className={['ds-recipe-list', compact && 'ds-recipe-list--compact'].filter(Boolean).join(' ')} aria-label={label}>
-    {children}
-  </ul>
+export const RecipeList = ({ children, label = 'Recipes' }) => (
+  <ul className="ds-recipe-list" aria-label={label}>{children}</ul>
 );

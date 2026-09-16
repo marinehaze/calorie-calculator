@@ -17,6 +17,9 @@ const FOCUSABLE = 'button:not([disabled]), [href], input:not([disabled]), select
  *
  * `contained` scopes the sheet to its parent instead of the viewport, which is
  * how the stories show it inside a 390px frame.
+ *
+ * `footerDivider={false}` drops the rule above the footer, for a sheet whose
+ * body never scrolls — the rule would be signalling content that is not there.
  */
 export const BottomSheet = ({
   open,
@@ -25,6 +28,7 @@ export const BottomSheet = ({
   children,
   footer,
   contained = false,
+  footerDivider = true,
   closeLabel = 'Close',
   labelledBy = 'ds-sheet-title',
 }) => {
@@ -74,7 +78,11 @@ export const BottomSheet = ({
           </span>
         </div>
         <div className="ds-sheet__body">{children}</div>
-        {footer && <div className="ds-sheet__footer">{footer}</div>}
+        {footer && (
+          <div className={['ds-sheet__footer', !footerDivider && 'ds-sheet__footer--flush'].filter(Boolean).join(' ')}>
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -36,3 +36,51 @@
 }
 
 .ds-segmented__option:disabled { color: var(--ds-disabled-fg); cursor: not-allowed; }
+
+
+/* ---------------------------------------------------------------- text
+   Same control, quieter clothes. Used where the unit switch is a mode, not
+   the main interaction — the portion sheet, where the amount stepper below it
+   is what the user came to touch.
+
+   No track, no thumb: plain text options with the active one marked by berry,
+   medium weight AND an underline, so the state never rests on hue alone. The
+   button keeps the full 44px target; the underline hugs the label inside it,
+   which is what lets the control look compact without faking the target. */
+.ds-segmented--text {
+  background: transparent;
+  padding: 0;
+  gap: var(--ds-space-3);
+  justify-content: center;
+}
+
+.ds-segmented--text .ds-segmented__option {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding-inline: var(--ds-space-1);
+  color: inherit;
+  font-weight: var(--ds-weight-regular);
+}
+.ds-segmented--text .ds-segmented__option:hover:not(:disabled) { background: transparent; }
+
+.ds-segmented--text .ds-segmented__label {
+  padding-bottom: 6px;
+  border-bottom: 2px solid transparent;
+  color: var(--ds-ink-2);
+  transition: color var(--ds-duration) var(--ds-ease),
+              border-color var(--ds-duration) var(--ds-ease);
+}
+
+.ds-segmented--text .ds-segmented__option[aria-checked='true'] {
+  background: transparent;
+  box-shadow: none;
+  font-weight: var(--ds-weight-regular);
+}
+.ds-segmented--text .ds-segmented__option[aria-checked='true'] .ds-segmented__label {
+  color: var(--ds-berry);
+  font-weight: var(--ds-weight-medium);
+  border-bottom-color: var(--ds-berry);
+}
+
+.ds-segmented--text .ds-segmented__option:disabled .ds-segmented__label { color: var(--ds-disabled-fg); }

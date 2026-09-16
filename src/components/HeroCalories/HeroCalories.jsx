@@ -14,6 +14,7 @@ export const HeroCalories = ({
   value,
   unit = 'kcal',
   size = 'lg',
+  align = 'start',
   pending = false,
   unavailableLabel = 'Calories not available',
 }) => {
@@ -22,8 +23,9 @@ export const HeroCalories = ({
   }
   return (
     <p
-      className={['ds-hero-calories', `ds-hero-calories--${size}`, pending && 'ds-hero-calories--pending']
-        .filter(Boolean).join(' ')}
+      className={['ds-hero-calories', `ds-hero-calories--${size}`,
+        align === 'center' && 'ds-hero-calories--center',
+        pending && 'ds-hero-calories--pending'].filter(Boolean).join(' ')}
     >
       {/* One announcement, not two. aria-label is not permitted on a
           paragraph, so the spoken form is a visually hidden span and the two
