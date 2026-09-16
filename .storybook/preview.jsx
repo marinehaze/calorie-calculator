@@ -27,6 +27,8 @@ export default {
           'Nutrition',
           'Food & Recipe',
           'Feedback & States',
+          'Screens',
+          ['Food Search', 'Nutrition Result'],
           'Overview',
         ],
       },

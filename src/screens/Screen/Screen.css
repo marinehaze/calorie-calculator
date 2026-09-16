@@ -1,0 +1,78 @@
+/* =========================================================================
+   Screen shell — screen-level layout only.
+
+   Everything here is composition: width, scroll, pinning and layering. No
+   colour, type or spacing value is invented — all of it reads the same tokens
+   the design system reads.
+   ========================================================================= */
+
+.screen {
+  position: relative;          /* the positioning context for `contained` sheets */
+  display: flex;
+  flex-direction: column;
+  width: var(--ds-screen-width);
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--ds-canvas);
+  border-radius: var(--ds-radius-lg);
+  box-shadow: 0 0 0 1px rgba(28, 27, 25, .05);
+  overflow: hidden;
+}
+
+/* The header sits outside the scroll: on Food Search the search field is the
+   screen's header, and a field that scrolls away is a field you cannot
+   correct a query in. */
+.screen__header {
+  flex: 0 0 auto;
+  padding: var(--ds-space-3) var(--ds-screen-margin) var(--ds-space-2);
+  background: var(--ds-canvas);
+}
+
+.screen__scroll {
+  flex: 1 1 auto;
+  /* hidden on the inline axis, not `auto`: the screen should never scroll
+     sideways, and declaring it means the 390px overflow audit still inspects
+     everything inside rather than treating the body as a scroller. */
+  overflow: hidden auto;
+  padding: 0 var(--ds-screen-margin) var(--ds-space-5);
+  /* This is a device frame. A scrollbar inside it would be chrome that no
+     handset shows. */
+  scrollbar-width: none;
+}
+.screen__scroll::-webkit-scrollbar { display: none; }
+
+/* A screen whose body starts at the top of the frame — Nutrition Result,
+   which has no header slot and opens on its own nav bar. */
+.screen__scroll--top { padding-top: var(--ds-space-3); }
+
+.screen__footer { flex: 0 0 auto; }
+
+/* ---------------------------------------------------------------- pieces
+   The small typographic parts a screen needs to hold design system
+   components together. Each one is a token setting, not a new style. */
+
+/* A list heading: "6 results for “lentil”", "Items". Matches the section
+   label inside the nutrition block so the two read as the same rank. */
+.screen-list-head {
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+  margin-bottom: var(--ds-space-1);
+}
+
+/* A quiet line that qualifies what is above it — the estimate expectation on
+   first run, the source line under a dish name. */
+.screen-note {
+  font-size: var(--ds-text-label);
+  line-height: var(--ds-leading-body);
+  color: var(--ds-ink-2);
+}
+
+/* A stack of actions at the end of a body. 8px apart, because they are one
+   group. */
+.screen-actions {
+  display: grid;
+  gap: var(--ds-space-1);
+  margin-top: var(--ds-space-5);
+}
+
+.screen-section { margin-top: var(--ds-space-5); }

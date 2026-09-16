@@ -1,0 +1,75 @@
+/* =========================================================================
+   Screen 1 — Food Search. Screen-level layout only.
+   Every value reads a token; no colour, size or spacing is invented here.
+   ========================================================================= */
+
+/* The banner sits under the search field and above the body, inside the fixed
+   header, so a dropped connection stays stated while the body scrolls. */
+.fs-banner { margin-top: var(--ds-space-2); }
+
+/* A query quoted back to the user. Typographic quotes, and the query itself in
+   ink so it is legible inside an ink-2 sentence — it is the thing the user is
+   being asked to judge. */
+.fs-quoted { color: var(--ds-ink); }
+.fs-quoted::before { content: '\201C'; }
+.fs-quoted::after  { content: '\201D'; }
+
+/* The accuracy expectation on first run. It reads as a footnote to the screen
+   rather than a fourth line of the invitation, and the empty state's own 40px
+   of bottom padding is already the section-sized gap that says so — adding a
+   margin on top of it would open a hole. */
+.fs-expectation { max-width: 34ch; }
+
+/* The manual entry set. 20px between fields: closer than a section, further
+   apart than lines in a group. */
+.fs-manual { display: grid; gap: 20px; }
+
+/* ------------------------------------------------------------- scanner
+   A camera view layered over the same screen. The bar above and the panel
+   below are the app's own surface, which is what keeps every control and
+   every word on a ground with known contrast — nothing is ever written over
+   the camera image. */
+
+.fs-scanner {
+  position: absolute;
+  inset: 0;
+  z-index: var(--ds-z-sheet);
+  display: flex;
+  flex-direction: column;
+  background: var(--ds-ink);
+}
+
+.fs-scanner__bar {
+  flex: 0 0 auto;
+  background: var(--ds-surface);
+  padding: var(--ds-space-2) var(--ds-screen-margin);
+}
+
+.fs-scanner__view { position: relative; flex: 1 1 auto; overflow: hidden; }
+.fs-scanner__view > .ds-food-image { position: absolute; inset: 0; aspect-ratio: auto; }
+
+/* The viewfinder, and the dimmed surround in one element: the box shadow
+   spreads the dim over everything outside the frame, so the frame is the one
+   part of the view left at full strength. The dim is the product's own ink at
+   reduced strength, mixed from the token rather than declared as a new
+   colour. Media radius, because this is a crop of the world. */
+.fs-scanner__reticle {
+  position: absolute;
+  left: var(--ds-screen-margin);
+  right: var(--ds-screen-margin);
+  top: 50%;
+  height: 168px;
+  transform: translateY(-50%);
+  border: 2px solid var(--ds-surface);
+  border-radius: var(--ds-radius-md);
+  box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--ds-ink) 58%, transparent);
+}
+
+.fs-scanner__foot {
+  flex: 0 0 auto;
+  display: grid;
+  gap: var(--ds-space-2);
+  background: var(--ds-surface);
+  padding: var(--ds-space-3) var(--ds-screen-margin);
+  padding-bottom: calc(var(--ds-space-3) + env(safe-area-inset-bottom, 0px));
+}
