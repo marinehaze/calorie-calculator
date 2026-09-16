@@ -1,0 +1,40 @@
+/* Recipe method. Space separates the steps; nothing is boxed. The number is a
+   counter rather than typed content, so the list stays reorderable and the
+   figure never disagrees with the markup. */
+
+.ds-method-list {
+  list-style: none;
+  counter-reset: ds-step;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--ds-space-3);
+}
+
+.ds-method-step {
+  counter-increment: ds-step;
+  display: grid;
+  grid-template-columns: var(--ds-space-4) minmax(0, 1fr);
+  gap: var(--ds-space-2);
+  align-items: baseline;
+}
+
+/* The number is quiet: it orders the steps, it is not the content. Tabular
+   figures keep 1 and 10 on the same axis down the column. */
+.ds-method-step::before {
+  content: counter(ds-step);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-text-value);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--ds-weight-medium);
+  letter-spacing: var(--ds-tracking-value);
+  color: var(--ds-ink-2);
+}
+
+.ds-method-step__body {
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-body);
+  line-height: var(--ds-leading-body);
+  letter-spacing: var(--ds-tracking-body);
+  color: var(--ds-ink);
+}

@@ -14,6 +14,7 @@ export { SegmentedControl } from './components/SegmentedControl/SegmentedControl
 export { TabBar } from './components/TabBar/TabBar';
 export { NavBar } from './components/NavBar/NavBar';
 export { Stepper } from './components/Stepper/Stepper';
+export { InputField } from './components/InputField/InputField';
 
 export { HeroCalories } from './components/HeroCalories/HeroCalories';
 export { PortionPair } from './components/PortionPair/PortionPair';
@@ -24,6 +25,7 @@ export { NutritionSummary } from './components/NutritionSummary/NutritionSummary
 export { FoodImage } from './components/FoodImage/FoodImage';
 export { FoodResultRow, FoodResultList } from './components/FoodResultRow/FoodResultRow';
 export { RecipeCard, RecipeList } from './components/RecipeCard/RecipeCard';
+export { MethodList, MethodStep } from './components/MethodList/MethodList';
 
 export { EmptyState } from './components/EmptyState/EmptyState';
 export { Banner } from './components/Banner/Banner';

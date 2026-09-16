@@ -91,3 +91,23 @@ export const Recalculating = {
     </Frame>
   ),
 };
+
+/** What manually entered values become. The user gave a name, a calorie figure
+ *  and protein, and left carbohydrate and fat blank. Blank is not zero: the
+ *  two untouched macros say "Not available", the same as a database entry that
+ *  never carried them. A zero here would be a claim about the food. */
+export const FromManualEntry = {
+  render: () => (
+    <Frame>
+      <Note>Entered by hand — carbohydrate and fat were left blank</Note>
+      <NutritionSummary
+        title="Nutrition"
+        kcal={268}
+        portion="1 bowl"
+        per100={null}
+        macros={{ protein: 14, carbs: null, fat: null }}
+        note="You entered these values. They are not from the database, and they are not an estimate of anything else."
+      />
+    </Frame>
+  ),
+};

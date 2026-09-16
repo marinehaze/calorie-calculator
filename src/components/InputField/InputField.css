@@ -1,0 +1,78 @@
+/* Manual-entry field. The control block is SearchField's, token for token —
+   same height, radius, soft fill and whole-field focus ring — because the two
+   are the same physical object doing two jobs. What differs is above it: a
+   visible label, since a field the user is authoring into cannot rely on a
+   placeholder to say what it holds. */
+
+.ds-input-field { display: grid; gap: var(--ds-space-1); min-width: 0; }
+
+.ds-input-field__label-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-1);
+  min-width: 0;
+}
+
+.ds-input-field__label {
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  letter-spacing: var(--ds-tracking-body);
+  color: var(--ds-ink-2);
+}
+
+/* Optionality is a word, not an asterisk: the same rule that makes a missing
+   value say "Not available" rather than showing a zero. */
+.ds-input-field__optional { color: var(--ds-ink-2); font-size: var(--ds-text-eyebrow); }
+
+.ds-input-field__control {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-1);
+  height: var(--ds-control-h);
+  /* An <input> has an intrinsic size, so the control needs an explicit floor
+     of zero to shrink into a narrow flex or grid parent. */
+  min-width: 0;
+  padding-inline: var(--ds-space-2);
+  background: var(--ds-soft);
+  border-radius: var(--ds-radius-sm);
+  transition: box-shadow var(--ds-duration) var(--ds-ease);
+}
+
+/* Focused as a whole, like SearchField: the ring surrounds the control rather
+   than the bare <input> inside it. */
+.ds-input-field__control:focus-within {
+  box-shadow: 0 0 0 var(--ds-focus-width) var(--ds-focus-color);
+}
+.ds-input-field__control:focus-within .ds-input-field__input:focus-visible { outline: none; }
+
+.ds-input-field__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-control);
+  letter-spacing: var(--ds-tracking-body);
+  color: var(--ds-ink);
+  padding: 0;
+  height: 100%;
+}
+.ds-input-field__input::placeholder { color: var(--ds-ink-2); }
+.ds-input-field__input:disabled { color: var(--ds-disabled-fg); -webkit-text-fill-color: var(--ds-disabled-fg); }
+
+/* The unit sits one step down from the value it belongs to — DECISIONS.md:
+   units never compete with the values they belong to. */
+.ds-input-field__unit {
+  flex: 0 0 auto;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+}
+
+.ds-input-field__hint {
+  margin: 0;
+  font-family: var(--ds-font-ui);
+  font-size: var(--ds-text-eyebrow);
+  line-height: var(--ds-leading-ui);
+  color: var(--ds-ink-2);
+}

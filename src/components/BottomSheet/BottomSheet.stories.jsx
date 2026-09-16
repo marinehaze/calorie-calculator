@@ -6,6 +6,7 @@ import { SegmentedControl } from '../SegmentedControl/SegmentedControl';
 import { FilterChip, FilterChipGroup } from '../FilterChip/FilterChip';
 import { FoodResultRow, FoodResultList } from '../FoodResultRow/FoodResultRow';
 import { HeroCalories } from '../HeroCalories/HeroCalories';
+import { InputField } from '../InputField/InputField';
 import { searchResults } from '../../lib/sampleData';
 
 export default {
@@ -217,6 +218,50 @@ export const FilterSheet = {
               options={[{ value: '15', label: '< 15 min' }, { value: '30', label: '< 30 min' }, { value: 'any', label: 'Any' }]}
             />
           </Group>
+        </BottomSheet>
+      </Stage>
+    );
+  },
+};
+
+/** Manual entry — the third recovery path SCREENS.md asks of the no-results
+ *  state, reached from "Enter the values myself" there and on barcode not
+ *  found. It is a sheet, not a screen: typing what the database is missing is
+ *  a decision inside the US1 task, exactly like setting a portion.
+ *
+ *  Kept to the smallest set that produces an answer. Calories is required
+ *  because it is the answer; the macros are optional, and leaving one blank
+ *  produces "Not available" rather than a zero. */
+export const ManualEntrySheet = {
+  render: () => {
+    const [open, setOpen] = useState(true);
+    const [v, setV] = useState({ name: 'Aunt\u2019s lentil soup', kcal: '268', protein: '14', carbs: '', fat: '' });
+    const set = (k) => (x) => setV((s) => ({ ...s, [k]: x }));
+    return (
+      <Stage trigger={<Button variant="quiet" fullWidth onClick={() => setOpen(true)}>Enter the values myself</Button>}>
+        <BottomSheet
+          contained
+          open={open}
+          onClose={() => setOpen(false)}
+          title="Enter the values yourself"
+          footer={<Button fullWidth onClick={() => setOpen(false)}>Use these values</Button>}
+        >
+          <div style={{ display: 'grid', gap: 20 }}>
+            <InputField id="ms-name" label="Food name" value={v.name} onChange={set('name')} placeholder="What is it?" />
+            <InputField
+              id="ms-kcal"
+              label="Calories"
+              value={v.kcal}
+              onChange={set('kcal')}
+              inputMode="decimal"
+              unit="kcal"
+              unitLabel="kilocalories"
+              hint="Per the portion you are entering, not per 100 g."
+            />
+            <InputField id="ms-protein" label="Protein" value={v.protein} onChange={set('protein')} inputMode="decimal" unit="g" unitLabel="grams" optional />
+            <InputField id="ms-carbs" label="Carbohydrate" value={v.carbs} onChange={set('carbs')} inputMode="decimal" unit="g" unitLabel="grams" optional />
+            <InputField id="ms-fat" label="Fat" value={v.fat} onChange={set('fat')} inputMode="decimal" unit="g" unitLabel="grams" optional />
+          </div>
         </BottomSheet>
       </Stage>
     );

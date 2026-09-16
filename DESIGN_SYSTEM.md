@@ -131,7 +131,7 @@ Hierarchy comes from scale and space, never from shrinking text.
 
 ## 2. Component inventory
 
-Twenty components, each traceable to a screen or state in `SCREENS.md`.
+Twenty-two components, each traceable to a screen or state in `SCREENS.md`.
 Public API is `src/index.js`.
 
 ### Actions
@@ -151,6 +151,7 @@ Public API is `src/index.js`.
 | **TabBar** | Two tabs. No home screen | Food Search, Recipe Discovery — root screens only |
 | **NavBar** | Back + optional title on drill-downs; title + trailing action on Recipe Discovery | All four screens — see §3 |
 | **Stepper** | Live-announced value. `default` (label + track) and `bare` (no label, no track) | Servings; portion sheet |
+| **InputField** | Visible label, free text or numeric, `type` / `inputMode` passthrough, optional trailing unit, `optional` stated in words | Manual entry — Food Search's no-results and barcode-not-found recovery — see §3 |
 
 ### Nutrition
 
@@ -169,6 +170,7 @@ Public API is `src/index.js`.
 | **FoodImage** | Focal-point crop API — see §4 |
 | **FoodResultRow** | Search match; reused in the item-swap sheet. No selected state — see §3 |
 | **RecipeCard** | One density — SCREENS.md gives Recipe Discovery a single list layout |
+| **MethodList / MethodStep** | Semantic `<ol>` / `<li>`, counter-numbered, separated by space | Recipe Detail's method — see §3 |
 
 ### Feedback & states
 
@@ -238,6 +240,34 @@ and must not outweigh the value it feeds.
 **Cards are used once.** `RecipeCard` is media plus type on the screen's own
 ground — not a box. Do not wrap information in a container to group it; use
 space.
+
+**Finding is not authoring.** `SearchField` and `InputField` share a control
+block token for token — 56px height, radius sm, soft fill, whole-field focus
+ring — because they are the same physical object. They are not one component
+because they are not one job. `SearchField` looks up what already exists, so it
+carries search semantics, the search glyph and the barcode action. `InputField`
+authors what the database is missing, so it carries a visible label and a unit
+and appears several at a time. SCREENS.md gives the no-results state three
+recovery paths — broaden the query, try a related term, **enter values
+manually** — and the third is the only one in the product that writes data.
+
+It lives in a `BottomSheet`, not on a screen: typing values the database lacks
+is a decision inside the US1 task, exactly like setting a portion or swapping
+an item. The set is the smallest that produces an answer — name, calories,
+and protein / carbs / fat. Calories is required because it is the answer the
+screen exists to give; the macros are optional, and **a macro left blank
+renders as "Not available", never as a zero** — the same rule that governs a
+database entry with no breakdown. Optionality is printed as the word
+"Optional", carried to assistive technology as a description rather than as
+part of the field's name, so "Protein" is announced once.
+
+**The method is prose, not a row.** `MethodList` / `MethodStep` is a semantic
+`<ol>` / `<li>`: a quiet counter-drawn number in a fixed 32px column and a
+sentence. Steps do not go through `IngredientRow` — that component's fixed
+name / amount / kcal columns are right for amounts and wrong for sentences.
+The number is a CSS counter rather than typed content, so the markup carries
+the order and the printed figure can never disagree with it. Steps are
+separated by 24px of space; nothing is boxed.
 
 **Data never sits on food.** See §4.
 
@@ -336,7 +366,7 @@ which is why the clearance is now enforced by tokens instead of by eye.
 
 ## 5. Accessibility decisions
 
-Verified by `npm run audit`: all 63 stories, at 390px, in headless Chromium.
+Verified by `npm run audit`: all 70 stories, at 390px, in headless Chromium.
 **0 WCAG 2.1 A/AA violations (axe-core), 0 horizontal overflow, 0 touch targets
 under 44px.**
 
