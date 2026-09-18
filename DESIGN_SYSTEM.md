@@ -292,7 +292,7 @@ separated by 24px of space; nothing is boxed.
 | Food Search | **visible** | — (the search field is the header) |
 | Recipe Discovery | **visible** | title + filter action, no back |
 | Nutrition Result | **not shown** | back only, no title |
-| Recipe Detail | **not shown** | back + title |
+| Recipe Detail | **not shown** | back only, no title — **sticky** |
 
 `TabBar` is root navigation between Calculate and Recipes. Nutrition Result and
 Recipe Detail are drill-downs reached from a list, so they replace the tab bar
@@ -300,10 +300,28 @@ with a back control rather than showing both: a tab bar on a drill-down offers
 a lateral move out of a task the user is mid-way through.
 
 `NavBar` therefore serves two jobs. On a drill-down it carries the back control
-and, where the screen needs one, a title — Nutrition Result omits the title
-because the dish name is already the largest thing on the screen. On Recipe
-Discovery it is a plain header: a title and the filter action, with no back
-control, sitting above a screen that still shows the tab bar.
+and no title: on both Nutrition Result and Recipe Detail the dish or recipe
+name is already the largest thing on the screen, and repeating it in a bar
+would compete with the heading. On Recipe Detail it would also truncate — a
+realistic recipe name needs 646px in a bar that has 300. On Recipe Discovery
+`NavBar` is a plain header instead: a title and the filter action, with no back
+control, above a screen that still shows the tab bar.
+
+**Back stays available on a long drill-down.** Recipe Detail runs to a hero, a
+nutrition block, nine ingredients and seven method steps, so its nav bar is
+sticky: a reader in the middle of the method must not have to scroll to the top
+to find the way out. It is a screen-level treatment (`.screen-sticky-top`) — an
+opaque, edge-to-edge canvas bar pinned to the top of the scroll box, which sits
+below the screen's safe-area padding. `NavBar` itself is unchanged.
+
+**The top safe area belongs to the screen shell.** Every screen reserves
+`env(safe-area-inset-top)` as padding on its own box, so no header, sticky bar
+or bleed crop can begin flush against the physical top edge or sit under the
+status bar. A sticky child's `top: 0` resolves below that padding, so a compact
+header can never buy its compactness out of the inset. The bottom inset works
+the other way round: it stays with the band's *content* (`TabBar`,
+`.screen-action-bar`), because there it has to be inside the white surface
+rather than under it.
 
 **Applied filters wrap; they never scroll sideways.** The set is small and
 bounded, and a chip cut off at the screen edge reads as broken rather than as

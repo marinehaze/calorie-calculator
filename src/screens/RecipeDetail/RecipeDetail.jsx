@@ -58,20 +58,23 @@ export const RecipeDetail = ({
   return (
     <Screen
       label="Recipe Detail"
-      /* The one bridge out of this screen — SCREENS.md: "optional bridge to
-         Screen 2 via see nutrition breakdown". Pinned in the same bottom band
-         Nutrition Result uses, so both drill-downs end the same way. */
-      footer={
-        <div className="screen-action-bar">
-          <Button variant="quiet" fullWidth onClick={onSeeBreakdown}>See nutrition breakdown</Button>
-        </div>
-      }
+      /* No pinned band. This is a reading screen, not a task screen: a
+         persistent bar would cost 131px of every viewport and would follow the
+         reader through the method, where it has nothing to do with what is on
+         screen. The one bridge out lives in the content instead — see below. */
     >
-      {/* The nav bar carries the back control only. The recipe title is the
-          largest thing on the screen a moment later, and DESIGN_SYSTEM.md's own
-          reason for omitting the title on Nutrition Result applies here
-          unchanged: repeating it in a bar would compete with the heading. */}
-      <NavBar onBack={onBack} backLabel="Back to recipes" />
+      {/* Back only, and sticky. No title: the recipe name is the largest thing
+          on the screen a moment later, and repeating it in a 22px bar would
+          both compete with the heading and truncate — a realistic name needs
+          646px in a bar that has 300.
+
+          It sticks because this screen is long — hero, nutrition, nine
+          ingredients, seven steps — and a reader deep in the method otherwise
+          has no way back on screen at all. The bar sits at the top of the
+          scroll box, which is already below the screen's safe-area padding. */}
+      <div className="screen-sticky-top rd-topbar">
+        <NavBar onBack={onBack} backLabel="Back to recipes" />
+      </div>
 
       {/* The hero runs to both screen edges and loses its radius there. */}
       <div className="rd-hero">
@@ -137,6 +140,17 @@ export const RecipeDetail = ({
             macros={macros}
             pending={pending}
           />
+        )}
+
+        {/* The bridge to Screen 2. It does not reveal a breakdown — that is
+            already on this screen — it opens these figures in the US1
+            calculator, where the portion can be changed and a mis-matched item
+            swapped. So it sits with the figures it acts on and scrolls away
+            with them, rather than following the reader down the page. */}
+        {state !== 'loading' && (
+          <div className="screen-actions">
+            <Button variant="secondary" fullWidth onClick={onSeeBreakdown}>Adjust in calculator</Button>
+          </div>
         )}
       </section>
 

@@ -26,7 +26,13 @@ import './Screen.css';
 export const Screen = ({ header, children, footer, overlay, height = 844, label }) => (
   <section className="screen" style={{ height }} aria-label={label}>
     {header && <div className="screen__header">{header}</div>}
-    <div className="screen__scroll">{children}</div>
+    {/* Without a footer the body is the last thing on the screen, so it has to
+        carry the bottom inset itself — otherwise the final line of content
+        sits under the home indicator. With a footer the band's content already
+        carries it, and adding it here would count it twice. */}
+    <div className={['screen__scroll', !footer && 'screen__scroll--no-band'].filter(Boolean).join(' ')}>
+      {children}
+    </div>
     {footer && <div className="screen__footer">{footer}</div>}
     {overlay}
   </section>

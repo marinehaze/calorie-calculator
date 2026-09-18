@@ -3,13 +3,20 @@
    Spacing follows the Flow 1 rhythm declared in Screen.css.
    ========================================================================= */
 
-/* Nav bar → search field: both are header chrome, so 16 — inside a group. */
-.rd-search { margin-top: var(--ds-space-2); }
+/* The title row scrolls away with the list. 16 below it — inside a group,
+   since the row and the controls beneath it are one header cluster. */
+.rd-title-row { margin-bottom: var(--ds-space-2); }
 
-/* The filters in force belong to the field above them, so 8. They stay in the
-   fixed header rather than the scroll: SCREENS.md asks that the user can
-   always see what "suitable" currently means, and a chip row that scrolls
-   away stops answering that question. */
+/* Search field and the control that edits the filters, on one row.
+   `flex: 0 0 auto` on the icon button is load-bearing: without it the flex row
+   squeezes the 44px target down to 42 and the touch-target audit fails. */
+.rd-search { display: flex; align-items: center; gap: var(--ds-space-1); }
+.rd-search > .ds-search-field { flex: 1 1 auto; min-width: 0; }
+.rd-search > .ds-icon-button { flex: 0 0 var(--ds-touch-min); }
+
+/* The filters in force belong to the field above them, so 8. They stay sticky:
+   SCREENS.md asks that the user can always see what "suitable" currently
+   means, and a chip row that scrolls away stops answering that question. */
 .rd-filters { margin-top: var(--ds-space-1); }
 
 .rd-banner { margin-top: var(--ds-space-2); }

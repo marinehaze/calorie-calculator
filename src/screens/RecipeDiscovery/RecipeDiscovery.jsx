@@ -21,10 +21,16 @@ import {
  * and the filter action, no back control — exactly as DESIGN_SYSTEM.md §3
  * specifies for this screen.
  *
- * The header carries the search field and the applied-filter chips together,
- * outside the scroll. SCREENS.md asks that the user "can always see what
- * 'suitable' currently means"; chips that scroll away stop answering that, and
- * a field you cannot reach is a query you cannot correct.
+ * The controls are split by how long they stay useful. The "Recipes" title row
+ * scrolls away: it duplicates the active tab label 700px below it and is the
+ * least useful of the three rows. The search field, the filter action and the
+ * chips stay sticky, because SCREENS.md asks that the user "can always see
+ * what 'suitable' currently means", and a field you cannot reach is a query
+ * you cannot correct.
+ *
+ * Fixing all three cost 388px — 46% of the screen — with four filters applied,
+ * leaving 456px for the list the user came for. Letting the title go brings
+ * that to 312px and 532px.
  *
  * `state` picks the body:
  *   browse     the landing state, unfiltered
@@ -133,72 +139,69 @@ export const RecipeDiscovery = ({
   return (
     <Screen
       label="Recipe Discovery"
-      header={
-        <>
-          {/* A plain header on a root screen: title and the filter action, no
-              back control. The tab bar below is what navigates. */}
-          <NavBar
-            title="Recipes"
-            trailing={<IconButton icon={<IconFilter />} label="Filter recipes" onClick={() => setSheet(true)} />}
-          />
-
-          <div className="rd-search">
-            <SearchField
-              value={query}
-              onChange={setQuery}
-              onClear={() => setQuery('')}
-              placeholder="Search recipes"
-              label="Search recipes"
-              loading={state === 'loading'}
-            />
-          </div>
-
-          {filters.length > 0 && (
-            <div className="rd-filters">
-              <FilterChipRow label="Filters in force">
-                {filters.map((f) => (
-                  <FilterChip
-                    key={f}
-                    mode="remove"
-                    onClick={() => {
-                      const next = filters.filter((x) => x !== f);
-                      setFilters(next);
-                      if (next.length === 0) setState('browse');
-                    }}
-                  >
-                    {f}
-                  </FilterChip>
-                ))}
-              </FilterChipRow>
-            </div>
-          )}
-
-          {state === 'offline' && (
-            <div className="rd-banner">
-              <Banner
-                tone="offline"
-                title="You are offline"
-                actionLabel="Retry"
-                onAction={() => setState('loading')}
-              />
-            </div>
-          )}
-          {state === 'error' && (
-            <div className="rd-banner">
-              <Banner
-                tone="error"
-                title="Search did not complete"
-                body="Showing your last results."
-                actionLabel="Retry"
-                onAction={() => setState('loading')}
-              />
-            </div>
-          )}
-        </>
-      }
       footer={<TabBar value="recipes" onChange={() => {}} />}
       overlay={<FilterSheet open={sheet} onClose={() => setSheet(false)} matchCount={filteredRecipes.length} />}
     >
+      {/* Scrolls away with the list. */}
+      <div className="rd-title-row">
+        <NavBar title="Recipes" />
+      </div>
+
+      {/* Stays. The search field and the control that edits the filters sit on
+          one row; the filters in force wrap below it. `.screen-sticky-top`
+          pins this below the screen's safe-area padding, so the controls can
+          never ride up into the status bar. */}
+      <div className="screen-sticky-top rd-controls">
+        <div className="rd-search">
+          <SearchField
+            value={query}
+            onChange={setQuery}
+            onClear={() => setQuery('')}
+            placeholder="Search recipes"
+            label="Search recipes"
+            loading={state === 'loading'}
+          />
+          <IconButton icon={<IconFilter />} label="Filter recipes" onClick={() => setSheet(true)} />
+        </div>
+
+        {filters.length > 0 && (
+          <div className="rd-filters">
+            <FilterChipRow label="Filters in force">
+              {filters.map((f) => (
+                <FilterChip
+                  key={f}
+                  mode="remove"
+                  onClick={() => {
+                    const next = filters.filter((x) => x !== f);
+                    setFilters(next);
+                    if (next.length === 0) setState('browse');
+                  }}
+                >
+                  {f}
+                </FilterChip>
+              ))}
+            </FilterChipRow>
+          </div>
+        )}
+
+        {state === 'offline' && (
+          <div className="rd-banner">
+            <Banner tone="offline" title="You are offline" actionLabel="Retry" onAction={() => setState('loading')} />
+          </div>
+        )}
+        {state === 'error' && (
+          <div className="rd-banner">
+            <Banner
+              tone="error"
+              title="Search did not complete"
+              body="Showing your last results."
+              actionLabel="Retry"
+              onAction={() => setState('loading')}
+            />
+          </div>
+        )}
+      </div>
+
       {body()}
     </Screen>
   );

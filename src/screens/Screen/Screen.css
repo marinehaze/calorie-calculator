@@ -15,6 +15,23 @@
 
    Every gap in Flow 1 is one of those five. If a new gap does not fit the
    list, the list is wrong — not the gap.
+
+   SAFE AREAS — the shell owns the top inset, the band content owns the bottom.
+
+   The top inset is reserved by the screen itself, so every one of the four
+   screens starts below it and nothing — not a header, not a sticky bar, not a
+   bleed crop — can ever begin flush against the physical top edge or sit under
+   the status bar. Because it is padding on the flex column, a sticky child's
+   `top: 0` resolves *below* it: compactness can never be bought by eating the
+   inset.
+
+   The bottom inset stays with the band's content (`TabBar` and
+   `.screen-action-bar` each carry `env(safe-area-inset-bottom)`), because there
+   the inset has to be inside the white surface rather than under it.
+
+   `--screen-safe-sim-top` / `--screen-safe-sim` are review-only and resolve to
+   0 in production. A desktop browser reports every `env(safe-area-inset-*)` as
+   0, so the Storybook device stage stands in for them.
    ========================================================================= */
 
 .screen {
@@ -27,6 +44,7 @@
   background: var(--ds-canvas);
   border-radius: var(--ds-radius-lg);
   overflow: hidden;
+  padding-top: calc(env(safe-area-inset-top, 0px) + var(--screen-safe-sim-top, 0px));
 }
 
 .screen__header {
@@ -51,6 +69,15 @@
 }
 .screen__scroll::-webkit-scrollbar { display: none; }
 
+/* A screen with no bottom band — Recipe Detail, which is a reading surface
+   with no pinned action. The body is then the last thing above the physical
+   edge, so it reserves the bottom inset itself. */
+.screen__scroll--no-band {
+  padding-bottom: calc(
+    var(--ds-space-3) + env(safe-area-inset-bottom, 0px) + var(--screen-safe-sim, 0px)
+  );
+}
+
 /* ------------------------------------------------------------ bottom band
    The footer owns the surface, so the bottom of the screen is one continuous
    white band whatever sits in it — the tab bar on a root screen, the single
@@ -69,6 +96,22 @@
   flex: 0 0 auto;
   background: var(--ds-surface);
   padding-bottom: var(--screen-safe-sim, 0px);
+}
+
+/* ------------------------------------------------------------- sticky top
+   A navigation surface that stays available on a long drill-down. It bleeds to
+   both screen edges and paints the canvas, so content passes underneath
+   cleanly rather than showing through the 24px gutters.
+
+   `top: 0` is the top of the scroll box, which already sits below the screen's
+   safe-area padding — the bar can never ride up into the status bar. */
+.screen-sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--ds-canvas);
+  margin-inline: calc(var(--ds-screen-margin) * -1);
+  padding: var(--ds-space-1) var(--ds-screen-margin);
 }
 
 /* A footer holding actions rather than navigation. Same band, same rules. */

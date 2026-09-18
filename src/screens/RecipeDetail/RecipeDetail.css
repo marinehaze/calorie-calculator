@@ -3,12 +3,22 @@
    Spacing follows the Flow 1 rhythm declared in Screen.css.
    ========================================================================= */
 
+/* The sticky back bar. `.screen-sticky-top` supplies the position, the bleed
+   and the opaque ground; it sits flush at the top of the scroll box, which is
+   already below the screen's safe-area padding.
+
+   The whole gap down to the hero is carried here rather than split with the
+   hero's own margin: the hero is the element that bleeds sideways, and a
+   margin that has to survive a sticky sibling is a margin that will be
+   mis-measured. 8 above the control + 44 control + 24 below = one band. */
+.rd-topbar { padding-bottom: var(--ds-space-3); }
+
 /* The hero runs to both screen edges. It is not a bleed *crop* — nothing is
    offset and nothing overlaps type — so it needs the negative margin rather
    than `.ds-bleed-stage`, and `flush` drops the radius on the edges it meets. */
 .rd-hero {
   margin-inline: calc(var(--ds-screen-margin) * -1);
-  margin-top: var(--ds-space-2);
+  margin-top: 0;
 }
 
 /* The screen's heading, at the recipe-title setting. */
