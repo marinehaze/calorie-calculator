@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calorie Calculator — product design walkthrough</title>
+<meta name="description" content="An eight-slide walkthrough of the Calorie Calculator mobile nutrition product: scope, branding, design system, both core flows, edge-case handling and the AI-native workflow.">
+<!-- Inline so the deck stays self-contained and never requests a missing icon. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23FBFAF8'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%238A3355'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="deck">
+<div class="stage" role="region" aria-label="Calorie Calculator presentation">
+
+<!-- ============================================================ 01 TITLE -->
+<section class="slide s1" data-active aria-label="Slide 1: Title">
+  <div>
+    <p class="eyebrow">Product design case</p>
+    <h1 class="s1__title">Calorie<br>Calculator</h1>
+    <p class="s1__sub">AI-native mobile nutrition product</p>
+    <p class="s1__meta">Product design<span>·</span>Design System<span>·</span>Storybook</p>
+  </div>
+
+  <div class="s1__shots">
+    <figure><img class="shot" src="./assets/screens/food-search--results.png" alt="Food Search, showing ranked matches for a typed query"></figure>
+    <figure><img class="shot" src="./assets/screens/nutrition-result--single-item.png" alt="Nutrition Result, showing 298 kcal for a 250 g portion"></figure>
+    <figure><img class="shot" src="./assets/screens/recipe-detail--full-recipe.png" alt="Recipe Detail, showing nutrition per serving and ingredients"></figure>
+  </div>
+</section>
+
+<!-- =================================================== 02 PROBLEM & SCOPE -->
+<section class="slide" aria-label="Slide 2: Problem and scope">
+  <div class="head">
+    <p class="eyebrow"><b>02</b> Problem &amp; scope</p>
+    <h2>Two focused user needs</h2>
+  </div>
+
+  <div class="s2__body">
+    <div class="needs">
+      <div class="need">
+        <div class="need__n">01</div>
+        <p class="need__t">Calculate calories and nutrition for a food, product or dish.</p>
+      </div>
+      <div class="need">
+        <div class="need__n">02</div>
+        <p class="need__t">Find a suitable recipe based on dietary preferences and constraints.</p>
+      </div>
+
+      <div class="scope__figs">
+        <div class="fig"><div class="fig__n">4</div><div class="fig__l">core screens</div></div>
+        <div class="fig"><div class="fig__n">34</div><div class="fig__l">application states</div></div>
+      </div>
+    </div>
+
+    <div class="s2__screens">
+      <figure>
+        <img class="shot" src="./assets/screens/food-search--results.png" alt="Food Search">
+        <figcaption>Food Search</figcaption>
+      </figure>
+      <figure>
+        <img class="shot" src="./assets/screens/nutrition-result--single-item.png" alt="Nutrition Result">
+        <figcaption>Nutrition Result</figcaption>
+      </figure>
+      <figure>
+        <img class="shot" src="./assets/screens/recipe-discovery--browse.png" alt="Recipe Discovery">
+        <figcaption>Recipe Discovery</figcaption>
+      </figure>
+      <figure>
+        <img class="shot" src="./assets/screens/recipe-detail--full-recipe.png" alt="Recipe Detail">
+        <figcaption>Recipe Detail</figcaption>
+      </figure>
+    </div>
+  </div>
+
+</section>
+
+<!-- ====================================================== 03 BRANDING -->
+<section class="slide" aria-label="Slide 3: Branding direction">
+  <div class="head">
+    <p class="eyebrow"><b>03</b> Branding direction</p>
+    <h2>Precision without intimidation</h2>
+  </div>
+
+  <div class="s3__band">
+    <div class="block">
+      <div class="block__h">Principles</div>
+      <ul class="principles">
+        <li>Warm, <em>not clinical</em></li>
+        <li>Precise, <em>not intimidating</em></li>
+        <li>Food-led, <em>not dashboard-led</em></li>
+        <li>Calm, spacious, <em>readable</em></li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <div class="block__h">Palette</div>
+      <div class="swatches">
+        <div class="sw"><div class="sw__c" style="background:#FBFAF8"></div><div class="sw__n">Canvas</div><div class="sw__h">#FBFAF8</div></div>
+        <div class="sw"><div class="sw__c" style="background:#FFFFFF"></div><div class="sw__n">Surface</div><div class="sw__h">#FFFFFF</div></div>
+        <div class="sw"><div class="sw__c" style="background:#F4F1EC"></div><div class="sw__n">Soft</div><div class="sw__h">#F4F1EC</div></div>
+        <div class="sw"><div class="sw__c" style="background:#1C1B19"></div><div class="sw__n">Ink</div><div class="sw__h">#1C1B19</div></div>
+        <div class="sw"><div class="sw__c" style="background:#6B6863"></div><div class="sw__n">Ink 2</div><div class="sw__h">#6B6863</div></div>
+        <div class="sw"><div class="sw__c" style="background:#8A3355"></div><div class="sw__n">Berry</div><div class="sw__h">#8A3355</div></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__h">Typography</div>
+      <div class="type-spec">
+        <div class="type-spec__row">
+          <div class="type-spec__big">298 kcal</div>
+          <div class="type-spec__cap">Plus Jakarta Sans — figures &amp; headings</div>
+        </div>
+        <div class="type-spec__row">
+          <div class="type-spec__mid">250 g portion · per 100 g</div>
+          <div class="type-spec__cap">Inter Tight — copy, labels &amp; controls</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block__h">Hierarchy</div>
+      <div class="hierarchy"><img src="./assets/components/nutrition-summary.png" alt="Nutrition block: calories first, then portion and per 100 g, then protein, carbs and fat"></div>
+    </div>
+  </div>
+
+  <div class="s3__photo">
+    <img class="p-hero" src="./assets/food/hero-4x5.jpg" alt="Roasted squash and lentil bowl, 4:5 crop">
+    <img class="p-sq" src="./assets/food/card-1x1.jpg" alt="Squash and couscous bowl, square crop">
+    <img class="p-sq" src="./assets/food/detail-1x1.jpg" alt="Roasted lentils, close detail crop">
+    <img class="p-circle" src="./assets/food/circle-bleed.jpg" alt="Chickpea bowl, circular bleed crop">
+    <p class="photo-cap">Daylight, one soft source, the dish filling the frame. Crops enter the layout from an edge; type and data hold the open side.</p>
+  </div>
+</section>
+
+<!-- ================================================== 04 DESIGN SYSTEM -->
+<section class="slide" aria-label="Slide 4: Design System">
+  <div class="head">
+    <p class="eyebrow"><b>04</b> Design System</p>
+    <h2>From visual language to reusable UI</h2>
+  </div>
+
+  <div class="s4__body">
+    <div class="s4__facts">
+      <div class="s4__figs">
+        <div class="fig"><div class="fig__n">22</div><div class="fig__l">reusable components</div></div>
+        <div class="fig"><div class="fig__n">104</div><div class="fig__l">Storybook stories</div></div>
+      </div>
+      <ul class="s4__notes">
+        <li><b>Tokens, not values.</b> Components read colour, type, spacing and radius from one set of tokens.</li>
+        <li><b>44 px minimum touch targets</b> on every interactive element.</li>
+        <li><b>Loading, empty and error states</b> are defined for each component, not left to the screen.</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="tiles tiles--row1">
+        <div class="tile"><div class="tile__f" style="--h:113px"><img src="./assets/components/button.png" alt=""></div><div class="tile__l">Button</div></div>
+        <div class="tile"><div class="tile__f" style="--h:113px"><img src="./assets/components/search-field.png" alt=""></div><div class="tile__l">SearchField</div></div>
+        <div class="tile"><div class="tile__f" style="--h:94px"><img src="./assets/components/filter-chip.png" alt=""></div><div class="tile__l">FilterChip</div></div>
+        <div class="tile"><div class="tile__f" style="--h:108px"><img src="./assets/components/segmented-control.png" alt=""></div><div class="tile__l">SegmentedControl</div></div>
+      </div>
+
+      <div class="tiles tiles--row2">
+        <div class="tile"><div class="tile__f" style="--h:113px"><img src="./assets/components/stepper.png" alt=""></div><div class="tile__l">Stepper</div></div>
+        <div class="tile"><div class="tile__f" style="--h:110px"><img src="./assets/components/macro-group.png" alt=""></div><div class="tile__l">MacroGroup</div></div>
+        <div class="tile"><div class="tile__f" style="--h:130px"><img src="./assets/components/nutrition-summary.png" alt=""></div><div class="tile__l">NutritionSummary</div></div>
+        <div class="tile"><div class="tile__f" style="--h:130px"><img src="./assets/components/recipe-card.png" alt=""></div><div class="tile__l">RecipeCard</div></div>
+      </div>
+
+      <div class="states-note"><span>Sheets &amp; states</span><hr class="rule"></div>
+
+      <div class="tiles tiles--row3">
+        <div class="tile"><div class="tile__f" style="--h:140px"><img src="./assets/components/bottom-sheet.png" alt=""></div><div class="tile__l">BottomSheet</div></div>
+        <div class="tile"><div class="tile__f" style="--h:128px"><img src="./assets/components/banner.png" alt=""></div><div class="tile__l">Banner</div></div>
+        <div class="tile"><div class="tile__f" style="--h:112px"><img src="./assets/components/empty-state.png" alt=""></div><div class="tile__l">EmptyState</div></div>
+        <div class="tile"><div class="tile__f" style="--h:140px"><img src="./assets/components/skeleton.png" alt=""></div><div class="tile__l">Skeleton</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= 05 FLOW 1 -->
+<section class="slide" aria-label="Slide 5: Flow 1, calculate nutrition">
+  <div class="head">
+    <p class="eyebrow"><b>05</b> Flow 1</p>
+    <h2>Calculate nutrition</h2>
+  </div>
+
+  <div class="flow__row">
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/food-search--first-run.png" alt="Food Search, first run: search field and barcode shortcut">
+      <div class="flow__cap"><div class="flow__n">01</div><div class="flow__t">Food Search</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/food-search--results.png" alt="Food Search showing ranked matches">
+      <div class="flow__cap"><div class="flow__n">02</div><div class="flow__t">Results</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/nutrition-result--single-item.png" alt="Nutrition Result, one item">
+      <div class="flow__cap"><div class="flow__n">03</div><div class="flow__t">Nutrition Result</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/nutrition-result--portion-sheet.png" alt="Portion sheet, adjusting grams">
+      <div class="flow__cap"><div class="flow__n">04</div><div class="flow__t">Adjust portion</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/nutrition-result--multi-item.png" alt="Nutrition Result for a multi-item dish">
+      <div class="flow__cap"><div class="flow__n">05</div><div class="flow__t">Multi-item dish</div></div>
+    </div>
+  </div>
+
+  <div class="flow__notes">
+    <span>Search</span>
+    <span>Barcode shortcut</span>
+    <span>Manual entry fallback</span>
+    <span>Correct the match</span>
+    <span>Portion adjustment</span>
+    <span>Incomplete data handled explicitly</span>
+  </div>
+</section>
+
+<!-- ========================================================= 06 FLOW 2 -->
+<section class="slide" aria-label="Slide 6: Flow 2, find a suitable recipe">
+  <div class="head">
+    <p class="eyebrow"><b>06</b> Flow 2</p>
+    <h2>Find a suitable recipe</h2>
+  </div>
+
+  <div class="flow__row">
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/recipe-discovery--browse.png" alt="Recipe Discovery, browsing recipes">
+      <div class="flow__cap"><div class="flow__n">01</div><div class="flow__t">Recipe Discovery</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/recipe-discovery--filter-sheet.png" alt="Filter sheet: diet, exclusions, calories and time">
+      <div class="flow__cap"><div class="flow__n">02</div><div class="flow__t">Filters</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/recipe-discovery--filters-applied.png" alt="Recipe Discovery with active filters shown above the results">
+      <div class="flow__cap"><div class="flow__n">03</div><div class="flow__t">Filtered results</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/recipe-detail--full-recipe.png" alt="Recipe Detail: nutrition per serving, ingredients and method">
+      <div class="flow__cap"><div class="flow__n">04</div><div class="flow__t">Recipe Detail</div></div>
+    </div>
+    <div class="flow__step">
+      <img class="shot" src="./assets/screens/recipe-detail--servings-adjusted.png" alt="Recipe Detail with servings adjusted and ingredients rescaled">
+      <div class="flow__cap"><div class="flow__n">05</div><div class="flow__t">Adjust servings</div></div>
+    </div>
+  </div>
+
+  <div class="flow__notes">
+    <span>Diet</span>
+    <span>Exclusions</span>
+    <span>Calorie limit</span>
+    <span>Preparation time</span>
+    <span>Nutrition per serving</span>
+    <span>Ingredients and method</span>
+  </div>
+</section>
+
+<!-- ============================================ 07 BEYOND THE HAPPY PATH -->
+<section class="slide" aria-label="Slide 7: Designing beyond the happy path">
+  <div class="head head--split">
+    <p class="eyebrow"><b>07</b> Beyond the happy path</p>
+    <h2>The product also handles uncertainty</h2>
+  </div>
+
+  <div class="s7__grid">
+    <figure>
+      <div class="shot-crop"><img src="./assets/screens/food-search--loading.png" alt="Food Search, skeleton rows while results load"></div>
+      <figcaption>Loading</figcaption>
+    </figure>
+    <figure>
+      <div class="shot-crop"><img src="./assets/screens/food-search--no-results.png" alt="Food Search, no results, with recovery actions"></div>
+      <figcaption>No results</figcaption>
+    </figure>
+    <figure>
+      <div class="shot-crop"><img src="./assets/screens/recipe-discovery--offline.png" alt="Recipe Discovery, offline banner with retry"></div>
+      <figcaption>Offline</figcaption>
+    </figure>
+    <figure>
+      <div class="shot-crop"><img src="./assets/screens/nutrition-result--error-state.png" alt="Nutrition Result, nutrition data could not be loaded"></div>
+      <figcaption>Error</figcaption>
+    </figure>
+    <figure>
+      <div class="shot-crop"><img src="./assets/screens/nutrition-result--incomplete-data.png" alt="Nutrition Result with missing macro values shown as not available"></div>
+      <figcaption>Incomplete nutrition</figcaption>
+    </figure>
+    <figure>
+      <div class="shot-crop"><img src="./assets/screens/food-search--camera-denied.png" alt="Barcode scanning with camera access turned off"></div>
+      <figcaption>Camera access off</figcaption>
+    </figure>
+  </div>
+
+  <div class="s7__foot">
+    <ul class="s7__msg">
+      <li>Missing data is explicit.</li>
+      <li>Recovery actions are always available.</li>
+      <li>The interface does not treat “unknown” as zero.</li>
+    </ul>
+
+    <div class="audit">
+      <div><b>104</b><span>stories audited</span></div>
+      <div><b>0</b><span>horizontal overflow</span></div>
+      <div><b>0</b><span>touch targets under 44 px</span></div>
+      <div><b>0</b><span>WCAG 2.1 A/AA violations</span></div>
+      <div><b>0</b><span>page errors</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== 08 AI-NATIVE WORKFLOW -->
+<section class="slide" aria-label="Slide 8: AI-native workflow">
+  <div class="head">
+    <p class="eyebrow"><b>08</b> AI-native workflow</p>
+    <h2>Designed with AI, directed by product decisions</h2>
+  </div>
+
+  <div class="s8__mid">
+    <div class="pipeline">
+      <div><b>01</b><p>Scope &amp; UX logic</p></div>
+      <div><b>02</b><p>Branding</p></div>
+      <div><b>03</b><p>Design System</p></div>
+      <div><b>04</b><p>Claude Code implementation</p></div>
+      <div><b>05</b><p>Storybook review</p></div>
+      <div><b>06</b><p>Visual &amp; accessibility audit</p></div>
+      <div><b>07</b><p>Git review checkpoints</p></div>
+      <div><b>08</b><p>GitHub Pages</p></div>
+    </div>
+
+    <div class="s8__foot">
+      <ul class="s8__say">
+        <li>Claude Code was used as an implementation and validation tool, not as an uncontrolled design generator.</li>
+        <li>AI accelerated implementation and verification. Design decisions, scope and UX logic stayed explicit and reviewable.</li>
+      </ul>
+
+      <div class="links">
+        <a href="https://github.com/marinehaze/calorie-calculator"><span>Repository</span><b>github.com/marinehaze/calorie-calculator</b></a>
+        <a href="https://marinehaze.github.io/calorie-calculator/"><span>Live Storybook</span><b>marinehaze.github.io/calorie-calculator</b></a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<p class="pager"><b>01</b> / 08</p>
+<p class="hint">→ or space to advance · F for full screen</p>
+
+</div>
+</div>
+
+<script src="./deck.js"></script>
+</body>
+</html>

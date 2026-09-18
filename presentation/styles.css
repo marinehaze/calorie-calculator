@@ -1,0 +1,409 @@
+/* =========================================================================
+   Calorie Calculator — walkthrough presentation
+   -------------------------------------------------------------------------
+   Presentation only. Nothing here is imported by the product, and none of the
+   product's own CSS is imported here: the deck restates the approved palette
+   and type pairing as its own tokens so it can never drift the design system.
+
+   The deck is a fixed 1600 x 900 stage scaled to fit the window, so a slide
+   composes once and then holds its proportions at every laptop resolution.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- fonts */
+/* The two approved families, copied into presentation/assets/fonts so the
+   deck records offline with no CDN dependency. Latin subset only. */
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 400; font-display: block; src: url('./assets/fonts/PlusJakartaSans-400-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 500; font-display: block; src: url('./assets/fonts/PlusJakartaSans-500-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Plus Jakarta Sans'; font-style: normal; font-weight: 600; font-display: block; src: url('./assets/fonts/PlusJakartaSans-600-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 400; font-display: block; src: url('./assets/fonts/InterTight-400-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 500; font-display: block; src: url('./assets/fonts/InterTight-500-latin.woff2') format('woff2'); }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 600; font-display: block; src: url('./assets/fonts/InterTight-600-latin.woff2') format('woff2'); }
+
+/* --------------------------------------------------------------- tokens */
+
+:root {
+  color-scheme: light;
+
+  --canvas:      #FBFAF8;
+  --surface:     #FFFFFF;
+  --soft:        #F4F1EC;
+  --ink:         #1C1B19;
+  --ink-2:       #6B6863;
+  --line:        #EAE6E0;
+  --line-strong: #DFDAD2;
+  --berry:       #8A3355;
+  --berry-soft:  #F7EDF1;
+
+  --display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --ui:      'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --margin: 88px;   /* the stage's outer margin */
+
+  /* One shadow for product stills, one for nothing else. The screens are the
+     only raised things in the deck. */
+  --lift: 0 24px 60px -28px rgba(28, 27, 25, .40), 0 0 0 1px rgba(28, 27, 25, .07);
+}
+
+/* ----------------------------------------------------------------- base */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;              /* slides never depend on browser scroll */
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--ui);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; }
+
+/* ---------------------------------------------------------------- stage */
+
+.deck {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--canvas);
+}
+
+/* Fixed design size. `--k` is set by deck.js from the window, so the slide is
+   composed once at 1600x900 and scaled — never reflowed — to fit. */
+.stage {
+  position: relative;
+  width: 1600px;
+  height: 900px;
+  transform: scale(var(--k, 1));
+  transform-origin: center center;
+  background: var(--canvas);
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------- slide */
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 72px var(--margin);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 340ms ease, transform 340ms ease, visibility 0s linear 340ms;
+}
+
+.slide[data-active] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 340ms ease, transform 340ms ease, visibility 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide, .slide[data-active] { transition-duration: 1ms; transform: none; }
+}
+
+/* ------------------------------------------------------------ type kit */
+
+.eyebrow {
+  margin: 0;
+  font: 500 14px/1 var(--ui);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.eyebrow b { color: var(--berry); font-weight: 500; margin-right: 10px; }
+
+h1, h2 { margin: 0; font-family: var(--display); font-weight: 500; }
+
+h2 {
+  font-size: 52px;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  max-width: 17ch;
+}
+
+.lede {
+  margin: 0;
+  font: 400 19px/1.55 var(--ui);
+  letter-spacing: -.005em;
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+
+.label {
+  margin: 0;
+  font: 500 14px/1.35 var(--ui);
+  letter-spacing: -.005em;
+  color: var(--ink-2);
+}
+
+.rule { height: 1px; background: var(--line); border: 0; margin: 0; }
+
+/* A slide's heading block: eyebrow, heading, optional lede. */
+.head { display: grid; gap: 22px; }
+.head--split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 480px);
+  align-items: end;
+  column-gap: 72px;
+}
+.head--split .eyebrow { grid-column: 1 / -1; }
+
+/* ------------------------------------------------------- product stills */
+
+/* Every product screenshot in the deck is presented the same way: the real
+   390x844 capture, a device-scale radius, one soft shadow. No bezel, no hand,
+   no perspective — nothing that competes with the interface. */
+.shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+  box-shadow: var(--lift);
+  background: var(--canvas);
+}
+
+/* A still cropped to its top, for state grids where the top of the screen is
+   the part that carries the message. */
+.shot-crop {
+  border-radius: 30px;
+  box-shadow: var(--lift);
+  overflow: hidden;
+  background: var(--canvas);
+}
+.shot-crop img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+/* =========================================================== slide 1 */
+
+.s1 { display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 1fr); column-gap: 80px; align-items: center; }
+
+.s1__title {
+  font-size: 84px;
+  line-height: .98;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.s1__sub {
+  margin: 30px 0 0;
+  font-family: var(--display);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+.s1__meta { margin: 46px 0 0; font: 500 15px/1 var(--ui); letter-spacing: .01em; color: var(--ink-2); }
+.s1__meta span { color: var(--line-strong); margin: 0 12px; }
+
+/* Three final screens, staggered. The middle one leads. */
+.s1__shots { display: flex; align-items: center; justify-content: flex-end; gap: 34px; }
+.s1__shots figure { margin: 0; width: 252px; }
+.s1__shots figure:nth-child(1) { transform: translateY(46px); }
+.s1__shots figure:nth-child(2) { width: 288px; transform: translateY(-14px); }
+.s1__shots figure:nth-child(3) { transform: translateY(46px); }
+
+/* =========================================================== slide 2 */
+
+.s2__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 72px;
+  align-items: start;
+  margin-top: 72px;
+}
+
+.needs { display: grid; gap: 44px; align-content: start; }
+.need { display: grid; grid-template-columns: 74px minmax(0, 1fr); align-items: start; }
+.need__n { font: 500 30px/1.35 var(--display); letter-spacing: -.02em; color: var(--berry); }
+.need__t { margin: 0; font-family: var(--display); font-size: 25px; font-weight: 400; line-height: 1.35; letter-spacing: -.02em; }
+
+.scope__figs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding-top: 14px; max-width: 460px; }
+.fig { display: grid; gap: 8px; }
+.fig__n { font: 500 46px/1 var(--display); letter-spacing: -.035em; }
+.fig__l { font: 400 15px/1.3 var(--ui); color: var(--ink-2); }
+
+/* The four core screens, whole rather than cropped: at this size they are an
+   index of the product, not something to read. */
+.s2__screens { display: grid; grid-template-columns: repeat(4, 186px); gap: 28px; }
+.s2__screens figure { margin: 0; display: grid; gap: 16px; }
+.s2__screens .shot { border-radius: 18px; }
+.s2__screens figcaption { font: 500 14px/1 var(--ui); color: var(--ink-2); letter-spacing: -.005em; }
+
+/* =========================================================== slide 3 */
+
+.principles { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; align-content: start; }
+.principles li { font: 400 18px/1.35 var(--ui); letter-spacing: -.01em; color: var(--ink); }
+.principles em { font-style: normal; color: var(--ink-2); }
+
+.s3__band {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 260px 330px 300px 300px;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.block { display: grid; gap: 18px; align-content: start; }
+.block__h { font: 500 13px/1 var(--ui); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+
+.swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.sw { display: grid; gap: 9px; }
+.sw__c { height: 58px; border-radius: 14px; box-shadow: inset 0 0 0 1px rgba(28, 27, 25, .07); }
+.sw__n { font: 500 13px/1.25 var(--ui); }
+.sw__h { font: 400 12px/1 var(--ui); color: var(--ink-2); letter-spacing: .02em; }
+
+.type-spec { display: grid; gap: 18px; }
+.type-spec__row { display: grid; gap: 6px; }
+.type-spec__big { font: 500 40px/1 var(--display); letter-spacing: -.035em; }
+.type-spec__mid { font: 400 22px/1.2 var(--ui); letter-spacing: -.01em; }
+.type-spec__cap { font: 400 13px/1 var(--ui); color: var(--ink-2); }
+
+.hierarchy { border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); }
+.hierarchy img { width: 100%; height: auto; }
+
+/* The approved crops, at the stylescape's own aspect ratios, with the caption
+   holding the open side. */
+.s3__photo { margin-top: auto; display: flex; align-items: center; gap: 20px; }
+.s3__photo img { object-fit: cover; flex: none; }
+.p-hero   { width: 152px; height: 190px; border-radius: 18px; }
+.p-sq     { width: 190px; height: 190px; border-radius: 18px; }
+.p-circle { width: 190px; height: 190px; border-radius: 50%; }
+.photo-cap { margin: 0 0 0 36px; max-width: 42ch; font: 400 15px/1.55 var(--ui); color: var(--ink-2); }
+
+/* =========================================================== slide 4 */
+
+.s4__body { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); column-gap: 72px; margin-top: 46px; flex: 1; min-height: 0; }
+
+.s4__facts { display: grid; gap: 30px; align-content: start; }
+.s4__figs { display: grid; gap: 26px; }
+.s4__notes { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.s4__notes li { font: 400 16px/1.45 var(--ui); letter-spacing: -.005em; color: var(--ink-2); }
+.s4__notes b { font-weight: 500; color: var(--ink); }
+
+.tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-content: start; }
+ /* Rows 1fr/auto so every label in a row sits on one line however tall its
+    specimen is. */
+.tile { display: grid; grid-template-rows: 1fr auto; gap: 10px; }
+.tile__f { height: var(--h, 130px); align-self: start; border-radius: 18px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); background: var(--surface); }
+/* The captures are all 390px wide. Scaling them to the tile's width and
+   clipping the bottom keeps every specimen whole across its width — cropping
+   with `cover` would slice chips and steppers off at both edges. */
+.tile__f img { width: 100%; height: auto; }
+.tile__l { font: 500 13px/1 var(--ui); letter-spacing: -.005em; color: var(--ink-2); }
+
+.tiles--row2 { margin-top: 24px; }
+.tiles--row3 { margin-top: 22px; }
+
+.states-note { margin-top: 26px; display: flex; align-items: center; gap: 18px; }
+.states-note .rule { flex: 1; }
+.states-note span { font: 500 13px/1 var(--ui); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+
+/* =========================================================== slides 5–6 */
+
+.flow__row {
+  --shot-w: 236px;                 /* 236 x 511 — five of these plus the gaps
+                                      is exactly the 1424px content column */
+  --shot-gap: 61px;
+  display: grid;
+  grid-template-columns: repeat(5, var(--shot-w));
+  justify-content: space-between;
+  margin-top: 46px;
+}
+.flow__step { display: grid; gap: 16px; align-content: start; position: relative; }
+.flow__step .shot { border-radius: 24px; }
+.flow__cap { display: grid; gap: 4px; }
+.flow__n { font: 500 12px/1 var(--ui); letter-spacing: .12em; color: var(--berry); }
+.flow__t { font: 500 15px/1.3 var(--ui); letter-spacing: -.01em; color: var(--ink); }
+
+/* The connector between two steps: one hairline and one small chevron, on the
+   screens' own centre line. */
+.flow__step + .flow__step::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--shot-gap) * -1);
+  width: var(--shot-gap);
+  top: 42%;
+  border-top: 1px solid var(--line-strong);
+}
+
+.flow__notes { margin-top: auto; padding-top: 30px; display: flex; flex-wrap: wrap; gap: 0 34px; }
+.flow__notes span { font: 400 15px/1.6 var(--ui); color: var(--ink-2); letter-spacing: -.005em; }
+.flow__notes span::before { content: '·'; color: var(--line-strong); margin-right: 34px; }
+.flow__notes span:first-child::before { content: none; margin: 0; }
+
+/* =========================================================== slide 7 */
+
+.s7__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 26px; margin-top: 42px; }
+.s7__grid figure { margin: 0; display: grid; gap: 14px; }
+/* 396px of a 465px-tall still: the crop stops just above the tab bar rather
+   than slicing through it. */
+.s7__grid .shot-crop { height: 396px; border-radius: 24px; }
+.s7__grid figcaption { font: 500 14px/1.3 var(--ui); letter-spacing: -.005em; }
+
+.s7__foot { margin-top: auto; padding-top: 34px; display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); column-gap: 72px; align-items: start; }
+
+.s7__msg { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.s7__msg li { font: 400 17px/1.4 var(--ui); letter-spacing: -.005em; }
+.s7__msg li:last-child { color: var(--ink-2); }
+
+.audit { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+.audit div { display: grid; gap: 6px; border-left: 1px solid var(--line); padding-left: 20px; }
+.audit b { font: 500 27px/1 var(--display); letter-spacing: -.03em; }
+.audit span { font: 400 13px/1.35 var(--ui); color: var(--ink-2); }
+
+/* =========================================================== slide 8 */
+
+/* The process line and what it means sit together, centred in the slide's
+   open space rather than stranded at opposite edges. */
+.s8__mid { margin: auto 0; }
+.pipeline { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; }
+.pipeline div { position: relative; padding: 0 22px 0 0; }
+.pipeline b { display: block; font: 500 12px/1 var(--ui); letter-spacing: .12em; color: var(--berry); margin-bottom: 16px; }
+.pipeline p { margin: 0; font: 400 16px/1.35 var(--ui); letter-spacing: -.01em; }
+/* The process line itself: one hairline running under every step, with the
+   step's own marker sitting on it. */
+.pipeline div::before { content: ''; position: absolute; left: 0; right: 0; top: -22px; border-top: 1px solid var(--line); }
+.pipeline div::after { content: ''; position: absolute; left: 0; top: -25px; width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
+
+.s8__foot { margin-top: 76px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); column-gap: 72px; align-items: start; }
+.s8__say { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.s8__say li { font: 400 19px/1.45 var(--ui); letter-spacing: -.008em; }
+.s8__say li:last-child { color: var(--ink-2); }
+
+.links { display: grid; gap: 16px; }
+.links a { text-decoration: none; display: grid; gap: 4px; }
+.links a span { font: 500 13px/1 var(--ui); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.links a b { font: 400 17px/1.3 var(--ui); letter-spacing: -.01em; color: var(--berry); word-break: break-all; }
+
+/* ------------------------------------------------------- slide number */
+
+.pager {
+  position: absolute;
+  right: var(--margin);
+  bottom: 44px;
+  font: 500 13px/1 var(--ui);
+  letter-spacing: .06em;
+  color: var(--ink-2);
+  opacity: .62;
+  z-index: 5;
+}
+.pager b { font-weight: 500; color: var(--ink); }
+
+/* The one-line hint, shown until the deck is first advanced. */
+.hint {
+  position: absolute;
+  left: var(--margin);
+  bottom: 44px;
+  font: 400 13px/1 var(--ui);
+  color: var(--ink-2);
+  opacity: .55;
+  transition: opacity 300ms ease;
+  z-index: 5;
+}
+.hint[hidden] { display: block; opacity: 0; pointer-events: none; }
