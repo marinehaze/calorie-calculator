@@ -1,0 +1,69 @@
+# Publishes the built Storybook to GitHub Pages.
+#
+# The four screens and the design system are only reviewable in Storybook, so
+# that static build is what the Pages URL should serve. Storybook emits every
+# asset reference as a relative path, so it needs no base-path configuration to
+# work from a project subpath such as /calorie-calculator/.
+#
+# This uses the official Pages Actions flow — configure-pages,
+# upload-pages-artifact, deploy-pages — which publishes an artifact directly
+# and never commits a built site to a branch.
+#
+# Requires Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
+
+name: Deploy Storybook to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Lets the site be republished without a new commit — useful straight after
+  # switching the Pages source over to GitHub Actions.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, and never cancel one that is already publishing.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Upload the built Storybook
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: storybook-static
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
