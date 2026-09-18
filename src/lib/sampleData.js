@@ -6,10 +6,17 @@
  * a grain bowl never look like they contain the same energy. Macro grams are
  * roughly consistent with the calorie totals (4/4/9).
  *
- * Photography is the approved set in assets/food/, served at /food by Storybook.
+ * Photography is the approved set in assets/food/, which Storybook's staticDirs
+ * copies to <base>/food in the build.
+ *
+ * The URL is built from Vite's BASE_URL rather than a root-absolute `/food/`
+ * so one helper covers both hosts: BASE_URL is `/` on the dev server and `./`
+ * in the static build, where it resolves against iframe.html. A root-absolute
+ * path breaks on GitHub Pages, which serves the site from the project subpath
+ * /calorie-calculator/ rather than the domain root.
  */
 
-export const img = (name) => `/food/${name}.png`;
+export const img = (name) => `${import.meta.env.BASE_URL}food/${name}.png`;
 
 /* ---------------------------------------------------------- search results */
 
