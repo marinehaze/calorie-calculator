@@ -1,0 +1,84 @@
+/* =========================================================================
+   Screen 4 — Recipe Detail. Screen-level layout only.
+   Spacing follows the Flow 1 rhythm declared in Screen.css.
+   ========================================================================= */
+
+/* The sticky back bar. `.screen-sticky-top` supplies the position, the bleed
+   and the opaque ground; it sits flush at the top of the scroll box, which is
+   already below the screen's safe-area padding.
+
+   The whole gap down to the hero is carried here rather than split with the
+   hero's own margin: the hero is the element that bleeds sideways, and a
+   margin that has to survive a sticky sibling is a margin that will be
+   mis-measured. 8 above the control + 44 control + 24 below = one band. */
+.rd-topbar { padding-bottom: var(--ds-space-3); }
+
+/* The hero runs to both screen edges. It is not a bleed *crop* — nothing is
+   offset and nothing overlaps type — so it needs the negative margin rather
+   than `.ds-bleed-stage`, and `flush` drops the radius on the edges it meets. */
+.rd-hero {
+  margin-inline: calc(var(--ds-screen-margin) * -1);
+  margin-top: 0;
+}
+
+/* The screen's heading, at the recipe-title setting. */
+.rd-title {
+  margin-top: var(--ds-space-3);
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-heading);
+  letter-spacing: var(--ds-tracking-display);
+  line-height: var(--ds-leading-display);
+  color: var(--ds-ink);
+  text-wrap: balance;
+}
+
+/* Time, yield and diet on one line, dot-separated — the same meta idiom the
+   recipe card uses, so a card and its recipe read as one thing. */
+.rd-meta {
+  margin-top: var(--ds-space-1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+}
+.rd-meta > * + *::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: var(--ds-radius-circle);
+  background: var(--ds-line-strong);
+  margin-inline: var(--ds-space-1);
+  vertical-align: middle;
+}
+
+.rd-banner { margin-top: var(--ds-space-4); }
+
+.rd-section-title {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-title);
+  line-height: var(--ds-leading-title);
+}
+
+/* The yield qualifies the heading above it. */
+.rd-yield { margin-top: var(--ds-space-1); margin-bottom: var(--ds-space-2); }
+
+/* Level → level inside one section. */
+.rd-method { margin-top: var(--ds-space-4); }
+
+.rd-note { margin-top: var(--ds-space-5); }
+
+/* ------------------------------------------------------------- skeletons
+   Sized to the boxes they replace, so nothing moves when the figures land. */
+.rd-loading-pair { display: flex; gap: var(--ds-space-6); margin-top: var(--ds-space-3); }
+.rd-loading-macros {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ds-space-2);
+  margin-top: var(--ds-space-3);
+}
+.rd-loading-rows { display: grid; gap: var(--ds-space-3); }
+.rd-loading-row { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-2); }

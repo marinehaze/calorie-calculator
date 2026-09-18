@@ -42,6 +42,27 @@
   color: var(--ds-ink-2);
 }
 
+/* ---------------------------------------------------------------- alignment
+   Edge-balanced: protein reads from the left margin, fat closes on the right,
+   carbs holds the middle. The three columns are still exactly equal and the
+   weights are still identical — only the alignment inside each column differs.
+
+   Left-aligning all three left 50px of dead air after "3.5 g" and nothing on
+   the right margin, so the band read as left-weighted rather than as spanning
+   the content column; with a long value such as "Not available" the gaps
+   between the figures went 73px / 37px. Balancing to the edges takes both to
+   zero and holds in either case.
+
+   This is a deliberate, reviewed departure from the stylescape's section 05
+   specimen, which set all three flush left. */
+.ds-macro:nth-child(2) { align-items: center; }
+.ds-macro:nth-child(2) .ds-macro__value { text-align: center; }
+.ds-macro:nth-child(2) .ds-macro__label { justify-content: center; }
+
+.ds-macro:nth-child(3) { align-items: flex-end; }
+.ds-macro:nth-child(3) .ds-macro__value { text-align: right; }
+.ds-macro:nth-child(3) .ds-macro__label { justify-content: flex-end; }
+
 /* The marker is a 7px dot and nothing else. It reinforces the label it sits
    next to; it never carries the meaning on its own, which is why the word
    "Protein" is always present. */

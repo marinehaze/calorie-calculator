@@ -1,0 +1,176 @@
+/* =========================================================================
+   Screen 2 — Nutrition Result. Screen-level layout only.
+
+   The hierarchy, the components and every value are the design system's. What
+   is here is composition: where the bleed crop sits, what holds the open side
+   of it, and how the sections are spaced.
+   ========================================================================= */
+
+/* ------------------------------------------------------------ the signature
+   The crop enters from the right edge and the name and the calorie figure hold
+   the open left. `.ds-bleed-stage` is what makes the offset measure from the
+   screen edge rather than from the 24px margin; `.ds-bleed-stage__type` caps
+   the column at 196px so the figure and its unit stop short of the crop. */
+
+.nr-stage {
+  /* The crop is 228px tall and starts below the nav bar, so the stage is never
+     shorter than the photograph it contains. No bottom padding: it used to add
+     8px on top of the following section's 40, making a third "between
+     sections" value of 48. */
+  min-height: calc(var(--ds-bleed-size) + var(--ds-space-7));
+}
+
+.nr-stage__crop {
+  top: var(--ds-space-7);
+  width: var(--ds-bleed-size);
+  height: var(--ds-bleed-size);
+}
+
+/* The nav bar is in the stage rather than above it, so the crop can start
+   level with the top of the type below and the screen opens as one block. */
+.nr-stage__nav { position: relative; z-index: 2; }
+
+/* The item name. 27px is the system's "item name on Nutrition Result" setting;
+   nothing about it is chosen here. */
+.nr-name {
+  margin-top: var(--ds-space-1);
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-heading);
+  letter-spacing: var(--ds-tracking-display);
+  line-height: var(--ds-leading-display);
+  color: var(--ds-ink);
+  text-wrap: balance;
+}
+
+.nr-source { margin-top: var(--ds-space-1); }
+
+.nr-hero { margin-top: var(--ds-space-3); }
+
+/* The pair clears the bottom of the crop, so it runs the full content width
+   rather than being squeezed into the capped column. Kept above the crop in
+   paint order regardless, because "data never sits on food" should not depend
+   on a measurement holding. */
+.nr-pair {
+  position: relative;
+  z-index: 2;
+  margin-top: var(--ds-space-4);
+}
+
+/* The two corrections. Same width and same weight: one edits the amount, the
+   other replaces the match, and neither outranks the other. Above the crop in
+   paint order for the same reason the pair is. */
+.nr-corrections { position: relative; z-index: 2; }
+
+.nr-banner { margin-top: var(--ds-space-4); }
+
+/* --------------------------------------------------------------- nutrition */
+
+.nr-nutrition__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  flex-wrap: wrap;
+}
+
+.nr-section-title {
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-semibold);
+  font-size: var(--ds-text-title);
+  letter-spacing: var(--ds-tracking-title);
+  line-height: var(--ds-leading-title);
+}
+
+/* Level → level inside one section. */
+.nr-macros { margin-top: var(--ds-space-4); }
+
+/* Skeletons in the same boxes the figures will occupy, so the screen does not
+   reflow when the rest of the entry arrives. The pair skeleton carries the
+   real pair's divider and cell padding as well as its height — the box has to
+   match, not just the bars inside it. */
+.nr-loading-pair { display: flex; }
+.nr-loading-pair__cell { flex: 1; min-width: 0; display: block; }
+.nr-loading-pair__cell:first-child { padding-right: var(--ds-space-3); }
+.nr-loading-pair__cell + .nr-loading-pair__cell {
+  padding-left: var(--ds-space-3);
+  border-left: var(--ds-border) solid var(--ds-line);
+}
+.nr-loading-macros { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-space-2); }
+
+/* ------------------------------------------------------------------- items
+   The multi-item layout. SCREENS.md asks for per-item rows, each item's
+   contribution, and a running total that stays visible while the list grows —
+   so the head carrying the total sticks to the top of the scrolling body
+   instead of leaving with the hero. */
+
+.nr-items { margin-top: var(--ds-space-5); }
+
+.nr-items__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ds-space-2);
+  background: var(--ds-canvas);
+  padding-block: var(--ds-space-1);
+}
+
+.nr-items__label { margin-bottom: 0; }
+
+.nr-items__total {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-half);
+  font-family: var(--ds-font-display);
+  font-weight: var(--ds-weight-medium);
+  font-size: var(--ds-text-value);
+  letter-spacing: var(--ds-tracking-value);
+  color: var(--ds-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.nr-items__unit {
+  font-family: var(--ds-font-ui);
+  font-weight: var(--ds-weight-regular);
+  font-size: var(--ds-text-label);
+  letter-spacing: 0;
+  color: var(--ds-ink-2);
+}
+
+.nr-note { margin-top: var(--ds-space-3); }
+
+/* ------------------------------------------------------------------ sheets */
+
+.nr-sheet-lead { font-size: var(--ds-text-body); color: var(--ds-ink-2); }
+.nr-sheet-switch { margin-top: var(--ds-space-3); display: flex; justify-content: center; }
+.nr-sheet-amount { margin-top: var(--ds-space-3); }
+
+.nr-sheet-equiv {
+  margin-top: var(--ds-space-1);
+  text-align: center;
+  font-size: var(--ds-text-eyebrow);
+  color: var(--ds-ink-2);
+}
+
+.nr-sheet-rule {
+  border: 0;
+  border-top: var(--ds-border) solid var(--ds-line);
+  margin: var(--ds-space-3) 0 0;
+}
+
+.nr-sheet-result { margin-top: var(--ds-space-3); text-align: center; }
+
+.nr-sheet-caption {
+  margin-top: var(--ds-space-1);
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+}
+
+.nr-sheet-extra {
+  margin-top: var(--ds-space-4);
+  display: grid;
+  gap: var(--ds-space-1);
+}

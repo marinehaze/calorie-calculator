@@ -7,8 +7,8 @@ production components for the four screens in `SCREENS.md`. It does not
 introduce a visual direction — every value here is traceable to the stylescape
 or to `DECISIONS.md`.
 
-The four screens themselves are **not** built yet. This stage delivers the
-parts they will be assembled from.
+Flow 1 — Food Search and Nutrition Result — is built from these parts. The
+Flow 2 screens are not. See §8.
 
 > **Precision without intimidation.**
 > Precision belongs to the information and the behaviour. The surface stays
@@ -159,7 +159,7 @@ Public API is `src/index.js`.
 |---|---|
 | **HeroCalories** | lg / md / sm; `pending`; unavailable |
 | **PortionPair** | Portion + per-100g on one hairline |
-| **MacroGroup** | Three columns, equal weight; per-macro unavailable |
+| **MacroGroup** | Three equal columns, equal weight, edge-balanced — see §3; per-macro unavailable |
 | **IngredientRow** | Fixed number columns; `flag`; interactive (item swap) |
 | **NutritionSummary** | `full` (Nutrition Result) and `summary` (Recipe Detail) |
 
@@ -201,6 +201,20 @@ by space, not by cards, borders or shadows.
 **Nutrition is not a dashboard.** No bars, rings, stacked charts, percentages
 of a daily target, or progress indicators. `DECISIONS.md` removed red/amber/
 green semantics from nutrition values: nothing turns red at someone for eating.
+
+**The macro grid is edge-balanced.** Protein is aligned left, carbs centred,
+fat right, so the band meets both content margins. The three columns stay
+exactly equal (103.3px at 390px) and the three values stay at identical
+weight — only the alignment inside each column differs, and nothing about the
+"equal weight" rule above changes.
+
+This **supersedes the stylescape's section 05 specimen**, which set all three
+flush left. Measured at 390px, flush left put the figures 0px from the left
+margin and 50px short of the right, so the band read as left-weighted rather
+than as spanning the content column; and where a value reads "Not available"
+rather than "3.5 g", the gaps between the three figures went ragged — 73px
+then 37px. Edge-balancing takes the lead-in and the trailing air to zero and
+holds in both cases.
 
 **Missing data is stated in words, never rendered as a zero.** Every component
 that shows a figure takes `null` and prints "Not available" or "n/a". A zero
@@ -278,7 +292,7 @@ separated by 24px of space; nothing is boxed.
 | Food Search | **visible** | — (the search field is the header) |
 | Recipe Discovery | **visible** | title + filter action, no back |
 | Nutrition Result | **not shown** | back only, no title |
-| Recipe Detail | **not shown** | back + title |
+| Recipe Detail | **not shown** | back only, no title — **sticky** |
 
 `TabBar` is root navigation between Calculate and Recipes. Nutrition Result and
 Recipe Detail are drill-downs reached from a list, so they replace the tab bar
@@ -286,10 +300,28 @@ with a back control rather than showing both: a tab bar on a drill-down offers
 a lateral move out of a task the user is mid-way through.
 
 `NavBar` therefore serves two jobs. On a drill-down it carries the back control
-and, where the screen needs one, a title — Nutrition Result omits the title
-because the dish name is already the largest thing on the screen. On Recipe
-Discovery it is a plain header: a title and the filter action, with no back
-control, sitting above a screen that still shows the tab bar.
+and no title: on both Nutrition Result and Recipe Detail the dish or recipe
+name is already the largest thing on the screen, and repeating it in a bar
+would compete with the heading. On Recipe Detail it would also truncate — a
+realistic recipe name needs 646px in a bar that has 300. On Recipe Discovery
+`NavBar` is a plain header instead: a title and the filter action, with no back
+control, above a screen that still shows the tab bar.
+
+**Back stays available on a long drill-down.** Recipe Detail runs to a hero, a
+nutrition block, nine ingredients and seven method steps, so its nav bar is
+sticky: a reader in the middle of the method must not have to scroll to the top
+to find the way out. It is a screen-level treatment (`.screen-sticky-top`) — an
+opaque, edge-to-edge canvas bar pinned to the top of the scroll box, which sits
+below the screen's safe-area padding. `NavBar` itself is unchanged.
+
+**The top safe area belongs to the screen shell.** Every screen reserves
+`env(safe-area-inset-top)` as padding on its own box, so no header, sticky bar
+or bleed crop can begin flush against the physical top edge or sit under the
+status bar. A sticky child's `top: 0` resolves below that padding, so a compact
+header can never buy its compactness out of the inset. The bottom inset works
+the other way round: it stays with the band's *content* (`TabBar`,
+`.screen-action-bar`), because there it has to be inside the white surface
+rather than under it.
 
 **Applied filters wrap; they never scroll sideways.** The set is small and
 bounded, and a chip cut off at the screen edge reads as broken rather than as
@@ -507,12 +539,23 @@ src/
 
 ---
 
-## 8. Not built, deliberately
+## 8. Screen status
 
-The four screens (Food Search, Nutrition Result, Recipe Discovery, Recipe
-Detail) and their eight dedicated states. This stage is the parts; the screens
-are the next one.
+**Built — Flow 1** ("calculate the calories in a dish or a specific product"):
 
-No design system overview page was created. Storybook's Foundations section
-already serves that purpose, and a second hand-written page would be a copy of
-the tokens that drifts out of date.
+- **Food Search** — first run and no results, plus suggestions, results,
+  loading, barcode scanning, barcode not found, camera access off, offline
+  and search error.
+- **Nutrition Result** — single item and multi-item dish, plus the portion
+  sheet, the item-swap sheet, recalculating, loading, error, incomplete data
+  and item removed.
+
+**Pending — Flow 2** ("find a recipe for a dish that is suitable for me"):
+
+- **Recipe Discovery** — browse / results, the filter sheet, no matching
+  recipes.
+- **Recipe Detail** — full recipe.
+
+Not built, deliberately: no design system overview page. Storybook's
+Foundations section already serves that purpose, and a second hand-written
+page would be a copy of the tokens that drifts out of date.

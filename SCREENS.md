@@ -177,12 +177,14 @@ Search plus a results list, with a filter sheet holding diet type, exclusions, c
 | **Before** | Screen 3. |
 | **After** | Terminal for US2. Optional bridge to Screen 2 via "see nutrition breakdown." |
 
-Carries a servings control, since changing servings changes both ingredient amounts and per-serving nutrition. Its nutrition block is Screen 2's, summarised — the join between the two stories.
+Carries a servings control, since changing the yield changes every ingredient amount. Its nutrition block is Screen 2's, summarised — the join between the two stories.
+
+**The servings control sets recipe yield.** Ingredient amounts and the total calories of the batch scale proportionally, and the portion label follows the new yield. **Nutrition per serving is invariant**: per-serving is total ÷ servings, so multiplying both by the same factor leaves it unchanged. A figure that moved here would claim that the same recipe puts different food in each portion depending on how many you cook.
 
 | State | | Notes |
 |---|---|---|
 | **Full recipe** | ◆ | The screen's reason to exist: ingredients, steps, and nutrition in one readable scroll. There is no second layout here to design. |
-| Servings adjusted | · | Amounts and nutrition recompute in place. |
+| Servings adjusted | · | Ingredient amounts, the batch total and the portion label recompute in place. The per-serving figures hold — see above. |
 | Ingredient flagged against an active filter | · | Inline marker on the offending ingredient. Only reachable when a recipe partially matches; a content variation, not a layout. |
 | Loading | · | Skeleton, or progressive fill from the list card's data. |
 | Error / unavailable | · | Shared banner. |

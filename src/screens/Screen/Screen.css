@@ -1,0 +1,187 @@
+/* =========================================================================
+   Screen shell — screen-level layout only.
+
+   Everything here is composition: width, scroll, pinning and layering. No
+   colour, type or spacing value is invented — all of it reads the same tokens
+   the design system reads.
+
+   VERTICAL RHYTHM — one value per relationship, no discretion:
+
+     8 / 16   inside a group          (eyebrow → name, label → list, fields)
+     24       content → the qualifier or control that belongs to it
+     32       level → level inside one section   (hero → pair, head → macros)
+     40       between major sections
+     24       header → body,  and  body → footer
+
+   Every gap in Flow 1 is one of those five. If a new gap does not fit the
+   list, the list is wrong — not the gap.
+
+   SAFE AREAS — the shell owns the top inset, the band content owns the bottom.
+
+   The top inset is reserved by the screen itself, so every one of the four
+   screens starts below it and nothing — not a header, not a sticky bar, not a
+   bleed crop — can ever begin flush against the physical top edge or sit under
+   the status bar. Because it is padding on the flex column, a sticky child's
+   `top: 0` resolves *below* it: compactness can never be bought by eating the
+   inset.
+
+   The bottom inset stays with the band's content (`TabBar` and
+   `.screen-action-bar` each carry `env(safe-area-inset-bottom)`), because there
+   the inset has to be inside the white surface rather than under it.
+
+   `--screen-safe-sim-top` / `--screen-safe-sim` are review-only and resolve to
+   0 in production. A desktop browser reports every `env(safe-area-inset-*)` as
+   0, so the Storybook device stage stands in for them.
+   ========================================================================= */
+
+.screen {
+  position: relative;          /* the positioning context for `contained` sheets */
+  display: flex;
+  flex-direction: column;
+  width: var(--ds-screen-width);
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--ds-canvas);
+  border-radius: var(--ds-radius-lg);
+  overflow: hidden;
+  padding-top: calc(env(safe-area-inset-top, 0px) + var(--screen-safe-sim-top, 0px));
+}
+
+.screen__header {
+  flex: 0 0 auto;
+  /* 24 all round: header → body is the same gap on every state, so the first
+     line of a result list and the first line of an empty state start at the
+     same place. */
+  padding: var(--ds-space-3) var(--ds-screen-margin);
+  background: var(--ds-canvas);
+}
+
+.screen__scroll {
+  flex: 1 1 auto;
+  /* hidden on the inline axis, not `auto`: the screen should never scroll
+     sideways, and declaring it means the 390px overflow audit still inspects
+     everything inside rather than treating the body as a scroller. */
+  overflow: hidden auto;
+  padding: 0 var(--ds-screen-margin) var(--ds-space-3);
+  /* This is a device frame. A scrollbar inside it would be chrome that no
+     handset shows. */
+  scrollbar-width: none;
+}
+.screen__scroll::-webkit-scrollbar { display: none; }
+
+/* A screen with no bottom band — Recipe Detail, which is a reading surface
+   with no pinned action. The body is then the last thing above the physical
+   edge, so it reserves the bottom inset itself. */
+.screen__scroll--no-band {
+  padding-bottom: calc(
+    var(--ds-space-3) + env(safe-area-inset-bottom, 0px) + var(--screen-safe-sim, 0px)
+  );
+}
+
+/* ------------------------------------------------------------ bottom band
+   The footer owns the surface, so the bottom of the screen is one continuous
+   white band whatever sits in it — the tab bar on a root screen, the single
+   pinned action on a drill-down.
+
+   The device's safe-area inset belongs to the band's *content*, not to this
+   box: `TabBar` already carries `env(safe-area-inset-bottom)` inside its own
+   surface, and `.screen-action-bar` below does the same. Putting it here as
+   well would count it twice.
+
+   `--screen-safe-sim` is review-only and resolves to 0 in production. A
+   desktop browser always reports `env(safe-area-inset-bottom)` as 0, so the
+   Storybook device stage sets this variable instead to show what the band
+   measures on a real handset. */
+.screen__footer {
+  flex: 0 0 auto;
+  background: var(--ds-surface);
+  padding-bottom: var(--screen-safe-sim, 0px);
+}
+
+/* ------------------------------------------------------------- sticky top
+   A navigation surface that stays available on a long drill-down. It bleeds to
+   both screen edges and paints the canvas, so content passes underneath
+   cleanly rather than showing through the 24px gutters.
+
+   `top: 0` is the top of the scroll box, which already sits below the screen's
+   safe-area padding — the bar can never ride up into the status bar. */
+.screen-sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--ds-canvas);
+  margin-inline: calc(var(--ds-screen-margin) * -1);
+  padding: var(--ds-space-1) var(--ds-screen-margin);
+}
+
+/* A footer holding actions rather than navigation. Same band, same rules. */
+.screen-action-bar {
+  display: grid;
+  gap: var(--ds-space-1);
+  border-top: var(--ds-border) solid var(--ds-line);
+  padding: var(--ds-space-2) var(--ds-screen-margin);
+  padding-bottom: calc(var(--ds-space-3) + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---------------------------------------------------------------- pieces
+   The small typographic parts a screen needs to hold design system
+   components together. Each one is a token setting, not a new style. */
+
+/* A list heading: "6 results for “lentil”", "Items". Matches the section
+   label inside the nutrition block so the two read as the same rank. */
+.screen-list-head {
+  font-size: var(--ds-text-label);
+  color: var(--ds-ink-2);
+  margin-bottom: var(--ds-space-1);
+}
+
+/* A quiet line that qualifies what is above it — the estimate expectation on
+   first run, the source line under a dish name. */
+.screen-note {
+  font-size: var(--ds-text-label);
+  line-height: var(--ds-leading-body);
+  color: var(--ds-ink-2);
+}
+
+/* A group of actions attached to the content directly above it. */
+.screen-actions {
+  display: grid;
+  gap: var(--ds-space-1);
+  margin-top: var(--ds-space-3);
+}
+
+/* Between major sections. */
+.screen-section { margin-top: var(--ds-space-5); }
+
+/* --------------------------------------------------------- recovery body
+   First run, no results, barcode not found, camera off, offline.
+
+   The explanatory copy stays at the top and the recovery action is anchored
+   at the bottom of the viewport, so all five screens share one composition
+   instead of leaving 294–402px of dead space that varied with copy length.
+
+   `min-height: 100%` rather than `height`: a body longer than the viewport
+   still grows and scrolls, and the anchor simply stops applying. */
+.screen-recovery {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* `EmptyState` carries 40px of block padding of its own, for a body that
+   supplies no rhythm. Here the screen supplies it — 24px header → body above,
+   the anchored action group below — so the component's padding would be a
+   second, competing gap and the first line would sit 40px lower on a recovery
+   state than on a result list.
+
+   This is a composition override, not a component change: nothing in
+   src/components is touched, and `EmptyState` keeps its padding everywhere
+   else it is used. */
+.screen-recovery > .ds-empty-state { padding-block: 0; }
+
+.screen-recovery__actions {
+  margin-top: auto;              /* anchor low … */
+  padding-top: var(--ds-space-5);/* … but never closer than one section gap */
+  display: grid;
+  gap: var(--ds-space-1);
+}
