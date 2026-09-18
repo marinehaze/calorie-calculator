@@ -39,7 +39,7 @@ export default {
           'Food & Recipe',
           'Feedback & States',
           'Screens',
-          ['Food Search', 'Nutrition Result'],
+          ['Food Search', 'Nutrition Result', 'Recipe Discovery', 'Recipe Detail'],
           'Overview',
         ],
       },

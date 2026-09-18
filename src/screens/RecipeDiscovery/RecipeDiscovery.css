@@ -1,0 +1,20 @@
+/* =========================================================================
+   Screen 3 — Recipe Discovery. Screen-level layout only.
+   Spacing follows the Flow 1 rhythm declared in Screen.css.
+   ========================================================================= */
+
+/* Nav bar → search field: both are header chrome, so 16 — inside a group. */
+.rd-search { margin-top: var(--ds-space-2); }
+
+/* The filters in force belong to the field above them, so 8. They stay in the
+   fixed header rather than the scroll: SCREENS.md asks that the user can
+   always see what "suitable" currently means, and a chip row that scrolls
+   away stops answering that question. */
+.rd-filters { margin-top: var(--ds-space-1); }
+
+.rd-banner { margin-top: var(--ds-space-2); }
+
+/* The filter sheet's four groups. 32 between them — level to level inside one
+   surface — and the group label sits 8 above its controls. */
+.rd-sheet { display: grid; gap: var(--ds-space-4); }
+.rd-sheet__group > .screen-list-head { margin-bottom: var(--ds-space-1); }
