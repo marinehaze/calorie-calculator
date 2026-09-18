@@ -1,0 +1,51 @@
+/* =========================================================================
+   Review-only presentation. Nothing here ships.
+
+   The screens are 390px surfaces with no chrome of their own, so in a desktop
+   browser the frame edge is invisible against a page of the same colour and
+   `env(safe-area-inset-bottom)` always reports 0. Both of those made the tab
+   bar read as floating above an empty strip when it is in fact flush to the
+   bottom edge. This file supplies the missing device context so the
+   composition can be judged honestly.
+
+   Scoped to `.sb-device`, which the `deviceFrame` story parameter adds.
+   ========================================================================= */
+
+.sb-device {
+  padding: 28px 0;
+  background: #CFC8BE;             /* a stage behind the device, not a token */
+}
+
+.sb-device .screen {
+  box-shadow: 0 18px 40px -18px rgba(28, 27, 25, .45),
+              0 0 0 1px rgba(28, 27, 25, .10);
+  /* What a handset's bottom inset actually measures. Production reads
+     env(safe-area-inset-bottom); this only stands in for it on the desktop. */
+  --screen-safe-sim: 34px;
+}
+
+/* The other two surfaces that own a bottom inset in production: a bottom
+   sheet's footer and the scanner's panel. Both already carry
+   env(safe-area-inset-bottom), which is 0 here, so the stage stands in for it
+   the same way — otherwise a sheet would sit flush to the device edge in
+   review and inset on the handset. Review-only; neither component changes. */
+.sb-device .ds-sheet__footer,
+.sb-device .fs-scanner__foot {
+  padding-bottom: calc(var(--ds-space-3) + 34px);
+}
+
+/* The home indicator, so the simulated inset reads as device chrome rather
+   than as empty padding. Decorative and inert. */
+.sb-device .screen::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 15px;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  border-radius: var(--ds-radius-pill);
+  background: rgba(28, 27, 25, .30);
+  z-index: 60;
+  pointer-events: none;
+}

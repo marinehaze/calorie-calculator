@@ -14,15 +14,28 @@
 .fs-quoted::before { content: '\201C'; }
 .fs-quoted::after  { content: '\201D'; }
 
-/* The accuracy expectation on first run. It reads as a footnote to the screen
-   rather than a fourth line of the invitation, and the empty state's own 40px
-   of bottom padding is already the section-sized gap that says so — adding a
-   margin on top of it would open a hole. */
-.fs-expectation { max-width: 34ch; }
+/* The accuracy expectation on first run. A footnote to the screen rather than
+   a fourth line of the invitation — 24px, the gap the rhythm gives a
+   qualifier. */
+.fs-expectation {
+  max-width: 34ch;
+  margin-top: var(--ds-space-3);
+}
 
-/* The manual entry set. 20px between fields: closer than a section, further
-   apart than lines in a group. */
-.fs-manual { display: grid; gap: 20px; }
+/* The two alternative searches on the no-results state. Queries, not peers of
+   the fallback: 44px auto-width controls that wrap, sitting with the sentence
+   that explains them. */
+.fs-alternatives { margin-top: var(--ds-space-3); }
+.fs-alternatives__row {
+  margin-top: var(--ds-space-1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-1);
+}
+
+/* The manual entry set. 16px between fields — inside a group, on the 8px
+   rhythm. */
+.fs-manual { display: grid; gap: var(--ds-space-2); }
 
 /* ------------------------------------------------------------- scanner
    A camera view layered over the same screen. The bar above and the panel
@@ -48,11 +61,10 @@
 .fs-scanner__view { position: relative; flex: 1 1 auto; overflow: hidden; }
 .fs-scanner__view > .ds-food-image { position: absolute; inset: 0; aspect-ratio: auto; }
 
-/* The viewfinder, and the dimmed surround in one element: the box shadow
-   spreads the dim over everything outside the frame, so the frame is the one
-   part of the view left at full strength. The dim is the product's own ink at
-   reduced strength, mixed from the token rather than declared as a new
-   colour. Media radius, because this is a crop of the world. */
+/* The viewfinder. Media radius, because it is a crop of the world. The frame
+   reads from its own white border against the neutral field — there is no
+   photograph behind it to dim, and the barcode glyph inside says what the
+   camera is looking for. */
 .fs-scanner__reticle {
   position: absolute;
   left: var(--ds-screen-margin);
@@ -60,10 +72,16 @@
   top: 50%;
   height: 168px;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid var(--ds-surface);
   border-radius: var(--ds-radius-md);
-  box-shadow: 0 0 0 100vmax color-mix(in srgb, var(--ds-ink) 58%, transparent);
+  color: var(--ds-surface);
 }
+
+/* The cue steps back from the frame that contains it. */
+.fs-scanner__reticle > svg { opacity: .5; }
 
 .fs-scanner__foot {
   flex: 0 0 auto;

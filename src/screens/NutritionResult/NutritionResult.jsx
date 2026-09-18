@@ -73,6 +73,15 @@ export const NutritionResult = ({
   return (
     <Screen
       label="Nutrition Result"
+      /* The one forward action pins to the bottom band, so it is reachable at
+         any content height. Before this the whole action stack was the last
+         thing in normal flow and its position depended on how tall the entry
+         happened to be — on the error state every action sat below the fold. */
+      footer={
+        <div className="screen-action-bar">
+          <Button variant="quiet" fullWidth onClick={onAddItem}>Add another item</Button>
+        </div>
+      }
       overlay={
         <>
           <PortionSheet
@@ -129,6 +138,16 @@ export const NutritionResult = ({
             ? <LoadingPair />
             : <PortionPair portion={dish.portion} per100={per100Reference} />}
         </div>
+
+        {/* Both corrections sit directly under the figures they correct: the
+            amount, then the match itself. A single item is the only case that
+            has them — inside a dish each row carries its own. */}
+        {!items && (
+          <div className="screen-actions nr-corrections">
+            <Button variant="secondary" fullWidth onClick={() => setSheet('portion')}>Change portion</Button>
+            <Button variant="secondary" fullWidth onClick={() => setSheet('swap')}>Not the right match?</Button>
+          </div>
+        )}
       </div>
 
       {state === 'error' && (
@@ -202,32 +221,36 @@ export const NutritionResult = ({
         </p>
       )}
 
-      {/* ------------------------------------------------------------ actions
-          No filled berry button. This screen is terminal for US1 — the answer
-          is the payload, and a primary action here would compete with the one
-          number the user came for. "Add another item" is the loop back to
-          Screen 1 and takes the quiet treatment the system reserves for a
-          supporting action that repeats. */}
-      <div className="screen-actions">
-        {!items && (
-          <>
-            <Button variant="secondary" fullWidth onClick={() => setSheet('portion')}>Change portion</Button>
-            <Button variant="secondary" fullWidth onClick={() => setSheet('swap')}>Not the right match?</Button>
-          </>
-        )}
-        <Button variant="quiet" fullWidth onClick={onAddItem}>Add another item</Button>
-      </div>
     </Screen>
   );
 };
 
 /* Progressive fill: the calorie figure arrived with the tapped search result,
    so it is already on screen. Only the figures the row could not carry are
-   still loading, and each skeleton holds the box its value will occupy. */
+   still loading.
+ *
+ * The bar heights mirror the real boxes exactly, so the screen does not jump
+ * when the rest of the entry lands. Measured against the loaded screen:
+ *
+ *   portion pair   value 29   gap 5   label 21.8   = 55.8
+ *   macro column   value 24   gap 9   label 21.8   = 54.8
+ *
+ * They are stated here rather than derived because the design system's
+ * contract is that a skeleton occupies the same box as the content it
+ * replaces, and the only way to hold that is to name the box. */
+const PAIR_VALUE_H = 29;
+const PAIR_LABEL_H = 21.8;
+const MACRO_VALUE_H = 24;
+const MACRO_LABEL_H = 21.8;
+
 const LoadingPair = () => (
   <div className="nr-loading-pair" role="status" aria-label="Loading the full breakdown">
-    <Skeleton width={84} height={22} />
-    <Skeleton width={84} height={22} />
+    {[0, 1].map((i) => (
+      <span className="nr-loading-pair__cell" key={i}>
+        <Skeleton width={84} height={PAIR_VALUE_H} />
+        <Skeleton width={62} height={PAIR_LABEL_H} style={{ marginTop: 5 }} />
+      </span>
+    ))}
   </div>
 );
 
@@ -235,8 +258,8 @@ const LoadingMacros = () => (
   <div className="nr-loading-macros" role="status" aria-label="Loading macros">
     {[0, 1, 2].map((i) => (
       <span key={i}>
-        <Skeleton width="72%" height={24} />
-        <Skeleton width="54%" height={15} style={{ marginTop: 9 }} />
+        <Skeleton width="72%" height={MACRO_VALUE_H} />
+        <Skeleton width="54%" height={MACRO_LABEL_H} style={{ marginTop: 9 }} />
       </span>
     ))}
   </div>

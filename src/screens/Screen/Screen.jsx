@@ -14,9 +14,11 @@ import './Screen.css';
  *            field stays reachable while results scroll under it.
  *   children the scrolling body, carrying the 24px screen margin so a
  *            `.ds-bleed-stage` inside it can bleed back out to the edge.
- *   footer   pinned at the bottom — the TabBar on a root screen. Nutrition
- *            Result passes none: SCREENS.md gives a drill-down a back control
- *            instead of a tab bar.
+ *   footer   the pinned bottom band. The TabBar on a root screen; the single
+ *            loop-back action on Nutrition Result, which has no tab bar
+ *            because SCREENS.md gives a drill-down a back control instead.
+ *            The shell paints the band's surface; its content carries the
+ *            device safe-area inset.
  *   overlay  sheets and the camera view. A sibling of the scroll area rather
  *            than a child of it, so `BottomSheet contained` positions against
  *            the screen and does not scroll away with the body.

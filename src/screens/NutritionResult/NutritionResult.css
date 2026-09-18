@@ -14,9 +14,10 @@
 
 .nr-stage {
   /* The crop is 228px tall and starts below the nav bar, so the stage is never
-     shorter than the photograph it contains. */
+     shorter than the photograph it contains. No bottom padding: it used to add
+     8px on top of the following section's 40, making a third "between
+     sections" value of 48. */
   min-height: calc(var(--ds-bleed-size) + var(--ds-space-7));
-  padding-bottom: var(--ds-space-1);
 }
 
 .nr-stage__crop {
@@ -56,6 +57,11 @@
   margin-top: var(--ds-space-4);
 }
 
+/* The two corrections. Same width and same weight: one edits the amount, the
+   other replaces the match, and neither outranks the other. Above the crop in
+   paint order for the same reason the pair is. */
+.nr-corrections { position: relative; z-index: 2; }
+
 .nr-banner { margin-top: var(--ds-space-4); }
 
 /* --------------------------------------------------------------- nutrition */
@@ -76,11 +82,20 @@
   line-height: var(--ds-leading-title);
 }
 
+/* Level → level inside one section. */
 .nr-macros { margin-top: var(--ds-space-4); }
 
 /* Skeletons in the same boxes the figures will occupy, so the screen does not
-   reflow when the rest of the entry arrives. */
-.nr-loading-pair { display: flex; gap: var(--ds-space-6); }
+   reflow when the rest of the entry arrives. The pair skeleton carries the
+   real pair's divider and cell padding as well as its height — the box has to
+   match, not just the bars inside it. */
+.nr-loading-pair { display: flex; }
+.nr-loading-pair__cell { flex: 1; min-width: 0; display: block; }
+.nr-loading-pair__cell:first-child { padding-right: var(--ds-space-3); }
+.nr-loading-pair__cell + .nr-loading-pair__cell {
+  padding-left: var(--ds-space-3);
+  border-left: var(--ds-border) solid var(--ds-line);
+}
 .nr-loading-macros { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-space-2); }
 
 /* ------------------------------------------------------------------- items

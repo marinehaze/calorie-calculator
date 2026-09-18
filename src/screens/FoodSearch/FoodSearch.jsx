@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './FoodSearch.css';
 import {
-  SearchField, FoodResultRow, FoodResultList, EmptyState, Button, IconButton,
-  Banner, SkeletonResultList, BottomSheet, InputField, TabBar, NavBar, FoodImage,
+  SearchField, FoodResultRow, FoodResultList, EmptyState, Button,
+  Banner, SkeletonResultList, BottomSheet, InputField, TabBar, NavBar,
   IconBarcode,
 } from '../../index';
 import { Screen } from '../Screen/Screen';
@@ -85,6 +85,25 @@ export const FoodSearch = ({
     </Button>
   );
 
+  /**
+   * The recovery composition, shared by every state that has no list to show.
+   *
+   * The explanatory copy stays at the top and the recovery action is anchored
+   * at the bottom of the viewport, so first run, no results, barcode not
+   * found, camera off and offline all share one vertical structure. Before
+   * this they left 294–402px of dead space that varied with copy length.
+   *
+   * `EmptyState` supplies the media, the title and the body; the screen places
+   * the actions, because only the screen knows where the bottom of the
+   * viewport is. `actions` stays an optional prop of the component.
+   */
+  const recovery = (copy, actions) => (
+    <div className="screen-recovery">
+      {copy}
+      <div className="screen-recovery__actions">{actions}</div>
+    </div>
+  );
+
   const body = () => {
     switch (state) {
       /* ------------------------------------------------ first run (dedicated)
@@ -93,24 +112,22 @@ export const FoodSearch = ({
          alternative, and set expectations about accuracy — and it does the
          third in one quiet line rather than an onboarding wall. */
       case 'first-run':
-        return (
+        return recovery(
           <>
             <EmptyState
               image={img('citrus-grain-bowl')}
               focal={{ x: 58, y: 52, scale: 1.18 }}
               title="What are you eating?"
               body="Search for a product or a dish by name. If it came in a pack, the barcode is quicker."
-              actions={
-                <Button variant="secondary" fullWidth iconBefore={<IconBarcode size={20} />} onClick={() => setScanning(true)}>
-                  Scan a barcode
-                </Button>
-              }
             />
             <p className="screen-note fs-expectation">
               Figures come from a verified food database. The portion you set is the
               largest source of variation — you can change it after any result.
             </p>
-          </>
+          </>,
+          <Button variant="secondary" fullWidth iconBefore={<IconBarcode size={20} />} onClick={() => setScanning(true)}>
+            Scan a barcode
+          </Button>,
         );
 
       /* ----------------------------------------------- suggestions (variation)
@@ -153,22 +170,29 @@ export const FoodSearch = ({
          the values by hand. The third is the one that always produces an
          answer, so it is the surface's single berry action. */
       case 'no-results':
-        return (
-          <EmptyState
-            title={<>No matches for <span className="fs-quoted">{query}</span></>}
-            body="That reads like a brand and a pack size. A shorter search usually finds the food itself."
-            actions={
-              <>
-                <Button variant="secondary" fullWidth onClick={() => { setQuery(broadenedQuery); setState('results'); }}>
-                  Search “{broadenedQuery}” instead
+        return recovery(
+          <>
+            <EmptyState
+              title={<>No matches for <span className="fs-quoted">{query}</span></>}
+              body="That reads like a brand and a pack size. A shorter search usually finds the food itself."
+            />
+            {/* The two alternative searches are queries, not peers of the
+                fallback that always produces an answer. They step down to the
+                44px auto-width control and sit with the copy that explains
+                them; the berry action stays anchored at the bottom. */}
+            <div className="fs-alternatives">
+              <p className="screen-note">Try instead</p>
+              <div className="fs-alternatives__row">
+                <Button variant="secondary" size="small" onClick={() => { setQuery(broadenedQuery); setState('results'); }}>
+                  “{broadenedQuery}”
                 </Button>
-                <Button variant="secondary" fullWidth onClick={() => { setQuery(relatedQuery); setState('results'); }}>
-                  Try “{relatedQuery}”
+                <Button variant="secondary" size="small" onClick={() => { setQuery(relatedQuery); setState('results'); }}>
+                  “{relatedQuery}”
                 </Button>
-                {manualEntryAction()}
-              </>
-            }
-          />
+              </div>
+            </div>
+          </>,
+          manualEntryAction(),
         );
 
       /* ------------------------------------------ barcode not found (variation)
@@ -176,34 +200,30 @@ export const FoodSearch = ({
          in the field. Only the copy changes: a barcode cannot be broadened, so
          the recovery is a name search or manual entry. */
       case 'barcode-not-found':
-        return (
+        return recovery(
           <EmptyState
             title="No product with that barcode"
             body="The code scanned cleanly — the database just has no entry for it yet. That is common for own-brand and local products."
-            actions={
-              <>
-                <Button variant="secondary" fullWidth onClick={clear}>Search by name instead</Button>
-                {manualEntryAction()}
-              </>
-            }
-          />
+          />,
+          <>
+            <Button variant="secondary" fullWidth onClick={clear}>Search by name instead</Button>
+            {manualEntryAction()}
+          </>,
         );
 
       /* ----------------------------------------- camera permission (variation)
          The standard inline prompt. It never strands the user: the name search
          above it still works, and the prompt says so. */
       case 'camera-denied':
-        return (
+        return recovery(
           <EmptyState
             title="Camera access is off"
             body="Scanning needs the camera. You can turn it on in Settings, or carry on searching by name."
-            actions={
-              <>
-                <Button fullWidth onClick={() => {}}>Open Settings</Button>
-                <Button variant="secondary" fullWidth onClick={clear}>Search by name instead</Button>
-              </>
-            }
-          />
+          />,
+          <>
+            <Button fullWidth onClick={() => {}}>Open Settings</Button>
+            <Button variant="secondary" fullWidth onClick={clear}>Search by name instead</Button>
+          </>,
         );
 
       /* ---------------------------------------------------- offline (variation)
@@ -211,12 +231,12 @@ export const FoodSearch = ({
          Manual entry needs no connection, which makes it the real recovery
          here rather than a consolation. */
       case 'offline':
-        return (
+        return recovery(
           <EmptyState
             title="Search needs a connection"
             body="Results come from the food database. You can still enter a food by hand, and it will be waiting when you are back online."
-            actions={manualEntryAction()}
-          />
+          />,
+          manualEntryAction(),
         );
 
       /* ------------------------------------------------------ error (variation)
@@ -306,7 +326,7 @@ export const FoodSearch = ({
  *
  * The chrome above and below the viewfinder is the app's own surface, so every
  * control and every word sits on a ground whose contrast is already known.
- * Nothing is written over the camera image.
+ * Nothing is written over the camera view, and nothing in it is food.
  */
 const BarcodeScanner = ({ onClose, onNotFound }) => (
   <div className="fs-scanner" role="dialog" aria-modal="true" aria-label="Scan a barcode">
@@ -315,10 +335,14 @@ const BarcodeScanner = ({ onClose, onNotFound }) => (
     </div>
 
     <div className="fs-scanner__view">
-      {/* Standing in for the camera feed. */}
-      <FoodImage src={img('dry-red-lentils')} crop="square" flush focalX={50} focalY={54} scale={1.3} alt="" />
-      <span className="fs-scanner__dim" aria-hidden="true" />
-      <span className="fs-scanner__reticle" aria-hidden="true" />
+      {/* A neutral camera field, and the design system's own barcode glyph as
+          the targeting cue. There is deliberately no food photograph here:
+          a dish inside a reticle reads as "point the camera at food and we
+          will identify it", and SCREENS.md excludes photo recognition in the
+          first line of its scope table. */}
+      <span className="fs-scanner__reticle" aria-hidden="true">
+        <IconBarcode size={104} strokeWidth={1.2} />
+      </span>
     </div>
 
     <div className="fs-scanner__foot">

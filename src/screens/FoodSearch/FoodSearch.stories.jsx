@@ -4,7 +4,12 @@ import { query, deadQuery, scannedBarcode } from '../flow1Data';
 export default {
   title: 'Screens/Food Search',
   component: FoodSearch,
-  parameters: { layout: 'fullscreen' },
+  /* `deviceFrame` is review-only presentation: a stage behind the 390px
+     frame, a drop shadow, and a simulated bottom safe area with a home
+     indicator. A desktop browser reports env(safe-area-inset-bottom) as 0,
+     so without it the tab bar and the pinned action band cannot be judged
+     at the size they take on a handset. See .storybook/preview.css. */
+  parameters: { layout: 'fullscreen', deviceFrame: true, backgrounds: { value: 'stage' } },
 };
 
 /** ◆ Dedicated — first run.
