@@ -1,7 +1,7 @@
 # Walkthrough presentation
 
-An eight-slide, browser-based presentation of the Calorie Calculator project,
-built for recording a 3–4 minute Loom / FocuSee walkthrough.
+An eight-slide, browser-based presentation of the Piatto project, built for
+recording a 3–4 minute Loom / FocuSee walkthrough.
 
 Everything in this directory is presentation-only. It reads the finished
 project as a source and changes nothing in it: no file outside `presentation/`
@@ -42,14 +42,14 @@ any 16:9-ish laptop resolution.
 
 | | |
 |---|---|
-| 01 | Title |
+| 01 | Piatto — the wordmark, and the product |
 | 02 | Problem & scope — two user needs, four screens, 34 states |
-| 03 | Branding direction — palette, type pairing, hierarchy, photography |
-| 04 | Design System — a curated component selection, 22 components / 104 stories |
+| 03 | Brand — a stylescape: wordmark, promise, rationale, colour, marks, photography and real UI |
+| 04 | Design System — 23 components / 107 stories, with MacroEnergySplit featured |
 | 05 | Flow 1 — calculate nutrition |
 | 06 | Flow 2 — find a suitable recipe |
 | 07 | Beyond the happy path — states, and the final audit |
-| 08 | AI-native workflow, with the repository and Storybook links |
+| 08 | AI-native workflow — what I decided, what Claude Code implemented, what I verified |
 
 ## Files
 
@@ -57,22 +57,47 @@ any 16:9-ish laptop resolution.
 index.html          the eight slides
 styles.css          deck styling — restates the approved tokens, imports none
 deck.js             ~90 lines: scale the stage, move between slides
-assets/screens/     16 stills of the final application states
-assets/components/  12 Design System specimens
-assets/food/        4 crops of the approved food photography
+brand/marks.js      the arc-"o" and the segmented arc, copied from the
+                    approved brand board and from MacroEnergySplit
+assets/screens/     18 stills of the final application states
+assets/components/  13 Design System specimens
+assets/food/        2 crops of the approved food photography
 assets/fonts/       Plus Jakarta Sans + Inter Tight, latin subset
 tools/capture.mjs   regenerates assets/ from the built Storybook
 tools/review.mjs    drives the deck and writes stills + a contact sheet
 tools/check-sizes.mjs  checks the stage at common laptop resolutions
 ```
 
+## The brand marks
+
+The wordmark is live text, not an image: Plus Jakarta Sans 600, lowercase,
+tracked −4.5%, with the final "o" drawn as the partial arc by `brand/marks.js`
+— measured from the typeface's own "o" at render time, 35° opening at one
+o'clock, exactly as `branding/brand-refresh/arc-o.js` draws it. The element
+carries `aria-label="Piatto"`, because the name is always written normally in
+text.
+
+The single arc is the brand mark and the app icon, and is the `<symbol>` from
+the brand board, inlined in `index.html`. The segmented arc is data only —
+never the logo — and is drawn with `MacroEnergySplit`'s own geometry from the
+same file.
+
+Slide 3 is composed as a board rather than a summary, following
+`branding/brand-refresh/hero.html`: the word and the promise on the left, and
+on the right the product's own type, colour, photography and two real UI
+fragments, shown at size rather than captioned.
+
 ## Regenerating the assets
 
 Every product still comes from the final Storybook build, captured in its own
 iframe so no Storybook sidebar, toolbar or addon panel is ever in frame. The
 screens carry the project's own review presentation — the 390 × 844 frame with
-its status bar, safe areas and home indicator — exactly as the project was
-reviewed.
+its status bar, safe areas and home indicator.
+
+Nutrition Result and Recipe Detail put the nutrition block below the fold of a
+handset, so those two are captured a second time with the screen's own scroll
+container scrolled — in the page, at capture time — so the stills show
+`MacroEnergySplit` as it actually appears. Nothing in the product changes.
 
 ```
 npm run build-storybook
@@ -87,6 +112,11 @@ node presentation/tools/review.mjs             # keyboard nav, overflow, stills,
 node presentation/tools/check-sizes.mjs        # 1280x800 through 2560x1440, plus file://
 ```
 
+The audit figure on slide 7 reads "0 **automated** WCAG 2.1 A/AA violations":
+axe-core covers what a machine can check, which is not the same as full WCAG
+conformance, and the deck should not imply otherwise.
+
 `review.mjs` fails if a slide overflows the stage, if the page scrolls, if
-keyboard navigation lands on the wrong slide, or if any asset 404s. Its output
-lands in `presentation/.review/` (git-ignored).
+keyboard navigation lands on the wrong slide, or if any asset 404s. A crop that
+runs off the edge on purpose declares itself with `data-bleed`. Output lands in
+`presentation/.review/` (git-ignored).

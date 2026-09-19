@@ -80,6 +80,9 @@ for (let i = 1; i <= total; i++) {
         if (getComputedStyle(a).overflow !== 'visible') { clipped = true; break; }
       }
       if (clipped) continue;
+      // A crop that runs off the edge on purpose declares itself; the stage
+      // clips it. Everything else must stay inside.
+      if (el.closest('[data-bleed]')) continue;
       if (r.bottom > stage.bottom + 1 || r.top < stage.top - 1 || r.right > stage.right + 1 || r.left < stage.left - 1) {
         over.push(`${el.tagName.toLowerCase()}.${String(el.className).split(' ')[0]}`);
       }
@@ -111,7 +114,10 @@ console.log(`\n  ArrowLeft from 08 → ${back}`);
 
 await page.setViewportSize({ width: 1640, height: 1120 });
 await page.goto(`http://127.0.0.1:${PORT}/index.html`, { waitUntil: 'domcontentloaded' });
-await page.setContent(`<!doctype html><html><body style="margin:0;background:#FBFAF8;
+// The contact sheet is this tool's own scratch page. It declares an empty
+// icon so its favicon request does not look like a deck problem; the deck's
+// real favicon is still checked when index.html is loaded above.
+await page.setContent(`<!doctype html><html><head><link rel="icon" href="data:,"></head><body style="margin:0;background:#FBFAF8;
   font:500 11px/1 -apple-system,Helvetica,Arial,sans-serif;color:#6B6863">
   <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding:22px">
   ${Array.from({ length: total }, (_, i) => {

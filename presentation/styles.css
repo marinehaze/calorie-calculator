@@ -1,5 +1,5 @@
 /* =========================================================================
-   Calorie Calculator — walkthrough presentation
+   Piatto — walkthrough presentation
    -------------------------------------------------------------------------
    Presentation only. Nothing here is imported by the product, and none of the
    product's own CSS is imported here: the deck restates the approved palette
@@ -33,6 +33,12 @@
   --line-strong: #DFDAD2;
   --berry:       #8A3355;
   --berry-soft:  #F7EDF1;
+
+  /* Macro data colours, as shipped in src/styles/tokens.css. Data only —
+     never the brand mark, never an action. */
+  --protein:     #2F6F6B;
+  --carbs:       #A57D31;
+  --fat:         #B36E49;
 
   --display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --ui:      'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -154,6 +160,39 @@ h2 {
 }
 .head--split .eyebrow { grid-column: 1 / -1; }
 
+/* ------------------------------------------------------------- the brand */
+
+/* The Piatto wordmark: Plus Jakarta Sans 600, lowercase, tracked -4.5%, with
+   the final "o" replaced by the partial arc (brand/marks.js). The element
+   carries aria-label="Piatto" — the name is always written normally in text. */
+.wordmark {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* The mark itself, from the approved board: one arc, round terminals, a 35°
+   opening at one o'clock. Berry unless something says otherwise. */
+.arc { display: block; color: var(--berry); overflow: visible; }
+
+/* App icon: the mark alone on a tile. */
+.bi {
+  position: relative;
+  flex: none;
+  border-radius: 22.4%;
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px rgba(28, 27, 25, .08);
+}
+.bi .arc { position: absolute; left: 19%; top: 19%; width: 62%; height: 62%; }
+.bi--inv { background: var(--berry); }
+.bi--inv .arc { color: var(--canvas); }
+.bi--lg { width: 84px; height: 84px; }
+.bi--inv { width: 58px; height: 58px; }
+.bi--sm { width: 34px; height: 34px; }
+
 /* ------------------------------------------------------- product stills */
 
 /* Every product screenshot in the deck is presented the same way: the real
@@ -180,32 +219,34 @@ h2 {
 
 /* =========================================================== slide 1 */
 
-.s1 { display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 1fr); column-gap: 80px; align-items: center; }
+.s1 { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1fr); column-gap: 72px; align-items: center; }
 
-.s1__title {
-  font-size: 84px;
-  line-height: .98;
-  letter-spacing: -.005em;
+.s1__wm { margin-top: 30px; font-size: 132px; }
+.s1__cat {
+  margin: 26px 0 0;
+  font: 500 15px/1 var(--ui);
+  letter-spacing: .22em;
   text-transform: uppercase;
-  font-weight: 500;
+  color: var(--ink-2);
 }
 .s1__sub {
-  margin: 30px 0 0;
+  margin: 44px 0 0;
   font-family: var(--display);
-  font-size: 27px;
+  font-size: 30px;
   font-weight: 400;
   line-height: 1.25;
-  letter-spacing: -.02em;
+  letter-spacing: -.025em;
   color: var(--ink);
 }
-.s1__meta { margin: 46px 0 0; font: 500 15px/1 var(--ui); letter-spacing: .01em; color: var(--ink-2); }
+.s1__meta { margin: 42px 0 0; font: 500 15px/1 var(--ui); letter-spacing: .01em; color: var(--ink-2); }
 .s1__meta span { color: var(--line-strong); margin: 0 12px; }
 
-/* Three final screens, staggered. The middle one leads. */
-.s1__shots { display: flex; align-items: center; justify-content: flex-end; gap: 34px; }
-.s1__shots figure { margin: 0; width: 252px; }
+/* Three final screens, staggered. The nutrition block leads, because the
+   segmented arc is where the brand and the data meet. */
+.s1__shots { display: flex; align-items: center; justify-content: flex-end; gap: 32px; }
+.s1__shots figure { margin: 0; width: 236px; }
 .s1__shots figure:nth-child(1) { transform: translateY(46px); }
-.s1__shots figure:nth-child(2) { width: 288px; transform: translateY(-14px); }
+.s1__shots figure:nth-child(2) { width: 280px; transform: translateY(-14px); }
 .s1__shots figure:nth-child(3) { transform: translateY(46px); }
 
 /* =========================================================== slide 2 */
@@ -237,53 +278,125 @@ h2 {
 
 /* =========================================================== slide 3 */
 
-.principles { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; align-content: start; }
-.principles li { font: 400 18px/1.35 var(--ui); letter-spacing: -.01em; color: var(--ink); }
-.principles em { font-style: normal; color: var(--ink-2); }
+/* A stylescape, not a summary: the visual world is shown at size and the
+   captions are kept to almost nothing. Composition follows the approved board
+   in branding/brand-refresh/hero.html — word and promise on the left, the
+   product's own type, colour, photography and UI on the right. */
+.s3 { display: grid; grid-template-columns: 640px minmax(0, 1fr); column-gap: 56px; }
+.s3__col { display: flex; flex-direction: column; min-height: 0; }
 
-.s3__band {
-  margin-top: 56px;
-  display: grid;
-  grid-template-columns: 260px 330px 300px 300px;
-  justify-content: space-between;
-  align-items: start;
+.s3__wm { margin-top: 30px; font-size: 112px; }
+.s3__cat {
+  margin: 20px 0 0;
+  font: 500 14px/1 var(--ui);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.s3__h {
+  margin: 38px 0 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 58px;
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+.s3__h em { font-style: normal; color: var(--berry); }
+
+.s3__lab {
+  margin: 0;
+  font: 500 12px/1 var(--ui);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--berry);
 }
 
-.block { display: grid; gap: 18px; align-content: start; }
-.block__h { font: 500 13px/1 var(--ui); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+/* The one piece of prose on the slide: why the direction is this and not the
+   category's usual dark, technical one. */
+.s3__why { max-width: 54ch; }
+.s3__why p + p { margin: 12px 0 0; font: 400 15px/1.6 var(--ui); color: var(--ink-2); }
 
-.swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.sw { display: grid; gap: 9px; }
-.sw__c { height: 58px; border-radius: 14px; box-shadow: inset 0 0 0 1px rgba(28, 27, 25, .07); }
-.sw__n { font: 500 13px/1.25 var(--ui); }
-.sw__h { font: 400 12px/1 var(--ui); color: var(--ink-2); letter-spacing: .02em; }
+/* Colour and the marks, shown rather than labelled. */
+.s3__foot { margin-top: 64px; display: grid; gap: 30px; }
+.s3__pal { display: flex; gap: 10px; }
+.s3__pal i { width: 56px; height: 56px; border-radius: 13px; box-shadow: inset 0 0 0 1px rgba(28, 27, 25, .08); }
 
-.type-spec { display: grid; gap: 18px; }
-.type-spec__row { display: grid; gap: 6px; }
-.type-spec__big { font: 500 40px/1 var(--display); letter-spacing: -.035em; }
-.type-spec__mid { font: 400 22px/1.2 var(--ui); letter-spacing: -.01em; }
-.type-spec__cap { font: 400 13px/1 var(--ui); color: var(--ink-2); }
+.s3__row { display: flex; align-items: flex-end; gap: 34px; }
+.brand-icons { display: flex; align-items: flex-end; gap: 14px; }
+.s3__type { margin: 0 0 4px; display: grid; gap: 5px; }
+.s3__type b { font-family: var(--display); font-weight: 500; font-size: 17px; letter-spacing: -.02em; color: var(--ink); }
+.s3__type span { font: 400 15px/1 var(--ui); color: var(--ink-2); }
 
-.hierarchy { border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); }
-.hierarchy img { width: 100%; height: auto; }
+/* ---- the board itself: absolute placement, crops running off the edge */
+.s3__board { position: relative; }
+.s3__crop { position: absolute; border-radius: 50%; object-fit: cover; }
+.s3__crop--a { width: 352px; height: 352px; right: -118px; top: -56px; }
+.s3__crop--b { width: 172px; height: 172px; right: -66px; top: 330px; }
 
-/* The approved crops, at the stylescape's own aspect ratios, with the caption
-   holding the open side. */
-.s3__photo { margin-top: auto; display: flex; align-items: center; gap: 20px; }
-.s3__photo img { object-fit: cover; flex: none; }
-.p-hero   { width: 152px; height: 190px; border-radius: 18px; }
-.p-sq     { width: 190px; height: 190px; border-radius: 18px; }
-.p-circle { width: 190px; height: 190px; border-radius: 50%; }
-.photo-cap { margin: 0 0 0 36px; max-width: 42ch; font: 400 15px/1.55 var(--ui); color: var(--ink-2); }
+/* The product's own nutrition composition, at display size: the hero figure,
+   the dish, and the split in the three macro colours. */
+.s3__hero { position: absolute; left: 0; top: 34px; width: 420px; }
+.s3__kcal { margin: 0; display: flex; align-items: baseline; gap: 14px; }
+.s3__kcal b { font-family: var(--display); font-weight: 500; font-size: 136px; line-height: .82; letter-spacing: -.055em; }
+.s3__kcal span { font: 400 26px/1 var(--ui); color: var(--ink-2); }
+.s3__dish { margin: 26px 0 0; font-family: var(--display); font-weight: 600; font-size: 26px; letter-spacing: -.03em; }
+.s3__meta { margin: 9px 0 0; font: 400 15px/1 var(--ui); color: var(--ink-2); }
+
+.s3__split { margin-top: 30px; display: flex; align-items: center; gap: 30px; }
+.s3__splitarc { width: 74px; height: 74px; flex: none; }
+.s3__splitarc svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.s3__macros { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 20px; }
+.s3__macros b { display: block; font-family: var(--display); font-weight: 500; font-size: 25px; line-height: 1; letter-spacing: -.022em; }
+.s3__macros span { display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; font: 400 14px/1 var(--ui); color: var(--ink-2); }
+.s3__macros i { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Two real fragments, presented the way the board presents them: a 390px
+   card, clipped, fading out into the canvas rather than cut off. */
+.s3__frags { position: absolute; left: 0; top: 438px; display: flex; gap: 24px; }
+.frag {
+  position: relative;
+  width: 198px;
+  height: 288px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--canvas);
+  box-shadow: 0 22px 44px -30px rgba(28, 27, 25, .45), 0 0 0 1px rgba(28, 27, 25, .06);
+}
+.frag img { width: 100%; height: auto; }
+.frag::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 92px;
+  background: linear-gradient(to bottom, rgba(251, 250, 248, 0), var(--canvas));
+}
 
 /* =========================================================== slide 4 */
 
 .s4__body { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); column-gap: 72px; margin-top: 46px; flex: 1; min-height: 0; }
 
-.s4__facts { display: grid; gap: 30px; align-content: start; }
-.s4__figs { display: grid; gap: 26px; }
+.s4__facts { display: grid; gap: 26px; align-content: start; }
+/* Side by side rather than stacked: the column's height belongs to the
+   featured component below them. */
+.s4__figs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* MacroEnergySplit gets the left column to itself — it is the one component
+   where the brand's arc became a functional part of the interface. */
+.feature { display: grid; gap: 13px; }
+.feature__f {
+  /* The full specimen, uncropped: the label, the shares, the arc and the
+     grams it explains. This is the one component the brand walked into. */
+  height: 256px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.feature__f img { width: 100%; height: auto; }
+.feature__c { margin: 0; font: 400 13px/1.5 var(--ui); letter-spacing: -.005em; color: var(--ink-2); }
+.feature__c b { font-weight: 500; color: var(--ink); }
 .s4__notes { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; }
-.s4__notes li { font: 400 16px/1.45 var(--ui); letter-spacing: -.005em; color: var(--ink-2); }
+.s4__notes li { font: 400 14px/1.45 var(--ui); letter-spacing: -.005em; color: var(--ink-2); }
 .s4__notes b { font-weight: 500; color: var(--ink); }
 
 .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-content: start; }
@@ -359,19 +472,47 @@ h2 {
 
 /* =========================================================== slide 8 */
 
-/* The process line and what it means sit together, centred in the slide's
-   open space rather than stranded at opposite edges. */
-.s8__mid { margin: auto 0; }
-.pipeline { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; }
-.pipeline div { position: relative; padding: 0 22px 0 0; }
-.pipeline b { display: block; font: 500 12px/1 var(--ui); letter-spacing: .12em; color: var(--berry); margin-bottom: 16px; }
-.pipeline p { margin: 0; font: 400 16px/1.35 var(--ui); letter-spacing: -.01em; }
-/* The process line itself: one hairline running under every step, with the
-   step's own marker sitting on it. */
-.pipeline div::before { content: ''; position: absolute; left: 0; right: 0; top: -22px; border-top: 1px solid var(--line); }
-.pipeline div::after { content: ''; position: absolute; left: 0; top: -25px; width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
+/* Three columns rather than a process line: who decided, what the tool built,
+   and what was checked afterwards. Sized to read from a recording. */
+.s8__cols {
+  margin-top: 46px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 64px;
+}
 
-.s8__foot { margin-top: 76px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); column-gap: 72px; align-items: start; }
+.col { display: grid; gap: 22px; align-content: start; }
+.col__h {
+  margin: 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  font: 500 13px/1 var(--ui);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+/* The one accent on the slide: the stage the tool did. */
+.col--ai .col__h { color: var(--berry); }
+
+.col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 16px; }
+.col li {
+  position: relative;
+  padding-left: 20px;
+  font: 400 18px/1.42 var(--ui);
+  letter-spacing: -.012em;
+}
+.col li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
+.s8__foot { margin-top: 68px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); column-gap: 72px; align-items: start; }
 .s8__say { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
 .s8__say li { font: 400 19px/1.45 var(--ui); letter-spacing: -.008em; }
 .s8__say li:last-child { color: var(--ink-2); }

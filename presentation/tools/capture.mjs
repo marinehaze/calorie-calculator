@@ -49,13 +49,32 @@ const SCREENS = [
   'screens-nutrition-result--portion-sheet',
   'screens-nutrition-result--incomplete-data',
   'screens-nutrition-result--error-state',
-  'screens-nutrition-result--multi-item',
   'screens-recipe-discovery--browse',
   'screens-recipe-discovery--filters-applied',
   'screens-recipe-discovery--filter-sheet',
   'screens-recipe-discovery--offline',
   'screens-recipe-detail--full-recipe',
-  'screens-recipe-detail--servings-adjusted',
+];
+
+/**
+ * The same real screens, scrolled. Nutrition Result and Recipe Detail both put
+ * the nutrition block below the fold of a 390 x 844 handset, so a still of the
+ * top of the screen cannot show MacroEnergySplit. These scroll the screen's own
+ * scroll container — in the page, at capture time — until the named element
+ * sits `offset` px below the top of the screen. Nothing in the product changes;
+ * this is the same screen a little further down.
+ */
+const SCROLLED = [
+  // Anchored on the nutrition block's own heading, so the still starts at a
+  // section boundary instead of part-way through a line of figures.
+  // Nutrition Result anchors on the portion pair rather than the nutrition
+  // block: the block is tall enough that scrolling to it hits the bottom of
+  // the scroller, which leaves a line of figures cut in half at the top edge.
+  // Pinning the pair puts a whole row under the status bar instead.
+  { id: 'screens-nutrition-result--single-item',     name: 'nutrition-result--single-item--nutrition',     focus: '.nr-pair', offset: 58 },
+  { id: 'screens-nutrition-result--multi-item',      name: 'nutrition-result--multi-item--nutrition',      focus: '.nr-pair', offset: 58 },
+  { id: 'screens-recipe-detail--full-recipe',        name: 'recipe-detail--full-recipe--nutrition',        focus: '.nr-nutrition, .ds-nutrition', offset: 96 },
+  { id: 'screens-recipe-detail--servings-adjusted',  name: 'recipe-detail--servings-adjusted--nutrition',  focus: '.nr-nutrition, .ds-nutrition', offset: 96 },
 ];
 
 /** Components — the curated set for the design system slide. */
@@ -66,6 +85,7 @@ const COMPONENTS = [
   ['segmented-control', 'input-navigation-segmented-control--portion-basis'],
   ['stepper', 'input-navigation-stepper--servings'],
   ['macro-group', 'nutrition-macro-group--default'],
+  ['macro-energy-split', 'nutrition-macro-energy-split--complete'],
   ['nutrition-summary', 'nutrition-nutrition-summary--summary'],
   ['recipe-card', 'food-recipe-recipe-card--long-title'],
   ['bottom-sheet', 'feedback-states-bottom-sheet--portion-sheet'],
@@ -80,9 +100,7 @@ const COMPONENTS = [
  * re-renders the approved crops at presentation size.
  */
 const FOOD = [
-  { name: 'hero-4x5', file: 'lentil-squash-bowl.png', w: 520, h: 650, op: '50% 50%', sc: 1 },
   { name: 'card-1x1', file: 'squash-couscous-bowl.png', w: 520, h: 520, op: '50% 50%', sc: 1 },
-  { name: 'circle-bleed', file: 'chickpea-bowl.png', w: 520, h: 520, op: '58% 59%', sc: 1.2 },
   { name: 'detail-1x1', file: 'roasted-lentils-detail.png', w: 520, h: 520, op: '50% 50%', sc: 1 },
 ];
 
@@ -123,7 +141,7 @@ const settle = async () => {
   await page.waitForTimeout(220);
 };
 
-const shoot = async (id, selector, out, { stripNotes = false } = {}) => {
+const shoot = async (id, selector, out, { stripNotes = false, focus = null, offset = 0 } = {}) => {
   await page.goto(`${base}/iframe.html?id=${id}&viewMode=story`, { waitUntil: 'networkidle' });
   const rendered = await page.evaluate(() => document.body.classList.contains('sb-show-main'));
   if (!rendered) throw new Error(`${id} did not render`);
@@ -137,6 +155,19 @@ const shoot = async (id, selector, out, { stripNotes = false } = {}) => {
     });
   }
   await settle();
+  if (focus) {
+    const moved = await page.evaluate(({ focus, offset }) => {
+      const target = document.querySelector(focus);
+      const scroller = document.querySelector('.screen__scroll');
+      const screen = document.querySelector('.screen');
+      if (!target || !scroller || !screen) return null;
+      const want = target.getBoundingClientRect().top - screen.getBoundingClientRect().top - offset;
+      scroller.scrollTop += want;
+      return Math.round(scroller.scrollTop);
+    }, { focus, offset });
+    if (moved === null) throw new Error(`${id}: nothing matching ${focus} to scroll to`);
+    await page.waitForTimeout(160);
+  }
   const el = await page.$(selector);
   if (!el) throw new Error(`${id}: no element matching ${selector}`);
   await el.screenshot({ path: out });
@@ -146,9 +177,12 @@ const shoot = async (id, selector, out, { stripNotes = false } = {}) => {
 const ONLY = process.argv[2]; // 'screens' | 'components' | 'food', or nothing for all
 
 if (!ONLY || ONLY === 'screens') {
-console.log(`\nScreens (${SCREENS.length})`);
+console.log(`\nScreens (${SCREENS.length} + ${SCROLLED.length} scrolled)`);
 for (const id of SCREENS) {
   await shoot(id, '.sb-device .screen', join(OUT, 'screens', `${id.replace('screens-', '')}.png`));
+}
+for (const t of SCROLLED) {
+  await shoot(t.id, '.sb-device .screen', join(OUT, 'screens', `${t.name}.png`), { focus: t.focus, offset: t.offset });
 }
 }
 
