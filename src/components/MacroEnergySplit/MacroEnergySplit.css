@@ -1,0 +1,56 @@
+/* Macro energy split — label, shares, arc; left-aligned like everything else
+   on the screen, with the gram grid following at the section's inner gap.
+   The arc is data, never the logo: no track, no goal, no text inside. */
+
+.ds-energy-split { display: block; }
+
+.ds-energy-split__label {
+  font-size: var(--ds-text-label);
+  line-height: var(--ds-leading-ui);
+  color: var(--ds-ink-2);
+}
+
+.ds-energy-split__summary {
+  margin-top: var(--ds-space-half);
+  font-size: var(--ds-text-body);
+  font-weight: var(--ds-weight-medium);
+  letter-spacing: var(--ds-tracking-body);
+  line-height: var(--ds-leading-ui);
+  color: var(--ds-ink);
+}
+
+.ds-energy-split__sep {
+  padding: 0 6px;
+  font-weight: var(--ds-weight-regular);
+  color: var(--ds-ink-2);
+}
+
+.ds-energy-split__arc {
+  display: block;
+  width: 112px;
+  height: 112px;
+  margin-top: var(--ds-space-2);
+}
+
+.ds-energy-split__arc path {
+  fill: none;
+  stroke-width: 12.5;
+  stroke-linecap: round;
+}
+
+/* Recalculating — dims in place like the hero figure and the gram values.
+   Same box, same spacing: no layout shift while a new portion is applied.
+   The arc takes the same 55% the figures use. The shares are 16px text, not
+   large text, so they soften to ink-2 (5.3 : 1) instead of dropping opacity,
+   which would fall under 4.5 : 1. The label stays, as MacroGroup's labels do. */
+.ds-energy-split--pending .ds-energy-split__summary {
+  color: var(--ds-ink-2);
+  transition: color var(--ds-duration) var(--ds-ease);
+}
+.ds-energy-split--pending .ds-energy-split__arc {
+  opacity: .55;
+  transition: opacity var(--ds-duration) var(--ds-ease);
+}
+
+/* The gram grid follows the split at the inner-section gap. */
+.ds-energy-split + .ds-macro-group { margin-top: var(--ds-space-3); }

@@ -14,7 +14,7 @@ const MACROS = [
  * values: nothing turns red at someone for eating.
  *
  * The dots are decorative reinforcement of a text label that is always
- * present, so the carbs marker (#C08442, 3.17 : 1) never has to carry meaning
+ * present, so the carbs marker (#A57D31, 3.77 : 1) never has to carry meaning
  * it cannot carry at that contrast.
  *
  * A macro the database does not have prints "Not available", not "0 g".
