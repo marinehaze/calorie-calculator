@@ -55,9 +55,9 @@ hex, pixel size or font family.**
 | `--ds-berry-deep` | `#732643` | **Derived state only** — hover / pressed on a bramble surface |
 | `--ds-berry-soft` | `#F7EDF1` | Quiet button; selected and applied chip tint |
 | `--ds-berry-line` | berry @ 70% | **Derived state only** — applied-filter chip boundary, 3.90 : 1 on canvas |
-| `--ds-macro-protein` | `#8A3355` | 7px marker dot only |
-| `--ds-macro-carbs` | `#C08442` | 7px marker dot only |
-| `--ds-macro-fat` | `#5F7185` | 7px marker dot only |
+| `--ds-macro-protein` | `#2F6F6B` | 7px marker dot only — deep teal, 5.82 : 1 on surface |
+| `--ds-macro-carbs` | `#A57D31` | 7px marker dot only — warm ochre, 3.77 : 1 on surface |
+| `--ds-macro-fat` | `#B36E49` | 7px marker dot only — warm terracotta, 4.01 : 1 on surface |
 
 Bramble marks the primary action, the selected or active state, constraint
 emphasis, and occasional hero emphasis. Everything else stays neutral so
@@ -131,7 +131,7 @@ Hierarchy comes from scale and space, never from shrinking text.
 
 ## 2. Component inventory
 
-Twenty-two components, each traceable to a screen or state in `SCREENS.md`.
+Twenty-three components, each traceable to a screen or state in `SCREENS.md`.
 Public API is `src/index.js`.
 
 ### Actions
@@ -159,6 +159,7 @@ Public API is `src/index.js`.
 |---|---|
 | **HeroCalories** | lg / md / sm; `pending`; unavailable |
 | **PortionPair** | Portion + per-100g on one hairline |
+| **MacroEnergySplit** | "Macro energy split", the shares (grams × 4 / 4 / 9, rounded to total 100) and the segmented arc — data only, never the logo. Sits immediately above MacroGroup; `pending` dims in place; renders nothing if any macro is unavailable or the total is zero |
 | **MacroGroup** | Three equal columns, equal weight, edge-balanced — see §3; per-macro unavailable |
 | **IngredientRow** | Fixed number columns; `flag`; interactive (item swap) |
 | **NutritionSummary** | `full` (Nutrition Result) and `summary` (Recipe Detail) |
@@ -424,8 +425,10 @@ of the 4.5 : 1 that 1.4.3 asks of text, so it is defined once, as
 a control, and nothing is ever written in it.
 
 The macro markers are absent from this table because none of them is ever
-text: carbs (`#C08442`) is 3.17 : 1 and exists only as a 7px dot beside
-the word "Carbs".
+text: carbs (`#A57D31`, 3.77 : 1) and fat (`#B36E49`, 4.01 : 1) fall short of
+4.5 : 1 and exist only as 7px dots beside their words. Protein (`#2F6F6B`,
+5.82 : 1) would pass as text but follows the same marker-only rule. All three
+clear the 3 : 1 that 1.4.11 asks of a non-text element on canvas and surface.
 
 **Touch targets.** Every interactive element is at least 44 × 44, verified
 programmatically rather than by eye. Where a glyph is 24px the hit area is

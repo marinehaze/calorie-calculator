@@ -19,6 +19,7 @@ export { InputField } from './components/InputField/InputField';
 export { HeroCalories } from './components/HeroCalories/HeroCalories';
 export { PortionPair } from './components/PortionPair/PortionPair';
 export { MacroGroup } from './components/MacroGroup/MacroGroup';
+export { MacroEnergySplit } from './components/MacroEnergySplit/MacroEnergySplit';
 export { IngredientRow, IngredientList } from './components/IngredientRow/IngredientRow';
 export { NutritionSummary } from './components/NutritionSummary/NutritionSummary';
 

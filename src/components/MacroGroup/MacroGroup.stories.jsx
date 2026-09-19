@@ -24,7 +24,7 @@ export const Default = {
 };
 
 /** The macro dots are decorative reinforcement of a label that is always
- *  present. That is what lets the carbs marker (#C08442, 3.17 : 1) exist at
+ *  present. That is what lets the carbs marker (#A57D31, 3.77 : 1) exist at
  *  all: it never has to carry meaning on its own. */
 export const PartiallyUnavailable = {
   render: () => (

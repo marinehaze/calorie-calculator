@@ -2,6 +2,7 @@ import './NutritionSummary.css';
 import { HeroCalories } from '../HeroCalories/HeroCalories';
 import { PortionPair } from '../PortionPair/PortionPair';
 import { MacroGroup } from '../MacroGroup/MacroGroup';
+import { MacroEnergySplit } from '../MacroEnergySplit/MacroEnergySplit';
 import { IngredientRow, IngredientList } from '../IngredientRow/IngredientRow';
 
 /**
@@ -56,6 +57,9 @@ export const NutritionSummary = ({
 
     {macros && (
       <div className="ds-nutrition__macros">
+        {/* Where the calories come from, above the exact grams. Renders
+            nothing unless all three macros are known. */}
+        <MacroEnergySplit macros={macros} pending={pending} />
         <MacroGroup macros={macros} pending={pending} />
       </div>
     )}

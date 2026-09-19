@@ -41,8 +41,10 @@ export const TextContrast = {
 
       <p style={{ font: '400 15px/1.6 var(--ds-font-ui)', color: 'var(--ds-ink-2)', marginTop: 24, maxWidth: '40ch' }}>
         The macro markers are not in this table because none of them is ever text.
-        Carbs (#C08442) is 3.17 : 1 on surface, which is why it exists only as a 7px
-        dot beside the word “Carbs” and never as the carrier of meaning.
+        Carbs (#A57D31, 3.77 : 1) and fat (#B36E49, 4.01 : 1) are below 4.5 : 1 on
+        surface, which is why each exists only as a 7px dot beside its word and
+        never as the carrier of meaning. Protein (#2F6F6B, 5.82 : 1) would pass
+        as text but is kept to the same marker-only rule.
       </p>
     </Frame>
   ),
