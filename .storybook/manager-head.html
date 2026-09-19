@@ -1,0 +1,22 @@
+<!-- Piatto: browser tab title and favicon for the Storybook manager. Nothing
+     here reaches the preview iframe, the stories, the tokens or the audit.
+
+     The favicon is the standalone arc mark (.storybook/favicon.svg), served
+     at /favicon.svg through staticDirs in main.js, which is where Storybook
+     looks for its favicon.
+
+     The tab title: Storybook 9 writes "<story> - <component> ⋅ Storybook" into
+     document.title on every navigation and offers no option for the suffix, so
+     the suffix is swapped for "Piatto" whenever the title changes. -->
+<title>Piatto</title>
+<script>
+  (function () {
+    var rename = function () {
+      var t = document.title;
+      if (/ ⋅ Storybook$/.test(t)) document.title = t.replace(/ ⋅ Storybook$/, ' ⋅ Piatto');
+      else if (t === 'Storybook' || /- Storybook$/.test(t)) document.title = 'Piatto';
+    };
+    rename();
+    new MutationObserver(rename).observe(document.head, { childList: true, subtree: true, characterData: true });
+  })();
+</script>

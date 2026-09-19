@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './NutritionResult.css';
 import {
-  NavBar, FoodImage, HeroCalories, PortionPair, MacroGroup, SegmentedControl,
+  NavBar, FoodImage, HeroCalories, PortionPair, MacroGroup, MacroEnergySplit, SegmentedControl,
   IngredientRow, IngredientList, Button, BottomSheet, Stepper, FoodResultRow,
   FoodResultList, Banner, Skeleton,
 } from '../../index';
@@ -182,7 +182,14 @@ export const NutritionResult = ({
         </div>
 
         <div className="nr-macros">
-          {state === 'loading' ? <LoadingMacros /> : <MacroGroup macros={macros} pending={state === 'recalculating'} />}
+          {state === 'loading' ? <LoadingMacros /> : (
+            <>
+              {/* Where the calories come from, above the exact grams. Renders
+                  nothing unless all three macros are known. */}
+              <MacroEnergySplit macros={macros} pending={state === 'recalculating'} />
+              <MacroGroup macros={macros} pending={state === 'recalculating'} />
+            </>
+          )}
         </div>
       </section>
 

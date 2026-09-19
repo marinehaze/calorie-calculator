@@ -1,6 +1,6 @@
-# Calorie Calculator
+# Piatto
 
-AI-native mobile nutrition app concept focused on two core user needs:
+Calorie calculator — an AI-native mobile nutrition app concept focused on two core user needs:
 
 1. Calculate calories and nutrition for a food, product or dish.
 2. Discover a suitable recipe based on dietary preferences and constraints.
@@ -104,7 +104,7 @@ Design decisions, scope and UX logic remained explicitly documented throughout t
 
 Final Storybook audit:
 
-- 104 stories
+- 107 stories
 - 34 application states
 - 0 horizontal overflow at 390 px
 - 0 touch targets under 44 px

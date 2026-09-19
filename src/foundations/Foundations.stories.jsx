@@ -58,9 +58,9 @@ export const Colour = {
         <Note>Macro markers — 7px dots, never fills or bars, always beside their label</Note>
         <div style={{ display: 'grid', gap: 10 }}>
           {[
-            ['--ds-macro-protein', 'Protein', '#8A3355'],
-            ['--ds-macro-carbs', 'Carbs', '#C08442'],
-            ['--ds-macro-fat', 'Fat', '#5F7185'],
+            ['--ds-macro-protein', 'Protein', '#2F6F6B'],
+            ['--ds-macro-carbs', 'Carbs', '#A57D31'],
+            ['--ds-macro-fat', 'Fat', '#B36E49'],
           ].map(([token, label, hex]) => (
             <span key={token} style={{ display: 'flex', alignItems: 'center', gap: 11, font: '400 15px var(--ds-font-ui)', color: 'var(--ds-ink-2)' }}>
               <i style={{ width: 7, height: 7, borderRadius: '50%', background: `var(${token})`, flex: '0 0 7px' }} />

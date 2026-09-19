@@ -53,10 +53,15 @@
   --ds-berry-line:    rgba(138, 51, 85, 0.7);
 
   /* Macro markers — 7px dots only. Never a fill, never a bar, and never the
-     only carrier of meaning: every dot is paired with its text label. */
-  --ds-macro-protein: #8A3355;
-  --ds-macro-carbs:   #C08442;
-  --ds-macro-fat:     #5F7185;
+     only carrier of meaning: every dot is paired with its text label.
+     Piatto macro separation: deep teal, warm ochre, warm terracotta. Every
+     one clears 3 : 1 on canvas and surface. Protein (5.58 : 1 canvas,
+     5.82 : 1 surface) is text-safe; carbs (3.61 / 3.77) and fat (3.84 / 4.01)
+     are marker-only and never written as text. Berry stays the action colour
+     and no longer doubles as a data colour. */
+  --ds-macro-protein: #2F6F6B;
+  --ds-macro-carbs:   #A57D31;
+  --ds-macro-fat:     #B36E49;
 
   /* ---------------------------------------------------------------------
      TYPOGRAPHY
