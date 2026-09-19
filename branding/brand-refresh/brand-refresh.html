@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Brand refresh — stylescape exploration 01</title>
+<meta name="description" content="Brand / stylescape exploration for the Calorie Calculator product. Concept stage. Nothing here changes the application, its tokens or Storybook.">
+<style>
+/* =========================================================================
+   BRAND REFRESH — STYLESCAPE BOARD (exploration 01)
+   One continuous 2400px-wide editorial board. Fonts are the product's own
+   self-hosted files; photography is the approved set in assets/food/.
+   ========================================================================= */
+@font-face{font-family:"Plus Jakarta Sans";font-weight:400;src:url("../../src/styles/fonts/PlusJakartaSans-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:500;src:url("../../src/styles/fonts/PlusJakartaSans-500-latin.woff2") format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:600;src:url("../../src/styles/fonts/PlusJakartaSans-600-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:400;src:url("../../src/styles/fonts/InterTight-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:500;src:url("../../src/styles/fonts/InterTight-500-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:600;src:url("../../src/styles/fonts/InterTight-600-latin.woff2") format("woff2")}
+
+:root{
+  color-scheme:light;
+  /* existing product palette — unchanged */
+  --canvas:#FBFAF8; --surface:#FFFFFF; --soft:#F4F1EC;
+  --ink:#1C1B19; --ink-2:#6B6863;
+  --line:#EAE6E0; --line-2:#DFDAD2;
+  --berry:#8A3355; --berry-deep:#732643; --berry-soft:#F7EDF1;
+  /* PROPOSED macro data colours — visualised here only, not tokens */
+  --p-protein:#2F6F6B; --p-carbs:#D9A441; --p-fat:#E08A5B;
+  --fd:"Plus Jakarta Sans",sans-serif;
+  --fu:"Inter Tight",sans-serif;
+  --W:2400px; --M:96px; --gap:24px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--canvas)}
+body{width:var(--W);color:var(--ink);font-family:var(--fu);font-size:22px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,p,figure,ul,ol,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+img{display:block}
+.num{font-variant-numeric:tabular-nums}
+.d{font-family:var(--fd)}
+.berry{color:var(--berry)}
+.ink2{color:var(--ink-2)}
+
+/* --------------------------------------------------------------- grid */
+.sec{position:relative;display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:var(--gap);padding:0 var(--M)}
+.folio{grid-column:1/-1;display:flex;align-items:baseline;gap:20px;font-size:17px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.folio b{color:var(--berry);font-weight:500}
+.folio i{font-style:normal;font-weight:400;letter-spacing:0;text-transform:none;font-size:18px;color:var(--ink-2)}
+.t{font-family:var(--fd);font-weight:500;letter-spacing:-.035em;line-height:1.02;text-wrap:balance}
+.lead{font-size:24px;line-height:1.5;color:var(--ink-2);max-width:46ch}
+.cap{font-size:17px;line-height:1.45;color:var(--ink-2)}
+.cap b{color:var(--ink);font-weight:500}
+.tag{display:inline-flex;align-items:center;gap:10px;height:34px;padding:0 14px;border-radius:999px;font-size:14px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--berry);background:var(--berry-soft)}
+.tag--ink{color:var(--ink-2);background:var(--soft)}
+.rule{grid-column:1/-1;height:1px;background:var(--line)}
+
+/* --------------------------------------------------------------- photo */
+.img{position:relative;overflow:hidden;background:#EFEAE1}
+.img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op,50% 50%);transform:scale(var(--sc,1));transform-origin:var(--op,50% 50%)}
+.circ{border-radius:50%}
+
+/* --------------------------------------------------------------- arc motif */
+.arc{display:block;color:var(--berry);overflow:visible}
+
+/* =========================================================================
+   00 · MASTHEAD
+   ========================================================================= */
+.mast{height:1230px;overflow:hidden;align-content:start;padding-top:88px}
+.mast__meta{grid-column:1/13}
+.mast h1{grid-column:1/16;margin-top:120px;font-size:184px;font-weight:500;letter-spacing:-.045em;line-height:.94;position:relative;z-index:2}
+.mast h1 em{font-style:normal;color:var(--berry)}
+.mast__sub{grid-column:1/11;margin-top:56px;position:relative;z-index:2}
+.mast__sig{grid-column:1/-1;margin-top:96px;display:flex;align-items:center;gap:36px;position:relative;z-index:2}
+.mast__sig .arc{width:132px;height:132px}
+.mast__sig p{font-size:22px;color:var(--ink-2);max-width:44ch;line-height:1.5}
+.mast__plate{position:absolute;right:-260px;top:150px;width:1040px;height:1040px;z-index:1}
+.mast__cat{position:absolute;right:var(--M);top:96px;text-align:right;font-size:17px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);z-index:3}
+
+/* =========================================================================
+   01 · BRAND IDEA
+   ========================================================================= */
+.idea{padding-top:120px;padding-bottom:120px;row-gap:64px}
+.idea__t{grid-column:1/10;font-size:88px}
+.idea__cols{grid-column:11/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px;align-content:start;margin-top:16px}
+.idea__cols h3{font-family:var(--fd);font-weight:600;font-size:30px;letter-spacing:-.025em;line-height:1.15}
+.idea__cols p{margin-top:16px;font-size:20px;line-height:1.5;color:var(--ink-2)}
+.idea__cols .arc{width:44px;height:44px;margin-bottom:26px}
+.idea__means{grid-column:1/-1;display:flex;align-items:center;gap:48px;padding-top:56px;border-top:1px solid var(--line)}
+.idea__means .arc{width:72px;height:72px;flex:0 0 72px}
+.idea__means ul{display:flex;gap:64px;font-family:var(--fd);font-weight:500;font-size:28px;letter-spacing:-.02em}
+.idea__means li span{display:block;margin-top:6px;font-family:var(--fu);font-weight:400;font-size:17px;color:var(--ink-2);letter-spacing:0}
+
+/* =========================================================================
+   02 · NAMING
+   ========================================================================= */
+.names{padding-top:120px;padding-bottom:110px;background:var(--surface);row-gap:56px}
+.names__t{grid-column:1/12;font-size:72px}
+.names__lead{grid-column:13/-1;margin-top:14px}
+.names__grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));column-gap:24px;border-top:1px solid var(--line)}
+.name{padding-top:36px;padding-right:24px;position:relative}
+.name .d{font-weight:600;font-size:74px;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.name p{margin-top:18px;font-size:17px;line-height:1.45;color:var(--ink-2);max-width:26ch}
+.name--out .d{color:#CFC9C1}
+.name--out p{color:#A39F98}
+.name__mark{position:absolute;top:-1px;left:0;width:56px;height:2px;background:var(--berry)}
+.name__k{display:block;margin-top:14px;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--berry);font-weight:500}
+.name--out .name__k{color:#A39F98}
+
+/* =========================================================================
+   03 · WORDMARKS
+   ========================================================================= */
+.wm{padding-top:120px;padding-bottom:120px;row-gap:0}
+.wm__t{grid-column:1/9;font-size:72px}
+.wm__lead{grid-column:1/9;margin-top:28px}
+.wm__stack{grid-column:10/-1;grid-row:2/6;display:grid;row-gap:88px;align-content:start;margin-top:40px}
+.lock{--wm:200px;display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:48px;align-items:end}
+.lock__wm{display:flex;align-items:baseline;gap:0;font-family:var(--fd);font-weight:600;font-size:var(--wm);letter-spacing:-.045em;line-height:1;color:var(--ink);white-space:nowrap}
+.lock__wm .arc{flex:0 0 auto;align-self:center;margin-right:.16em}
+/* The descriptor clears the descender of the "p": its gap scales with the
+   wordmark (0.3em of it) instead of being a fixed pixel value. */
+.lock__cat{margin-top:calc(var(--wm) * .30);font-size:20px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.lock--stack .lock__wm{flex-direction:column;align-items:flex-start}
+.lock--stack .lock__wm .arc{align-self:flex-start;margin:0 0 .22em}
+.lock__note{font-size:17px;line-height:1.45;color:var(--ink-2)}
+.lock__note b{display:block;color:var(--ink);font-weight:500;font-size:18px;margin-bottom:6px}
+.wm__rev{grid-column:1/9;margin-top:120px;align-self:start;background:var(--berry);border-radius:28px;padding:64px 56px 56px;color:#fff}
+.wm__rev .lock{--wm:120px;display:block}
+.wm__rev .lock__wm{color:#fff}
+.wm__rev .arc{color:#fff}
+.wm__rev .lock__cat{color:rgba(255,255,255,.72)}
+.wm__rev .cap{color:rgba(255,255,255,.72);margin-top:40px}
+.wm__sym{grid-column:1/9;margin-top:40px;display:flex;align-items:center;gap:40px}
+.wm__sym .arc{color:var(--ink)}
+.wm__sym .cap{max-width:34ch}
+.wm__sizes{grid-column:1/-1;margin-top:110px;padding-top:56px;border-top:1px solid var(--line);display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.wm__sizes .lock{display:block}
+.wm__sizes .lock__cat{font-size:calc(var(--wm) * .1);letter-spacing:.2em}
+.wm__sizes small{display:block;margin-top:18px;font-size:15px;color:var(--ink-2)}
+.wm__sizes .arc{color:var(--berry)}
+
+/* =========================================================================
+   04 · APP ICON
+   ========================================================================= */
+.icons{padding-top:120px;padding-bottom:120px;background:var(--surface);row-gap:64px}
+.icons__t{grid-column:1/9;font-size:72px}
+.icons__lead{grid-column:1/9;margin-top:24px}
+.icons__row{grid-column:10/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px}
+.ai{--s:264px;width:var(--s);height:var(--s);border-radius:22.4%;position:relative;overflow:hidden;background:var(--canvas);box-shadow:inset 0 0 0 1px rgba(28,27,25,.06)}
+.ai .arc{position:absolute}
+.ai--rim .arc{left:19%;top:19%;width:62%;height:62%}
+.ai--bleed .arc{left:24%;top:24%;width:104%;height:104%}
+.ai--inv{background:var(--berry)}
+.ai--inv .arc{left:19%;top:19%;width:62%;height:62%;color:#FBFAF8}
+.ai--sm{--s:76px}
+.ai--xs{--s:36px}
+.ai--sm.ai,.ai--xs.ai{box-shadow:inset 0 0 0 1px rgba(28,27,25,.08)}
+.iconset__sizes{display:flex;align-items:flex-end;gap:20px;margin-top:28px}
+.iconset h3{margin-top:36px;font-family:var(--fd);font-weight:600;font-size:26px;letter-spacing:-.02em}
+.iconset p{margin-top:10px;font-size:17px;line-height:1.45;color:var(--ink-2);max-width:30ch}
+
+/* =========================================================================
+   05 · ARC MOTIF
+   ========================================================================= */
+.motif{padding-top:130px;padding-bottom:130px;row-gap:80px}
+.motif__t{grid-column:1/10;font-size:88px}
+.motif__lead{grid-column:1/9;margin-top:28px}
+.motif__big{grid-column:11/-1;position:relative;height:620px}
+.motif__big .arc{position:absolute;left:0;top:0;width:620px;height:620px}
+.motif__big svg.guide{position:absolute;left:0;top:0;width:620px;height:620px;overflow:visible}
+.motif__spec{position:absolute;left:700px;top:40px;display:grid;row-gap:22px;font-size:18px;color:var(--ink-2);max-width:32ch;line-height:1.45}
+.motif__spec b{display:block;color:var(--ink);font-weight:500;font-family:var(--fd);font-size:24px;letter-spacing:-.02em;margin-bottom:4px}
+.motif__ladder{grid-column:1/9;display:flex;align-items:flex-end;gap:36px}
+.motif__ladder div{text-align:center}
+.motif__ladder .arc{margin:0 auto}
+.motif__ladder span{display:block;margin-top:14px;font-size:16px;color:var(--ink-2)}
+.motif__use{grid-column:1/-1;display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:var(--gap);row-gap:32px}
+.use{background:var(--surface);border-radius:28px;padding:40px;position:relative;overflow:hidden}
+.use h3{font-family:var(--fd);font-weight:600;font-size:26px;letter-spacing:-.02em;position:relative;z-index:2}
+.use p{margin-top:10px;font-size:17px;color:var(--ink-2);line-height:1.45;max-width:30ch;position:relative;z-index:2}
+.use--crop{grid-column:1/9;height:460px}
+.use--crop .img{position:absolute;right:-190px;top:120px;width:440px;height:440px}
+.use--crop2{grid-column:9/15;height:460px}
+.use--crop2 .img{position:absolute;left:-140px;bottom:-190px;width:400px;height:400px}
+.use--prop{grid-column:15/-1;height:460px;display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:40px;align-items:center}
+.use--prop h3,.use--prop p{grid-column:2}
+.use--prop .prop{grid-column:1;grid-row:1/4;width:220px;height:220px}
+.prop path{fill:none;stroke-width:12.5;stroke-linecap:round}
+.prop-legend{grid-column:2;display:grid;row-gap:10px;margin-top:22px;font-size:17px;color:var(--ink-2)}
+.prop-legend b{display:inline-block;min-width:72px;font-family:var(--fd);font-weight:500;color:var(--ink);letter-spacing:-.02em;font-size:20px}
+.prop-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:12px;vertical-align:middle}
+.motif__not{grid-column:1/-1;display:flex;gap:64px;padding-top:40px;border-top:1px solid var(--line);font-size:18px;color:var(--ink-2)}
+.motif__not b{color:var(--ink);font-weight:500}
+
+/* =========================================================================
+   06 · COLOUR
+   ========================================================================= */
+.col{padding-top:130px;padding-bottom:130px;background:var(--surface);row-gap:72px}
+.col__t{grid-column:1/10;font-size:88px}
+.col__lead{grid-column:1/9;margin-top:28px}
+.pal{grid-column:1/-1;display:grid;grid-template-columns:repeat(24,minmax(0,1fr));grid-auto-rows:220px;column-gap:var(--gap);row-gap:var(--gap)}
+.sw{border-radius:20px;padding:28px;display:flex;flex-direction:column;justify-content:space-between}
+.sw b{font-family:var(--fd);font-weight:600;font-size:30px;letter-spacing:-.025em}
+.sw span{font-size:17px;opacity:.75}
+.sw small{font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.7;font-weight:500}
+.sw--canvas{grid-column:1/9;grid-row:1/3;background:var(--canvas);box-shadow:inset 0 0 0 1px var(--line)}
+.sw--surface{grid-column:9/14;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line)}
+.sw--soft{grid-column:14/19;background:var(--soft)}
+.sw--berry{grid-column:19/-1;grid-row:1/3;background:var(--berry);color:#fff}
+.sw--ink{grid-column:9/14;background:var(--ink);color:var(--canvas)}
+.sw--ink2{grid-column:14/19;background:var(--ink-2);color:#fff}
+.chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+.chip{display:flex;align-items:center;gap:14px;font-size:17px;color:var(--ink-2)}
+.chip i{width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(28,27,25,.08)}
+.chip b{color:var(--ink);font-weight:500}
+.prop-panel{grid-column:1/-1;display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:var(--gap);row-gap:48px;padding:64px 0 0;border-top:1px solid var(--line)}
+.prop-panel__head{grid-column:1/9}
+.prop-panel__head h3{font-family:var(--fd);font-weight:500;font-size:52px;letter-spacing:-.035em;line-height:1.05;margin-top:24px}
+.prop-panel__head p{margin-top:22px;font-size:19px;line-height:1.5;color:var(--ink-2);max-width:40ch}
+.pm{grid-column:10/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+.pm__sw{height:260px;border-radius:20px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;color:#fff}
+.pm__sw b{font-family:var(--fd);font-weight:600;font-size:30px;letter-spacing:-.025em}
+.pm__sw span{font-size:17px;opacity:.85}
+.pm__sw .mk{width:44px;height:44px}
+.pm__sw--carbs,.pm__sw--fat{color:var(--ink)}
+.pm__meta{margin-top:20px;font-size:16px;line-height:1.5;color:var(--ink-2)}
+.pm__meta b{color:var(--ink);font-weight:500}
+.mk{display:block}
+.mk--dot{fill:currentColor}
+.mk--ring{fill:none;stroke:currentColor;stroke-width:2.4}
+.mk--sq{fill:currentColor}
+.prop-demo{grid-column:1/-1;display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:var(--gap);align-items:start}
+.demo{background:var(--canvas);border-radius:28px;padding:40px;box-shadow:inset 0 0 0 1px var(--line)}
+.demo h4{font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);display:flex;align-items:center;gap:14px}
+.demo--now{grid-column:1/9}
+.demo--now img{width:390px;margin-top:28px;border-radius:14px}
+.demo--new{grid-column:9/17}
+.demo--prop{grid-column:17/-1}
+.mrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:390px;margin-top:44px;padding:0 0 4px}
+.mrow div:nth-child(2){text-align:center}
+.mrow div:nth-child(3){text-align:right}
+.mrow b{display:block;font-family:var(--fd);font-weight:500;font-size:24px;letter-spacing:-.022em;line-height:1}
+.mrow span{display:inline-flex;align-items:center;gap:8px;margin-top:9px;font-size:15px;color:var(--ink-2)}
+.mrow .mk{width:9px;height:9px}
+.demo p{margin-top:26px;font-size:16px;line-height:1.45;color:var(--ink-2);max-width:32ch}
+.demo--prop .prop{width:180px;height:180px;margin-top:28px}
+
+.acc{grid-column:1/-1;display:grid;grid-template-columns:repeat(24,minmax(0,1fr));column-gap:var(--gap);padding-top:48px;border-top:1px solid var(--line)}
+.acc__head{grid-column:1/9}
+.acc__head h3{font-family:var(--fd);font-weight:500;font-size:40px;letter-spacing:-.03em;line-height:1.08;margin-top:22px}
+.acc__head p{margin-top:18px;font-size:18px;line-height:1.5;color:var(--ink-2);max-width:40ch}
+.acc__row{grid-column:10/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+.acc__sw{height:150px;border-radius:20px;padding:24px;display:flex;align-items:flex-end;justify-content:space-between;color:#fff;box-shadow:inset 0 0 0 1px rgba(28,27,25,.06)}
+.acc__sw b{font-family:var(--fd);font-weight:600;font-size:26px;letter-spacing:-.025em;display:block}
+.acc__sw span{font-size:16px;opacity:.85}
+.acc__sw i{font-style:normal;font-family:var(--fd);font-weight:500;font-size:22px;letter-spacing:-.02em;text-align:right;line-height:1.2}
+.acc__pair{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:16px;color:var(--ink-2)}
+.acc__pair i{width:22px;height:22px;border-radius:50%;flex:0 0 22px}
+.acc__pair b{color:var(--ink);font-weight:500}
+.acc__pair svg{width:22px;height:22px;flex:0 0 22px;fill:none;stroke:var(--ink-2);stroke-width:1.6;stroke-linecap:round}
+
+/* =========================================================================
+   07 · TYPOGRAPHY
+   ========================================================================= */
+.type{padding-top:130px;padding-bottom:120px;row-gap:0}
+.type__t{grid-column:1/11;font-size:72px}
+.type__lead{grid-column:1/9;margin-top:28px}
+.type__hero{grid-column:11/-1;align-self:start;display:flex;align-items:baseline;gap:24px;margin-top:-30px}
+.type__hero b{font-family:var(--fd);font-weight:500;font-size:520px;letter-spacing:-.06em;line-height:.82}
+.type__hero span{font-size:44px;color:var(--ink-2)}
+.type__hero small{display:block;margin-top:34px;font-size:16px;color:var(--ink-2);letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.spec{grid-column:1/-1;margin-top:120px;border-top:1px solid var(--line)}
+.sp{display:grid;grid-template-columns:320px minmax(0,1fr);column-gap:48px;align-items:baseline;padding:44px 0;border-bottom:1px solid var(--line)}
+.sp__m{font-size:16px;color:var(--ink-2);line-height:1.5}
+.sp__m b{display:block;color:var(--ink);font-weight:500;font-size:17px}
+.sp__s{min-width:0}
+
+/* =========================================================================
+   08 · PHOTOGRAPHY
+   ========================================================================= */
+.photo{padding-top:130px;padding-bottom:0;background:var(--surface);row-gap:72px;overflow:hidden}
+.photo__t{grid-column:1/10;font-size:88px}
+.photo__lead{grid-column:11/19;margin-top:24px}
+.photo__grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(24,minmax(0,1fr));grid-auto-rows:120px;column-gap:var(--gap);row-gap:var(--gap)}
+.ph{border-radius:20px}
+.ph__cap{position:absolute;left:0;bottom:-40px;font-size:16px;color:var(--ink-2)}
+.ph--a{grid-column:1/9;grid-row:1/7}
+.ph--b{grid-column:9/17;grid-row:1/5}
+.ph--c{grid-column:17/-1;grid-row:1/5;border-radius:50%;aspect-ratio:1;grid-row:1/6}
+.ph--d{grid-column:9/13;grid-row:5/9}
+.ph--e{grid-column:13/17;grid-row:5/9}
+.ph--f{grid-column:1/9;grid-row:7/11}
+.ph--g{grid-column:17/-1;grid-row:6/11}
+.photo__rules{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:48px;padding:64px 0 120px;border-top:1px solid var(--line)}
+.photo__rules h3{font-family:var(--fd);font-weight:600;font-size:24px;letter-spacing:-.02em}
+.photo__rules p{margin-top:12px;font-size:17px;line-height:1.45;color:var(--ink-2)}
+.photo__bleed{grid-column:1/-1;position:relative;height:560px;background:var(--canvas)}
+.photo__bleed .img{position:absolute;left:-360px;top:-40px;width:760px;height:760px}
+.photo__bleed .type{position:absolute;left:540px;top:120px}
+.photo__bleed h3{font-family:var(--fd);font-weight:600;font-size:48px;letter-spacing:-.03em;line-height:1.1;max-width:14ch}
+.photo__bleed .k{display:flex;align-items:baseline;gap:18px;margin-top:40px}
+.photo__bleed .k b{font-family:var(--fd);font-weight:500;font-size:168px;letter-spacing:-.05em;line-height:.85}
+.photo__bleed .k span{font-size:26px;color:var(--ink-2)}
+.photo__bleed .cap{position:absolute;right:0;bottom:64px;max-width:40ch}
+.photo__bleed .arc{position:absolute;right:120px;top:110px;width:220px;height:220px}
+
+/* =========================================================================
+   09 · ICON LANGUAGE   10 · REAL UI
+   ========================================================================= */
+.ui{padding-top:130px;padding-bottom:130px;row-gap:96px}
+.ui__t{grid-column:1/9;font-size:72px}
+.ui__lead{grid-column:1/8;margin-top:28px}
+.glyphs{grid-column:1/9;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:56px;column-gap:24px;align-content:start}
+.gl{display:grid;row-gap:14px;justify-items:start}
+.gl svg{width:64px;height:64px;fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.gl svg.berry{stroke:var(--berry)}
+.gl span{font-size:16px;color:var(--ink-2)}
+.gl span b{display:block;color:var(--ink);font-weight:500;font-size:17px}
+.glyphs__spec{grid-column:1/-1;font-size:16px;color:var(--ink-2);padding-top:28px;border-top:1px solid var(--line)}
+.frag{grid-column:10/-1;display:grid;grid-template-columns:repeat(3,390px);column-gap:56px;align-content:start}
+.frag__t{grid-column:1/-1;margin-bottom:8px}
+.frag__t h3{font-family:var(--fd);font-weight:500;font-size:52px;letter-spacing:-.035em;line-height:1.05}
+.frag__t p{margin-top:16px;font-size:19px;line-height:1.5;color:var(--ink-2);max-width:56ch}
+.dev{position:relative}
+.dev__screen{width:390px;background:var(--surface);border-radius:28px;overflow:hidden;position:relative;box-shadow:0 34px 64px -44px rgba(28,27,25,.42),0 0 0 1px rgba(28,27,25,.05)}
+.dev__screen img{width:390px}
+.dev__fade{position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(to bottom,rgba(255,255,255,0),#fff)}
+.dev__fade--canvas{background:linear-gradient(to bottom,rgba(251,250,248,0),#FBFAF8)}
+.dev__cap{margin-top:22px;font-size:16px;line-height:1.45;color:var(--ink-2);max-width:36ch}
+.dev__cap b{display:block;color:var(--ink);font-weight:500;font-size:17px;margin-bottom:4px}
+
+/* =========================================================================
+   11 · TONE OF VOICE
+   ========================================================================= */
+.tone{padding-top:140px;padding-bottom:140px;background:var(--surface);row-gap:88px}
+.tone__t{grid-column:1/-1;font-size:150px;letter-spacing:-.045em;line-height:.98;max-width:16ch}
+.tone__t em{font-style:normal;color:var(--berry)}
+.tone__lines{grid-column:1/12;display:grid;row-gap:36px;font-family:var(--fd);font-weight:500;font-size:34px;letter-spacing:-.025em;line-height:1.25}
+.tone__lines span{display:block;margin-top:10px;font-family:var(--fu);font-weight:400;font-size:17px;color:var(--ink-2);letter-spacing:0;line-height:1.45}
+.tone__rules{grid-column:14/-1;display:grid;grid-template-columns:1fr 1fr;column-gap:48px;align-content:start}
+.tone__rules h3{font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);padding-bottom:18px;border-bottom:1px solid var(--line)}
+.tone__rules li{padding:16px 0;border-bottom:1px solid var(--line);font-size:22px}
+.tone__rules .no li{color:var(--ink-2);text-decoration:line-through;text-decoration-color:rgba(138,51,85,.55);text-decoration-thickness:1.5px}
+.tone__rules .yes li{font-family:var(--fd);font-weight:500;letter-spacing:-.02em}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.foot{padding-top:64px;padding-bottom:88px;border-top:1px solid var(--line);row-gap:16px}
+.foot p{grid-column:1/16;font-size:17px;line-height:1.55;color:var(--ink-2)}
+.foot p b{color:var(--ink);font-weight:500}
+.foot .arc{grid-column:23/-1;justify-self:end;width:56px;height:56px}
+</style>
+</head>
+<body>
+
+<!-- the arc motif, defined once -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="arc" viewBox="0 0 100 100"><path d="M92.83 41.06A43.75 43.75 0 1 1 51.36 6.27" fill="none" stroke="currentColor" stroke-width="12.5" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- ===================================================== 00 MASTHEAD -->
+<header class="sec mast">
+  <p class="mast__meta folio"><b>Brand refresh</b> Stylescape · exploration 01 <i>· concept stage, nothing in the product changes</i></p>
+  <p class="mast__cat">Calorie Calculator<br>product category</p>
+  <h1 class="d">Precision without<br><em>intimidation.</em></h1>
+  <p class="mast__sub lead" style="font-size:28px;max-width:38ch">A brand built around the portion and its proportions, not around restriction. Calm, food-positive, exact where it matters.</p>
+  <div class="mast__sig">
+    <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+    <p>The device: a partial circular arc. A plate seen from above, a portion of a whole, an honest estimate that does not pretend to close the circle.</p>
+  </div>
+  <div class="img circ mast__plate"><img src="../../assets/food/citrus-grain-bowl.png" style="--op:64% 60%;--sc:1.3" alt="Citrus, barley and pistachio bowl"></div>
+</header>
+
+<!-- ===================================================== 01 BRAND IDEA -->
+<section class="sec idea">
+  <p class="folio"><b>01</b> Brand idea</p>
+  <h2 class="idea__t t">Portion and proportion, not restriction.</h2>
+  <div class="idea__cols">
+    <div>
+      <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+      <h3>Calm, not clinical</h3>
+      <p>Warm cream ground, daylight photography, one berry accent. Data is present and exact, but it sits on a kitchen table rather than an instrument panel.</p>
+    </div>
+    <div>
+      <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+      <h3>Proportion, not judgement</h3>
+      <p>Protein, carbs and fat are shown as parts of a portion at equal weight. Nothing turns red at someone for eating. No good food, no bad food.</p>
+    </div>
+    <div>
+      <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+      <h3>An honest estimate</h3>
+      <p>Figures are database estimates against a portion you set. The open arc says so: precise enough to be useful, never claiming to be a measurement.</p>
+    </div>
+  </div>
+  <div class="idea__means">
+    <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+    <ul>
+      <li>A plate<span>seen from above</span></li>
+      <li>A portion<span>of a whole</span></li>
+      <li>A proportion<span>what the portion is made of</span></li>
+      <li>An estimate<span>the circle is left open on purpose</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================================================== 02 NAMING -->
+<section class="sec names">
+  <p class="folio"><b>02</b> Naming <i>· six candidates, three shortlisted, no winner yet</i></p>
+  <h2 class="names__t t">Six names. Three worth drawing.</h2>
+  <p class="names__lead lead">Short, pronounceable, friendly, and pointing at the portion rather than the diet. “Calorie Calculator” stays as the product category line under any of them. Trademark screening has not been done at this stage.</p>
+  <div class="names__grid">
+    <div class="name">
+      <i class="name__mark"></i>
+      <p class="d">Plated</p>
+      <span class="name__k">Shortlisted</span>
+      <p>What is on the plate, already served. Food-positive, complete, calm. Prior use in the meal-kit category needs checking.</p>
+    </div>
+    <div class="name">
+      <i class="name__mark"></i>
+      <p class="d">Piatto</p>
+      <span class="name__k">Shortlisted</span>
+      <p>Italian for plate. Warm and easy to say, and the final “o” is a natural home for the arc.</p>
+    </div>
+    <div class="name">
+      <i class="name__mark"></i>
+      <p class="d">Helping</p>
+      <span class="name__k">Shortlisted</span>
+      <p>A helping is a portion, and the word is supportive by itself. The most human of the six.</p>
+    </div>
+    <div class="name name--out">
+      <p class="d">Ladle</p>
+      <span class="name__k">Considered</span>
+      <p>Serving, generosity, kitchen. Strong shape, but reads as a utensil brand before it reads as a product.</p>
+    </div>
+    <div class="name name--out">
+      <p class="d">Ratio</p>
+      <span class="name__k">Considered</span>
+      <p>Proportion itself. Clean wordmark, but it tips towards maths and clinical, and the name is crowded elsewhere.</p>
+    </div>
+    <div class="name name--out">
+      <p class="d">Dollop</p>
+      <span class="name__k">Considered</span>
+      <p>Two “o”s for the arc and a portion in the name, but it lands closer to playful than to precise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== 03 WORDMARKS -->
+<section class="sec wm">
+  <p class="folio"><b>03</b> Wordmark <i>· Piatto, Plus Jakarta Sans 600, tracked to −4.5% · the final “o” is the arc</i></p>
+  <h2 class="wm__t t">The final “o” is the plate.</h2>
+  <p class="wm__lead lead">Lowercase, every letter the typeface’s own, and the final “o” redrawn as the partial arc: same width, same stem, round terminals, a 35° opening at one o’clock. The primary lockup carries no separate mark. In text and for assistive technology the name is always written “Piatto”.</p>
+
+  <div class="wm__rev">
+    <div class="lock">
+      <p class="lock__wm" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p>
+      <p class="lock__cat">Calorie calculator</p>
+    </div>
+    <p class="cap">Reversed on berry: wordmark and descriptor in canvas white. One colour, no outline.</p>
+  </div>
+  <div class="wm__sym">
+    <svg class="arc" style="width:96px;height:96px" aria-hidden="true"><use href="#arc"/></svg>
+    <svg class="arc" style="width:56px;height:56px" aria-hidden="true"><use href="#arc"/></svg>
+    <svg class="arc" style="width:32px;height:32px" aria-hidden="true"><use href="#arc"/></svg>
+    <p class="cap">The brand mark on its own, in ink or berry. It carries the brand where the word cannot fit: the app icon, a favicon, a list marker, the corner of a photograph. It is never placed before the wordmark.</p>
+  </div>
+
+  <div class="wm__stack">
+    <div class="lock" style="--wm:250px">
+      <div>
+        <p class="lock__wm" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p>
+        <p class="lock__cat">Calorie calculator</p>
+      </div>
+      <p class="lock__note"><b>A · Primary</b>The final “o” is the arc. Selected after three refinements (60°, 40°, 28°): a 35° opening keeps the letter and keeps the plate. No separate mark before the word.</p>
+    </div>
+    <div class="lock lock--stack" style="--wm:200px">
+      <div>
+        <p class="lock__wm"><svg class="arc" style="width:.5em;height:.5em" aria-hidden="true"><use href="#arc"/></svg>piatto</p>
+        <p class="lock__cat">Calorie calculator</p>
+      </div>
+      <p class="lock__note"><b>B · Stacked, secondary</b>The mark above the plain word, for a splash screen or a square tile where the mark has to lead. The word is set plain so the arc appears once.</p>
+    </div>
+    <div class="lock" style="--wm:200px">
+      <div>
+        <p class="lock__wm">piatto<svg class="arc" style="width:.34em;height:.34em;align-self:flex-end;margin-bottom:.02em" aria-hidden="true"><use href="#arc"/></svg></p>
+        <p class="lock__cat">Calorie calculator</p>
+      </div>
+      <p class="lock__note"><b>C · Signature, secondary</b>The plain word closed by the small mark, for a footer or the end of a line where the arc-“o” would be too small to read.</p>
+    </div>
+  </div>
+
+  <div class="wm__sizes">
+    <div class="lock" style="--wm:240px"><p class="lock__wm" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p><p class="lock__cat">Calorie calculator</p><small>240 · hero, print</small></div>
+    <div class="lock" style="--wm:120px"><p class="lock__wm" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p><p class="lock__cat">Calorie calculator</p><small>120 · masthead</small></div>
+    <div class="lock" style="--wm:64px"><p class="lock__wm" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p><p class="lock__cat">Calorie calculator</p><small>64 · splash</small></div>
+    <div class="lock" style="--wm:40px"><p class="lock__wm" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p><small>40 · nav bar</small></div>
+    <div class="lock" style="--wm:24px"><p class="lock__wm" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p><small>24 · footer</small></div>
+  </div>
+</section>
+
+<!-- ===================================================== 04 APP ICON -->
+<section class="sec icons">
+  <p class="folio"><b>04</b> App icon <i>· cream, berry, one arc, no gradients</i></p>
+  <h2 class="icons__t t">Three restrained icons.</h2>
+  <p class="icons__lead lead">The same geometry at three intensities. No numbers, no food, no illustration: the arc has to be recognisable at 29&nbsp;px on a home screen, next to louder neighbours.</p>
+  <div class="icons__row">
+    <div class="iconset">
+      <div class="ai ai--rim"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+      <div class="iconset__sizes">
+        <div class="ai ai--rim ai--sm"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+        <div class="ai ai--rim ai--xs"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+      </div>
+      <h3>A · Rim</h3>
+      <p>Canvas ground, berry arc centred at 62%. The most literal plate, and the calmest of the three.</p>
+    </div>
+    <div class="iconset">
+      <div class="ai ai--bleed"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+      <div class="iconset__sizes">
+        <div class="ai ai--bleed ai--sm"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+        <div class="ai ai--bleed ai--xs"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+      </div>
+      <h3>B · Bleed</h3>
+      <p>The arc enters from the bottom-right, the way the product’s photography enters a screen. More distinctive, slightly less legible when tiny.</p>
+    </div>
+    <div class="iconset">
+      <div class="ai ai--inv"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+      <div class="iconset__sizes">
+        <div class="ai ai--inv ai--sm"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+        <div class="ai ai--inv ai--xs"><svg class="arc" aria-hidden="true"><use href="#arc"/></svg></div>
+      </div>
+      <h3>C · Inverse</h3>
+      <p>Berry ground, cream arc. Strongest on a crowded home screen; the least like the app’s own light surfaces.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== 05 ARC MOTIF -->
+<section class="sec motif">
+  <p class="folio"><b>05</b> The partial arc <i>· one construction, every size</i></p>
+  <h2 class="motif__t t">A plate from above. A portion of a whole.</h2>
+  <p class="motif__lead lead">One circle, one opening, round ends. The opening sits at one o’clock, where a portion is taken. It is never a gauge: there is no track behind it and it never fills towards a target.</p>
+  <div class="motif__big">
+    <svg class="guide" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="49.9" fill="none" stroke="#DFDAD2" stroke-width=".3" stroke-dasharray="1 1.4"/>
+      <circle cx="50" cy="50" r="43.75" fill="none" stroke="#DFDAD2" stroke-width=".3" stroke-dasharray="1 1.4"/>
+      <line x1="50" y1="50" x2="92.83" y2="41.06" stroke="#DFDAD2" stroke-width=".3"/>
+      <line x1="50" y1="50" x2="51.36" y2="6.27" stroke="#DFDAD2" stroke-width=".3"/>
+      <line x1="0" y1="50" x2="100" y2="50" stroke="#EAE6E0" stroke-width=".3"/>
+      <line x1="50" y1="0" x2="50" y2="100" stroke="#EAE6E0" stroke-width=".3"/>
+    </svg>
+    <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+    <div class="motif__spec">
+      <div><b>300° drawn, 60° open</b>Measured between the round ends, so the opening reads the same at every size.</div>
+      <div><b>Stroke = ⅛ of the diameter</b>The arc is one weight, chosen to sit between the 500 and 600 of the type.</div>
+      <div><b>Opening at one o’clock</b>Fixed. Never rotated to “fill”, never animated as progress.</div>
+      <div><b>Ink or berry, on canvas or surface</b>Two colours, no gradient, no outline.</div>
+    </div>
+  </div>
+  <div class="motif__ladder">
+    <div><svg class="arc" style="width:16px;height:16px"><use href="#arc"/></svg><span>16</span></div>
+    <div><svg class="arc" style="width:24px;height:24px"><use href="#arc"/></svg><span>24</span></div>
+    <div><svg class="arc" style="width:32px;height:32px"><use href="#arc"/></svg><span>32</span></div>
+    <div><svg class="arc" style="width:48px;height:48px"><use href="#arc"/></svg><span>48</span></div>
+    <div><svg class="arc" style="width:96px;height:96px"><use href="#arc"/></svg><span>96</span></div>
+    <div><svg class="arc" style="width:160px;height:160px"><use href="#arc"/></svg><span>160</span></div>
+    <div><svg class="arc" style="width:240px;height:240px;color:var(--ink)"><use href="#arc"/></svg><span>240 · ink</span></div>
+  </div>
+  <div class="motif__use">
+    <div class="use use--crop">
+      <h3>As an image crop</h3>
+      <p>The product’s bleed crop already draws the arc: a circular photograph entering from an edge shows only part of its rim. The device and the signature are the same shape.</p>
+      <div class="img circ"><img src="../../assets/food/chickpea-bowl.png" style="--op:58% 58%;--sc:1.24" alt=""></div>
+    </div>
+    <div class="use use--crop2">
+      <h3>From any edge</h3>
+      <p>Bottom-left works as well as right. The type always holds the open side.</p>
+      <div class="img circ"><img src="../../assets/food/squash-couscous-bowl.png" style="--op:40% 62%;--sc:1.2" alt=""></div>
+    </div>
+    <div class="use use--prop">
+      <svg class="prop" viewBox="0 0 100 100" data-prop="29,60,11" aria-hidden="true"></svg>
+      <h3>As proportion</h3>
+      <p>Three arcs, one portion: what the calories in this portion come from. Labelled always, never a target. <b style="color:var(--ink);font-weight:500">Segmented means data only.</b> It is never the logo and never the app icon; the single arc is the brand.</p>
+      <div class="prop-legend">
+        <div><i style="background:var(--p-protein)"></i><b class="num">29%</b>Protein · 21 g</div>
+        <div><i style="background:var(--p-carbs)"></i><b class="num">60%</b>Carbs · 44 g</div>
+        <div><i style="background:var(--p-fat)"></i><b class="num">11%</b>Fat · 3.5 g</div>
+      </div>
+    </div>
+  </div>
+  <div class="motif__not">
+    <p><b>Single arc = brand.</b> Portion, proportion, the mark, the icon. <b>Segmented arc = data.</b> Protein, carbs and fat, and nothing else.</p>
+    <p><b>Not a gauge.</b> No grey track, no percentage in the middle, no daily target it fills towards.</p>
+    <p><b>Not a logo on everything.</b> One arc per surface at most, and usually none: the photography carries the shape.</p>
+    <p><b>Not decoration.</b> Where it appears, it means a plate, a portion or a proportion.</p>
+  </div>
+</section>
+
+<!-- ===================================================== 06 COLOUR -->
+<section class="sec col">
+  <p class="folio"><b>06</b> Colour <i>· the existing palette, by role</i></p>
+  <h2 class="col__t t">Neutral ground. One berry. Food does the rest.</h2>
+  <p class="col__lead lead">Every value below is already in the product. What the brand layer adds is discipline: berry is the brand and the action, and nothing else borrows it.</p>
+  <div class="pal">
+    <div class="sw sw--canvas"><small>Ground</small><div><b>Canvas</b><br><span>#FBFAF8 · app background, the board you are reading</span></div></div>
+    <div class="sw sw--surface"><small>Raised</small><div><b>Surface</b><br><span>#FFFFFF · cards, sheets</span></div></div>
+    <div class="sw sw--soft"><small>Fill</small><div><b>Soft</b><br><span>#F4F1EC · controls, skeletons</span></div></div>
+    <div class="sw sw--berry"><small>Brand · action · selected</small><div><b>Berry</b><br><span>#8A3355 · wordmark, primary button, active state, the arc</span></div></div>
+    <div class="sw sw--ink"><small>Text · values</small><div><b>Ink</b><br><span>#1C1B19 · 16.5 : 1 on canvas</span></div></div>
+    <div class="sw sw--ink2"><small>Secondary text</small><div><b>Ink 2</b><br><span>#6B6863 · labels, units, meta</span></div></div>
+  </div>
+  <div class="chips">
+    <span class="chip"><i style="background:#EAE6E0"></i><b>Line</b> #EAE6E0 · dividers</span>
+    <span class="chip"><i style="background:#DFDAD2"></i><b>Line strong</b> #DFDAD2 · field rules, edges</span>
+    <span class="chip"><i style="background:#F7EDF1"></i><b>Berry soft</b> #F7EDF1 · quiet button, selected tint</span>
+    <span class="chip"><i style="background:#732643"></i><b>Berry deep</b> #732643 · pressed only, derived</span>
+    <span class="chip"><i style="background:#FBFAF8;box-shadow:inset 0 0 0 1px #8C877F"></i><b>Line control</b> #8C877F · control boundary, never text</span>
+  </div>
+
+  <div class="prop-panel">
+    <div class="prop-panel__head">
+      <span class="tag">Proposal · not a token</span>
+      <h3>Proposed macro data colours</h3>
+      <p>Today protein borrows berry, so the brand colour also means “protein”. This proposal separates brand from data: three food-adjacent hues that never carry an action, never mark a selection and never appear as a fill in the app. Marker plus word, always.</p>
+    </div>
+    <div class="pm">
+      <div>
+        <div class="pm__sw" style="background:var(--p-protein)"><svg class="mk" viewBox="0 0 44 44"><circle class="mk--dot" cx="22" cy="22" r="10" fill="#fff"/></svg><div><b>Protein</b><br><span>Deep teal · #2F6F6B</span></div></div>
+        <p class="pm__meta"><b>Marker: filled dot.</b> 5.6 : 1 on canvas, so it can also be used as text if ever needed.</p>
+      </div>
+      <div>
+        <div class="pm__sw pm__sw--carbs" style="background:var(--p-carbs)"><svg class="mk" viewBox="0 0 44 44"><circle class="mk--ring" cx="22" cy="22" r="9" stroke="#1C1B19" fill="none" stroke-width="2.6"/></svg><div><b>Carbs</b><br><span>Saffron · #D9A441</span></div></div>
+        <p class="pm__meta"><b>Marker: ring.</b> 2.2 : 1 on canvas: a marker beside a word, never text, never the only signal.</p>
+      </div>
+      <div>
+        <div class="pm__sw pm__sw--fat" style="background:var(--p-fat)"><svg class="mk" viewBox="0 0 44 44"><rect class="mk--sq" x="13" y="13" width="18" height="18" rx="3" fill="#1C1B19"/></svg><div><b>Fat</b><br><span>Clay · #E08A5B</span></div></div>
+        <p class="pm__meta"><b>Marker: rounded square.</b> 2.5 : 1 on canvas, same rule as carbs. Three shapes, so the set survives greyscale.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="acc">
+    <div class="acc__head">
+      <span class="tag">Proposed accessible product values</span>
+      <h3>Darker Carbs and Fat for anything that must read on its own.</h3>
+      <p>The saffron and clay above are brand and marker hues. Where a macro colour ever has to carry a control edge or a figure on canvas or surface, these darker siblings clear 3 : 1 on both grounds. Still a proposal; no token changes.</p>
+    </div>
+    <div class="acc__row">
+      <div>
+        <div class="acc__sw" style="background:#2F6F6B"><div><b>Protein</b><span>#2F6F6B · unchanged</span></div><i>5.6 : 1<br>5.8 : 1</i></div>
+        <p class="acc__pair"><i style="background:#2F6F6B"></i><b>Deep teal</b> already clears text contrast</p>
+      </div>
+      <div>
+        <div class="acc__sw" style="background:#A57D31"><div><b>Carbs</b><span>#A57D31 · ochre</span></div><i>3.6 : 1<br>3.8 : 1</i></div>
+        <p class="acc__pair"><svg viewBox="0 0 22 22"><path d="M4 11h14"/></svg><i style="background:#D9A441"></i>from saffron #D9A441 · 2.2 : 1</p>
+      </div>
+      <div>
+        <div class="acc__sw" style="background:#B36E49"><div><b>Fat</b><span>#B36E49 · terracotta</span></div><i>3.8 : 1<br>4.0 : 1</i></div>
+        <p class="acc__pair"><svg viewBox="0 0 22 22"><path d="M4 11h14"/></svg><i style="background:#E08A5B"></i>from clay #E08A5B · 2.5 : 1</p>
+      </div>
+      <p class="cap" style="grid-column:1/-1;margin-top:20px">Ratios: on canvas #FBFAF8 over on surface #FFFFFF. WCAG 1.4.11 asks 3 : 1 of a control boundary or graphic; 1.4.3 asks 4.5 : 1 of text. Both darker values pass the first; teal passes both.</p>
+    </div>
+  </div>
+
+  <div class="prop-demo">
+    <div class="demo demo--now">
+      <h4><span class="tag tag--ink">Current product</span> unchanged</h4>
+      <img src="assets/ui/macro-row.png" alt="The current macro row: 21 g protein, 44 g carbs, 3.5 g fat, with berry, amber and slate dots">
+      <p>The shipped macro row. Berry dot for protein, amber for carbs, slate for fat. Correct, and the dots are never the only carrier of meaning.</p>
+    </div>
+    <div class="demo demo--new">
+      <h4><span class="tag">Proposal</span> same row, proposed colours and markers</h4>
+      <div class="mrow">
+        <div><b class="num">21 g</b><span><svg class="mk" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4.5" fill="#2F6F6B"/></svg>Protein</span></div>
+        <div><b class="num">44 g</b><span><svg class="mk" viewBox="0 0 10 10"><circle cx="5" cy="5" r="3.6" fill="none" stroke="#D9A441" stroke-width="1.8"/></svg>Carbs</span></div>
+        <div><b class="num">3.5 g</b><span><svg class="mk" viewBox="0 0 10 10"><rect x="1" y="1" width="8" height="8" rx="1.6" fill="#E08A5B"/></svg>Fat</span></div>
+      </div>
+      <p>Nothing about the hierarchy, the alignment or the weights changes. Only the three 7–9 px markers and their hues. Berry is freed to mean brand and action alone.</p>
+    </div>
+    <div class="demo demo--prop">
+      <h4><span class="tag">Proposal</span> the same three colours in the proportion arc</h4>
+      <svg class="prop" viewBox="0 0 100 100" data-prop="29,60,11" aria-hidden="true"></svg>
+      <p>Where the arcs meet the food photography, teal, saffron and clay come from the same table: lentils, squash, citrus. Brand graphics only; not an app component.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== 07 TYPOGRAPHY -->
+<section class="sec type">
+  <p class="folio"><b>07</b> Typography <i>· the existing pairing, given room</i></p>
+  <h2 class="type__t t">Plus Jakarta Sans for presence.<br>Inter Tight for everything you read.</h2>
+  <p class="type__lead lead">Weights 400, 500 and 600 only. Hierarchy comes from scale and space, never from bolding. Every figure is tabular so columns hold still while a portion changes.</p>
+  <div class="type__hero">
+    <div><b class="num">298</b><small>Hero nutrition figure · Plus Jakarta Sans 500 · tabular · −6%</small></div>
+    <span>kcal</span>
+  </div>
+  <div class="spec">
+    <div class="sp">
+      <div class="sp__m"><b>Brand wordmark</b>Plus Jakarta Sans 600 · lowercase · −4.5% · the final “o” as the arc, 35° open</div>
+      <div class="sp__s"><p class="lock__wm d" style="--wm:112px;font-size:112px" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p></div>
+    </div>
+    <div class="sp">
+      <div class="sp__m"><b>Display headline</b>Plus Jakarta Sans 600 · 34 in product · −3% · 1.12</div>
+      <div class="sp__s d" style="font-weight:600;font-size:104px;letter-spacing:-.035em;line-height:1.02;max-width:14ch">Roast squash &amp; red lentils</div>
+    </div>
+    <div class="sp">
+      <div class="sp__m"><b>Body copy</b>Inter Tight 400 · 16 in product · 1.6</div>
+      <div class="sp__s" style="font-size:30px;line-height:1.55;max-width:44ch">From a verified database entry. The portion is the largest source of variation, and you can change it. Roasted until the edges catch, then folded through lentils with lemon and tahini.</div>
+    </div>
+    <div class="sp">
+      <div class="sp__m"><b>Macro value + label</b>Value Plus Jakarta Sans 500 · label Inter Tight 400 · marker beside the word</div>
+      <div class="sp__s" style="display:flex;gap:120px">
+        <div><b class="d num" style="display:block;font-weight:500;font-size:72px;letter-spacing:-.022em;line-height:1">21 g</b><span style="display:inline-flex;align-items:center;gap:12px;margin-top:16px;font-size:30px;color:var(--ink-2)"><i style="width:12px;height:12px;border-radius:50%;background:var(--berry)"></i>Protein</span></div>
+        <div><b class="d num" style="display:block;font-weight:500;font-size:72px;letter-spacing:-.022em;line-height:1">44 g</b><span style="display:inline-flex;align-items:center;gap:12px;margin-top:16px;font-size:30px;color:var(--ink-2)"><i style="width:12px;height:12px;border-radius:50%;background:#C08442"></i>Carbs</span></div>
+        <div><b class="d num" style="display:block;font-weight:500;font-size:72px;letter-spacing:-.022em;line-height:1">3.5 g</b><span style="display:inline-flex;align-items:center;gap:12px;margin-top:16px;font-size:30px;color:var(--ink-2)"><i style="width:12px;height:12px;border-radius:50%;background:#5F7185"></i>Fat</span></div>
+      </div>
+    </div>
+    <div class="sp">
+      <div class="sp__m"><b>Small UI label</b>Inter Tight 500 · 14 in product · +0.1em · uppercase · the floor</div>
+      <div class="sp__s" style="display:flex;gap:64px;align-items:baseline"><span style="font-size:28px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)">Per 100 g</span><span style="font-size:28px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)">Product</span><span style="font-size:28px;color:var(--ink-2)">Portion · Not available · 6 results for “lentil”</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== 08 PHOTOGRAPHY -->
+<section class="sec photo">
+  <p class="folio"><b>08</b> Photography direction <i>· the approved set, six dishes and the ingredients behind them</i></p>
+  <h2 class="photo__t t">Daylight, one soft source, a table you could sit at.</h2>
+  <p class="photo__lead lead">Near-overhead, the dish filling the frame, a warm stone ground with almost nothing else on it. Appetising without being styled to sell. The variety is in the food, not in the props.</p>
+  <div class="photo__grid">
+    <div class="img ph ph--a" style="position:relative"><img src="../../assets/food/lentil-squash-bowl.png" style="--op:60% 50%;--sc:1.08" alt=""></div>
+    <div class="img ph ph--b"><img src="../../assets/food/vegetable-grain-bowl.png" style="--op:62% 56%;--sc:1.12" alt=""></div>
+    <div class="img ph ph--c"><img src="../../assets/food/lentil-vegetable-soup.png" style="--op:40% 52%;--sc:1.28" alt=""></div>
+    <div class="img ph ph--d"><img src="../../assets/food/squash-wedge.png" style="--op:62% 52%;--sc:1.2" alt=""></div>
+    <div class="img ph ph--e"><img src="../../assets/food/dry-red-lentils.png" style="--op:64% 56%;--sc:1.26" alt=""></div>
+    <div class="img ph ph--f"><img src="../../assets/food/citrus-grain-bowl.png" style="--op:60% 62%;--sc:1.12" alt=""></div>
+    <div class="img ph ph--g"><img src="../../assets/food/lentil-stew.png" style="--op:60% 52%;--sc:1.06" alt=""></div>
+  </div>
+  <div class="photo__rules">
+    <div><h3>One light, from the side</h3><p>Soft daylight, gentle shadow, no fill from the front. Nothing is glossed.</p></div>
+    <div><h3>Cream and stone ground</h3><p>The table is the canvas colour’s cousin. Photography and interface share one temperature.</p></div>
+    <div><h3>Dishes and ingredients</h3><p>Bowls for recipes; a wedge of squash, a bowl of lentils or a bunch of parsley for products and rows.</p></div>
+    <div><h3>Cropped with intent</h3><p>Circle, square, 3:2 and 4:5. The circle enters from an edge and becomes the arc.</p></div>
+  </div>
+  <div class="photo__bleed">
+    <div class="img circ"><img src="../../assets/food/lentil-stew.png" style="--op:62% 56%;--sc:1.18" alt=""></div>
+    <div class="type">
+      <h3>Spiced lentil stew</h3>
+      <div class="k"><b class="num">318</b><span>kcal · 350 g bowl</span></div>
+    </div>
+    <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+    <p class="cap"><b>The signature, at brand scale.</b> A crop entering from the left, the answer holding the open right, the arc keeping them company. Data never sits on food.</p>
+  </div>
+</section>
+
+<!-- ===================================================== 09 ICONS · 10 REAL UI -->
+<section class="sec ui">
+  <p class="folio"><b>09</b> Icon language <i>· 24 px box, 1.6 stroke, round caps, currentColor</i> <b style="margin-left:48px">10</b> Real product fragments</p>
+  <h2 class="ui__t t">The same hand, on screen and off.</h2>
+  <p class="ui__lead lead">The product’s icons are already the brand’s: one stroke, round ends, no fills. The arc joins the family as the glyph for a portion. Everything else is untouched.</p>
+  <div class="glyphs">
+    <div class="gl"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg><span><b>Search</b>Food Search, Recipe Discovery</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24"><path d="M3 7V5.5A1.5 1.5 0 0 1 4.5 4H6M18 4h1.5A1.5 1.5 0 0 1 21 5.5V7M21 17v1.5a1.5 1.5 0 0 1-1.5 1.5H18M6 20H4.5A1.5 1.5 0 0 1 3 18.5V17"/><path d="M7 8.5v7M10.5 8.5v7M14 8.5v7M17 8.5v7"/></svg><span><b>Barcode</b>Inside the search field</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24"><path d="M4 7h11M19 7h1M4 17h5M13 17h7M4 12h3M11 12h9"/><circle cx="17" cy="7" r="2"/><circle cx="11" cy="17" r="2"/><circle cx="9" cy="12" r="2"/></svg><span><b>Filter</b>Recipe Discovery</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24" class="berry"><path d="M20.38 10.58A8.5 8.5 0 1 1 11.94 3.50"/><path d="M12 12h.01"/></svg><span><b>Portion · proposed</b>The arc at 1.6 stroke, with a centre point</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg><span><b>Less</b>Stepper, portion sheet</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span><b>More</b>Stepper, portion sheet</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></svg><span><b>Back</b>Drill-down screens</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span><b>Close</b>Sheets, clear search</span></div>
+    <div class="gl"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span><b>Check</b>Selected filter</span></div>
+    <p class="glyphs__spec">Shown at 64 px for the board. In the product every glyph is 24 px inside a 44 px target. The portion glyph is the only addition, and it is proposed, not built.</p>
+  </div>
+  <div class="frag">
+    <div class="frag__t">
+      <h3>Screenshots of the shipped screens, not mock-ups.</h3>
+      <p>Captured from the built Storybook at 390 px. Nothing here has been redesigned: the brand layer has to belong to these surfaces, or it does not belong anywhere.</p>
+    </div>
+    <div class="dev">
+      <div class="dev__screen"><img src="assets/ui/nutrition-hero.png" alt="Nutrition Result: Puy lentils, ready to eat, 298 kcal, 250 g portion, 119 kcal per 100 g, with a circular photograph entering from the right"><div class="dev__fade dev__fade--canvas"></div></div>
+      <p class="dev__cap"><b>Nutrition Result · hero hierarchy</b>The answer, the pair beneath it, and the bleed crop already drawing the arc.</p>
+    </div>
+    <div class="dev">
+      <div class="dev__screen"><img src="assets/ui/portion-sheet.png" alt="The portion sheet: grams or portions, a stepper at 250 g, 298 kcal for this amount, and a Done button"></div>
+      <p class="dev__cap"><b>Portion sheet · portion control</b>One question, one consequence. The figure recalculates in place.</p>
+    </div>
+    <div class="dev">
+      <div class="dev__screen"><img src="assets/ui/search-results.png" alt="Food Search: 6 results for lentil, each with a thumbnail, a name, a source and a calorie value"><div class="dev__fade dev__fade--canvas"></div></div>
+      <p class="dev__cap"><b>Food Search · result rows</b>Thumbnail, name, source, figure. The icons above are the ones in the field.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================== 11 TONE OF VOICE -->
+<section class="sec tone">
+  <p class="folio"><b>11</b> Tone of voice <i>· clear, calm, neutral, supportive</i></p>
+  <h2 class="tone__t t">See what’s in <em>your portion.</em></h2>
+  <div class="tone__lines">
+    <p>298 kcal in this pouch. If your portion is different, change it.<span>The figure first, then the one thing that most affects it. An instruction, not a warning.</span></p>
+    <p>Protein, carbs and fat for this amount.<span>Proportion of the portion. No target, no percentage of a day.</span></p>
+    <p>Not available. The database has no figure for this.<span>Missing data is said in words and explained. It is never a zero and never the user’s fault.</span></p>
+  </div>
+  <div class="tone__rules">
+    <div class="yes"><h3>We say</h3><ul><li>Portion</li><li>Per 100 g</li><li>For this amount</li><li>Change portion</li><li>Not the right match?</li><li>Not available</li></ul></div>
+    <div class="no"><h3>We don’t say</h3><ul><li>Stay on track</li><li>Be good today</li><li>Burn it off</li><li>Guilt-free</li><li>Cheat meal</li><li>You’re over</li></ul></div>
+  </div>
+</section>
+
+<footer class="sec foot">
+  <p><b>Exploration only.</b> Nothing in <code>src/</code>, the design tokens, Storybook or the four screens changes. The palette, type pairing and every product fragment above are the shipped ones; the names, wordmarks, icons, arc, and the three macro data colours are proposals for review.</p>
+  <p>branding/brand-refresh · September 2026 · board captured at 2400 px</p>
+  <svg class="arc" aria-hidden="true"><use href="#arc"/></svg>
+</footer>
+
+<script>
+/* The proportion arc: three segments of one circle, gaps between them. */
+function proportion(svg) {
+  const vals = svg.dataset.prop.split(',').map(Number);
+  const colors = ['#2F6F6B', '#D9A441', '#E08A5B'];
+  const total = vals.reduce((a, b) => a + b, 0);
+  const gap = 16, r = 43.75, stroke = 12.5;
+  const capA = Math.asin((stroke / 2) / r) * 180 / Math.PI;
+  const usable = 360 - gap * vals.length;
+  let a = -90 + gap / 2;
+  vals.forEach((v, i) => {
+    const sweep = usable * v / total;
+    const s = a + capA, e = a + sweep - capA;
+    const p = (d) => [50 + r * Math.cos(d * Math.PI / 180), 50 + r * Math.sin(d * Math.PI / 180)];
+    const [x0, y0] = p(s), [x1, y1] = p(Math.max(e, s + 0.5));
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', `M${x0} ${y0}A${r} ${r} 0 ${sweep - 2 * capA > 180 ? 1 : 0} 1 ${x1} ${y1}`);
+    path.setAttribute('stroke', colors[i]);
+    svg.appendChild(path);
+    a += sweep + gap;
+  });
+}
+document.fonts.ready.then(() => {
+  document.querySelectorAll('[data-prop]').forEach(proportion);
+  document.body.dataset.ready = '1';
+});
+</script>
+<script src="arc-o.js"></script>
+</body>
+</html>

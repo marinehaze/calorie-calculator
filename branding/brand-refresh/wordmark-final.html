@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Piatto — final wordmark</title>
+<meta name="description" content="The selected Piatto wordmark treatment: variant B refined to a 35° opening. Large, 48 px, 20 px and reversed on berry. In text and accessibility naming the name is always written Piatto.">
+<style>
+@font-face{font-family:"Plus Jakarta Sans";font-weight:500;src:url("../../src/styles/fonts/PlusJakartaSans-500-latin.woff2") format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:600;src:url("../../src/styles/fonts/PlusJakartaSans-600-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:400;src:url("../../src/styles/fonts/InterTight-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:500;src:url("../../src/styles/fonts/InterTight-500-latin.woff2") format("woff2")}
+:root{--canvas:#FBFAF8;--ink:#1C1B19;--ink-2:#6B6863;--line:#EAE6E0;--berry:#8A3355;--fd:"Plus Jakarta Sans",sans-serif;--fu:"Inter Tight",sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--canvas)}
+body{width:2400px;color:var(--ink);font-family:var(--fu);font-size:20px;line-height:1.5;-webkit-font-smoothing:antialiased;padding:88px 96px 120px}
+p,h1,h2{margin:0}
+.folio{display:flex;gap:18px;align-items:baseline;font-size:16px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.folio b{color:var(--berry);font-weight:500}
+.wm{font-family:var(--fd);font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--ink);white-space:nowrap;display:inline-block}
+.cat{margin-top:.3em;font-size:20px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+.lab{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:96px;margin-top:72px;align-items:start}
+.cell{padding-top:32px;border-top:1px solid var(--line)}
+.cell .lab{display:block;margin-bottom:28px}
+.small{display:grid;row-gap:40px}
+.small div{display:flex;align-items:baseline;gap:32px}
+.rev{background:var(--berry);border-radius:28px;padding:56px;color:#fff;margin-top:64px}
+.rev .wm{color:#fff}
+.rev .cat{color:rgba(255,255,255,.72)}
+.rev .lab{color:rgba(255,255,255,.72)}
+.spec{margin-top:56px;padding-top:28px;border-top:1px solid var(--line);font-size:17px;color:var(--ink-2);max-width:70ch;line-height:1.5}
+.spec b{color:var(--ink);font-weight:500}
+</style>
+</head>
+<body>
+<p class="folio"><b>Piatto</b> Final wordmark · variant B, refined <span style="letter-spacing:0;text-transform:none;font-weight:400">· 35° opening at one o’clock, same diameter, same stroke, round terminals</span></p>
+
+<div class="grid">
+  <div>
+    <div class="cell">
+      <span class="lab">1 · Large · 320 px</span>
+      <p class="wm" style="font-size:320px" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p>
+      <p class="cat" style="font-size:28px;margin-top:96px">Calorie calculator</p>
+    </div>
+    <div class="rev">
+      <span class="lab" style="display:block;margin-bottom:28px">4 · Reversed on berry</span>
+      <p class="wm" style="font-size:176px" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p>
+      <p class="cat" style="margin-top:52px">Calorie calculator</p>
+      <div style="display:flex;gap:48px;align-items:baseline;margin-top:48px">
+        <p class="wm" style="font-size:48px" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p>
+        <p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="cell">
+      <span class="lab">2 · 48 px · splash, sheet title</span>
+      <div class="small">
+        <div><p class="wm" style="font-size:48px" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p></div>
+      </div>
+    </div>
+    <div class="cell" style="margin-top:56px">
+      <span class="lab">3 · 20 px · nav bar</span>
+      <div class="small">
+        <div><p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span data-arc-o aria-hidden="true">o</span></p><p style="font-size:15px;color:var(--ink-2)">rendered at true size</p></div>
+      </div>
+    </div>
+    <div class="cell" style="margin-top:56px">
+      <span class="lab">For comparison · 40° (variant B as shown before)</span>
+      <div class="small">
+        <div><p class="wm" style="font-size:48px" aria-label="Piatto">piatt<span data-arc-o="40" aria-hidden="true">o</span></p><p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span data-arc-o="40" aria-hidden="true">o</span></p></div>
+      </div>
+    </div>
+    <p class="spec"><b>Construction.</b> The final “o” keeps the typeface’s advance width, ink box and stem thickness, measured at render time. One uniform stroke, round terminals, a 35° opening measured between the terminals, centred at one o’clock. <b>In text, captions and accessibility labels the name is always written “Piatto”.</b> This is the wordmark’s visual treatment only; the separate arc remains the brand mark and the app icon, and is not placed before the word.</p>
+  </div>
+</div>
+<script src="arc-o.js"></script>
+</body>
+</html>

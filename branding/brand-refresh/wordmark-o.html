@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Piatto — arc-o wordmark variations</title>
+<meta name="description" content="Three refinements of the Piatto wordmark in which the final o is the partial arc. Concept stage. In text and accessibility naming the name is always written Piatto.">
+<style>
+@font-face{font-family:"Plus Jakarta Sans";font-weight:500;src:url("../../src/styles/fonts/PlusJakartaSans-500-latin.woff2") format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-weight:600;src:url("../../src/styles/fonts/PlusJakartaSans-600-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:400;src:url("../../src/styles/fonts/InterTight-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter Tight";font-weight:500;src:url("../../src/styles/fonts/InterTight-500-latin.woff2") format("woff2")}
+:root{--canvas:#FBFAF8;--surface:#FFFFFF;--ink:#1C1B19;--ink-2:#6B6863;--line:#EAE6E0;--berry:#8A3355;--fd:"Plus Jakarta Sans",sans-serif;--fu:"Inter Tight",sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--canvas)}
+body{width:2400px;color:var(--ink);font-family:var(--fu);font-size:20px;line-height:1.5;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3{margin:0}
+.sec{padding:0 96px}
+.folio{display:flex;gap:18px;align-items:baseline;font-size:16px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.folio b{color:var(--berry);font-weight:500}
+.t{font-family:var(--fd);font-weight:500;font-size:64px;letter-spacing:-.035em;line-height:1.04;max-width:20ch;margin-top:20px}
+.lead{margin-top:20px;font-size:22px;color:var(--ink-2);max-width:60ch}
+.cap{font-size:16px;line-height:1.45;color:var(--ink-2)}
+.cap b{color:var(--ink);font-weight:500}
+
+/* the wordmark */
+.wm{font-family:var(--fd);font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--ink);white-space:nowrap;display:inline-block}
+.wm .o{display:inline-block;vertical-align:baseline;margin-left:.02em}
+.wm .o svg{display:block;overflow:visible}
+.wm .o [data-ink]{fill:currentColor;stroke:currentColor}
+.wm .o path.stroke{fill:none;stroke-linecap:round}
+.wm--berry .o [data-ink]{fill:var(--berry);stroke:var(--berry)}
+.rev{background:var(--berry);border-radius:28px;padding:56px 56px 48px;color:#fff}
+.rev .wm{color:#fff}
+.rev .cat{color:rgba(255,255,255,.72)}
+.cat{margin-top:.3em;font-size:18px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+
+/* rows */
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px}
+.row{padding:88px 96px;border-top:1px solid var(--line)}
+.row h2{font-family:var(--fd);font-weight:500;font-size:34px;letter-spacing:-.025em;margin-bottom:44px}
+.v h3{font-family:var(--fd);font-weight:600;font-size:24px;letter-spacing:-.02em;margin-top:40px}
+.v p:not(.wm){margin-top:8px;font-size:17px;color:var(--ink-2);max-width:34ch;line-height:1.45}
+.v .spec{display:inline-flex;gap:14px;margin-top:14px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--berry);font-weight:500}
+.sizes{display:grid;row-gap:28px;align-items:end;justify-items:start}
+.sizes div{display:flex;align-items:baseline;gap:28px}
+.sizes small{font-size:14px;color:var(--ink-2);min-width:64px}
+.ref{display:flex;align-items:baseline;gap:40px;padding-top:40px;border-top:1px solid var(--line);margin-top:40px}
+.reco{padding:88px 96px 120px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;column-gap:96px}
+.reco h2{font-family:var(--fd);font-weight:500;font-size:44px;letter-spacing:-.03em;line-height:1.08}
+.reco h2 em{font-style:normal;color:var(--berry)}
+.reco ul{margin:0;padding:0;list-style:none;display:grid;row-gap:16px;font-size:19px;line-height:1.5;color:var(--ink-2)}
+.reco li b{color:var(--ink);font-weight:500}
+.reco .ok{display:inline-flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--berry);margin-bottom:22px}
+.tab{width:100%;border-collapse:collapse;font-size:17px;margin-top:6px}
+.tab th,.tab td{text-align:left;padding:12px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tab th{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);font-weight:500}
+.tab td.name{font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="sec" style="padding-top:88px;padding-bottom:72px">
+  <p class="folio"><b>Piatto</b> Wordmark · the arc as the final “o” <span style="letter-spacing:0;text-transform:none;font-weight:400">· three refinements, no redesign</span></p>
+  <h1 class="t">One word, one opening. How much of the “o” becomes the arc?</h1>
+  <p class="lead">Every version is drawn from the typeface’s own “o”: same advance width, same ink box, same stroke, measured from Plus Jakarta Sans 600 at render time. Only the opening changes. The name is written “Piatto” everywhere in text and in accessibility labels; the arc is a visual treatment of the wordmark only.</p>
+</header>
+
+<!-- 1 · large, side by side -->
+<section class="sec row">
+  <h2>1 · Large</h2>
+  <div class="three">
+    <div class="v">
+      <p class="wm" style="font-size:196px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p>
+      <h3>A · Earlier version</h3>
+      <span class="spec">60° open · 1 o’clock · uniform stroke</span>
+      <p>The arc as first drawn: a clear plate with a clear portion taken. The most distinctive, the least like an “o”.</p>
+    </div>
+    <div class="v">
+      <p class="wm" style="font-size:196px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p>
+      <h3>B · More readable as “o”</h3>
+      <span class="spec">40° open · 1 o’clock · uniform stroke</span>
+      <p>Same diameter, same round terminals, a third less opening. The plate still reads; the letter comes back.</p>
+    </div>
+    <div class="v">
+      <p class="wm" style="font-size:196px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p>
+      <h3>C · Closest to the typeface</h3>
+      <span class="spec">28° open · 1 o’clock · the letter’s own contrast</span>
+      <p>The real “o” ring, with its thicker sides and thinner top, and only a small section opened. Reads as “o” first, arc second.</p>
+    </div>
+  </div>
+  <div class="ref">
+    <p class="wm" style="font-size:96px;color:var(--ink-2)" aria-label="Piatto">piatto</p>
+    <p class="cap"><b>Reference.</b> The unmodified word in Plus Jakarta Sans 600 at the same tracking, for comparison against C.</p>
+  </div>
+</section>
+
+<!-- 2 · small sizes -->
+<section class="sec row">
+  <h2>2 · Small</h2>
+  <div class="three">
+    <div class="sizes">
+      <div><small>96</small><p class="wm" style="font-size:96px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p></div>
+      <div><small>48</small><p class="wm" style="font-size:48px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p></div>
+      <div><small>32</small><p class="wm" style="font-size:32px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p></div>
+      <div><small>20</small><p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p></div>
+      <div><small>14</small><p class="wm" style="font-size:14px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p></div>
+    </div>
+    <div class="sizes">
+      <div><small>96</small><p class="wm" style="font-size:96px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p></div>
+      <div><small>48</small><p class="wm" style="font-size:48px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p></div>
+      <div><small>32</small><p class="wm" style="font-size:32px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p></div>
+      <div><small>20</small><p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p></div>
+      <div><small>14</small><p class="wm" style="font-size:14px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p></div>
+    </div>
+    <div class="sizes">
+      <div><small>96</small><p class="wm" style="font-size:96px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p></div>
+      <div><small>48</small><p class="wm" style="font-size:48px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p></div>
+      <div><small>32</small><p class="wm" style="font-size:32px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p></div>
+      <div><small>20</small><p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p></div>
+      <div><small>14</small><p class="wm" style="font-size:14px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p></div>
+    </div>
+  </div>
+  <p class="cap" style="margin-top:44px">Rendered at true pixel sizes, nothing scaled. 20 px is a nav-bar wordmark; 14 px is the floor of the product’s type scale.</p>
+</section>
+
+<!-- 3 · reversed on berry -->
+<section class="sec row">
+  <h2>3 · Reversed on berry</h2>
+  <div class="three">
+    <div class="rev">
+      <p class="wm" style="font-size:132px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p>
+      <p class="cat">Calorie calculator</p>
+      <div style="display:flex;gap:40px;align-items:baseline;margin-top:48px">
+        <p class="wm" style="font-size:40px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p>
+        <p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span class="o" data-variant="A" aria-hidden="true">o</span></p>
+      </div>
+    </div>
+    <div class="rev">
+      <p class="wm" style="font-size:132px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p>
+      <p class="cat">Calorie calculator</p>
+      <div style="display:flex;gap:40px;align-items:baseline;margin-top:48px">
+        <p class="wm" style="font-size:40px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p>
+        <p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p>
+      </div>
+    </div>
+    <div class="rev">
+      <p class="wm" style="font-size:132px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p>
+      <p class="cat">Calorie calculator</p>
+      <div style="display:flex;gap:40px;align-items:baseline;margin-top:48px">
+        <p class="wm" style="font-size:40px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p>
+        <p class="wm" style="font-size:20px" aria-label="Piatto">piatt<span class="o" data-variant="C" aria-hidden="true">o</span></p>
+      </div>
+    </div>
+  </div>
+  <p class="cap" style="margin-top:32px">The arc-“o” inherits the wordmark colour. A berry arc inside an ink word is possible (shown small below) but it is a second treatment, not the primary.</p>
+  <div style="display:flex;gap:64px;align-items:baseline;margin-top:24px">
+    <p class="wm wm--berry" style="font-size:64px" aria-label="Piatto">piatt<span class="o" data-variant="B" aria-hidden="true">o</span></p>
+    <p class="cap">B with a berry arc, for reference only.</p>
+  </div>
+</section>
+
+<!-- 4 · recommendation -->
+<section class="sec reco" id="reco">
+  <div>
+    <p class="ok">Recommendation · readability and distinctiveness only</p>
+    <h2 id="reco-title">Take <em>B</em>. It keeps the plate and gives the letter back.</h2>
+  </div>
+  <div>
+    <ul id="reco-list">
+      <li><b>A</b> is the most distinctive and reads as a “c” or a broken ring before it reads as an “o”, especially at 20 px and below where the round terminals close the gap unevenly.</li>
+      <li><b>B</b> holds the word as “piatto” at every size shown, and the opening is still unmistakably a portion taken from a whole. The uniform stroke keeps the terminals round and clean when reversed.</li>
+      <li><b>C</b> is the most faithful letter, but at 48 px and below the opening collapses into what looks like a rendering flaw in an ordinary “o”. The distinctiveness is gone before the readability gain matters.</li>
+    </ul>
+    <table class="tab">
+      <tr><th>Variant</th><th>Reads as “piatto”</th><th>Reads as the arc</th><th>Holds at 20 px</th></tr>
+      <tr><td class="name">A · 60°</td><td>with a pause</td><td>yes, strongly</td><td>as a “c”</td></tr>
+      <tr><td class="name">B · 40°</td><td>yes</td><td>yes</td><td>yes</td></tr>
+      <tr><td class="name">C · 28°</td><td>yes</td><td>only large</td><td>as a plain “o”</td></tr>
+    </table>
+  </div>
+</section>
+
+<script>
+/* ---------------------------------------------------------------------------
+   The arc-"o": measure the typeface's own "o" on a canvas — advance width,
+   ink box, vertical and horizontal stroke — and draw the letter from those
+   numbers, so the word keeps the letterform's proportions exactly.
+
+   A, B  uniform stroke (the vertical stem thickness), round terminals,
+         opening measured between the terminals: 60° and 40°.
+   C     the letter's own ring — thicker sides, thinner top and bottom —
+         with a 28° section opened and round terminals.
+   --------------------------------------------------------------------------- */
+const VARIANTS = { A: { opening: 60, mode: 'stroke' }, B: { opening: 40, mode: 'stroke' }, C: { opening: 28, mode: 'ring' } };
+const CENTRE = -50; // one o'clock, as the brand mark
+
+function measureO(font) {
+  const c = document.createElement('canvas');
+  const ctx = c.getContext('2d');
+  ctx.font = font;
+  const m = ctx.measureText('o');
+  const adv = m.width, asc = m.actualBoundingBoxAscent, desc = m.actualBoundingBoxDescent;
+  const left = m.actualBoundingBoxLeft, right = m.actualBoundingBoxRight;
+  const inkW = left + right, inkH = asc + desc;
+  const S = 8; // rasterise at 8x for the stroke measurements
+  c.width = Math.ceil(inkW * S) + 32; c.height = Math.ceil(inkH * S) + 32;
+  ctx.scale(S, S); ctx.font = font; ctx.fillStyle = '#000';
+  ctx.fillText('o', left + 2, asc + 2); // ink box now spans x 2..2+inkW, y 2..2+inkH
+  const run = (data, count, step, start) => {
+    let x0 = -1;
+    for (let i = 0; i < count; i++) {
+      const on = data[(start + i * step) * 4 + 3] > 120;
+      if (on && x0 < 0) x0 = i;
+      if (x0 >= 0 && !on) return (i - x0) / S;
+    }
+    return 0;
+  };
+  const img = ctx.getImageData(0, 0, c.width, c.height).data;
+  const yMid = Math.round((2 + inkH / 2) * S);
+  const xMid = Math.round((2 + inkW / 2) * S);
+  const sv = run(img, c.width, 1, yMid * c.width);        // vertical stem, scanning a row
+  const sh = run(img, c.height, c.width, xMid);           // top stroke, scanning a column
+  return { adv, asc, desc, left, right, inkW, inkH, sv: sv || inkH * 0.16, sh: sh || inkH * 0.13 };
+}
+
+const P = (cx, cy, rx, ry, a) => [cx + rx * Math.cos(a * Math.PI / 180), cy + ry * Math.sin(a * Math.PI / 180)];
+const f = (n) => n.toFixed(2);
+
+function drawO(el) {
+  const v = VARIANTS[el.dataset.variant];
+  const cs = getComputedStyle(el);
+  const font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+  const m = measureO(font);
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${m.adv} ${m.inkH}`);
+  svg.setAttribute('width', m.adv); svg.setAttribute('height', m.inkH);
+  const cx = (-m.left + m.right) / 2, cy = m.inkH / 2;
+  const rxO = m.inkW / 2, ryO = m.inkH / 2;
+
+  if (v.mode === 'stroke') {
+    const s = m.sv;
+    const rx = rxO - s / 2, ry = ryO - s / 2;
+    const cap = Math.asin((s / 2) / rx) * 180 / Math.PI;
+    const a0 = CENTRE + v.opening / 2 + cap, a1 = CENTRE - v.opening / 2 - cap + 360;
+    const [x0, y0] = P(cx, cy, rx, ry, a0), [x1, y1] = P(cx, cy, rx, ry, a1);
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('class', 'stroke');
+    path.setAttribute('data-ink', '');
+    path.setAttribute('d', `M${f(x0)} ${f(y0)}A${f(rx)} ${f(ry)} 0 1 1 ${f(x1)} ${f(y1)}`);
+    path.setAttribute('stroke-width', s);
+    path.setAttribute('fill', 'none');
+    svg.appendChild(path);
+  } else {
+    // The letter's own ring: outer ellipse minus inner ellipse, then a wedge
+    // removed and round terminals added at the cut.
+    const rxI = rxO - m.sv, ryI = ryO - m.sh;
+    const rxM = rxO - m.sv / 2, ryM = ryO - m.sh / 2;
+    const id = 'm' + Math.random().toString(36).slice(2, 8);
+    const local = (a) => Math.hypot(m.sv * Math.cos(a * Math.PI / 180), m.sh * Math.sin(a * Math.PI / 180));
+    const capA = Math.asin((local(CENTRE) / 2) / rxM) * 180 / Math.PI;
+    const wedge = v.opening + 2 * capA;                 // visible opening + the two round caps
+    const aA = CENTRE - wedge / 2, aB = CENTRE + wedge / 2;
+    const R = Math.max(rxO, ryO) * 3;
+    const [wx0, wy0] = P(cx, cy, R, R, aA), [wx1, wy1] = P(cx, cy, R, R, aB);
+    const mask = document.createElementNS(ns, 'mask');
+    mask.setAttribute('id', id);
+    mask.setAttribute('maskUnits', 'userSpaceOnUse');
+    mask.setAttribute('x', -R); mask.setAttribute('y', -R); mask.setAttribute('width', R * 4); mask.setAttribute('height', R * 4);
+    mask.innerHTML =
+      `<rect x="${-R}" y="${-R}" width="${R * 4}" height="${R * 4}" fill="#fff"/>` +
+      `<path d="M${f(cx)} ${f(cy)}L${f(wx0)} ${f(wy0)}L${f(wx1)} ${f(wy1)}Z" fill="#000"/>` +
+      [aA, aB].map((a) => { const [tx, ty] = P(cx, cy, rxM, ryM, a); return `<circle cx="${f(tx)}" cy="${f(ty)}" r="${f(local(a) / 2)}" fill="#fff"/>`; }).join('');
+    svg.appendChild(mask);
+    const ring = document.createElementNS(ns, 'path');
+    ring.setAttribute('data-ink', '');
+    ring.setAttribute('fill-rule', 'evenodd');
+    ring.setAttribute('stroke', 'none');
+    ring.setAttribute('d',
+      `M${f(cx - rxO)} ${f(cy)}a${f(rxO)} ${f(ryO)} 0 1 0 ${f(rxO * 2)} 0a${f(rxO)} ${f(ryO)} 0 1 0 ${f(-rxO * 2)} 0Z` +
+      `M${f(cx - rxI)} ${f(cy)}a${f(rxI)} ${f(ryI)} 0 1 0 ${f(rxI * 2)} 0a${f(rxI)} ${f(ryI)} 0 1 0 ${f(-rxI * 2)} 0Z`);
+    ring.setAttribute('mask', `url(#${id})`);
+    svg.appendChild(ring);
+  }
+  el.textContent = '';
+  el.appendChild(svg);
+  el.style.width = m.adv + 'px';
+  el.style.verticalAlign = (-m.desc) + 'px';
+}
+
+document.fonts.ready.then(() => {
+  document.querySelectorAll('.o[data-variant]').forEach(drawO);
+  document.body.dataset.ready = '1';
+});
+</script>
+</body>
+</html>
