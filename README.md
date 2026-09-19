@@ -11,6 +11,38 @@ Calorie calculator — an AI-native mobile nutrition app concept focused on two 
 
 The Storybook includes the complete Design System and all application screens, states and edge cases.
 
+## Key design screens
+
+Clean PNG exports of the final screens live in [`screens/`](screens/). Each one
+is a whole 390 × 844 application viewport, exported at 2× (780 × 1688) with no
+Storybook chrome.
+
+The four core screens:
+
+- [Food Search](screens/food-search.png) — and its [first run](screens/food-search-first-run.png)
+- Nutrition Result — [top](screens/nutrition-result-top.png) · [scrolled to the nutrition block](screens/nutrition-result-scrolled.png)
+- [Recipe Discovery](screens/recipe-discovery.png) — and its [filters](screens/recipe-discovery-filters.png)
+- Recipe Detail — [top](screens/recipe-detail-top.png) · [scrolled to the nutrition block](screens/recipe-detail-scrolled.png)
+
+Nutrition Result and Recipe Detail are longer than a handset screen, so each is
+exported twice rather than cropped once.
+
+Selected states: [portion sheet](screens/nutrition-result-portion-sheet.png) ·
+[incomplete nutrition](screens/nutrition-result-incomplete.png) ·
+[error](screens/nutrition-result-error.png) ·
+[loading](screens/search-loading.png) ·
+[no results](screens/search-no-results.png) ·
+[offline](screens/offline.png) ·
+[camera access off](screens/camera-access-off.png)
+
+## Walkthrough presentation
+
+An eight-slide browser presentation of the project lives in
+[`presentation/`](presentation/) — open
+[`presentation/index.html`](presentation/index.html) in a desktop browser, with
+no build step. [`presentation/piatto-case.pdf`](presentation/piatto-case.pdf) is
+a static fallback for reading it as a document.
+
 ## Core flows
 
 ### Flow 1 — Calorie calculation
