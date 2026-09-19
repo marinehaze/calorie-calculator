@@ -1,26 +1,35 @@
 /**
- * Presentation capture — pulls clean stills out of the FINAL built Storybook
- * and writes them into presentation/assets/.
+ * Screen capture — pulls clean stills out of the FINAL built Storybook and
+ * writes them into presentation/assets/ and the reviewer-facing screens/.
  *
  * Nothing here touches the product. It serves the already-built
  * `storybook-static/` over http, opens each story in its own iframe (so no
  * Storybook sidebar, toolbar or addon panel is ever in frame) and screenshots
- * a single element. The application, the design system and the Storybook
+ * the browser viewport. The application, the design system and the Storybook
  * config are read-only inputs.
  *
- *   Screens      the 390x844 `.screen` element, with the review device stage's
- *                status bar and home indicator already painted into it — the
- *                same safe-area presentation the project was reviewed at.
- *   Components   the story's own specimen frame. The story-only `Note`
- *                captions are dropped at capture time (in the page, not in the
- *                source) so the slide shows the component, not its annotation.
+ *   Screens      a true 390 x 844 CSS viewport at deviceScaleFactor 2, so every
+ *                PNG is exactly 780 x 1688 and holds the whole application
+ *                viewport — never a crop of a taller image. The review device
+ *                stage's own padding and drop shadow are switched off in the
+ *                page at capture time so the screen sits flush in the viewport;
+ *                its status bar, safe areas and home indicator stay, because
+ *                that is the project's approved screen presentation.
+ *   Components   the story's own specimen frame, for the design system slide.
+ *                The story-only `Note` captions are dropped at capture time
+ *                (in the page, not in the source).
  *   Food         presentation-only crops of the approved photography, at the
  *                stylescape's own focal points and aspect ratios.
  *
- * Usage:  npm run build-storybook && node presentation/tools/capture.mjs
+ * Long screens are captured twice — a top state and a scrolled state — rather
+ * than cropped once. A scrolled capture is still a whole 390 x 844 viewport:
+ * the application is scrolled, the screenshot is not trimmed.
+ *
+ * Usage:  npm run build-storybook
+ *         node presentation/tools/capture.mjs [screens|components|food]
  */
 import { chromium } from 'playwright';
-import { statSync, createReadStream, existsSync, mkdirSync } from 'node:fs';
+import { statSync, createReadStream, existsSync, mkdirSync, copyFileSync } from 'node:fs';
 import http from 'node:http';
 import { extname, join, normalize, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,7 +38,12 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(HERE, '../..');
 const ROOT = join(REPO, 'storybook-static');
 const OUT = join(REPO, 'presentation/assets');
+const DELIVERY = join(REPO, 'screens');
 const PORT = 4401;
+
+/** The one capture geometry. Every screen PNG is this viewport at 2x. */
+const VIEWPORT = { width: 390, height: 844 };
+const SCALE = 2;
 
 if (!existsSync(join(ROOT, 'index.json'))) {
   console.error('No Storybook build found. Run `npm run build-storybook` first.');
@@ -38,43 +52,41 @@ if (!existsSync(join(ROOT, 'index.json'))) {
 
 /* ---------------------------------------------------------------- targets */
 
-/** Screens — the strongest final states, nothing from an earlier iteration. */
-const SCREENS = [
-  'screens-food-search--first-run',
-  'screens-food-search--results',
-  'screens-food-search--loading',
-  'screens-food-search--no-results',
-  'screens-food-search--camera-denied',
-  'screens-nutrition-result--single-item',
-  'screens-nutrition-result--portion-sheet',
-  'screens-nutrition-result--incomplete-data',
-  'screens-nutrition-result--error-state',
-  'screens-recipe-discovery--browse',
-  'screens-recipe-discovery--filters-applied',
-  'screens-recipe-discovery--filter-sheet',
-  'screens-recipe-discovery--offline',
-  'screens-recipe-detail--full-recipe',
-];
-
 /**
- * The same real screens, scrolled. Nutrition Result and Recipe Detail both put
- * the nutrition block below the fold of a 390 x 844 handset, so a still of the
- * top of the screen cannot show MacroEnergySplit. These scroll the screen's own
- * scroll container — in the page, at capture time — until the named element
- * sits `offset` px below the top of the screen. Nothing in the product changes;
- * this is the same screen a little further down.
+ * Screens. `scrollTo` marks a deliberate scrolled capture: the screen's own
+ * scroll container is scrolled until that element sits `offset` px below the
+ * top of the screen, and the whole viewport is then captured. `deliver` is the
+ * filename this screen takes in the root screens/ folder, when reviewers
+ * should have it.
  */
-const SCROLLED = [
-  // Anchored on the nutrition block's own heading, so the still starts at a
-  // section boundary instead of part-way through a line of figures.
-  // Nutrition Result anchors on the portion pair rather than the nutrition
-  // block: the block is tall enough that scrolling to it hits the bottom of
-  // the scroller, which leaves a line of figures cut in half at the top edge.
-  // Pinning the pair puts a whole row under the status bar instead.
-  { id: 'screens-nutrition-result--single-item',     name: 'nutrition-result--single-item--nutrition',     focus: '.nr-pair', offset: 58 },
-  { id: 'screens-nutrition-result--multi-item',      name: 'nutrition-result--multi-item--nutrition',      focus: '.nr-pair', offset: 58 },
-  { id: 'screens-recipe-detail--full-recipe',        name: 'recipe-detail--full-recipe--nutrition',        focus: '.nr-nutrition, .ds-nutrition', offset: 96 },
-  { id: 'screens-recipe-detail--servings-adjusted',  name: 'recipe-detail--servings-adjusted--nutrition',  focus: '.nr-nutrition, .ds-nutrition', offset: 96 },
+const SCREENS = [
+  { id: 'screens-food-search--first-run', file: 'food-search--first-run', deliver: 'food-search-first-run' },
+  { id: 'screens-food-search--results', file: 'food-search--results', deliver: 'food-search' },
+  { id: 'screens-food-search--loading', file: 'food-search--loading', deliver: 'search-loading' },
+  { id: 'screens-food-search--no-results', file: 'food-search--no-results', deliver: 'search-no-results' },
+  { id: 'screens-food-search--camera-denied', file: 'food-search--camera-denied', deliver: 'camera-access-off' },
+
+  { id: 'screens-nutrition-result--single-item', file: 'nutrition-result--single-item', deliver: 'nutrition-result-top' },
+  { id: 'screens-nutrition-result--single-item', file: 'nutrition-result--single-item--scrolled', deliver: 'nutrition-result-scrolled',
+    scrollTo: '.nr-pair', offset: 58 },
+  { id: 'screens-nutrition-result--portion-sheet', file: 'nutrition-result--portion-sheet', deliver: 'nutrition-result-portion-sheet' },
+  { id: 'screens-nutrition-result--multi-item', file: 'nutrition-result--multi-item--scrolled', deliver: null,
+    scrollTo: '.nr-pair', offset: 58 },
+  { id: 'screens-nutrition-result--incomplete-data', file: 'nutrition-result--incomplete-data', deliver: 'nutrition-result-incomplete' },
+  // Delivery only: slide 7 shows five whole screens, and Offline already
+  // carries the Banner-and-retry pattern this state repeats.
+  { id: 'screens-nutrition-result--error-state', file: null, deliver: 'nutrition-result-error' },
+
+  { id: 'screens-recipe-discovery--browse', file: 'recipe-discovery--browse', deliver: 'recipe-discovery' },
+  { id: 'screens-recipe-discovery--filter-sheet', file: 'recipe-discovery--filter-sheet', deliver: 'recipe-discovery-filters' },
+  { id: 'screens-recipe-discovery--filters-applied', file: 'recipe-discovery--filters-applied', deliver: null },
+  { id: 'screens-recipe-discovery--offline', file: 'recipe-discovery--offline', deliver: 'offline' },
+
+  { id: 'screens-recipe-detail--full-recipe', file: 'recipe-detail--full-recipe', deliver: 'recipe-detail-top' },
+  { id: 'screens-recipe-detail--full-recipe', file: 'recipe-detail--full-recipe--scrolled', deliver: 'recipe-detail-scrolled',
+    scrollTo: '.ds-nutrition', offset: 96 },
+  { id: 'screens-recipe-detail--servings-adjusted', file: 'recipe-detail--servings-adjusted--scrolled', deliver: null,
+    scrollTo: '.ds-nutrition', offset: 96 },
 ];
 
 /** Components — the curated set for the design system slide. */
@@ -95,8 +107,8 @@ const COMPONENTS = [
 ];
 
 /**
- * Food crops for the branding slide. Focal points and aspect ratios are the
- * stylescape's own values (branding/stylescape.html, section 04) — this only
+ * Food crops for the brand slide. Focal points and aspect ratios are the
+ * stylescape's own values (branding/brand-refresh, section 04) — this only
  * re-renders the approved crops at presentation size.
  */
 const FOOD = [
@@ -127,12 +139,13 @@ const base = `http://127.0.0.1:${PORT}`;
 const executablePath = ['/opt/pw-browsers/chromium-1194/chrome-linux/chrome', '/opt/pw-browsers/chromium/chrome-linux/chrome']
   .find((p) => existsSync(p));
 const browser = await chromium.launch(executablePath ? { executablePath } : {});
-const page = await browser.newPage({ viewport: { width: 1100, height: 1200 }, deviceScaleFactor: 2 });
 
+const ONLY = process.argv[2];
 for (const d of ['screens', 'components', 'food']) mkdirSync(join(OUT, d), { recursive: true });
+mkdirSync(DELIVERY, { recursive: true });
 
 /** Storybook's screens lazy-load their photography; a still has to wait for it. */
-const settle = async () => {
+const settle = async (page) => {
   await page.evaluate(async () => {
     for (const img of document.images) img.loading = 'eager';
     await Promise.all([...document.images].map((i) => (i.complete ? null : i.decode().catch(() => {}))));
@@ -141,76 +154,111 @@ const settle = async () => {
   await page.waitForTimeout(220);
 };
 
-const shoot = async (id, selector, out, { stripNotes = false, focus = null, offset = 0 } = {}) => {
-  await page.goto(`${base}/iframe.html?id=${id}&viewMode=story`, { waitUntil: 'networkidle' });
-  const rendered = await page.evaluate(() => document.body.classList.contains('sb-show-main'));
-  if (!rendered) throw new Error(`${id} did not render`);
-  if (stripNotes) {
-    // `Note` is the story-only caption from src/lib/Frame.jsx. It is identified
-    // by its inline font/colour declaration, and removed in the page only.
-    await page.evaluate(() => {
-      for (const p of document.querySelectorAll('p[style]')) {
-        if (p.getAttribute('style').includes('--ds-ink-2') && p.getAttribute('style').includes('--ds-font-ui')) p.remove();
-      }
-    });
-  }
-  await settle();
-  if (focus) {
-    const moved = await page.evaluate(({ focus, offset }) => {
-      const target = document.querySelector(focus);
-      const scroller = document.querySelector('.screen__scroll');
-      const screen = document.querySelector('.screen');
-      if (!target || !scroller || !screen) return null;
-      const want = target.getBoundingClientRect().top - screen.getBoundingClientRect().top - offset;
-      scroller.scrollTop += want;
-      return Math.round(scroller.scrollTop);
-    }, { focus, offset });
-    if (moved === null) throw new Error(`${id}: nothing matching ${focus} to scroll to`);
-    await page.waitForTimeout(160);
-  }
-  const el = await page.$(selector);
-  if (!el) throw new Error(`${id}: no element matching ${selector}`);
-  await el.screenshot({ path: out });
-  console.log(`  ${out.replace(REPO + '/', '')}`);
-};
+const rel = (p) => p.replace(REPO + '/', '');
 
-const ONLY = process.argv[2]; // 'screens' | 'components' | 'food', or nothing for all
+/* ------------------------------------------------------------ 1. screens */
 
 if (!ONLY || ONLY === 'screens') {
-console.log(`\nScreens (${SCREENS.length} + ${SCROLLED.length} scrolled)`);
-for (const id of SCREENS) {
-  await shoot(id, '.sb-device .screen', join(OUT, 'screens', `${id.replace('screens-', '')}.png`));
+  const page = await browser.newPage({ viewport: VIEWPORT, deviceScaleFactor: SCALE });
+  console.log(`\nScreens (${SCREENS.length}) — ${VIEWPORT.width}x${VIEWPORT.height} viewport at ${SCALE}x`);
+
+  for (const t of SCREENS) {
+    await page.goto(`${base}/iframe.html?id=${t.id}&viewMode=story`, { waitUntil: 'networkidle' });
+    if (!(await page.evaluate(() => document.body.classList.contains('sb-show-main')))) {
+      throw new Error(`${t.id} did not render`);
+    }
+
+    // The review device stage centres the screen on a coloured ground with a
+    // drop shadow, which is right for reviewing in Storybook and wrong for an
+    // exported viewport. Switch both off in the page; the status bar, safe
+    // areas and home indicator are part of the screen and stay.
+    await page.addStyleTag({ content: `
+      html, body { margin: 0 !important; padding: 0 !important; background: transparent !important; overflow: hidden !important; }
+      .sb-device { padding: 0 !important; background: transparent !important; }
+      .sb-device .screen { box-shadow: none !important; }
+    ` });
+    await settle(page);
+
+    if (t.scrollTo) {
+      const moved = await page.evaluate(({ sel, offset }) => {
+        const target = document.querySelector(sel);
+        const scroller = document.querySelector('.screen__scroll');
+        const screen = document.querySelector('.screen');
+        if (!target || !scroller || !screen) return null;
+        scroller.scrollTop += target.getBoundingClientRect().top - screen.getBoundingClientRect().top - offset;
+        return Math.round(scroller.scrollTop);
+      }, { sel: t.scrollTo, offset: t.offset });
+      if (moved === null) throw new Error(`${t.id}: nothing matching ${t.scrollTo} to scroll to`);
+      await page.waitForTimeout(160);
+    }
+
+    // The viewport itself — not an element, and not a full-page shot.
+    const out = t.file ? join(OUT, 'screens', `${t.file}.png`)
+                       : join(DELIVERY, `${t.deliver}.png`);
+    await page.screenshot({ path: out });
+    console.log(`  ${rel(out)}${t.scrollTo ? '  (scrolled)' : ''}`);
+
+    if (t.file && t.deliver) {
+      const dest = join(DELIVERY, `${t.deliver}.png`);
+      copyFileSync(out, dest);
+      console.log(`     -> ${rel(dest)}`);
+    }
+  }
+  await page.close();
 }
-for (const t of SCROLLED) {
-  await shoot(t.id, '.sb-device .screen', join(OUT, 'screens', `${t.name}.png`), { focus: t.focus, offset: t.offset });
-}
-}
+
+/* --------------------------------------------------------- 2. components */
 
 if (!ONLY || ONLY === 'components') {
-console.log(`\nComponents (${COMPONENTS.length})`);
-for (const [name, id] of COMPONENTS) {
-  // Bottom Sheet renders on its own 390px stage rather than inside `Frame`.
-  const selector = name === 'bottom-sheet' ? '#storybook-root > div > div' : '.ds-frame';
-  await shoot(id, selector, join(OUT, 'components', `${name}.png`), { stripNotes: true });
-}
+  const page = await browser.newPage({ viewport: { width: 1100, height: 1200 }, deviceScaleFactor: SCALE });
+  console.log(`\nComponents (${COMPONENTS.length})`);
+
+  for (const [name, id] of COMPONENTS) {
+    await page.goto(`${base}/iframe.html?id=${id}&viewMode=story`, { waitUntil: 'networkidle' });
+    if (!(await page.evaluate(() => document.body.classList.contains('sb-show-main')))) {
+      throw new Error(`${id} did not render`);
+    }
+    // `Note` is the story-only caption from src/lib/Frame.jsx, identified by
+    // its inline font/colour declaration and removed in the page only.
+    await page.evaluate(() => {
+      for (const p of document.querySelectorAll('p[style]')) {
+        const s = p.getAttribute('style');
+        if (s.includes('--ds-ink-2') && s.includes('--ds-font-ui')) p.remove();
+      }
+    });
+    await settle(page);
+
+    // Bottom Sheet renders on its own 390px stage rather than inside `Frame`.
+    const selector = name === 'bottom-sheet' ? '#storybook-root > div > div' : '.ds-frame';
+    const el = await page.$(selector);
+    if (!el) throw new Error(`${id}: no element matching ${selector}`);
+    const out = join(OUT, 'components', `${name}.png`);
+    await el.screenshot({ path: out });
+    console.log(`  ${rel(out)}`);
+  }
+  await page.close();
 }
 
+/* --------------------------------------------------------------- 3. food */
+
 if (!ONLY || ONLY === 'food') {
-console.log(`\nFood crops (${FOOD.length})`);
-for (const f of FOOD) {
-  await page.setViewportSize({ width: f.w + 40, height: f.h + 40 });
-  await page.goto(`${base}/iframe.html`, { waitUntil: 'domcontentloaded' });
-  await page.setContent(`<!doctype html><html><body style="margin:0;background:#FBFAF8">
-    <div id="crop" style="width:${f.w}px;height:${f.h}px;overflow:hidden">
-      <img src="${base}/food/${f.file}" style="width:100%;height:100%;object-fit:cover;
-           object-position:${f.op};transform-origin:${f.op};transform:scale(${f.sc});display:block">
-    </div></body></html>`, { waitUntil: 'networkidle' });
-  await settle();
-  const el = await page.$('#crop');
-  const out = join(OUT, 'food', `${f.name}.jpg`);
-  await el.screenshot({ path: out, type: 'jpeg', quality: 88 });
-  console.log(`  ${out.replace(REPO + '/', '')}`);
-}
+  const page = await browser.newPage({ deviceScaleFactor: SCALE });
+  console.log(`\nFood crops (${FOOD.length})`);
+
+  for (const f of FOOD) {
+    await page.setViewportSize({ width: f.w + 40, height: f.h + 40 });
+    await page.goto(`${base}/iframe.html`, { waitUntil: 'domcontentloaded' });
+    await page.setContent(`<!doctype html><html><body style="margin:0;background:#FBFAF8">
+      <div id="crop" style="width:${f.w}px;height:${f.h}px;overflow:hidden">
+        <img src="${base}/food/${f.file}" style="width:100%;height:100%;object-fit:cover;
+             object-position:${f.op};transform-origin:${f.op};transform:scale(${f.sc});display:block">
+      </div></body></html>`, { waitUntil: 'networkidle' });
+    await settle(page);
+    const out = join(OUT, 'food', `${f.name}.jpg`);
+    await (await page.$('#crop')).screenshot({ path: out, type: 'jpeg', quality: 88 });
+    console.log(`  ${rel(out)}`);
+  }
+  await page.close();
 }
 
 await browser.close();

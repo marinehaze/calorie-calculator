@@ -4,15 +4,25 @@ An eight-slide, browser-based presentation of the Piatto project, built for
 recording a 3–4 minute Loom / FocuSee walkthrough.
 
 Everything in this directory is presentation-only. It reads the finished
-project as a source and changes nothing in it: no file outside `presentation/`
-is modified, and the application, Design System, Storybook config and branding
-are inputs, not outputs.
+project as a source and changes nothing in it: the application, Design System,
+Storybook config and branding are inputs, not outputs. The capture tool here
+also writes the reviewer-facing PNGs in the repository's root `screens/`
+folder, which is the only thing it touches outside this directory.
 
 ## Running it
 
 Open `presentation/index.html` in a desktop browser — that is the whole
 installation. There is no build step, no framework and no network dependency:
-the fonts, the screenshots and the photography are all local.
+the fonts, the screenshots and the photography are all local, referenced by
+relative paths, so the deck also works straight out of a downloaded archive.
+
+Move through it with `→` / `Space` for the next slide and `←` for the previous
+one; `F` goes full screen. The full key list is below.
+
+**`piatto-case.pdf`** in this folder is a static fallback: the same eight
+slides, one per page, at the deck's own 16:9. The HTML deck is the presentation;
+the PDF is for reviewers who would rather read a document.
+
 
 If you prefer to serve it:
 
@@ -59,13 +69,16 @@ styles.css          deck styling — restates the approved tokens, imports none
 deck.js             ~90 lines: scale the stage, move between slides
 brand/marks.js      the arc-"o" and the segmented arc, copied from the
                     approved brand board and from MacroEnergySplit
-assets/screens/     18 stills of the final application states
+piatto-case.pdf     the static fallback: 8 slides, one per page, 16:9
+assets/screens/     18 application viewports, each 780 x 1688
 assets/components/  13 Design System specimens
 assets/food/        2 crops of the approved food photography
 assets/fonts/       Plus Jakarta Sans + Inter Tight, latin subset
-tools/capture.mjs   regenerates assets/ from the built Storybook
+tools/capture.mjs   regenerates assets/ and root screens/ from the Storybook
 tools/review.mjs    drives the deck and writes stills + a contact sheet
+tools/verify-screens.mjs  proves every screen is displayed whole, not cropped
 tools/check-sizes.mjs  checks the stage at common laptop resolutions
+tools/pdf.mjs       renders the live deck to piatto-case.pdf
 ```
 
 ## The brand marks
@@ -86,6 +99,22 @@ Slide 3 is composed as a board rather than a summary, following
 `branding/brand-refresh/hero.html`: the word and the promise on the left, and
 on the right the product's own type, colour, photography and two real UI
 fragments, shown at size rather than captioned.
+
+## One screen treatment
+
+Every mobile screen in the deck (slides 1, 2, 5, 6, 7) goes through one
+container, `.phone`. It holds the 390:844 ratio, lays the image inside with
+`object-fit: contain` and never `cover`, and derives its corner radius from its
+own width, so a 186px screen and a 280px screen read as the same device. A
+slide sets `--w` and nothing else.
+
+There is deliberately no drawn bezel: at five screens to a slide it adds weight
+without adding information, and the captures already carry the real status bar,
+safe areas and home indicator.
+
+`node presentation/tools/verify-screens.mjs` checks the result — for every
+screen instance it compares the PNG's own pixels, the computed `object-fit`,
+the laid-out box and every clipping ancestor, and fails on any accidental crop.
 
 ## Regenerating the assets
 
@@ -109,7 +138,9 @@ node presentation/tools/capture.mjs screens    # or one of screens|components|fo
 
 ```
 node presentation/tools/review.mjs             # keyboard nav, overflow, stills, contact sheet
+node presentation/tools/verify-screens.mjs     # every screen displayed whole
 node presentation/tools/check-sizes.mjs        # 1280x800 through 2560x1440, plus file://
+node presentation/tools/pdf.mjs                # regenerate piatto-case.pdf
 ```
 
 The audit figure on slide 7 reads "0 **automated** WCAG 2.1 A/AA violations":
